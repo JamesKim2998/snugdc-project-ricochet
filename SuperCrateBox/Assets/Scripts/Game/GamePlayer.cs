@@ -6,8 +6,8 @@ public class GamePlayer {
 
 	private Shooter m_Shooter;
 
-	public float maxUpForce = 2.0f;
-	public float upForce = 2.0f;
+	public float maxUpForce = 2f;
+	public float upForce = 30f;
 	private float m_UpForceLeft = 0;
 
 	public delegate void PostPlayerChanged(Shooter _shooter);

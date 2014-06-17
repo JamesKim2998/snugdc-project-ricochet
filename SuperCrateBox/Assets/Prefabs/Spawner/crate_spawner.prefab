@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -0, z: 0}
+  m_LocalPosition: {x: -4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,8 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed05544ea852c44986df7bdb0582022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 100002, guid: b85acebb10c26a845a60174290c40570, type: 2}
+  target: {fileID: 100002, guid: b85acebb10c26a845a60174290c40570, type: 2}
   maxUnits: 1
   periodMin: 0
   periodMax: 0
@@ -50,10 +49,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 5
-    height: 3
+    width: 8
+    height: 4
   filters:
   - Terrain
+  networkEnabled: 0
+  networkServerOnly: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

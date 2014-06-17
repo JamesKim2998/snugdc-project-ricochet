@@ -5,17 +5,24 @@ public class DamageDetector : MonoBehaviour {
 
 	public delegate void DoDamage(AttackData attackData);
 
-	private DoDamage _doDamage;
+	private DoDamage m_DoDamage;
 	public DoDamage doDamage {
-		set { _doDamage = value; }
+		set { m_DoDamage = value; }
 	}
 
 	public void Damage(AttackData attackData) {
-		if (! enabled) return;
+		if (! enabled) 
+		{
+			Debug.Log("trying to damage disabled DamageDetector!");
+			return;
+		}
 
-		if (_doDamage != null) {
-			_doDamage(attackData);
-		} else {
+		if (m_DoDamage != null) 
+		{
+			m_DoDamage(attackData);
+		} 
+		else 
+		{
 			Debug.Log("doDamage is not set!");
 		}
 	}

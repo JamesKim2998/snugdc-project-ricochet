@@ -4,7 +4,7 @@ using UnityEngine;
 public class SimpleWeaponDef : ScriptableObject {
 
 	public Weapon weapon;
-	public GameObject projectile;
+	public string projectile;
 
 	void OnEnable() {
 
@@ -15,7 +15,11 @@ public class SimpleWeaponDef : ScriptableObject {
 		var _projectilePrf = projectile;
 		
 		_weapon.doCreateProjectile = _ => {
-			return (GameObject) GameObject.Instantiate(_projectilePrf);
+			return (GameObject) GameObject.Instantiate(Resources.Load(_projectilePrf));
+		};
+
+		_weapon.doCreateProjectileServer = (int _count, int _idx ) => {
+			return (GameObject) GameObject.Instantiate(Resources.Load(_projectilePrf));
 		};
 	}
 	

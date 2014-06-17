@@ -11,73 +11,11 @@ Default GameObject Tag: Player already registered
 (Filename:  Line: 68)
 
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\bin\SuperCrateBox_clone_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\bin\SuperCrateBox_clone_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\bin\SuperCrateBox_clone_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\bin\SuperCrateBox_clone_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.040 seconds
+Platform assembly: C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\binary\SuperCrateBox_clone_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\binary\SuperCrateBox_clone_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\binary\SuperCrateBox_clone_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Daewon\Documents\GitHub\snugdc-project-ricochet\SuperCrateBox\binary\SuperCrateBox_clone_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.041 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-[Singleton] Using instance already created: game
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-detector not found!
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-[Singleton] Instance 'Game' already destroyed on application quit. Won't create again - returning null.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Game.Player () [0x00000] in <filename unknown>:0 
-  at FlyingEnemy.OnDestroy () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Behaviour:set_enabled (bool)
-  at FlyingEnemy.ListenPlayerChanged (.Shooter _shooter) [0x00000] in <filename unknown>:0 
-  at (wrapper delegate-invoke) GamePlayer/PostPlayerChanged:invoke_void__this___Shooter (Shooter)
-  at GamePlayer.set_shooter (.Shooter value) [0x00000] in <filename unknown>:0 
-  at GamePlayer.ListenDestroy (.Destroyable _destroyable) [0x00000] in <filename unknown>:0 
-  at Destroyable.OnDestroy () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-[Singleton] Instance 'Game' already destroyed on application quit. Won't create again - returning null.
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at Game.Player () [0x00000] in <filename unknown>:0 
-  at FlyingEnemy.OnDestroy () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-

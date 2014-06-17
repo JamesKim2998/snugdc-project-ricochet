@@ -7,6 +7,7 @@ public class Explosion : MonoBehaviour {
 	public AttackData attackData;
 	public float radius;
 	public float duration;
+
 	public List<string> targets;
 	
 	private bool m_Exploded = false;
@@ -39,9 +40,14 @@ public class Explosion : MonoBehaviour {
 		foreach(Collider2D _collider in _colliders) {
 			var _damageDetector = _collider.GetComponent<DamageDetector>();
 
-			if (_damageDetector == null) continue;
-
-			if (targets.Exists(x => x == _damageDetector.tag)) {
+			if (_damageDetector == null
+			    || ! _damageDetector.enabled) 
+			{
+				continue;
+			}
+				
+			if (targets.Exists(x => x == _damageDetector.tag)) 
+			{
 				_damageDetector.Damage(attackData);
 			}
 		}

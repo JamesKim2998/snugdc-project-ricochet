@@ -12,7 +12,7 @@ public class Shooter : MonoBehaviour
     public float moveForce = 10.0f;
 	public float hitCooldown = 0.5f;
 	public Vector2 hitForce = new Vector2(10.0f, 5.0f);
-
+	
 	public bool hitEnabled {
 		get { return damageDetector.enabled; }
 		set { damageDetector.enabled = value; }
@@ -114,6 +114,18 @@ public class Shooter : MonoBehaviour
         };
     }
 
+	void DestroySelf()
+	{
+		if (networkView.enabled)
+		{
+			Network.Destroy(networkView.viewID);
+		}
+		else 
+		{
+			GameObject.Destroy(gameObject);
+		}
+	}
+
     void Update()
     {
 		m_JumpCooltime -= Time.deltaTime;
@@ -175,10 +187,6 @@ public class Shooter : MonoBehaviour
 		}
 	}
 
-	void DestroySelf() {
-		Destroy(gameObject);
-	}
-
 	void Die() {
 		CancelInvoke("EnableHit");
 
@@ -199,11 +207,29 @@ public class Shooter : MonoBehaviour
 		Invoke("DestroySelf", deadDelay);
 	}
 	
-	void Obtain(Crate _crate) {
-		
+	void Obtain(Crate _crate) 
+	{
+		if (networkView.enabled && ! networkView.isMine) 
+			return;
+
 		if (_crate.empty) return;
 
-		var _weapon = GameObject.Instantiate(_crate.weapon) as GameObject;
+		var _weapon = GameObject.Instantiate(Resources.Load(_crate.weapon)) as GameObject;
 		weapon = _weapon.GetComponent<Weapon>();
+
+		if (networkView.enabled) {
+			weapon.networkView.viewID = Network.AllocateViewID();
+			weapon.networkView.enabled = true;
+			networkView.RPC("ObtainUponServer", RPCMode.Others, weapon.networkView.viewID, _crate.weapon);
+		}
+	}
+
+	[RPC]
+	void ObtainUponServer(NetworkViewID _viewID, string _weapon) 
+	{
+		var _theWeapon = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
+		weapon = _theWeapon.GetComponent<Weapon>();
+		weapon.networkView.viewID = _viewID;
+		weapon.networkView.enabled = true;
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Crate : MonoBehaviour {
 
-	public GameObject weapon;
+	public string weapon;
 
 	public bool empty { get { return weapon == null; } }
 
@@ -17,6 +17,18 @@ public class Crate : MonoBehaviour {
 
 	}
 
+	void DestroySelf() 
+	{
+		if (networkView.enabled) 
+		{
+			Network.Destroy(gameObject);
+		}
+		else 
+		{
+			Destroy(gameObject);
+		}
+	}
+
 	void OnCollisionEnter2D(Collision2D _collider)
 	{
 		if (_collider.gameObject.tag == "Player") {
@@ -24,16 +36,15 @@ public class Crate : MonoBehaviour {
 			var detector = _collider.collider.gameObject.GetComponent<CrateDetector>();
 
 			if (detector) {
-				detector.doObtain(this);
+				if (! detector.enabled) return;
+				detector.Obtain(this);
 				Game.Statistic().score.val += score;
-
-				Destroy(gameObject);
-
+				DestroySelf();
 			} else {
 				Debug.Log("detector not found!");
 			}
 
-
 		}
 	}
+
 }

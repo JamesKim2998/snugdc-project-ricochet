@@ -5,6 +5,8 @@ public class Game : Singleton<Game> {
 
 	private Game() {}
 
+	public float timescale = 1f;
+
 	public GamePlayer player = new GamePlayer();
 	public static GamePlayer Player() { return Instance.player; } 
 
@@ -15,7 +17,8 @@ public class Game : Singleton<Game> {
 	public static GameWeapon Weapon() { return Instance.weapon; }
 
 	void Start () {
-
+		Time.timeScale = timescale;
+		DontDestroyOnLoad(transform.gameObject);
 	}
 	
 	void Update () {

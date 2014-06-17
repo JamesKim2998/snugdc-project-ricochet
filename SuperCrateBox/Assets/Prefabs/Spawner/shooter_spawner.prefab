@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: shooter_spawner
   m_TagString: Untagged
@@ -38,7 +39,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544ada6b78e0c464b83b132253f8fe47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooter: {fileID: 100000, guid: 7cc123bb773267447b1cea72ef6886a1, type: 2}
+  shooterPrf: {fileID: 100000, guid: 7cc123bb773267447b1cea72ef6886a1, type: 2}
+  spawnRange:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+--- !u!148 &14800000
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400000}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

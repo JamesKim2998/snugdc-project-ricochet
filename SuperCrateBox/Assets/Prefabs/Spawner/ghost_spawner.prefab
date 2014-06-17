@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: -1003283189, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.48252058, y: 3.31990576, z: 0}
+  m_LocalPosition: {x: -2.26005435, y: 4.82625294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -38,10 +38,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed05544ea852c44986df7bdb0582022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 100004, guid: 91d1929a14bdfec43a4f63c3b36867b4, type: 2}
+  target: {fileID: 100004, guid: 91d1929a14bdfec43a4f63c3b36867b4, type: 2}
   maxUnits: 10
-  periodMin: 1
+  periodMin: 3
   periodMax: 8
   periodOffset: .300000012
   velocity: {x: 0, y: 0}
@@ -52,6 +51,8 @@ MonoBehaviour:
     width: 0
     height: 0
   filters: []
+  networkEnabled: 0
+  networkServerOnly: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

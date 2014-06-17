@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class WeaponDef : ScriptableObject {
-
+	
 	public Weapon weapon;
 	public float cooldown;
 

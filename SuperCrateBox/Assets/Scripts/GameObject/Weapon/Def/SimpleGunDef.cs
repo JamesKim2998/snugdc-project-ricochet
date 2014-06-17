@@ -15,7 +15,7 @@ public class SimpleGunDef : ScriptableObject {
 		var _speed = speed;
 
 		_weapon.doShoot = (_, _projectile) => {
-			var _direction = new Vector2(0, 0);
+			var _direction = Vector2.zero;
 			_direction.x = (_weapon.direction.x > 0) ? 1 : -1;
 			_projectile.rigidbody2D.velocity = _speed * _direction;
 

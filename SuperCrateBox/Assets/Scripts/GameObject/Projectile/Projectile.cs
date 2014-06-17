@@ -14,6 +14,9 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
+	public int ownerID = 0;
+	public int ownerDetecterID = 0;
+
 	// life
 	public float life = 10;
 	private float m_Age = 0;
@@ -26,6 +29,7 @@ public class Projectile : MonoBehaviour {
 	public Vector2 drivingForce = new Vector2(0, 0);
 
 	// filter
+	public bool isHitOwner = false;
 	public List<string> targets;
 	public List<string> terrains;
 
@@ -68,7 +72,19 @@ public class Projectile : MonoBehaviour {
 			activated = true;
 		}
 	}
-	
+
+	void DestroySelf() 
+	{
+		if (networkView.enabled)
+		{
+			Network.Destroy(networkView.viewID);
+		}
+		else 
+		{
+			GameObject.Destroy(gameObject);
+		}
+	}
+
 	void Update () {
 
 		var dt = Time.deltaTime;
@@ -105,7 +121,7 @@ public class Projectile : MonoBehaviour {
 			m_DecayTime += dt;
 
 			if (m_DecayTime > decayDuration) {
-				Destroy(this);
+				DestroySelf();
 			}
 
 		} else {
@@ -131,7 +147,7 @@ public class Projectile : MonoBehaviour {
 		m_Decaying = true;
 
 		if (decayDuration.Equals(0)) {
-			Destroy(gameObject);
+			DestroySelf();
 			return;
 		}
 
@@ -153,11 +169,19 @@ public class Projectile : MonoBehaviour {
 		if (! decaying) {
 			if (targets.Exists(x => x == _collider.tag)) {
 				
-				var _damageDetector = _collider.GetComponentsInChildren<DamageDetector>();
+				var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
 
-				if (_damageDetector != null) {
+				if (! isHitOwner 
+				    && (_damageDetector.GetInstanceID() == ownerDetecterID))
+				{
+					return;
+				}
+
+				if (_damageDetector != null
+				    && _damageDetector.enabled) 
+				{
 					attackData.velocity = rigidbody2D.velocity;
-					_damageDetector[0].Damage(attackData);
+					_damageDetector.Damage(attackData);
 				}
 				
 				if (postHit != null) {

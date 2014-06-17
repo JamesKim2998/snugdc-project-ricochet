@@ -4,11 +4,11 @@ using System.Collections;
 [System.Serializable]
 public class GameWeapon {
 
-	public GameObject[] weapons;
+	public string[] weapons;
 
 	public int count { get { return weapons.Length; }}
 
-	public GameObject Random() {
+	public string Random() {
 		return weapons[UnityEngine.Random.Range(0, count)];
 	}
 }

@@ -51,7 +51,10 @@ public class SimpleWeapon : Weapon {
 
 	public delegate void DoShoot(Weapon self, GameObject projectile);
 	public DoShoot doShoot;
-	
+
+	public delegate GameObject DoCreateProjectileServer(int _count, int _idx);
+	public DoCreateProjectileServer doCreateProjectileServer;
+
 	// events
 	public delegate void PostShoot(object sender, ShootArgs args);
 	public event PostShoot postShoot;
@@ -60,6 +63,9 @@ public class SimpleWeapon : Weapon {
 	public event PostCooldown postCooldown;
 
 	public void Update () {
+
+		if (networkView.enabled && ! networkView.isMine)
+			return;
 
 		if (m_IsShooting) {
 
@@ -88,6 +94,7 @@ public class SimpleWeapon : Weapon {
 	}
 
 	public override void Shoot() {
+
 		if (! IsShootable()) {
 			Debug.LogError("trying to shoot not shootable weapon!");
 		}
@@ -121,6 +128,13 @@ public class SimpleWeapon : Weapon {
 			}
 
 			var _theProjectile = _projectile.GetComponent<Projectile>();
+			
+			if (owner != null)
+			{
+				_theProjectile.ownerID = owner.GetInstanceID();
+				var _detector = owner.GetComponentInChildren<DamageDetector>();
+				if (_detector) _theProjectile.ownerDetecterID = _detector.GetInstanceID();
+			}
 
 			if (_theProjectile) {
 
@@ -133,6 +147,21 @@ public class SimpleWeapon : Weapon {
 				doShoot(this, _projectile);
 			}
 
+			if (networkView.enabled)
+			{
+				_projectile.networkView.viewID = Network.AllocateViewID();
+				_projectile.networkView.enabled = true;
+
+				networkView.RPC("CreateProjectileServer", 
+				                RPCMode.Others, 
+				                _projectile.networkView.viewID, 
+				                _projectile.transform.position, 
+				                _projectile.transform.localRotation, 
+				                (Vector3) _projectile.rigidbody2D.velocity, 
+				                projectileCount, 
+				                projectileIdx);
+			}
+
 			if (postShoot != null) {
 				var args = new ShootArgs();
 				args.projectile = _projectile;
@@ -140,6 +169,27 @@ public class SimpleWeapon : Weapon {
 			}
 		}
 
+	}
+
+	[RPC]
+	void CreateProjectileServer(NetworkViewID _viewID, Vector3 _position, Quaternion _rotation, Vector3 _velocity, int _count, int _idx)
+	{
+		var _projectile = doCreateProjectileServer(_count, _idx);
+
+		_projectile.transform.position = _position;
+		_projectile.transform.rotation = _rotation;
+		_projectile.rigidbody2D.velocity = _velocity;
+
+		if (owner != null)
+		{
+			var _theProjecttile = _projectile.GetComponent<Projectile>();
+			_theProjecttile.ownerID = owner.GetInstanceID();
+			var _detector = owner.GetComponentInChildren<DamageDetector>();
+			if (_detector) _theProjecttile.ownerDetecterID = _detector.GetInstanceID();
+		}
+
+		_projectile.networkView.viewID = _viewID;
+		_projectile.networkView.enabled = true;
 	}
 
 	public override void Stop() {
