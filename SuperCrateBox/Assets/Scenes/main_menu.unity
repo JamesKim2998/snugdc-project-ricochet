@@ -690,12 +690,8 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
-      propertyPath: weapon.weapons.Array.data[1]
-      value: simple_gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
-      propertyPath: weapon.weapons.Array.data[2]
-      value: simple_gun
+      propertyPath: timescale
+      value: 1.39999998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
@@ -904,14 +900,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c7b295196dbc8448bef9cb0fa414f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timescale: 1.39999998
   player:
     maxUpForce: 2
     upForce: 30
   weapon:
     weapons:
     - simple_gun
-    - simple_gun
-    - simple_gun
+    - rocket_luncher
+    - mine_weapon
 --- !u!4 &988737437
 Transform:
   m_ObjectHideFlags: 0
