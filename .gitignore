@@ -218,7 +218,10 @@ pip-log.txt
 # Unity generated #
 # =============== #
 Temp/
-Library/
+/Library/FailedAssetImports.txt
+/Library/cache/
+/Library/previews/
+/Library/ScriptAssemblies
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -248,7 +251,13 @@ Thumbs.db
 
 output_log.txt
 *.zip
-[Bb]inary
-*.sln
-*.csproj
 *.DotSettings
+
+[Bb]inary
+FailedAssetImports.txt
+ScriptAssemblies
+*.csproj
+metadata
+
+*.sln
+*.dwlt
