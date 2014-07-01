@@ -247,3 +247,16 @@ ehthumbs.db
 Thumbs.db
 SuperCrateBox/binary/SuperCrateBox_clone_Data/output_log.txt
 SuperCrateBox/binary/SuperCrateBox_clone_Data/output_log.txt
+/Skeleton/Binary/*.zip
+Binary
+*.sln
+*.csproj
+*.csproj
+/Skeleton/*.csproj
+*.csproj
+*.csproj
+*.csproj
+/SuperCrateBox/binary
+*.csproj
+*.DotSettings
+*.sln
