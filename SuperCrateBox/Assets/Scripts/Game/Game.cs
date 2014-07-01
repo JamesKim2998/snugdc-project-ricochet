@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Game : Singleton<Game> {
-
+public class Game : Singleton<Game> 
+{
 	private Game() {}
 
 	public float timescale = 1f;
@@ -15,6 +15,14 @@ public class Game : Singleton<Game> {
 	
 	public GameWeapon weapon = new GameWeapon();
 	public static GameWeapon Weapon() { return Instance.weapon; }
+
+	private static GameCheat m_Cheat = null;
+	public static GameCheat Cheat() 
+	{ 
+		if (m_Cheat == null) 
+			m_Cheat = Instance.GetComponent<GameCheat>(); 
+		return m_Cheat;
+	}
 
 	void Start () {
 		Time.timeScale = timescale;

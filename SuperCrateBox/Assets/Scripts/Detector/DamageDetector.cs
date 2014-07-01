@@ -13,7 +13,7 @@ public class DamageDetector : MonoBehaviour {
 	public void Damage(AttackData attackData) {
 		if (! enabled) 
 		{
-			Debug.Log("trying to damage disabled DamageDetector!");
+			Debug.Log("DamageDetector already disabled!");
 			return;
 		}
 

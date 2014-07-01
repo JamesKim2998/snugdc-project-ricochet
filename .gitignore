@@ -245,9 +245,10 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
-SuperCrateBox/binary/SuperCrateBox_clone_Data/output_log.txt
-SuperCrateBox/binary/SuperCrateBox_clone_Data/output_log.txt
-*.csproj
-/Skeleton/Binary/*.zip
-/Skeleton/Binary
+
+output_log.txt
+*.zip
+[Bb]inary
 *.sln
+*.csproj
+*.DotSettings
