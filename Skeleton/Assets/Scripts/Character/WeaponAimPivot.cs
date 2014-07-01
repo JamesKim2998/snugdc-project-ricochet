@@ -24,7 +24,7 @@ public class WeaponAimPivot : MonoBehaviour {
 			var _angleRad = Mathf.Deg2Rad * _angle;
 
 			Gizmos.DrawLine(transform.position, 
-			                transform.position + 15 * new Vector3(Mathf.Cos(_angleRad), Mathf.Sin(_angleRad)));
+			                transform.position + 1.5f * new Vector3(Mathf.Cos(_angleRad), Mathf.Sin(_angleRad)));
 		}
 		
 		for (var _radius = 1; _radius < 15; ++_radius) 
@@ -40,7 +40,7 @@ public class WeaponAimPivot : MonoBehaviour {
 				transform.forward,
 				-transform.up,
 				180,
-				_radius);
+				0.1f * _radius);
 		}
 #endif
 	}
