@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -.65203172, y: .652031779, z: 1}
+  m_LocalScale: {x: -.0199999996, y: .0199999996, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
 --- !u!50 &5000000
@@ -71,7 +72,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerID: 0
   ownerDetecterID: 0
-  life: 10
+  life: 1000
   attackData:
     velocity: {x: 0, y: 0}
     damage: 1
@@ -137,6 +138,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367094aacb6600a49a25b82ba4c9b148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0c5809860bb4542a9070dfe1f0bfa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mirrorX: 1
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
@@ -170,7 +183,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: f89f4040b8baf2b488b8902c7475c0fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61a10a1a99d9dac4f89e202f1fcfd770, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

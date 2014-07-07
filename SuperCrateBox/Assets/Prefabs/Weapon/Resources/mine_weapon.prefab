@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08edc746b979a0418eed9f81c655efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: mine_weapon
   relativeVelocityEnabled: 0
 --- !u!148 &14800000
 NetworkView:

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Game : Singleton<Game> 
@@ -7,8 +7,8 @@ public class Game : Singleton<Game>
 
 	public float timescale = 1f;
 
-	public GamePlayer player = new GamePlayer();
-	public static GamePlayer Player() { return Instance.player; } 
+	public GameCharacter character = new GameCharacter();
+	public static GameCharacter Character() { return Instance.character; } 
 
 	public GameStatistics statistic = new GameStatistics();
 	public static GameStatistics Statistic() { return Instance.statistic; }
@@ -30,11 +30,11 @@ public class Game : Singleton<Game>
 	}
 	
 	void Update () {
-		player.Update();
+		character.Update();
 	}
 
 	void FixedUpdate() {
-		player.FixedUpdate();
+		character.FixedUpdate();
 	}
 
 }

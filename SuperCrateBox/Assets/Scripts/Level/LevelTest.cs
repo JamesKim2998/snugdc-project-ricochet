@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LevelTest : MonoBehaviour {
 
-	public ShooterSpawner shooterSpawner;
+	public CharacterSpawner characterSpawner;
 
 	void Start () {
-		shooterSpawner.enabled = false;
-		shooterSpawner.networkView.enabled = true;
+		characterSpawner.enabled = false;
+		characterSpawner.networkView.enabled = true;
 
 		NetworkManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
@@ -28,13 +28,13 @@ public class LevelTest : MonoBehaviour {
 
 	void InitLevelCommon() 
 	{
-		shooterSpawner.enabled = true;
+		characterSpawner.enabled = true;
 	}
 
 	void ListenBeforeDisconnected()
 	{
 		Debug.Log ("server disconnected.");
-		shooterSpawner.enabled = false;
+		characterSpawner.enabled = false;
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
 	}

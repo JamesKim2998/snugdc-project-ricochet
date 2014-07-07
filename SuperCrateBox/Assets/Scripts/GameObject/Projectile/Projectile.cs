@@ -26,7 +26,8 @@ public class Projectile : MonoBehaviour {
 	public int damage { set { attackData.damage = value; }}
 
 	// physics
-	public Vector2 drivingForce = new Vector2(0, 0);
+	public Vector2 drivingForce = Vector2.zero;
+	public Vector2 relativeDrivingForce = Vector2.zero;
 
 	// filter
 	public bool isHitOwner = false;
@@ -61,14 +62,16 @@ public class Projectile : MonoBehaviour {
 	public event PostBumped postBumped;
 
 
-	void Start () {
-
+	void Start () 
+	{
 		m_Animator = GetComponent<Animator>();
 
-		if (! prepareDuration.Equals(0)) {
+		if (! prepareDuration.Equals(0)) 
+		{
 			m_PrepareTime = 0;
-
-		} else {
+		} 
+		else 
+		{
 			activated = true;
 		}
 	}
@@ -89,44 +92,61 @@ public class Projectile : MonoBehaviour {
 
 		var dt = Time.deltaTime;
 
-		if (! activated) {
-			
-			if (m_PrepareTime < prepareDuration) {
+		if (! activated) 
+		{
+			if (m_PrepareTime < prepareDuration) 
+			{
 				m_PrepareTime += dt;
 				
-				if (m_PrepareTime >= prepareDuration) {
+				if (m_PrepareTime >= prepareDuration) 
+				{
 					activated = true;
 
-					if (m_Animator != null) {
+					if (m_Animator != null) 
 						m_Animator.SetTrigger("Activate");
-					}
 				}
 			} 
 		}
 
 		if (activated) {
 
-			if ( m_Age < life) {
-
+			if ( m_Age < life) 
+			{
 				m_Age += dt;
 
-				if (m_Age >= life ) {
+				if (m_Age >= life )
 					StartDecay();
-				}
 			}
 		} 
 
-		if (m_Decaying) {
-
+		if (m_Decaying) 
+		{
 			m_DecayTime += dt;
-
-			if (m_DecayTime > decayDuration) {
+			if (m_DecayTime > decayDuration) 
 				DestroySelf();
-			}
+		}
+	}
 
-		} else {
-			if (! drivingForce.Equals(new Vector2(0, 0))) {
-				rigidbody2D.AddForce(drivingForce);
+	void FixedUpdate() 
+	{
+		if (! m_Decaying) 
+		{
+			if (! rigidbody2D.isKinematic)
+			{
+				Vector2 _drivingForce = Vector2.zero;
+				
+				if (! drivingForce.Equals(Vector2.zero)) 
+					_drivingForce += drivingForce;
+				
+				if (! relativeDrivingForce.Equals(Vector2.zero)) 
+				{
+					// todo: opt
+					var _drivingForceWorld = transform.localToWorldMatrix.MultiplyVector(relativeDrivingForce);
+					_drivingForce += new Vector2(_drivingForceWorld.x, _drivingForceWorld.y);
+				}
+				
+				if (_drivingForce != Vector2.zero)
+					rigidbody2D.AddForce(_drivingForce);
 			}
 		}
 	}
@@ -141,24 +161,6 @@ public class Projectile : MonoBehaviour {
 		OnCollision(_collider);
 	}
 
-	void StartDecay() {
-		if (decaying) return;
-
-		m_Decaying = true;
-
-		if (decayDuration.Equals(0)) {
-			DestroySelf();
-			return;
-		}
-
-		m_DecayTime = 0;
-
-		if (stopOnDecay) {
-			rigidbody2D.velocity = new Vector2(0, 0);
-			rigidbody2D.isKinematic = true;
-		}
-	}
-
 	void OnCollision(Collider2D _collider) {
 
 		if (! activated) return;
@@ -167,15 +169,13 @@ public class Projectile : MonoBehaviour {
 		bool _bumped = false;
 
 		if (! decaying) {
-			if (targets.Exists(x => x == _collider.tag)) {
-				
+			if (targets.Exists(x => x == _collider.tag)) 
+			{
 				var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
 
 				if (! isHitOwner 
 				    && (_damageDetector.GetInstanceID() == ownerDetecterID))
-				{
 					return;
-				}
 
 				if (_damageDetector != null
 				    && _damageDetector.enabled) 
@@ -184,33 +184,51 @@ public class Projectile : MonoBehaviour {
 					_damageDetector.Damage(attackData);
 				}
 				
-				if (postHit != null) {
+				if (postHit != null) 
 					postHit(this, _collider);
-				}
 				
 				_hit = true;
 			}
 		}
 		
 		if (! _hit) {
-			if (terrains.Exists(x => x == _collider.tag)){
-				
-				if (postBumped != null) {
+			if (terrains.Exists(x => x == _collider.tag))
+			{
+				if (postBumped != null) 
 					postBumped(this, _collider);
-				}
 
 				_bumped = true;
 			}
 		}
 		
-		if (postCollide != null) {
+		if (postCollide != null) 
 			postCollide(this, _collider);
-		}
 
-		if (_hit || _bumped) {
-			if (! decaying && decayOnCrash) {
+		if (_hit || _bumped) 
+		{
+			if (! decaying && decayOnCrash)
 				StartDecay();
-			}
 		}
 	}
+	
+	void StartDecay() {
+		if (decaying) return;
+		
+		m_Decaying = true;
+		
+		if (decayDuration.Equals(0)) 
+		{
+			DestroySelf();
+			return;
+		}
+		
+		m_DecayTime = 0;
+		
+		if (stopOnDecay) 
+		{
+			rigidbody2D.velocity = new Vector2(0, 0);
+			rigidbody2D.isKinematic = true;
+		}
+	}
+
 }

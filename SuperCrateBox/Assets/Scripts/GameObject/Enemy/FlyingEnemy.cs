@@ -11,27 +11,27 @@ public class FlyingEnemy : Enemy
 	{
 		base.Start();
 
-		var _shooter = Game.Player().shooter;
+		var _character = Game.Character().character;
 
-		if (_shooter) {
-			followAgent.target = _shooter.gameObject;
+		if (_character) {
+			followAgent.target = _character.gameObject;
 		}
 
-		Game.Player().postPlayerChanged += ListenPlayerChanged;
+		Game.Character().postCharacterChanged += ListenCharacterChanged;
 	}
 
 	public override void OnDestroy() {
-		Game.Player().postPlayerChanged -= ListenPlayerChanged;
+		Game.Character().postCharacterChanged -= ListenCharacterChanged;
 	}
 
-	void ListenPlayerChanged(Shooter _shooter) {
+	void ListenCharacterChanged(Character _character) {
 
-		if (_shooter == null) {
+		if (_character == null) {
 			followAgent.enabled = false;
 			followAgent.target = null;
 		} else {
 			followAgent.enabled = true;
-			followAgent.target = _shooter.gameObject;
+			followAgent.target = _character.gameObject;
 		}
 
 	}
