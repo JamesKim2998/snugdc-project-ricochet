@@ -14,8 +14,7 @@ public class Statistic<T> where T : System.IEquatable<T> {
 
 		set {
 			m_OldValue = m_Value;
-			m_Value = value; 
-			
+			m_Value = value;
 			if (!m_Value.Equals(m_OldValue)
 			    && postChanged != null) 
 			{
@@ -60,6 +59,8 @@ public class GameStatistics {
 	}
 	public UserStatistic myUserStatistic {
 		get {
+			if (Game.Character ().character == null)
+				return null;
 			var _myNetworkID = Game.Character ().character.networkView.viewID;
 			return userStatisticList.Find(el => el.viewID == _myNetworkID);
 		}

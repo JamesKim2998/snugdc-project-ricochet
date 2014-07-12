@@ -335,7 +335,6 @@ public class Character : MonoBehaviour
 		rigidbody2D.AddForce(_deadForce);
 		
 		m_NetworkAnimator.SetTrigger("Dead");
-		
 		Game.Statistic().myUserStatistic.death.val += 1;
 		if (postDead != null) postDead(this);
 		
