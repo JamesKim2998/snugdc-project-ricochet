@@ -19963,8 +19963,8 @@ MonoBehaviour:
     - {r: 1, g: 0, b: 0, a: 1}
     - {r: 1, g: 1, b: 0, a: 1}
     - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 0, g: 1, b: 1, a: 0}
-    - {r: 0, g: 0, b: 1, a: 0}
+    - {r: 0, g: 1, b: 1, a: 1}
+    - {r: 0, g: 0, b: 1, a: 1}
     characterColor: {r: 0, g: 0, b: 0, a: 0}
   weapon:
     weapons:
@@ -42651,7 +42651,23 @@ Prefab:
       objectReference: {fileID: 1658369782}
     - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
       propertyPath: character.characterColorPresets.Array.data[3].a
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
+      propertyPath: character.characterColorPresets.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
+      propertyPath: character.characterColorPresets.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
+      propertyPath: character.characterColorPresets.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
+      propertyPath: character.characterColorPresets.Array.data[4].a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41f364ba78c6c8645bc2e5babacdf6c8, type: 2}
