@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Statistic<T> where T : System.IEquatable<T> {
 	private T m_Value;
@@ -51,11 +52,11 @@ public class UserStatistic {
 	}
 }
 public class GameStatistics {
-	public UserStatistic[] userStatisticList;
+	public List<UserStatistic> userStatisticList;
 	public UserStatistic myUserStatistic {
 		get {
 			NetworkViewID myNetworkId = Game.Character ().character.networkView.viewID;
-			return Array.Find(userStatisticList, el => el.networkId == myNetworkId);
+			return userStatisticList.Find(el => el.networkId == myNetworkId);
 		}
 	}
 }
