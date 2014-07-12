@@ -9,12 +9,10 @@ public class Crate : MonoBehaviour {
 
 	public int score = 1;
 
-	void Start() {
-
-		if (empty) {
+	void Start() 
+	{
+		if (empty)
 			Debug.Log("empty crate!");
-		}
-
 	}
 
 	void DestroySelf() 
@@ -31,16 +29,19 @@ public class Crate : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D _collider)
 	{
-		if (_collider.gameObject.tag == "Player") {
+		if (_collider.gameObject.tag == "Character") 
+		{
+			var detector = _collider.gameObject.GetComponent<CrateDetector>();
 
-			var detector = _collider.collider.gameObject.GetComponent<CrateDetector>();
-
-			if (detector) {
+			if (detector) 
+			{
 				if (! detector.enabled) return;
 				detector.Obtain(this);
 				Game.Statistic().score.val += score;
 				DestroySelf();
-			} else {
+			} 
+			else 
+			{
 				Debug.Log("detector not found!");
 			}
 

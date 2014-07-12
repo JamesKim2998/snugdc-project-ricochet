@@ -17,7 +17,7 @@ public class SimpleWeapon : Weapon {
 	public override bool isCooling { get { return m_IsCooling; }}
 
 	// flag
-	public bool relativeVelocityEnabled = false;
+	public bool relativeVelocityEnabled = true;
 
 	// time
 	private float m_ShootTime;

@@ -1,13 +1,13 @@
 
 using UnityEngine;
 
-public class SimpleGunDef : ScriptableObject {
-
+public class SimpleGunDef : MonoBehaviour 
+{
 	public Weapon weapon;
 	public float speed;
 
-	void OnEnable() {
-
+	void Start() 
+	{
 		var _weapon = weapon as SimpleWeapon;
 
 		if (_weapon == null) return;

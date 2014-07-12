@@ -1,13 +1,13 @@
 
 using UnityEngine;
 
-public class SimpleWeaponDef : ScriptableObject {
+public class SimpleWeaponDef : MonoBehaviour {
 
 	public Weapon weapon;
 	public string projectile;
 
-	void OnEnable() {
-
+	void Start() 
+	{
 		var _weapon = weapon as SimpleWeapon;
 
 		if (_weapon == null) return;

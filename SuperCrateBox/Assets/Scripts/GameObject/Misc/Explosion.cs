@@ -8,7 +8,7 @@ public class Explosion : MonoBehaviour {
 	public float radius;
 	public float duration;
 
-	public List<string> targets;
+	public LayerMask targets;
 	
 	private bool m_Exploded = false;
 	private float m_ExplosionTime = 0;
@@ -46,7 +46,7 @@ public class Explosion : MonoBehaviour {
 				continue;
 			}
 				
-			if (targets.Exists(x => x == _damageDetector.tag)) 
+			if ((targets.value & _damageDetector.gameObject.layer) != 0) 
 			{
 				_damageDetector.Damage(attackData);
 			}

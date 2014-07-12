@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MainMenu : MonoBehaviour {
+public class MultiplayerGUI : MonoBehaviour {
 
 	enum Context {
 		Main,

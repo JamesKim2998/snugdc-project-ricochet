@@ -22,17 +22,19 @@ public class Projectile : MonoBehaviour {
 	private float m_Age = 0;
 
 	// attack
+	public bool isHitOwner = false;
 	public AttackData attackData;
 	public int damage { set { attackData.damage = value; }}
 
 	// physics
+	public Vector2 initialVelocity = Vector2.zero;
 	public Vector2 drivingForce = Vector2.zero;
 	public Vector2 relativeDrivingForce = Vector2.zero;
 
 	// filter
-	public bool isHitOwner = false;
-	public List<string> targets;
-	public List<string> terrains;
+	public LayerMask collisionIgnores;
+	public LayerMask collisionTargets;
+	public LayerMask collisionTerrains;
 
 	// prepare
 	public float prepareDuration = 0;
@@ -41,12 +43,12 @@ public class Projectile : MonoBehaviour {
 	// decay
 	private bool m_Decaying = false;
 	public bool decaying { get { return m_Decaying; } }
-	public bool decayOnCrash = true;
 	public bool stopOnDecay = true;
 	public float decayDuration = 0;
 	private float m_DecayTime;
 
 	// components
+	private Ricochet m_Ricochet;
 	private Animator m_Animator;
 
 	// collide with something
@@ -64,6 +66,10 @@ public class Projectile : MonoBehaviour {
 
 	void Start () 
 	{
+		if (initialVelocity != Vector2.zero)
+			rigidbody2D.velocity = initialVelocity;
+
+		m_Ricochet = GetComponent<Ricochet>();
 		m_Animator = GetComponent<Animator>();
 
 		if (! prepareDuration.Equals(0)) 
@@ -87,9 +93,29 @@ public class Projectile : MonoBehaviour {
 			GameObject.Destroy(gameObject);
 		}
 	}
+	
+	void StartDecay() {
+		if (decaying) return;
+		
+		m_Decaying = true;
+		
+		if (decayDuration.Equals(0)) 
+		{
+			DestroySelf();
+			return;
+		}
+		
+		m_DecayTime = 0;
+		
+		if (stopOnDecay) 
+		{
+			rigidbody2D.velocity = new Vector2(0, 0);
+			rigidbody2D.isKinematic = true;
+		}
+	}
 
-	void Update () {
-
+	void Update () 
+	{
 		var dt = Time.deltaTime;
 
 		if (! activated) 
@@ -161,74 +187,53 @@ public class Projectile : MonoBehaviour {
 		OnCollision(_collider);
 	}
 
-	void OnCollision(Collider2D _collider) {
-
+	void OnCollision(Collider2D _collider) 
+	{
 		if (! activated) return;
+		if (decaying) return;
 
-		bool _hit = false;
-		bool _bumped = false;
+		if (LayerHelper.Exist(collisionIgnores, _collider)) return;
 
-		if (! decaying) {
-			if (targets.Exists(x => x == _collider.tag)) 
-			{
-				var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
+		if (m_Ricochet && ! m_Ricochet.ShouldCollide(_collider)) return;
 
-				if (! isHitOwner 
-				    && (_damageDetector.GetInstanceID() == ownerDetecterID))
-					return;
-
-				if (_damageDetector != null
-				    && _damageDetector.enabled) 
-				{
-					attackData.velocity = rigidbody2D.velocity;
-					_damageDetector.Damage(attackData);
-				}
-				
-				if (postHit != null) 
-					postHit(this, _collider);
-				
-				_hit = true;
-			}
+		if (m_Ricochet)
+		{
+			if (! m_Ricochet.OnCollision(_collider))
+				StartDecay();
 		}
-		
-		if (! _hit) {
-			if (terrains.Exists(x => x == _collider.tag))
-			{
-				if (postBumped != null) 
-					postBumped(this, _collider);
+		else 
+		{
+			StartDecay();
+		}
 
-				_bumped = true;
+		if (LayerHelper.Exist(collisionTargets, _collider)) 
+		{
+			var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
+
+			if (! isHitOwner 
+			    && (_damageDetector.GetInstanceID() == ownerDetecterID))
+				return;
+
+			if (_damageDetector != null
+			    && _damageDetector.enabled) 
+			{
+				attackData.velocity = rigidbody2D.velocity;
+				_damageDetector.Damage(attackData);
 			}
+			
+			if (postHit != null) 
+				postHit(this, _collider);
+		}
+		else if (LayerHelper.Exist(collisionTargets, _collider.gameObject))
+		{
+			if (postBumped != null) 
+				postBumped(this, _collider);
 		}
 		
 		if (postCollide != null) 
 			postCollide(this, _collider);
 
-		if (_hit || _bumped) 
-		{
-			if (! decaying && decayOnCrash)
-				StartDecay();
-		}
 	}
-	
-	void StartDecay() {
-		if (decaying) return;
-		
-		m_Decaying = true;
-		
-		if (decayDuration.Equals(0)) 
-		{
-			DestroySelf();
-			return;
-		}
-		
-		m_DecayTime = 0;
-		
-		if (stopOnDecay) 
-		{
-			rigidbody2D.velocity = new Vector2(0, 0);
-			rigidbody2D.isKinematic = true;
-		}
-	}
+
 
 }

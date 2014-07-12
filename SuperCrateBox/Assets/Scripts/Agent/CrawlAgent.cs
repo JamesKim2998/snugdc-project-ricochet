@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CrawlAgent : Agent {
 
-	public TerrainDetector forwardDetector;
+	public LayerDetector forwardDetector;
 
 	public override void Start() {
 

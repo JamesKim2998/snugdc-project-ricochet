@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class WeaponDef : ScriptableObject {
+public class WeaponDef : MonoBehaviour {
 	
 	public Weapon weapon;
 	public float cooldown;
@@ -9,7 +9,7 @@ public class WeaponDef : ScriptableObject {
 	public bool useDamage = false;
 	public int damage;
 
-	void OnEnable ()
+	void Start()
 	{
 		weapon.cooldown = cooldown;
 

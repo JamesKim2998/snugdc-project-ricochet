@@ -52,7 +52,7 @@ public class ExplodeOnCrash : MonoBehaviour {
 		_explosion.attackData = m_Projectile.attackData;
 		_explosion.duration = duration;
 		_explosion.radius = radius;
-		_explosion.targets = m_Projectile.targets;
+		_explosion.targets = m_Projectile.collisionTargets;
 		_explosion.Explode();
 	}
 

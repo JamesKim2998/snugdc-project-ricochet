@@ -1,14 +1,14 @@
 
 using UnityEngine;
 
-public class RocketLauncherDef : ScriptableObject {
-	
+public class RocketLauncherDef : MonoBehaviour 
+{
 	public Weapon weapon;
 	public float drivingForce;
 	public float explosionRadius;
 
-	void OnEnable() {
-		
+	void Start() 
+	{
 		var _weapon = weapon as SimpleWeapon;
 		
 		if (_weapon == null) return;

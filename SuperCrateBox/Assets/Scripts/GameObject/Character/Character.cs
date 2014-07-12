@@ -17,6 +17,12 @@ public class Character : MonoBehaviour {
 	}
 	#endregion
 	
+	#region pose
+	private bool m_IsStanding = true;
+	public bool isStanding { get { return m_IsStanding; }}
+	public bool isCrouching { get { return ! m_IsStanding; }}
+	#endregion
+
 	#region life_state
 	public int hpMax = 1;
 	private HasHP m_Hp;
@@ -92,6 +98,8 @@ public class Character : MonoBehaviour {
 		}
 	}
 
+	public float aimSpeed = 90f;
+
 	#endregion
 
 	#region components
@@ -100,7 +108,7 @@ public class Character : MonoBehaviour {
 	// detector
 	public CrateDetector crateDetector;
 	public DamageDetector damageDetector;
-	public TerrainDetector terrainDetector;
+	public LayerDetector terrainDetector;
 	#endregion
 
 	#region events
@@ -164,14 +172,26 @@ public class Character : MonoBehaviour {
 		m_Animator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
 		m_Animator.SetFloat("velocity_y", rigidbody2D.velocity.y);
 	}
-	
+
+	public void Stand()
+	{
+		m_IsStanding = true;
+		m_Animator.SetTrigger("stand_lower");
+	}
+
+	public void Crouch()
+	{
+		m_IsStanding = false;
+		m_Animator.SetTrigger("crouch_lower");
+	}
+
 	public bool movable { 
 		get { return ! isDead; }
 	}
 	
 	public void Move(float _direction)
 	{
-		rigidbody2D.AddForce(_direction * moveForce * transform.right);
+		rigidbody2D.AddForce(_direction * moveForce * Vector3.right);
 	}
 	
 	public bool jumpable {
@@ -186,6 +206,11 @@ public class Character : MonoBehaviour {
 		terrainDetector.gameObject.SetActive(true);
 	}
 	
+	public void ChangeAim(float _direction)
+	{
+		aim += _direction * aimSpeed;
+	}
+
 	public bool shootable {
 		get {
 			return weapon != null && weapon.IsShootable(); 
