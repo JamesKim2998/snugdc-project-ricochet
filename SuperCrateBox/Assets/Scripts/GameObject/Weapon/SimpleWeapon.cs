@@ -16,11 +16,21 @@ public class SimpleWeapon : Weapon {
 	private State m_State = State.IDLE;
 	public State state { 
 		get { return m_State; } 
-		set { 
+		private set { 
 			if (m_State == value) 
 			{
 				Debug.Log("Trying to set same state again. Ignore.");
 			}
+	
+			/*
+			switch (value)
+			{
+			case State.SHOOTING:
+				if (! IsState(State.PREPARING) || IsState(State.CHARGING) ) 
+					return;
+				break;
+			}
+			*/
 
 			m_StateTime = 0;
 			m_State = value; 
@@ -30,6 +40,7 @@ public class SimpleWeapon : Weapon {
 			case State.SHOOTING:
 				++m_ShootCount;
 				++m_ShootIdx;
+				Shoot();
 				break;
 			case State.COOLING:
 				m_ShootIdx = 0;
@@ -53,8 +64,9 @@ public class SimpleWeapon : Weapon {
 	// trigger
 	public bool autoload = false;
 	public int shootAtOnce = 1;
-	public int ammoMax;
-	public int ammo;
+	public int ammoMax = 1000;
+	private int m_Ammo = 0;
+	public int ammo { get { return m_Ammo; } }
 
 	// flag
 	public bool relativeVelocityEnabled = true;
@@ -106,8 +118,13 @@ public class SimpleWeapon : Weapon {
 	public delegate void PostCooldown(object sender, EventArgs args);
 	public event PostCooldown postCooldown;
 
-	public void Update () {
+	public void Start()
+	{
+		m_Ammo = ammoMax;
+	}
 
+	public void Update () 
+	{
 		if (networkView.enabled && ! networkView.isMine)
 			return;
 
@@ -115,10 +132,11 @@ public class SimpleWeapon : Weapon {
 
 		switch (m_State) 
 		{
+		case State.IDLE: break;
 		case State.SHOOTING: {
-			if (m_StateTime > m_ShootTime)
+			if (m_StateTime > shootTime)
 			{
-				if (autoload)
+				if (autoload || (shootIdx >= shootAtOnce) )
 				{
 					state = State.COOLING;
 				}
@@ -129,11 +147,18 @@ public class SimpleWeapon : Weapon {
 			}
 			break;
 		}
-			
+
+		case State.CHARGING: {
+			if (m_StateTime > chargeTime)
+			{
+				state = State.SHOOTING;
+			}
+			break;
+		}
+
 		case State.COOLING: {
-			if (m_StateTime > m_Cooldown) {
+			if (m_StateTime > cooldown) {
 				state = State.IDLE;
-				if (postCooldown != null) postCooldown(this, null); 
 			}
 			break;
 		}
@@ -141,7 +166,6 @@ public class SimpleWeapon : Weapon {
 	}
 
 	public override bool IsShootable() {
-		if (IsState(State.SHOOTING) || IsState(State.COOLING) ) return false;
 		if (doIsShootable != null && ! doIsShootable(this)) return false;
 		return true;
 	}
@@ -251,7 +275,13 @@ public class SimpleWeapon : Weapon {
 		state = State.IDLE;
 	}
 
-	private void Cool() {
+	private void Cool() 
+	{
+		if (postCooldown != null) postCooldown(this, null); 
+	}
 
+	public void Rest() 
+	{
+		state = State.IDLE;
 	}
 }

@@ -6,6 +6,7 @@ public class Game : Singleton<Game>
 	private Game() {}
 
 	public float timescale = 1f;
+	public bool multiplayer = false;
 
 	public GameCharacter character = new GameCharacter();
 	public static GameCharacter Character() { return Instance.character; } 

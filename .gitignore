@@ -262,3 +262,5 @@ ScriptAssemblies
 *.dwlt
 ShaderCache.db
 ShaderCache
+/SuperCrateBox/Library/metadata
+/SuperCrateBox/Library/InspectorExpandedItems.asset

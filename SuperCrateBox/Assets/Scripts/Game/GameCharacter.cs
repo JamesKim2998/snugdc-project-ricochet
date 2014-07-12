@@ -4,12 +4,14 @@ using System.Collections;
 [System.Serializable]
 public class GameCharacter 
 {
-	public Game game;
-	private Game m_Game { get { return game; } set { game = value; } }
+	public Game game { get { return m_Game; } set { m_Game = value; } }
+	private Game m_Game;
 
 	public float maxUpForce = 2f;
 	public float upForce = 30f;
 	private float m_UpForceLeft = 0;
+
+	public GameObject weaponDefault;
 
 	public delegate void PostCharacterChanged(Character _character);
 	public event PostCharacterChanged postCharacterChanged;
@@ -31,8 +33,16 @@ public class GameCharacter
 			m_Character = value;
 			game.camera_.Bind(GetHashCode(), m_Character.transform);
 
-			if (character != null) 
-				character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
+			if (m_Character != null) 
+			{
+				if (weaponDefault != null)
+				{
+					var _weapon = GameObject.Instantiate(weaponDefault) as GameObject;	
+					m_Character.weapon = _weapon.GetComponent<Weapon>();
+				}
+
+				m_Character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
+			}
 
 			if (postCharacterChanged != null) 
 				postCharacterChanged(m_Character);

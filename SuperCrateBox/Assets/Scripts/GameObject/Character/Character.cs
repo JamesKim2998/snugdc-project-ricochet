@@ -77,10 +77,25 @@ public class Character : MonoBehaviour {
 			{
 				m_Animator.SetTrigger("equip_" + weapon.type);
 			}
+
+			if (networkView.isMine && (Network.peerType != NetworkPeerType.Disconnected))
+			{
+				weapon.networkView.viewID = Network.AllocateViewID();
+				weapon.networkView.enabled = true;
+				networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.type);
+			}
 		}
 	}
 
 	public WeaponPivot weaponPivot;
+
+	[RPC]
+	private void SetWeaponRPC(NetworkViewID _viewID, string _weapon)
+	{
+		var _weaponObj = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
+		_weaponObj.networkView.viewID = _viewID;
+		weapon = _weaponObj.GetComponent<Weapon>();
+	}
 
 	private float m_Aim = 90;
 	public float aim { 
@@ -116,7 +131,7 @@ public class Character : MonoBehaviour {
 	public event PostDead postDead;
 	#endregion
 
-	void Start () {
+	void Awake () {
 		m_Hp = GetComponent<HasHP>();
 		m_Hp.hp = hpMax;
 		m_Hp.postDead = Die;
@@ -133,11 +148,6 @@ public class Character : MonoBehaviour {
 			m_Floating = false;
 			terrainDetector.gameObject.SetActive(false);
 		};
-
-		// weapon
-		weapon = null;
-		//		var _weapon = GameObject.Instantiate(Resources.Load("rocket_luncher")) as GameObject;
-		//		weapon = _weapon.GetComponent<Weapon>();
 	}
 	
 	void DestroySelf()
@@ -277,12 +287,12 @@ public class Character : MonoBehaviour {
 		if (networkView.enabled) {
 			weapon.networkView.viewID = Network.AllocateViewID();
 			weapon.networkView.enabled = true;
-			networkView.RPC("ObtainUponServer", RPCMode.Others, weapon.networkView.viewID, _crate.weapon);
+			networkView.RPC("ObtainRPC", RPCMode.Others, weapon.networkView.viewID, _crate.weapon);
 		}
 	}
 	
 	[RPC]
-	void ObtainUponServer(NetworkViewID _viewID, string _weapon) 
+	void ObtainRPC(NetworkViewID _viewID, string _weapon) 
 	{
 		var _theWeapon = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
 		weapon = _theWeapon.GetComponent<Weapon>();

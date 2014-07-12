@@ -13,6 +13,9 @@ public class ArcGuider : MonoBehaviour
 
 	void FixedUpdate () 
 	{
+		if (target == null)
+			return;
+
 		var _targetPosition = transform.worldToLocalMatrix.MultiplyPoint3x4(target.transform.position);
 
 		if (_targetPosition.sqrMagnitude > radius * radius)

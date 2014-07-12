@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class LevelTest : MonoBehaviour {
+public class LevelMultiplayer : MonoBehaviour {
 
 	public CharacterSpawner characterSpawner;
 
@@ -16,12 +16,14 @@ public class LevelTest : MonoBehaviour {
 	
 	}
 
-	void OnServerInitialized() {
+	void OnServerInitialized() 
+	{
 		Debug.Log("server initialized.");
 		InitLevelCommon();
 	}
 
-	void OnConnectedToServer() {
+	void OnConnectedToServer() 
+	{
 		Debug.Log ("server connected.");
 		InitLevelCommon();
 	}

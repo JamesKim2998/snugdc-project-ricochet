@@ -14,6 +14,10 @@ public class MultiplayerGUI : MonoBehaviour {
 	Context m_Context;
 	Stack<Context> m_ContextStack;
 
+	int m_DirectHostPort = 1234;
+	string m_DirectJoinIP = "127.0.0.1";
+	int m_DirectJoinPort = 1234;
+
 	HostButton m_HostButton;
 	JoinButton m_JoinButton;
 
@@ -39,9 +43,8 @@ public class MultiplayerGUI : MonoBehaviour {
 		switch (m_Context) {
 		case Context.RoomList:
 			m_HostList = MasterServer.PollHostList();
-			if (m_HostList.Length == 0) {
+			if (m_HostList.Length == 0) 
 				NetworkManager.RequestHostList();
-			}
 			break;
 		}
 
@@ -107,6 +110,21 @@ public class MultiplayerGUI : MonoBehaviour {
 	{
 		GUILayout.BeginVertical();
 
+		GUILayout.BeginHorizontal ();
+		GUILayout.Label("DirectPort");
+		m_DirectHostPort = int.Parse(GUILayout.TextField (m_DirectHostPort.ToString()));
+		if (GUILayout.Button("Host"))
+			Network.InitializeServer(4, m_DirectHostPort, false);
+		GUILayout.EndHorizontal();
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label ("DirectAddress");
+		m_DirectJoinIP = GUILayout.TextField (m_DirectJoinIP);
+		m_DirectJoinPort = int.Parse(GUILayout.TextField (m_DirectJoinPort.ToString()));
+		if (GUILayout.Button("Join"))
+			Network.Connect(m_DirectJoinIP, m_DirectJoinPort);
+		GUILayout.EndHorizontal ();
+
 		m_HostButton.Display();
 		m_JoinButton.Display(() => Enter(Context.RoomList));
 		DisplayBack();
@@ -123,9 +141,8 @@ public class MultiplayerGUI : MonoBehaviour {
 
 		foreach (var _host in m_HostList) 
 		{
-			if ( GUILayout.Button(_host.gameName)) {
+			if ( GUILayout.Button(_host.gameName)) 
 				Network.Connect(_host);
-			}
 		}
 
 		GUI.enabled = true;
@@ -138,9 +155,7 @@ public class MultiplayerGUI : MonoBehaviour {
 	void OnMasterServerEvent(MasterServerEvent e) 
 	{
 		if (e == MasterServerEvent.HostListReceived) 
-		{
 			m_HostList = MasterServer.PollHostList();
-		}
 	}
 }
 
@@ -150,17 +165,19 @@ public class HostButton : MonoBehaviour
 
 	public void Display() 
 	{
-		if (Network.isServer) {
-			if (GUILayout.Button("Disconnect")) {
+		if (Network.isServer) 
+		{
+			if (GUILayout.Button("Disconnect")) 
 				NetworkManager.StopServer();
-			}
-		} else {
+		} 
+		else 
+		{
 			GUILayout.BeginHorizontal();
 
 			if (Network.isClient)
 				GUI.enabled = false;
 
-			if (GUILayout.Button("Host")) 
+			if (GUILayout.Button("HostMasterServer")) 
 				NetworkManager.StartServer(m_RoomName);
 
 			m_RoomName = GUILayout.TextField(m_RoomName);
@@ -179,16 +196,14 @@ public class JoinButton : MonoBehaviour
 		if (Network.isClient) 
 		{
 			if (GUILayout.Button("Disconnect")) 
-			{
 				NetworkManager.Disconnect();
-			}
 		} 
 		else 
 		{
 			if (Network.isServer) 
 				GUI.enabled = false;
 
-			if (GUILayout.Button("Join"))
+			if (GUILayout.Button("JoinMasterServer"))
 				callback();
 
 			GUI.enabled = true;
