@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 15
   jumpCooldown: .100000001
-  moveForce: 1500
+  moveForce: 2000
   hpMax: 1
   hitCooldown: .5
   hitForce: {x: 10, y: 5}
@@ -2301,13 +2301,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useHpos: 1
-  hpos: 5
+  hpos: 2
   useHneg: 1
-  hneg: -5
+  hneg: -2
   useVpos: 0
-  vpos: 10
+  vpos: 8
   useVneg: 0
-  vneg: -10
+  vneg: -8
 --- !u!114 &11400136
 MonoBehaviour:
   m_ObjectHideFlags: 1
