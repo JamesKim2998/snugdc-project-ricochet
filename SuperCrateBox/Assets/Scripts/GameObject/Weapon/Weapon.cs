@@ -1,8 +1,8 @@
 
 using UnityEngine;
 
-abstract public class Weapon : MonoBehaviour {
-
+abstract public class Weapon : MonoBehaviour 
+{
 	public string type;
 
 	private GameObject m_Owner;
