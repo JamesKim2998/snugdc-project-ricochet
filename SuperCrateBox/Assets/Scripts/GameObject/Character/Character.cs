@@ -158,6 +158,7 @@ public class Character : MonoBehaviour {
 
 		var _rotation = transform.rotation;
 
+		/*
 		if (rigidbody2D.velocity.x > 0.3f) 
 		{
 			_rotation.y = 0;
@@ -168,6 +169,7 @@ public class Character : MonoBehaviour {
 		}
 
 		transform.rotation = _rotation;
+		*/
 
 		m_Animator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
 		m_Animator.SetFloat("velocity_y", rigidbody2D.velocity.y);

@@ -57,12 +57,6 @@ public class GameCharacter
 			}
 		}
 
-		if (Input.GetButtonDown("Fire1")) 
-		{
-			if (character.shootable) 
-				character.Shoot();
-		}
-
 		if (Input.GetButtonDown("Crouch"))
 		{
 			if (character.isCrouching) 
@@ -74,6 +68,12 @@ public class GameCharacter
 				character.Crouch();
 			}
 		}
+
+		if (Input.GetButtonDown("Fire1")) 
+		{
+			if (character.shootable) 
+				character.Shoot();
+		}
 	}
 
 	public void FixedUpdate() 
@@ -84,7 +84,11 @@ public class GameCharacter
 		if (character.movable) 
 		{
 			float _horizontal = Input.GetAxis("Horizontal");
-			if (! _horizontal.Equals(0)) character.Move(_horizontal);
+			if (! _horizontal.Equals(0)) 
+			{
+				Debug.Log(_horizontal);
+				character.Move(_horizontal);
+			}
 			
 			float _vertical = Input.GetAxis("Vertical");
 			

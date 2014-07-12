@@ -257,8 +257,8 @@ output_log.txt
 FailedAssetImports.txt
 ScriptAssemblies
 *.csproj
-metadata
 
 *.sln
 *.dwlt
-AtlasCache
+ShaderCache.db
+ShaderCache
