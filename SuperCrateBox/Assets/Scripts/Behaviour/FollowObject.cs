@@ -9,6 +9,8 @@ public class FollowObject : MonoBehaviour {
 
 	void FixedUpdate () 
 	{
+		if (target == null) return;
+
 		transform.position
 			= Vector3.Lerp(transform.position, target.transform.position + offset, lerp);
 	}

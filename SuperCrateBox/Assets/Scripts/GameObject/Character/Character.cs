@@ -305,5 +305,16 @@ public class Character : MonoBehaviour {
 		weapon = null;
 	}
 
-	// public void OnSerial
+	/*
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
+		if (stream.isWriting) {
+			int healthC = currentHealth;
+			stream.Serialize(ref healthC);
+		} else {
+			int healthZ = 0;
+			stream.Serialize(ref healthZ);
+			currentHealth = healthZ;
+		}
+	}
+	*/
 }
