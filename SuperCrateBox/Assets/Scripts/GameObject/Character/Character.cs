@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
+	private Character m_lastAttacked = null;
+
 	public int direction {
 		get { return transform.rotation.y > 0.5f ? -1 : 1; }
 		set {
@@ -215,8 +217,9 @@ public class Character : MonoBehaviour
 		if (networkView.enabled)
 		{
 			Network.Destroy(networkView.viewID);
+
 		}
-		else 
+		else
 		{
 			GameObject.Destroy(gameObject);
 		}
@@ -307,8 +310,11 @@ public class Character : MonoBehaviour
 		Invoke("EnableHit", hitCooldown);
 		
 		var _direction = Mathf.Sign(_attackData.velocity.x);
+
+		m_lastAttacked = _attackData.owner;
+
 		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
-		
+
 		m_Hp.damage(_attackData);
 		
 		if (m_Hp > 0) {
@@ -330,7 +336,7 @@ public class Character : MonoBehaviour
 		
 		m_NetworkAnimator.SetTrigger("Dead");
 		
-		Game.Statistic().death.val += 1;
+		Game.Statistic().myUserStatistic.death.val += 1;
 		if (postDead != null) postDead(this);
 		
 		Invoke("DestroySelf", deadDelay);
@@ -360,9 +366,9 @@ public class Character : MonoBehaviour
 
 	public void OnCollisionStay2D(Collision2D coll)
 	{
-		Vector3 delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
-		if (Mathf.Abs (delta.x) > 0.1f) {
-			Move(-Mathf.Sign(delta.x));
+		Vector3 _delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
+		if (Mathf.Abs (_delta.x) > 0.1f) {
+			Move(-Mathf.Sign(_delta.x));
 		}
 	}
 	/*

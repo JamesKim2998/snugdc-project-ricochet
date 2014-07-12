@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Statistic {
-	private int m_Value = 0;
-	private int m_OldValue = 0;
+public class Statistic<T> where T : System.IEquatable<T> {
+	private T m_Value;
+	private T m_OldValue;
 
-	public int val { 
+	public T val { 
 		get { 
 			return m_Value;
 		} 
@@ -14,7 +16,7 @@ public class Statistic {
 			m_OldValue = m_Value;
 			m_Value = value; 
 			
-			if (m_Value != m_OldValue
+			if (!m_Value.Equals(m_OldValue)
 			    && postChanged != null) 
 			{
 				postChanged(this);
@@ -22,30 +24,47 @@ public class Statistic {
 		}
 	}
 
-	public int old { get { return m_OldValue; }}
+	public T old { get { return m_OldValue; }}
 
-	public delegate void PostChanged(Statistic _statistic);
+	public delegate void PostChanged(Statistic<T> _statistic);
 	public event PostChanged postChanged;
 
-	public static implicit operator int(Statistic _statistic) {
+	public static implicit operator T(Statistic<T> _statistic) {
 		return _statistic.val;
 	}
-
 }
 
-public class GameStatistics {
-	public readonly Statistic score;
-	public readonly Statistic death;
+public class UserStatistic {
+	public NetworkViewID viewID;
+	public readonly Statistic<int> score;
+	public readonly Statistic<int> death;
+	public readonly string username;
+	//public readonly Statistic<Weapon> weapon;
 
-	public GameStatistics() {
-		score = new Statistic();
-		death = new Statistic();
+	public UserStatistic(NetworkViewID viewID) {
+		this.viewID = viewID;
+		score = new Statistic<int>();
+		death = new Statistic<int>();
+		Reset ();
 	}
 
 	public void Reset() {
 		score.val = 0;
 		death.val = 0;
 	}
-
-
+}
+public class GameStatistics {
+	private List<UserStatistic> userStatisticList;
+	public GameStatistics() {
+		userStatisticList = new List<UserStatistic> ();
+	}
+	public UserStatistic myUserStatistic {
+		get {
+			var _myNetworkID = Game.Character ().character.networkView.viewID;
+			return userStatisticList.Find(el => el.viewID == _myNetworkID);
+		}
+	}
+	public void AddUserStatistic(NetworkViewID viewID) {
+		userStatisticList.Add(new UserStatistic(viewID));
+	}
 }
