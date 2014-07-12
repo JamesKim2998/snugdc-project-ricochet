@@ -211,7 +211,7 @@ public class Character : MonoBehaviour
 		{
 			Network.Destroy(networkView.viewID);
 		}
-		else 
+		else
 		{
 			GameObject.Destroy(gameObject);
 		}
@@ -355,9 +355,9 @@ public class Character : MonoBehaviour
 
 	public void OnCollisionStay2D(Collision2D coll)
 	{
-		Vector3 delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
-		if (Mathf.Abs (delta.x) > 0.1f) {
-			Move(-Mathf.Sign(delta.x));
+		Vector3 _delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
+		if (Mathf.Abs (_delta.x) > 0.1f) {
+			Move(-Mathf.Sign(_delta.x));
 		}
 	}
 	/*
