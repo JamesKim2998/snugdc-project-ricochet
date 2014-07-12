@@ -5,37 +5,81 @@ using UnityEngine;
 
 public class SimpleWeapon : Weapon {
 
+	public enum State {
+		IDLE,
+		PREPARING,
+		CHARGING,
+		SHOOTING,
+		COOLING,
+	}
+
+	private State m_State = State.IDLE;
+	public State state { 
+		get { return m_State; } 
+		set { 
+			if (m_State == value) 
+			{
+				Debug.Log("Trying to set same state again. Ignore.");
+			}
+
+			m_StateTime = 0;
+			m_State = value; 
+
+			switch (m_State) 
+			{
+			case State.SHOOTING:
+				++m_ShootCount;
+				++m_ShootIdx;
+				break;
+			case State.COOLING:
+				m_ShootIdx = 0;
+				Cool();
+				break;
+			}
+		}
+	} 
+
 	public class ShootArgs : EventArgs {
 		public GameObject projectile;
 	}
 
 	// state
-	private bool m_IsShooting = false;
-	public override bool isShooting { get { return m_IsShooting; }}
+	// todo: incomplete
+	public bool IsState(State _state) { return _state == m_State; }
 
-	private bool m_IsCooling = false;
-	public override bool isCooling { get { return m_IsCooling; }}
+	public override bool isShooting { get { return IsState(State.SHOOTING); }}
+	public override bool isCooling { get { return IsState(State.COOLING); }}
+
+	// trigger
+	public bool autoload = false;
+	public int shootAtOnce = 1;
+	public int ammoMax;
+	public int ammo;
 
 	// flag
 	public bool relativeVelocityEnabled = true;
 
 	// time
+	private float m_StateTime;
+	public float stateTime { get { return m_StateTime; } }
+
+	public float prepareTime;
+	public float chargeTime;
+
 	private float m_ShootTime;
 	public float shootTime { get { return m_ShootTime; } set { m_ShootTime = value; }}
-	
-	private float m_ShootTimeLeft;
-	public float shootTimeLeft { get { return m_ShootTimeLeft; }}
 
 	private float m_Cooldown;
 	public override float cooldown { get { return m_Cooldown; } set { m_Cooldown = value; }}
 
-	private float m_Cooltime;
-	public float cooltime { get { return m_Cooltime; }}
+	// shoot/projectile idx
+	private int m_ShootCount = 0;
+	public int shootCount { get { return m_ShootCount; } private set { m_ShootCount = value; } }
+	private int m_ShootIdx = 0;
+	public int shootIdx { get { return m_ShootIdx; } private set { m_ShootIdx = value; } }
 
-	// projectile idx
 	private int m_ProjectileCount = 0;
 	public int projectileCount { get { return m_ProjectileCount; } }
-
 	private int m_ProjectileIdx;
 	public int projectileIdx { get { return m_ProjectileIdx; }}
 
@@ -67,40 +111,46 @@ public class SimpleWeapon : Weapon {
 		if (networkView.enabled && ! networkView.isMine)
 			return;
 
-		if (m_IsShooting) {
+		m_StateTime += Time.deltaTime;
 
-			m_ShootTimeLeft -= Time.deltaTime;
-
-			if (m_ShootTimeLeft <= 0) {
-				Cool();
+		switch (m_State) 
+		{
+		case State.SHOOTING: {
+			if (m_StateTime > m_ShootTime)
+			{
+				if (autoload)
+				{
+					state = State.COOLING;
+				}
+				else 
+				{
+					state = State.CHARGING;
+				}
 			}
+			break;
+		}
 			
-		} 
-
-		if (m_IsCooling) {
-			m_Cooltime -= Time.deltaTime;
-			if (m_Cooltime <= 0) {
-				m_IsCooling = false;
+		case State.COOLING: {
+			if (m_StateTime > m_Cooldown) {
+				state = State.IDLE;
 				if (postCooldown != null) postCooldown(this, null); 
 			}
+			break;
 		}
-
+		}
 	}
 
 	public override bool IsShootable() {
-		if (m_IsShooting || m_IsCooling ) return false;
+		if (IsState(State.SHOOTING) || IsState(State.COOLING) ) return false;
 		if (doIsShootable != null && ! doIsShootable(this)) return false;
 		return true;
 	}
 
-	public override void Shoot() {
-
+	public override void Shoot() 
+	{
 		if (! IsShootable()) {
 			Debug.LogError("trying to shoot not shootable weapon!");
 		}
-
-		m_IsShooting = true;
-		m_ShootTimeLeft = 0;
 
 		int _bundle = 1;
 
@@ -196,19 +246,12 @@ public class SimpleWeapon : Weapon {
 		
 		if (isShooting) {
 			Cool();
-		} else {
-			m_IsShooting = false;
-			m_IsCooling = false;
 		}
 
+		state = State.IDLE;
 	}
 
 	private void Cool() {
 
-		if (! isShooting || isCooling) return;
-
-		m_IsShooting = false;
-		m_IsCooling = true;
-		m_Cooltime = cooldown;
 	}
 }
