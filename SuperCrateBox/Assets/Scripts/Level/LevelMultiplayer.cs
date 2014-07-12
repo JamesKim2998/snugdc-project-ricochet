@@ -11,10 +11,10 @@ public class LevelMultiplayer : MonoBehaviour
 	{
 		foreach(CharacterSpawner _spawner in characterSpawners)
 		{
-			_spawner.postDestroy += ListenCharacterDestroyed;
 			_spawner.enabled = false;
 			_spawner.autoSpawn = false;
 			_spawner.networkView.enabled = true;
+			_spawner.postDestroy += ListenCharacterDestroyed;
 		}
 			
 		NetworkManager.postBeforeDisconnected += ListenBeforeDisconnected;
@@ -60,12 +60,6 @@ public class LevelMultiplayer : MonoBehaviour
 
 	void SpawnCharacter()
 	{
-		if (Game.Character ().character != null) 
-		{
-			Debug.Log("Trying to spawner character again! Ignore.");
-			return;
-		}
-
 		var _spawnerCnt = Random.Range (0, characterSpawners.Count);
 		var _spawnerTarget = characterSpawners[_spawnerCnt];
 		var _character = _spawnerTarget.Spawn();	
@@ -74,7 +68,6 @@ public class LevelMultiplayer : MonoBehaviour
 
 	void ListenCharacterDestroyed(CharacterSpawner _spawner, GameObject _obj) 
 	{
-		SpawnCharacter ();
-
+		Invoke("SpawnCharacter", 0.5f);
 	}
 }
