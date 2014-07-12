@@ -68,4 +68,7 @@ public class GameStatistics {
 	public void AddUserStatistic(NetworkViewID viewID) {
 		userStatisticList.Add(new UserStatistic(viewID));
 	}
+	public UserStatistic GetUserStatistic(NetworkViewID viewID) {
+		return userStatisticList.Find (el => el.viewID == viewID);
+	}
 }

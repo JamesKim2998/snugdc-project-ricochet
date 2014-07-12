@@ -336,6 +336,12 @@ public class Character : MonoBehaviour
 		
 		m_NetworkAnimator.SetTrigger("Dead");
 		Game.Statistic().myUserStatistic.death.val += 1;
+		if (m_lastAttacked) {
+			if (Game.Statistic().GetUserStatistic(m_lastAttacked.networkView.viewID) != null) {
+				Game.Statistic().GetUserStatistic(m_lastAttacked.networkView.viewID).score.val += 1;
+			}
+			Game.Statistic().myUserStatistic.death.val += 1;
+		}
 		if (postDead != null) postDead(this);
 		
 		Invoke("DestroySelf", deadDelay);
