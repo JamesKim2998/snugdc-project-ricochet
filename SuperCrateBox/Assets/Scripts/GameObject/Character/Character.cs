@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
-	private Character m_lastAttacked = null;
+	private NetworkPlayer m_lastAttacked = new NetworkPlayer ();
 
 	public int direction {
 		get { return transform.rotation.y > 0.5f ? -1 : 1; }
@@ -310,8 +310,8 @@ public class Character : MonoBehaviour
 		Invoke("EnableHit", hitCooldown);
 		
 		var _direction = Mathf.Sign(_attackData.velocity.x);
-
 		m_lastAttacked = _attackData.owner;
+		Debug.Log (_attackData.owner);
 
 		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
 
@@ -335,12 +335,12 @@ public class Character : MonoBehaviour
 		rigidbody2D.AddForce(_deadForce);
 		
 		m_NetworkAnimator.SetTrigger("Dead");
-		Game.Statistic().myUserStatistic.death.val += 1;
-		if (m_lastAttacked) {
-			if (Game.Statistic().GetUserStatistic(m_lastAttacked.networkView.viewID) != null) {
-				Game.Statistic().GetUserStatistic(m_lastAttacked.networkView.viewID).score.val += 1;
+		Game.Statistic().GetUserStatistic(networkView.owner).death.val += 1;
+		if (m_lastAttacked != null) {
+			Debug.Log(m_lastAttacked);
+			if (Game.Statistic().GetUserStatistic(m_lastAttacked) != null) {
+				Game.Statistic().GetUserStatistic(m_lastAttacked).score.val += 1;
 			}
-			Game.Statistic().myUserStatistic.death.val += 1;
 		}
 		if (postDead != null) postDead(this);
 		

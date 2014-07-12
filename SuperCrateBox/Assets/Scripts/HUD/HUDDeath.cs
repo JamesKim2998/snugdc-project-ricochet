@@ -21,7 +21,6 @@ public class HUDDeath : MonoBehaviour {
 	}
 	
 	public void Set(Statistic<int> _statistic) {
-		Debug.Log("hud update");
 		var _text = "Death: " + _statistic.val;
 		guiText.text = _text;
 	}

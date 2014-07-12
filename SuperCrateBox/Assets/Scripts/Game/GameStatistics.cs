@@ -34,14 +34,14 @@ public class Statistic<T> where T : System.IEquatable<T> {
 }
 
 public class UserStatistic {
-	public NetworkViewID viewID;
+	public NetworkPlayer player;
 	public readonly Statistic<int> score;
 	public readonly Statistic<int> death;
 	public readonly string username;
 	//public readonly Statistic<Weapon> weapon;
 
-	public UserStatistic(NetworkViewID viewID) {
-		this.viewID = viewID;
+	public UserStatistic(NetworkPlayer player) {
+		this.player = player;
 		score = new Statistic<int>();
 		death = new Statistic<int>();
 		Reset ();
@@ -61,14 +61,14 @@ public class GameStatistics {
 		get {
 			if (Game.Character ().character == null)
 				return null;
-			var _myNetworkID = Game.Character ().character.networkView.viewID;
-			return userStatisticList.Find(el => el.viewID == _myNetworkID);
+			var _myNetworkPlayer = Game.Character ().character.networkView.owner;
+			return userStatisticList.Find(el => el.player == _myNetworkPlayer);
 		}
 	}
-	public void AddUserStatistic(NetworkViewID viewID) {
-		userStatisticList.Add(new UserStatistic(viewID));
+	public void AddUserStatistic(NetworkPlayer player) {
+		userStatisticList.Add(new UserStatistic(player));
 	}
-	public UserStatistic GetUserStatistic(NetworkViewID viewID) {
-		return userStatisticList.Find (el => el.viewID == viewID);
+	public UserStatistic GetUserStatistic(NetworkPlayer player) {
+		return userStatisticList.Find (el => el.player == player);
 	}
 }
