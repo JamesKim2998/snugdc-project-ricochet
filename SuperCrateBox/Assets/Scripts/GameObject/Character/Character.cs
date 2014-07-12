@@ -71,11 +71,11 @@ public class Character : MonoBehaviour
 
 			if (value == null) 
 			{
-				m_Animator.SetTrigger("unequip");
+				m_NetworkAnimator.SetTrigger("unequip");
 			}
 			else 
 			{
-				m_Animator.SetTrigger("equip_" + weapon.type);
+				m_NetworkAnimator.SetTrigger("equip_" + weapon.type);
 			}
 
 			if (IsNetworkEnabled())
@@ -93,8 +93,9 @@ public class Character : MonoBehaviour
 	private void SetWeaponRPC(NetworkViewID _viewID, string _weapon)
 	{
 		var _weaponObj = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
-		_weaponObj.networkView.viewID = _viewID;
 		weapon = _weaponObj.GetComponent<Weapon>();
+		weapon.networkView.enabled = true;
+		weapon.networkView.viewID = _viewID;
 	}
 
 	private float m_Aim = 90;
@@ -118,8 +119,8 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region components
-	// private Animator m_Animator;
-	private NetworkAnimator m_Animator;
+	private Animator m_Animator;
+	private NetworkAnimator m_NetworkAnimator;
 	
 	// detector
 	public CrateDetector crateDetector;
@@ -146,8 +147,8 @@ public class Character : MonoBehaviour
 		m_Hp.postDead = Die;
 
 		// components
-		// m_Animator = GetComponent<Animator>();
-		m_Animator = GetComponent<NetworkAnimator>();
+		m_Animator = GetComponent<Animator>();
+		m_NetworkAnimator = GetComponent<NetworkAnimator>();
 		
 		// detector
 		crateDetector.doObtain = Obtain;
@@ -191,14 +192,14 @@ public class Character : MonoBehaviour
 		transform.rotation = _rotation;
 		*/
 
-		m_Animator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
-		m_Animator.SetFloat("velocity_y", rigidbody2D.velocity.y);
+		m_NetworkAnimator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
+		m_NetworkAnimator.SetFloat("velocity_y", rigidbody2D.velocity.y);
 	}
 
 	public void Stand()
 	{
 		m_IsStanding = true;
-		m_Animator.SetTrigger("stand_lower");
+		m_NetworkAnimator.SetTrigger("stand_lower");
 
 		if (IsNetworkEnabled ())
 			networkView.RPC ("StandRPC", RPCMode.Others);
@@ -213,7 +214,7 @@ public class Character : MonoBehaviour
 	public void Crouch()
 	{
 		m_IsStanding = false;
-		m_Animator.SetTrigger("crouch_lower");
+		m_NetworkAnimator.SetTrigger("crouch_lower");
 
 		if (IsNetworkEnabled ())
 			networkView.RPC ("CrouchRPC", RPCMode.Others);
@@ -259,7 +260,7 @@ public class Character : MonoBehaviour
 	
 	public void Shoot() {
 		weapon.Shoot();
-		m_Animator.SetTrigger ("shoot");
+		m_NetworkAnimator.SetTrigger ("shoot");
 	}
 	
 	void EnableHit() {
@@ -278,7 +279,7 @@ public class Character : MonoBehaviour
 		m_Hp.damage(_attackData);
 		
 		if (m_Hp > 0) {
-			m_Animator.SetTrigger("Hit");
+			m_NetworkAnimator.SetTrigger("Hit");
 		}
 	}
 	
@@ -294,7 +295,7 @@ public class Character : MonoBehaviour
 		rigidbody2D.velocity = new Vector2(0, 0);
 		rigidbody2D.AddForce(_deadForce);
 		
-		m_Animator.SetTrigger("Dead");
+		m_NetworkAnimator.SetTrigger("Dead");
 		
 		Game.Statistic().death.val += 1;
 		if (postDead != null) postDead(this);
@@ -311,21 +312,6 @@ public class Character : MonoBehaviour
 		
 		var _weapon = GameObject.Instantiate(Resources.Load(_crate.weapon)) as GameObject;
 		weapon = _weapon.GetComponent<Weapon>();
-		
-		if (networkView.enabled) {
-			weapon.networkView.viewID = Network.AllocateViewID();
-			weapon.networkView.enabled = true;
-			networkView.RPC("ObtainRPC", RPCMode.Others, weapon.networkView.viewID, _crate.weapon);
-		}
-	}
-	
-	[RPC]
-	void ObtainRPC(NetworkViewID _viewID, string _weapon) 
-	{
-		var _theWeapon = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
-		weapon = _theWeapon.GetComponent<Weapon>();
-		weapon.networkView.viewID = _viewID;
-		weapon.networkView.enabled = true;
 	}
 
 	public void Unequip()
@@ -340,7 +326,8 @@ public class Character : MonoBehaviour
 		Vector3 _velocity = Vector3.zero;
 		float _aim = 0;
 
-		if (_stream.isWriting) {
+		if (_stream.isWriting) 
+		{
 			_position = transform.position;
 			_rotation = transform.rotation;
 			_velocity = rigidbody2D.velocity;
@@ -350,7 +337,11 @@ public class Character : MonoBehaviour
 			_stream.Serialize(ref _rotation);
 			_stream.Serialize(ref _velocity);
 			_stream.Serialize(ref _aim);
-		} else {
+		} 
+		else 
+		{
+			// Debug.Log(_aim);
+
 			_stream.Serialize(ref _position);
 			_stream.Serialize(ref _rotation);
 			_stream.Serialize(ref _velocity);

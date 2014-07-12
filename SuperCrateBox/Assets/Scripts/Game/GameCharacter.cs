@@ -100,10 +100,7 @@ public class GameCharacter
 		{
 			float _horizontal = Input.GetAxis("Horizontal");
 			if (! _horizontal.Equals(0)) 
-			{
-				Debug.Log(_horizontal);
 				character.Move(_horizontal);
-			}
 			
 			float _vertical = Input.GetAxis("Vertical");
 			
