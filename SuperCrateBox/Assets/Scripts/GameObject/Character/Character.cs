@@ -69,10 +69,7 @@ public class Character : MonoBehaviour
 	public Weapon weapon {
 		get { return m_Weapon; }
 		set {
-			if (m_Weapon != null) 
-			{
-				Destroy(m_Weapon.gameObject);
-			}
+			var _old = m_Weapon;
 
 			m_Weapon = value;
 
@@ -108,6 +105,13 @@ public class Character : MonoBehaviour
 					networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.type);
 				}
 			}
+
+			if (postWeaponChanged != null)
+				postWeaponChanged(this, _old);
+
+			if (_old != null) 
+				Destroy(_old.gameObject);
+
 		}
 	}
 
@@ -179,6 +183,8 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region events
+	public delegate void PostWeaponChanged(Character _character, Weapon _old);
+	public event PostWeaponChanged postWeaponChanged;
 	public delegate void PostDead(Character _character);
 	public event PostDead postDead;	
 	#endregion

@@ -5,7 +5,6 @@ public class InterpolatePosition : MonoBehaviour {
 
 	public float weight = 0.9f;
 
-	double m_LastSyncTimestamp = 0;
 	Vector3 m_LastSyncPosition = Vector3.zero;
 	Vector3 m_LastSyncVelocity = Vector3.zero;
 

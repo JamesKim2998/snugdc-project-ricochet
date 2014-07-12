@@ -40,7 +40,7 @@ public class LevelMultiplayer : MonoBehaviour
 	{
 		if (m_IsInitialized) return;
 		m_IsInitialized = true;
-		var _character = SpawnCharacter ();
+		SpawnCharacter ();
 	}
 
 	void ListenBeforeDisconnected()

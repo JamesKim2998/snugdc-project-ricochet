@@ -50,10 +50,6 @@ public class SimpleWeapon : Weapon {
 		}
 	} 
 
-	public class ShootArgs : EventArgs {
-		public GameObject projectile;
-	}
-
 	// state
 	// todo: incomplete
 	public bool IsState(State _state) { return _state == m_State; }
@@ -132,10 +128,10 @@ public class SimpleWeapon : Weapon {
 	public DoCreateProjectileServer doCreateProjectileServer;
 
 	// events
-	public delegate void PostShoot(object sender, ShootArgs args);
+	public delegate void PostShoot(SimpleWeapon _weapon, Projectile _projectile);
 	public event PostShoot postShoot;
 	
-	public delegate void PostCooldown(object sender, EventArgs args);
+	public delegate void PostCooldown(SimpleWeapon _weapon);
 	public event PostCooldown postCooldown;
 
 	public void Start()
@@ -266,11 +262,8 @@ public class SimpleWeapon : Weapon {
 				                projectileIdx);
 			}
 
-			if (postShoot != null) {
-				var args = new ShootArgs();
-				args.projectile = _projectile;
-				postShoot(this, args);
-			}
+			if (postShoot != null) 
+				postShoot(this, _projectile.GetComponent<Projectile>());
 		}
 
 	}
@@ -307,7 +300,7 @@ public class SimpleWeapon : Weapon {
 
 	private void Cool() 
 	{
-		if (postCooldown != null) postCooldown(this, null); 
+		if (postCooldown != null) postCooldown(this); 
 	}
 
 	public void Rest() 
