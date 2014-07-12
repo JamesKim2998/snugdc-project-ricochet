@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400004}
-  speed: 15
+  speed: 18
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
