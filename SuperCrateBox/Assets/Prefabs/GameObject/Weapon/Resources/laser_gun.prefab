@@ -137,6 +137,8 @@ MonoBehaviour:
   projectileOffset: {x: 1, y: 0, z: 0}
   prepareTime: .200000003
   chargeTime: .200000003
+  effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
+  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

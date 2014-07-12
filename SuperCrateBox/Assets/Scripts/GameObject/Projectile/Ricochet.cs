@@ -16,6 +16,13 @@ public class Ricochet : MonoBehaviour
 	private bool m_IsReflected = false;
 	public LayerMask reflectionMask;
 
+	// effect
+	public GameObject effectReflectPrf;
+	public Vector3 effectReflectOffset;
+
+	public GameObject effectPenetratePrf;
+	public Vector3 effectPenetrateOffset;
+
 	void Start () 
 	{
 	}
@@ -53,22 +60,34 @@ public class Ricochet : MonoBehaviour
 		     //				|| (penetration > _collider.hardness)
 		     ))
 		{
-			Debug.Log("penetrate");
 			m_IsPenetrating = true;
 			m_IsPenetratingTemp = true;
 			m_PenetrationTimer = 0.1f;
 			m_PenetratingObject = _collider.gameObject.GetInstanceID();
 			_shouldDecay = true;
+
+			// todo: server
+			if (effectPenetratePrf)
+			{
+				var _effect = GameObject.Instantiate(effectPenetratePrf, transform.position, transform.rotation) as GameObject;
+				_effect.transform.Translate(effectPenetrateOffset);
+			}
 		}
 		else if ( reflectionCount > 0 
 		         && (LayerHelper.Exist(reflectionMask, _collider)
 		    //		    	|| _collider.reflectable)
 		    ))
 		{
-			Debug.Log("reflect");
 			--reflectionCount;
 			Reflect(_collider);
 			_shouldDecay = true;
+			
+			// todo: server
+			if (effectReflectPrf)
+			{
+				var _effect = GameObject.Instantiate(effectReflectPrf, transform.position, transform.rotation) as GameObject;
+				_effect.transform.Translate(effectReflectOffset);
+			}
 		}
 
 		return _shouldDecay;

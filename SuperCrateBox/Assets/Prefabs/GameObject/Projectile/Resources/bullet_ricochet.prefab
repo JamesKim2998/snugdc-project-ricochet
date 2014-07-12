@@ -110,6 +110,10 @@ MonoBehaviour:
   reflectionMask:
     serializedVersion: 2
     m_Bits: 256
+  effectReflectPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
+  effectReflectOffset: {x: 0, y: 0, z: 0}
+  effectPenetratePrf: {fileID: 0}
+  effectPenetrateOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,7 +155,6 @@ MonoBehaviour:
   attackData:
     velocity: {x: 0, y: 0}
     damage: 1
-    owner: {fileID: 0}
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
   relativeDrivingForce: {x: 0, y: 0}
@@ -167,6 +170,8 @@ MonoBehaviour:
   prepareDuration: 0
   stopOnDecay: 1
   decayDuration: 0
+  effectHitPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
+  effectHitOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

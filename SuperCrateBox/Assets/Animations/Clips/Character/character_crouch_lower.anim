@@ -20,7 +20,7 @@ AnimationClip:
         value: {x: -.37622124, y: -.388442546, z: 0}
         inSlope: {x: .0421822071, y: .0421822071, z: 0}
         outSlope: {x: .0421822071, y: .0421822071, z: 0}
-        tangentMode: 1965974902
+        tangentMode: 0
       - time: .5
         value: {x: -.355130136, y: -.367351443, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
@@ -46,45 +46,17 @@ AnimationClip:
         value: {x: .371921927, y: -.372312397, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 117998076
+        tangentMode: 115588144
       - time: 1
         value: {x: .390000015, y: -.372312397, z: 0}
         inSlope: {x: .0361561775, y: 0, z: 0}
         outSlope: {x: .0361561775, y: 0, z: 0}
-        tangentMode: 0
+        tangentMode: 1065353216
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: Skeleton/placer_shin_l
   m_ScaleCurves: []
   m_FloatCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Center.x
-    path: 
-    classID: 58
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .400000006
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Center.y
-    path: 
-    classID: 58
-    script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -175,6 +147,57 @@ AnimationClip:
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - path: 1711025112
+      attribute: 1
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2683508411
+      attribute: 1
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2500912479
+      attribute: 3305885265
+      script: {fileID: 11500000, guid: ce43f279066d4444fb1215d0821139bc, type: 3}
+      classID: 114
+      customType: 24
+      isPPtrCurve: 0
+    - path: 1864357948
+      attribute: 3305885265
+      script: {fileID: 11500000, guid: ce43f279066d4444fb1215d0821139bc, type: 3}
+      classID: 114
+      customType: 24
+      isPPtrCurve: 0
+    - path: 0
+      attribute: 2368279999
+      script: {fileID: 0}
+      classID: 61
+      customType: 0
+      isPPtrCurve: 0
+    - path: 0
+      attribute: 1394318531
+      script: {fileID: 0}
+      classID: 61
+      customType: 0
+      isPPtrCurve: 0
+    - path: 0
+      attribute: 4197328169
+      script: {fileID: 0}
+      classID: 61
+      customType: 0
+      isPPtrCurve: 0
+    - path: 0
+      attribute: 605858901
+      script: {fileID: 0}
+      classID: 61
+      customType: 0
+      isPPtrCurve: 0
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
@@ -193,34 +216,6 @@ AnimationClip:
     m_HeightFromFeet: 0
     m_Mirror: 0
   m_EditorCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Center.x
-    path: 
-    classID: 58
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .400000006
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Center.y
-    path: 
-    classID: 58
-    script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:

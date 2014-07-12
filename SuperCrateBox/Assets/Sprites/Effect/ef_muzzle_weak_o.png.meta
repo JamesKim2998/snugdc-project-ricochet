@@ -1,8 +1,6 @@
 fileFormatVersion: 2
-guid: 0922cfe22cbe53941bc3403f08824950
+guid: 221bb2d7d7c0dba43a242a892761b225
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: ef_muzzle_strong_OL
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -35,7 +33,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 4
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100

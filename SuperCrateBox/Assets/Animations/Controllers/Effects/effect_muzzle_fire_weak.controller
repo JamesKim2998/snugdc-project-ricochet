@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: hit_effect
+  m_Name: effect_muzzle_fire_weak
   serializedVersion: 2
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -25,13 +25,13 @@ State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ef_hit
+  m_Name: effect_muzzle_fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: ed12881d300d7bd43b4d2ac01672eae0, type: 2}
+  - {fileID: 7400000, guid: 8890bc90dbdd6944b83072d74a35fccc, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 216, y: 12, z: 0}
+  m_Position: {x: 24, y: 84, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -49,5 +49,5 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions: {}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: 48, y: 12, z: 0}
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
