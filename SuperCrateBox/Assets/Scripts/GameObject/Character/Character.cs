@@ -304,4 +304,6 @@ public class Character : MonoBehaviour {
 	{
 		weapon = null;
 	}
+
+	// public void OnSerial
 }
