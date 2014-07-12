@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
 		get { return transform.localRotation.y > 100 ? -1 : 1; }
 	}
 	#endregion
-	
+
 	#region pose
 	private bool m_IsStanding = true;
 	public bool isStanding { get { return m_IsStanding; }}
@@ -112,6 +112,13 @@ public class Character : MonoBehaviour
 
 			m_Animator.SetFloat("aim", m_Aim);
 
+			if (crossHair) 
+			{
+				var _angle = crossHair.transform.localEulerAngles;
+				_angle.z = m_Aim - 90;
+				crossHair.transform.localEulerAngles = _angle;
+			}
+
 			networkView.RPC("SetAimRPC", RPCMode.Others, m_Aim);
 		}
 	}
@@ -134,6 +141,8 @@ public class Character : MonoBehaviour
 	#region components
 	private Animator m_Animator;
 	private NetworkAnimator m_NetworkAnimator;
+
+	public GameObject crossHair;
 	
 	// detector
 	public CrateDetector crateDetector;
@@ -143,7 +152,7 @@ public class Character : MonoBehaviour
 
 	#region events
 	public delegate void PostDead(Character _character);
-	public event PostDead postDead;
+	public event PostDead postDead;	
 	#endregion
 
 	#region network
