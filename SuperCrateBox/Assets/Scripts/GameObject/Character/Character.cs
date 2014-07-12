@@ -141,7 +141,8 @@ public class Character : MonoBehaviour
 				crossHair.transform.localEulerAngles = _angle;
 			}
 
-			networkView.RPC("SetAimRPC", RPCMode.Others, m_Aim);
+			if (IsNetworkEnabled())
+				networkView.RPC("SetAimRPC", RPCMode.Others, m_Aim);
 		}
 	}
 
@@ -161,6 +162,9 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region components
+	private CharacterRenderers m_Renderers;
+	public CharacterRenderers renderers { get { return m_Renderers; } }
+
 	private Animator m_Animator;
 	private NetworkAnimator m_NetworkAnimator;
 
@@ -191,6 +195,7 @@ public class Character : MonoBehaviour
 		m_Hp.postDead = Die;
 
 		// components
+		m_Renderers = GetComponent<CharacterRenderers> ();
 		m_Animator = GetComponent<Animator>();
 		m_NetworkAnimator = GetComponent<NetworkAnimator>();
 		

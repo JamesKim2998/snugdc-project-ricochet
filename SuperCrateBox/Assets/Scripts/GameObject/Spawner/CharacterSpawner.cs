@@ -73,7 +73,7 @@ public class CharacterSpawner : MonoBehaviour
 
 	void ListenDestroy(Destroyable _destroyable)
 	{
-		if (networkView.enabled) 
+		if (networkView != null && networkView.enabled) 
 			Network.RemoveRPCs(networkView.viewID);
 
 		if (postDestroy != null)

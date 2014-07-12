@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class GameCharacter 
@@ -34,6 +35,8 @@ public class GameCharacter
 
 			if (m_Character != null) 
 			{
+				m_Character.renderers.SetColor(characterColor);
+
 				game.camera_.Bind(GetHashCode(), m_Character.transform);
 
 				if (weaponDefault != null)
@@ -50,8 +53,21 @@ public class GameCharacter
 		}
 	}
 
+	public List<Color> characterColorPresets;
+	[HideInInspector]
+	public Color characterColor;
+
 	public void Start()
 	{
+		if (characterColorPresets.Count == 0) 
+		{
+			characterColor = Color.white;
+		}
+		else 
+		{
+			characterColor = GenericHelper.SelectRandom (characterColorPresets);
+		}
+
 		if (characterExpose)
 			character = characterExpose;
 	}
@@ -119,7 +135,6 @@ public class GameCharacter
 
 	public void FixedUpdate() 
 	{
-
 		if (character == null) return;
 
 		if (character.movable) 
