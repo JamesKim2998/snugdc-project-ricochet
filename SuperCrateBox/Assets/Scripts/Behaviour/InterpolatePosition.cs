@@ -18,28 +18,18 @@ public class InterpolatePosition : MonoBehaviour {
 		if (_stream.isWriting)
 		{
 			_syncPosition = transform.position;
-			_stream.Serialize(ref _syncPosition);
-			
 			_syncScale = transform.localScale;
-			_stream.Serialize(ref _syncScale);
-
 			_syncVelocity = rigidbody2D.velocity;
+
+			_stream.Serialize(ref _syncPosition);
+			_stream.Serialize(ref _syncScale);
 			_stream.Serialize(ref _syncVelocity);
 		}
 		else
 		{
-			if (m_LastSyncTimestamp > _info.timestamp) 
-			{
-				Debug.Log("serialization order cluttered!");
-				return;
-			}
-
 			_stream.Serialize(ref _syncPosition);
 			_stream.Serialize(ref _syncScale);
 			_stream.Serialize(ref _syncVelocity);
-
-//			Debug.Log(_syncPosition);
-//			 Debug.Log(_syncVelocity);
 
 			if (m_LastSyncPosition == Vector3.zero) 
 				m_LastSyncPosition = _syncPosition;

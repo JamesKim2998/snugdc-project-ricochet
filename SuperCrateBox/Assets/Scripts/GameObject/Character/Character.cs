@@ -111,10 +111,23 @@ public class Character : MonoBehaviour
 			weaponPivot.transform.eulerAngles = _weaponAngle;
 
 			m_Animator.SetFloat("aim", m_Aim);
+
+			networkView.RPC("SetAimRPC", RPCMode.Others, m_Aim);
 		}
 	}
 
 	public float aimSpeed = 90f;
+
+	// todo: networkview error로 인해서 일단 외부에서 설정함.
+	[RPC]
+	void SetAimRPC(float _aim) 
+	{
+		m_Aim = _aim;
+		var _weaponAngle = weaponPivot.transform.eulerAngles;
+		_weaponAngle.z = m_Aim - 90;
+		weaponPivot.transform.eulerAngles = _weaponAngle;
+		m_Animator.SetFloat("aim", m_Aim);
+	}
 
 	#endregion
 
@@ -178,8 +191,7 @@ public class Character : MonoBehaviour
 		m_JumpCooltime -= Time.deltaTime;
 
 		var _rotation = transform.rotation;
-
-		/*
+		
 		if (rigidbody2D.velocity.x > 0.3f) 
 		{
 			_rotation.y = 0;
@@ -190,8 +202,7 @@ public class Character : MonoBehaviour
 		}
 
 		transform.rotation = _rotation;
-		*/
-
+	
 		m_NetworkAnimator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
 		m_NetworkAnimator.SetFloat("velocity_y", rigidbody2D.velocity.y);
 	}
@@ -319,6 +330,7 @@ public class Character : MonoBehaviour
 		weapon = null;
 	}
 
+	/*
 	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
 	{
 		Vector3 _position = Vector3.zero;
@@ -328,30 +340,32 @@ public class Character : MonoBehaviour
 
 		if (_stream.isWriting) 
 		{
-			_position = transform.position;
-			_rotation = transform.rotation;
-			_velocity = rigidbody2D.velocity;
 			_aim = aim;
+			_position = transform.position;
+			// _rotation = transform.rotation;
+			_velocity = rigidbody2D.velocity;
 
-			_stream.Serialize(ref _position);
-			_stream.Serialize(ref _rotation);
-			_stream.Serialize(ref _velocity);
 			_stream.Serialize(ref _aim);
+			_stream.Serialize(ref _position);
+			// _stream.Serialize(ref _rotation);
+			_stream.Serialize(ref _velocity);
 		} 
 		else 
 		{
-			// Debug.Log(_aim);
-
-			_stream.Serialize(ref _position);
-			_stream.Serialize(ref _rotation);
-			_stream.Serialize(ref _velocity);
 			_stream.Serialize(ref _aim);
+			_stream.Serialize(ref _position);	
+			// _stream.Serialize(ref _rotation);
+			_stream.Serialize(ref _velocity);
 
-			transform.position = _position;
-			transform.rotation = _rotation;
-			rigidbody2D.velocity = _velocity;
 			aim = _aim;
+			transform.position = _position;
+			// transform.rotation = _rotation;
+			rigidbody2D.velocity = _velocity;
+
 		}
+
+		Debug.Log(_aim.ToString());
 	}
 
+*/
 }
