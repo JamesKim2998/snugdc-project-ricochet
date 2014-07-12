@@ -251,6 +251,7 @@ public class SimpleWeapon : Weapon {
 			{
 				_projectile.networkView.viewID = Network.AllocateViewID();
 				_projectile.networkView.enabled = true;
+				_theProjectile.attackData.owner = _projectile.networkView.owner;
 
 				networkView.RPC("CreateProjectileServer", 
 				                RPCMode.Others, 
@@ -279,10 +280,11 @@ public class SimpleWeapon : Weapon {
 
 		if (owner != null)
 		{
-			var _theProjecttile = _projectile.GetComponent<Projectile>();
-			_theProjecttile.ownerID = owner.GetInstanceID();
+			var _theProjectile = _projectile.GetComponent<Projectile>();
+			_theProjectile.ownerID = owner.GetInstanceID();
+			_theProjectile.attackData.owner = _projectile.networkView.owner;
 			var _detector = owner.GetComponentInChildren<DamageDetector>();
-			if (_detector) _theProjecttile.ownerDetecterID = _detector.GetInstanceID();
+			if (_detector) _theProjectile.ownerDetecterID = _detector.GetInstanceID();
 		}
 
 		_projectile.networkView.viewID = _viewID;

@@ -2,9 +2,18 @@
 using System.Collections;
 
 public class HUDScore : MonoBehaviour {
+	IEnumerator Bind ()
+	{
+		yield return new WaitForSeconds(0.1f);
+		if (Game.Statistic ().myUserStatistic == null) {
+			StartCoroutine (Bind());
+		} else {
+			Game.Statistic().myUserStatistic.score.postChanged += Set;
+		}
+	}
 
 	void Start () {
-		Game.Statistic().myUserStatistic.score.postChanged += Set;
+		StartCoroutine (Bind());
 	}
 	
 	void Update () {
