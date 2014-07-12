@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 90234dff43092d344b6d33795d94f9ed
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: proportions-of-the-human-body-1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

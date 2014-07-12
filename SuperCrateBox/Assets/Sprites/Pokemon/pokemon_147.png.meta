@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: c50c226edf339ea4bb955d0da61847dd
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: pokemon_147
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

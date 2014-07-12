@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 52b72f35b78957240905b97395f2c8b1
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: rpg
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

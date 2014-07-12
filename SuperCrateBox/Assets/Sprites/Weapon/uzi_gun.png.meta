@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 923120fdc1a2261498f6834f249782d9
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: uzi_gun
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

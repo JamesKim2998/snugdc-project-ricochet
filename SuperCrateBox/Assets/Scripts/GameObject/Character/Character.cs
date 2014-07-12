@@ -341,6 +341,13 @@ public class Character : MonoBehaviour
 		weapon = null;
 	}
 
+	public void OnCollisionStay2D(Collision2D coll)
+	{
+		Vector3 delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
+		if (Mathf.Abs (delta.x) > 0.1f) {
+			Move(-Mathf.Sign(delta.x));
+		}
+	}
 	/*
 	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
 	{
