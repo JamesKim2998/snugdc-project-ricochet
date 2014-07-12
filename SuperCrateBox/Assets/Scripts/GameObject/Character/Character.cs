@@ -381,6 +381,8 @@ public class Character : MonoBehaviour
 	{
 		Vector3 _delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
 		if (Mathf.Abs (_delta.x) > 0.1f) {
+			float _horizontal = Input.GetAxis("Horizontal");
+			m_Floating = false;
 			Move(-Mathf.Sign(_delta.x));
 		}
 	}
