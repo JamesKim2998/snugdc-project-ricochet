@@ -56,6 +56,7 @@ public class CharacterSpawner : MonoBehaviour
 			networkView.RPC("SpawnUponServer", RPCMode.OthersBuffered, _character.networkView.viewID, _characterPosition);
 		}
 
+		Game.Statistic ().AddUserStatistic (_character.networkView.viewID);
 		return _character;
 	}
 
@@ -69,6 +70,7 @@ public class CharacterSpawner : MonoBehaviour
 
 		var _observed = _character.AddComponent<InterpolatePosition>();
 		_character.networkView.observed = _observed;
+		Game.Statistic ().AddUserStatistic (_character.networkView.viewID);
 	}
 
 	void ListenDestroy(Destroyable _destroyable)

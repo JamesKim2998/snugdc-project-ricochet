@@ -35,28 +35,36 @@ public class Statistic<T> where T : System.IEquatable<T> {
 }
 
 public class UserStatistic {
-	public NetworkViewID networkId;
+	public NetworkViewID viewID;
 	public readonly Statistic<int> score;
 	public readonly Statistic<int> death;
 	public readonly string username;
 	//public readonly Statistic<Weapon> weapon;
 
-	public UserStatistic() {
+	public UserStatistic(NetworkViewID viewID) {
+		this.viewID = viewID;
 		score = new Statistic<int>();
 		death = new Statistic<int>();
+		Reset ();
 	}
-	
+
 	public void Reset() {
 		score.val = 0;
 		death.val = 0;
 	}
 }
 public class GameStatistics {
-	public List<UserStatistic> userStatisticList;
+	private List<UserStatistic> userStatisticList;
+	public GameStatistics() {
+		userStatisticList = new List<UserStatistic> ();
+	}
 	public UserStatistic myUserStatistic {
 		get {
-			NetworkViewID myNetworkId = Game.Character ().character.networkView.viewID;
-			return userStatisticList.Find(el => el.networkId == myNetworkId);
+			var _myNetworkID = Game.Character ().character.networkView.viewID;
+			return userStatisticList.Find(el => el.viewID == _myNetworkID);
 		}
+	}
+	public void AddUserStatistic(NetworkViewID viewID) {
+		userStatisticList.Add(new UserStatistic(viewID));
 	}
 }

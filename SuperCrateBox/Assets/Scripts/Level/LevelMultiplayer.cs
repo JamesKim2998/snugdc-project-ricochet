@@ -40,7 +40,7 @@ public class LevelMultiplayer : MonoBehaviour
 	{
 		if (m_IsInitialized) return;
 		m_IsInitialized = true;
-		SpawnCharacter ();
+		var _character = SpawnCharacter ();
 	}
 
 	void ListenBeforeDisconnected()
@@ -58,12 +58,13 @@ public class LevelMultiplayer : MonoBehaviour
 		Network.DestroyPlayerObjects(player);
 	}
 
-	void SpawnCharacter()
+	Character SpawnCharacter()
 	{
 		var _spawnerCnt = Random.Range (0, characterSpawners.Count);
 		var _spawnerTarget = characterSpawners[_spawnerCnt];
 		var _character = _spawnerTarget.Spawn();	
 		Game.Character().character = _character;
+		return _character;
 	}
 
 	void ListenCharacterDestroyed(CharacterSpawner _spawner, GameObject _obj) 
