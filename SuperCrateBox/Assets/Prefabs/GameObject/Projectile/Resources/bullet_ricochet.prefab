@@ -105,7 +105,7 @@ MonoBehaviour:
   penetrationForced:
     serializedVersion: 2
     m_Bits: 0
-  reflectionCount: 1
+  reflectionCount: 2
   reflectionMask:
     serializedVersion: 2
     m_Bits: 256
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerID: 0
   ownerDetecterID: 0
-  life: 4
+  life: 1.5
   isHitOwner: 1
   attackData:
     velocity: {x: 0, y: 0}
