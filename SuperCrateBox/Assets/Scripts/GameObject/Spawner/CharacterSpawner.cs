@@ -7,20 +7,21 @@ public class CharacterSpawner : MonoBehaviour
 
 	public Rect spawnRange;
 
+	public bool autoSpawn = false;
+
+	public delegate void PostDestroy(CharacterSpawner _spawner, GameObject _obj);
+	public event PostDestroy postDestroy;
+	
 	void Start ()
 	{
-
+		
 	}
 
 	void Update ()
 	{
-		if (Game.Character().character == null) {
-			var _character = Spawn();
-			Game.Character().character = _character;
-			
-			_character.hitEnabled = false;
-			_character.Invoke("EnableHit", 1.5f);
-		}
+		if (! autoSpawn) return;
+
+		Spawn ();
 	}
 	
 	Vector2 Locate() 
@@ -31,7 +32,7 @@ public class CharacterSpawner : MonoBehaviour
 		return _position;
 	}
 
-	Character Spawn() 
+	public Character Spawn() 
 	{
 		Vector3 _characterPosition = Locate();
 
@@ -41,6 +42,8 @@ public class CharacterSpawner : MonoBehaviour
 		_destroyable.postDestroy += ListenDestroy;
 
 		var _character = _gameObj.GetComponent<Character>();
+		_character.hitEnabled = false;
+		_character.Invoke("EnableHit", 1.5f);
 
 		if (networkView.enabled && Network.peerType != NetworkPeerType.Disconnected)
 		{
@@ -70,9 +73,11 @@ public class CharacterSpawner : MonoBehaviour
 
 	void ListenDestroy(Destroyable _destroyable)
 	{
-		if (networkView.enabled) {
+		if (networkView.enabled) 
 			Network.RemoveRPCs(networkView.viewID);
-		}
+
+		if (postDestroy != null)
+			postDestroy (this, _destroyable.gameObject);
 	}
 }
 
