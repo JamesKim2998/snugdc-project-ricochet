@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Character : MonoBehaviour {
-
+public class Character : MonoBehaviour 
+{
 	#region movement
 	private bool m_Floating = false;
 	public bool floating { get {return m_Floating; }}
@@ -78,7 +78,7 @@ public class Character : MonoBehaviour {
 				m_Animator.SetTrigger("equip_" + weapon.type);
 			}
 
-			if (networkView.isMine && (Network.peerType != NetworkPeerType.Disconnected))
+			if (IsNetworkEnabled())
 			{
 				weapon.networkView.viewID = Network.AllocateViewID();
 				weapon.networkView.enabled = true;
@@ -118,7 +118,8 @@ public class Character : MonoBehaviour {
 	#endregion
 
 	#region components
-	private Animator m_Animator;
+	// private Animator m_Animator;
+	private NetworkAnimator m_Animator;
 	
 	// detector
 	public CrateDetector crateDetector;
@@ -131,13 +132,22 @@ public class Character : MonoBehaviour {
 	public event PostDead postDead;
 	#endregion
 
+	#region network
+	public bool IsNetworkEnabled() 
+	{
+		return networkView.isMine && (Network.peerType != NetworkPeerType.Disconnected);
+	}
+
+	#endregion
+
 	void Awake () {
 		m_Hp = GetComponent<HasHP>();
 		m_Hp.hp = hpMax;
 		m_Hp.postDead = Die;
 
 		// components
-		m_Animator = GetComponent<Animator>();
+		// m_Animator = GetComponent<Animator>();
+		m_Animator = GetComponent<NetworkAnimator>();
 		
 		// detector
 		crateDetector.doObtain = Obtain;
@@ -189,12 +199,30 @@ public class Character : MonoBehaviour {
 	{
 		m_IsStanding = true;
 		m_Animator.SetTrigger("stand_lower");
+
+		if (IsNetworkEnabled ())
+			networkView.RPC ("StandRPC", RPCMode.Others);
+	}
+
+	[RPC]
+	void StandRPC()
+	{
+		Stand();
 	}
 
 	public void Crouch()
 	{
 		m_IsStanding = false;
 		m_Animator.SetTrigger("crouch_lower");
+
+		if (IsNetworkEnabled ())
+			networkView.RPC ("CrouchRPC", RPCMode.Others);
+	}
+	
+	[RPC]
+	void CrouchRPC()
+	{
+		Crouch();
 	}
 
 	public bool movable { 
@@ -231,7 +259,7 @@ public class Character : MonoBehaviour {
 	
 	public void Shoot() {
 		weapon.Shoot();
-		m_Animator.SetTrigger("shoot");
+		m_Animator.SetTrigger ("shoot");
 	}
 	
 	void EnableHit() {
@@ -305,16 +333,34 @@ public class Character : MonoBehaviour {
 		weapon = null;
 	}
 
-	/*
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
-		if (stream.isWriting) {
-			int healthC = currentHealth;
-			stream.Serialize(ref healthC);
+	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
+	{
+		Vector3 _position = Vector3.zero;
+		Quaternion _rotation = Quaternion.identity;
+		Vector3 _velocity = Vector3.zero;
+		float _aim = 0;
+
+		if (_stream.isWriting) {
+			_position = transform.position;
+			_rotation = transform.rotation;
+			_velocity = rigidbody2D.velocity;
+			_aim = aim;
+
+			_stream.Serialize(ref _position);
+			_stream.Serialize(ref _rotation);
+			_stream.Serialize(ref _velocity);
+			_stream.Serialize(ref _aim);
 		} else {
-			int healthZ = 0;
-			stream.Serialize(ref healthZ);
-			currentHealth = healthZ;
+			_stream.Serialize(ref _position);
+			_stream.Serialize(ref _rotation);
+			_stream.Serialize(ref _velocity);
+			_stream.Serialize(ref _aim);
+
+			transform.position = _position;
+			transform.rotation = _rotation;
+			rigidbody2D.velocity = _velocity;
+			aim = _aim;
 		}
 	}
-	*/
+
 }
