@@ -37,7 +37,7 @@ public class Crate : MonoBehaviour {
 			{
 				if (! detector.enabled) return;
 				detector.Obtain(this);
-				Game.Statistic().score.val += score;
+				Game.Statistic().myUserStatistic.score.val += score;
 				DestroySelf();
 			} 
 			else 

@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
+	private Character m_lastAttacked = null;
+
 	public int direction {
 		get { return transform.rotation.y > 0.5f ? -1 : 1; }
 		set {
@@ -210,6 +212,7 @@ public class Character : MonoBehaviour
 		if (networkView.enabled)
 		{
 			Network.Destroy(networkView.viewID);
+
 		}
 		else
 		{
@@ -302,8 +305,11 @@ public class Character : MonoBehaviour
 		Invoke("EnableHit", hitCooldown);
 		
 		var _direction = Mathf.Sign(_attackData.velocity.x);
+
+		m_lastAttacked = _attackData.owner;
+
 		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
-		
+
 		m_Hp.damage(_attackData);
 		
 		if (m_Hp > 0) {
@@ -325,7 +331,7 @@ public class Character : MonoBehaviour
 		
 		m_NetworkAnimator.SetTrigger("Dead");
 		
-		Game.Statistic().death.val += 1;
+		Game.Statistic().myUserStatistic.death.val += 1;
 		if (postDead != null) postDead(this);
 		
 		Invoke("DestroySelf", deadDelay);
