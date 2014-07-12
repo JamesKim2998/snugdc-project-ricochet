@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 30, z: 0}
+  m_LocalPosition: {x: -73.8936768, y: 41.0690536, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.97539902, y: 3.60733414, z: 0}
+  m_LocalPosition: {x: -.293441772, y: 4.26482773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoPrf: {fileID: 100000, guid: 8cff0284ce2e65246afc4104c3f8903c, type: 2}
-  offset: {x: 1.5, y: .5}
+  offset: {x: 3, y: .5}
   interval: {x: .25, y: 0}
 --- !u!212 &21200000
 SpriteRenderer:
