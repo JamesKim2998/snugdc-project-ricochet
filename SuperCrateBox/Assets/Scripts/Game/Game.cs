@@ -16,8 +16,8 @@ public class Game : Singleton<Game>
 	public GameWeapon weapon = new GameWeapon();
 	public static GameWeapon Weapon() { return Instance.weapon; }
 
-	public GameCamera camera = new GameCamera ();
-	public static GameCamera Camera() { return Instance.camera; }
+	public GameCamera camera_ = new GameCamera();
+	public static GameCamera Camera() { return Instance.camera_; }
 
 	public static GameCheat cheat = null;
 	public static GameCheat Cheat() 
@@ -30,6 +30,10 @@ public class Game : Singleton<Game>
 	void Start () {
 		Time.timeScale = timescale;
 		DontDestroyOnLoad(transform.gameObject);
+
+		camera_.Start();
+
+		character.game = this;
 		character.Start();
 	}
 	
