@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: ac0df9685c5255d4ebf51f62c5336a57
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: gizmo_circle
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

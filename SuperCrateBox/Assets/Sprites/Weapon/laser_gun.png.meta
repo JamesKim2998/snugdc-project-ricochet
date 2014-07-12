@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 782fd245066fd854597725982eed1801
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: laser_gun
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

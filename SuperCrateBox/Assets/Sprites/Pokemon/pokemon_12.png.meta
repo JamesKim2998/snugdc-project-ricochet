@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 7003902ea7e232a40a5db68d5a4dbce2
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: pokemon_12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

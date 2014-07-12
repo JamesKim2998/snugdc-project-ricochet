@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 886728dccfd044a499b347caca0c9724
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: laser_beam
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

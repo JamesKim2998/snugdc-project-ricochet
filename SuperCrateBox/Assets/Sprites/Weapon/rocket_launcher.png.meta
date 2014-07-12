@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 7db44cae71a677243bb504dc0bdd8e98
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: rocket_launcher
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
