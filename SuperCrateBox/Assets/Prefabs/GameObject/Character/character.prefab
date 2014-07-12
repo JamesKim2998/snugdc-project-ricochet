@@ -1805,7 +1805,7 @@ MonoBehaviour:
   deadForce: {x: 0, y: 0}
   deadDelay: .5
   weaponPivot: {fileID: 11400126}
-  aimSpeed: 1
+  aimSpeed: 10
   crossHair: {fileID: 100036}
   crateDetector: {fileID: 11400048}
   damageDetector: {fileID: 11400046}

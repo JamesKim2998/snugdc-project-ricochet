@@ -31,10 +31,11 @@ public class GameCharacter
 			}
 
 			m_Character = value;
-			game.camera_.Bind(GetHashCode(), m_Character.transform);
 
 			if (m_Character != null) 
 			{
+				game.camera_.Bind(GetHashCode(), m_Character.transform);
+
 				if (weaponDefault != null)
 				{
 					var _weapon = GameObject.Instantiate(weaponDefault) as GameObject;	
@@ -96,10 +97,17 @@ public class GameCharacter
 			var _mousePositionDelta = _mousePosition - character.crossHair.transform.position;
 			character.direction = _mousePositionDelta.x > 0 ? 1 : -1;
 
-// incomplete
-			var _aimDelta = character.aim - (TransformHelper.VectorToDeg(_mousePositionDelta) - 90);
-			if (_aimDelta > 180) _aimDelta = _aimDelta - 360;
-			// character.aim += Mathf.Clamp(_aimDelta, -character.aimSpeed, character.aimSpeed);
+			var _mouseAngle = TransformHelper.VectorToDeg(_mousePositionDelta) + 90;
+
+			if (character.direction < 0) 
+			{
+				_mouseAngle = 360 - _mouseAngle;
+			}
+
+			_mouseAngle = MathHelper.Mod(_mouseAngle, 360f);
+
+			var _aimDelta = _mouseAngle - character.aim;
+			character.aim += Mathf.Clamp(_aimDelta, -character.aimSpeed, character.aimSpeed);
 		}
 	}
 

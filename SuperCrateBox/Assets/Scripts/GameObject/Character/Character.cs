@@ -120,7 +120,7 @@ public class Character : MonoBehaviour
 		set { 
 			if (m_Aim == value) return;
 
-			// m_Aim = value % 360;
+			m_Aim = value;
 			
 			var _weaponAngle = weaponPivot.transform.eulerAngles;
 			_weaponAngle.z = m_Aim - 90;
