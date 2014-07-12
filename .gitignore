@@ -262,7 +262,11 @@ ScriptAssemblies
 *.dwlt
 ShaderCache.db
 ShaderCache
-/SuperCrateBox/Library/
 /SuperCrateBox/Library/metadata
 /SuperCrateBox/Library/InspectorExpandedItems.asset
-/SuperCrateBox/Library
+/SuperCrateBox/Library/AtlasCache
+/SuperCrateBox/Library/EditorUserSettings.asset
+/SuperCrateBox/Library/EditorUserBuildSettings.asset
+/SuperCrateBox/Library/MonoManager.asset
+/SuperCrateBox/Library/UnityAssemblies
+/SuperCrateBox/Library/expandedItems
