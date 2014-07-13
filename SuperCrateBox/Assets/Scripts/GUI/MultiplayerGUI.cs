@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class MultiplayerGUI : MonoBehaviour {
 
+	public GameObject credit;
 	enum Context {
 		Main,
 		Singleplayer,
 		Multiplayer,
 		RoomList,
+		Credit,
 	}
 
 	Context m_Context;
@@ -68,13 +70,26 @@ public class MultiplayerGUI : MonoBehaviour {
 		case Context.Singleplayer: DisplaySingleplay();   break;
 		case Context.Multiplayer:  DisplayMultiplay();    break;
 		case Context.RoomList:     DisplayRoomList();      break;
+		case Context.Credit:	   DisplayCredit();		break;
+		}
+	}
+
+	void DisplayCredit()
+	{
+		credit.SetActive (true);
+		
+		if (GUILayout.Button("Back")){
+			credit.SetActive (false);
+			Back();
 		}
 	}
 
 	void DisplayBack() 
 	{
-		if (GUILayout.Button("Back"))
+
+		if (GUILayout.Button("Back")) {
 			Back();
+		}
 	}
 
 	void DisplayMain() 
@@ -87,7 +102,9 @@ public class MultiplayerGUI : MonoBehaviour {
 
 		if (GUILayout.Button("MultiPlayer")) 
 			Enter(Context.Multiplayer);
-
+		
+		if (GUILayout.Button("Credit")) 
+			Enter(Context.Credit);
 		if (GUILayout.Button("Exit"))
 			Back();
 
