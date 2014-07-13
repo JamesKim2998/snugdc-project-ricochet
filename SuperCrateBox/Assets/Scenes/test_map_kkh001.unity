@@ -20483,7 +20483,7 @@ Transform:
   m_GameObject: {fileID: 754240352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00416666688, y: .00416666688, z: .00416666688}
+  m_LocalScale: {x: .00602409616, y: .00602409616, z: .00602409616}
   m_Children:
   - {fileID: 841453306}
   m_Father: {fileID: 0}
@@ -45360,7 +45360,7 @@ GameObject:
   - 92: {fileID: 1658369781}
   - 124: {fileID: 1658369780}
   - 81: {fileID: 1658369779}
-  - 114: {fileID: 1658369784}
+  - 114: {fileID: 1658369785}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -45434,7 +45434,7 @@ Transform:
   - {fileID: 91463724}
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &1658369784
+--- !u!114 &1658369785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -45442,12 +45442,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1658369778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f6671d87e1bc5419b86728e0e3377c, type: 3}
+  m_Script: {fileID: 11500000, guid: e557c8942d29a4547bfc13d10a5c0ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offset: {x: 0, y: 2, z: -10}
-  lerp: .100000001
+  lerp: .0199999996
   mouseDeltaScale: 5
 --- !u!1 &1664029357
 GameObject:

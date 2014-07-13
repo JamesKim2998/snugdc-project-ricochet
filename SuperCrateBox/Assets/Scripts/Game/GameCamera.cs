@@ -7,7 +7,7 @@ public class GameCamera
 	private Camera m_Camera;
 	public Camera cameraExpose;
 
-	private FollowObject followObject;
+	private CameraFollowObject followObject;
 
 	public void Start() 
 	{
@@ -18,7 +18,7 @@ public class GameCamera
 
 		m_Camera = cameraExpose;
 
-		followObject = m_Camera.GetComponent<FollowObject> ();
+		followObject = m_Camera.GetComponent<CameraFollowObject> ();
 
 		if (followObject == null) 
 			Debug.LogError("FollowObject not exist!");
