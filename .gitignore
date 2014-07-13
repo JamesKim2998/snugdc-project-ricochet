@@ -70,11 +70,11 @@ $RECYCLE.BIN/
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-/Library/FailedAssetImports.txt
-/Library/cache/
-/Library/previews/
-/Library/ScriptAssemblies
+Skeleton/Temp/
+SuperCrateBox/Temp/
+Skeleton/Library
+SuperCrateBox/Library
+
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -113,16 +113,3 @@ ScriptAssemblies
 
 *.sln
 *.dwlt
-ShaderCache.db
-ShaderCache
-/SuperCrateBox/Library/metadata
-/SuperCrateBox/Library/InspectorExpandedItems.asset
-/SuperCrateBox/Library/EditorUserSettings.asset
-/SuperCrateBox/Library/EditorUserBuildSettings.asset
-/SuperCrateBox/Library/MonoManager.asset
-/SuperCrateBox/Library/UnityAssemblies
-/SuperCrateBox/Library/expandedItems
-/SuperCrateBox/Library/AssetServerCacheV3
-/SuperCrateBox/Library/assetDatabase3
-/SuperCrateBox/Library/ScriptMapper
-/SuperCrateBox/Library/guidmapper
