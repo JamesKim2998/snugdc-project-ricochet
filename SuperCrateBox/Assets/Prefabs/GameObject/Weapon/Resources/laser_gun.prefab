@@ -136,7 +136,7 @@ MonoBehaviour:
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: 0, z: 0}
   prepareTime: .200000003
-  chargeTime: .200000003
+  chargeTime: .0500000007
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
