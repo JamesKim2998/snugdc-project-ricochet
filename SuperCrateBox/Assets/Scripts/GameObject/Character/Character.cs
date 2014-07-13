@@ -197,6 +197,11 @@ public class Character : MonoBehaviour
 
 	#endregion
 
+	#region effects
+	public GameObject effectDeadPrf;
+	public Vector3 effectDeadOffset;
+	#endregion
+
 	void Awake () {
 		m_Hp = GetComponent<HasHP>();
 		m_Hp.hp = hpMax;
@@ -351,7 +356,10 @@ public class Character : MonoBehaviour
 			}
 		}
 		if (postDead != null) postDead(this);
-		
+
+		var _effectDead = GameObject.Instantiate (effectDeadPrf, transform.position, transform.rotation) as GameObject;
+		_effectDead.transform.Translate (effectDeadOffset);
+
 		Invoke("DestroySelf", deadDelay);
 	}
 	

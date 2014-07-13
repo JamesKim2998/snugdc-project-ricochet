@@ -16,8 +16,6 @@ public class HUDAmmo : MonoBehaviour
 	public int ammo {
 		get { return m_Ammo; }
 		set { 
-			Debug.Log(value);
-
 			for (int _i = m_Ammo; _i < value; ++_i)
 			{
 				Vector2 _position = offset + _i * interval;
