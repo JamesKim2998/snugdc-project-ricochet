@@ -13,7 +13,23 @@ public class Character : MonoBehaviour
 	public float moveForce = 10.0f;
 
 	public int direction {
-		get { return transform.localRotation.y > 100 ? -1 : 1; }
+		get { return transform.rotation.y > 0.5f ? -1 : 1; }
+		set {
+			if (direction == value) return;
+
+			var _rotation = transform.localRotation;
+			
+			if (value == 1) 
+			{
+				_rotation.y = 0;
+			}
+			else if (value == -1)
+			{
+				_rotation.y = 180;
+			}
+			
+			transform.localRotation = _rotation;
+		}
 	}
 	#endregion
 
@@ -104,7 +120,7 @@ public class Character : MonoBehaviour
 		set { 
 			if (m_Aim == value) return;
 
-			m_Aim = value;
+			// m_Aim = value % 360;
 			
 			var _weaponAngle = weaponPivot.transform.eulerAngles;
 			_weaponAngle.z = m_Aim - 90;
@@ -198,20 +214,6 @@ public class Character : MonoBehaviour
 	void Update() 
 	{
 		m_JumpCooltime -= Time.deltaTime;
-
-		var _rotation = transform.rotation;
-		
-		if (rigidbody2D.velocity.x > 0.3f) 
-		{
-			_rotation.y = 0;
-		}
-		else if (rigidbody2D.velocity.x < -0.3f)
-		{
-			_rotation.y = 180;
-		}
-
-		transform.rotation = _rotation;
-	
 		m_NetworkAnimator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
 		m_NetworkAnimator.SetFloat("velocity_y", rigidbody2D.velocity.y);
 	}

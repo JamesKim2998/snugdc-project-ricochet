@@ -89,6 +89,18 @@ public class GameCharacter
 			if (character.shootable) 
 				character.Shoot();
 		}
+
+		if (Input.mousePresent)
+		{
+			var _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			var _mousePositionDelta = _mousePosition - character.crossHair.transform.position;
+			character.direction = _mousePositionDelta.x > 0 ? 1 : -1;
+
+// incomplete
+			var _aimDelta = character.aim - (TransformHelper.VectorToDeg(_mousePositionDelta) - 90);
+			if (_aimDelta > 180) _aimDelta = _aimDelta - 360;
+			// character.aim += Mathf.Clamp(_aimDelta, -character.aimSpeed, character.aimSpeed);
+		}
 	}
 
 	public void FixedUpdate() 
