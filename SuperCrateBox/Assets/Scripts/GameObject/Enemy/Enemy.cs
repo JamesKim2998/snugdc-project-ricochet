@@ -133,6 +133,6 @@ public class Enemy : MonoBehaviour {
 			Destroy(gameObject);
 		}
 			
-		Game.Statistic().score.val += score;
+		Game.Statistic().myUserStatistic.score.val += score;
 	}
 }
