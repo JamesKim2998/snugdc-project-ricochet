@@ -130,15 +130,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: laser_gun
-  autoload: 0
-  shootAtOnce: 3
-  ammoMax: 30
+  autoload: 1
+  shootAtOnce: 1
+  ammoMax: 100
   relativeVelocityEnabled: 1
-  projectileOffset: {x: 1, y: 0, z: 0}
+  projectileOffset: {x: 1, y: .100000001, z: 0}
   prepareTime: .200000003
-  chargeTime: .0500000007
+  chargeTime: .00999999978
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
-  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
+  effectMuzzleFireOffset: {x: .5, y: .100000001, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
