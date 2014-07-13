@@ -40,7 +40,7 @@ public class SimpleWeapon : Weapon {
 			case State.SHOOTING:
 				++m_ShootCount;
 				++m_ShootIdx;
-				Shoot();
+				ShootProc();
 				break;
 			case State.COOLING:
 				m_ShootIdx = 0;
@@ -67,6 +67,26 @@ public class SimpleWeapon : Weapon {
 	public int ammoMax = 1000;
 	private int m_Ammo = 0;
 	public int ammo { get { return m_Ammo; } }
+
+	public void consumeAmmo() {
+		if (m_Ammo <= 0) 
+		{
+			Debug.Log("Trying to consume not existing ammo! Ignore.");
+			return;
+		}
+
+		m_Ammo -= 1;
+
+		if (m_Ammo == 0)
+		{
+			if (postOutOfAmmo != null)
+				postOutOfAmmo(this);
+		}
+
+	}
+
+	public delegate void PostOutOfAmmo(SimpleWeapon _weapon);
+	public PostOutOfAmmo postOutOfAmmo;
 
 	// flag
 	public bool relativeVelocityEnabled = true;
@@ -136,13 +156,13 @@ public class SimpleWeapon : Weapon {
 		case State.SHOOTING: {
 			if (m_StateTime > shootTime)
 			{
-				if (autoload || (shootIdx >= shootAtOnce) )
+				if (autoload || (shootIdx < shootAtOnce) )
 				{
-					state = State.COOLING;
+					state = State.CHARGING;
 				}
 				else 
 				{
-					state = State.CHARGING;
+					state = State.COOLING;
 				}
 			}
 			break;
@@ -166,11 +186,15 @@ public class SimpleWeapon : Weapon {
 	}
 
 	public override bool IsShootable() {
-		if (doIsShootable != null && ! doIsShootable(this)) return false;
+		if (m_Ammo > 0 && doIsShootable != null && ! doIsShootable(this)) return false;
 		return true;
 	}
 
-	public override void Shoot() 
+	public override void Shoot() {
+		state = State.SHOOTING;
+	}
+
+	private void ShootProc() 
 	{
 		if (! IsShootable()) {
 			Debug.LogError("trying to shoot not shootable weapon!");
@@ -187,6 +211,12 @@ public class SimpleWeapon : Weapon {
 			var _projectile = doCreateProjectile(this);
 
 			++m_ProjectileCount;
+
+			if (ammo <= 0)
+				return;
+
+			consumeAmmo();
+
 
 			if (owner) {
 				// todo: test
@@ -282,6 +312,18 @@ public class SimpleWeapon : Weapon {
 
 	public void Rest() 
 	{
-		state = State.IDLE;
+		if (! autoload)
+			return;
+
+		switch (state)
+		{
+		case State.SHOOTING:
+		case State.CHARGING:
+			state = State.COOLING;
+			break;
+		case State.PREPARING:
+			state = State.IDLE;
+			break;
+		}
 	}
 }

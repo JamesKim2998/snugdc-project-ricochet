@@ -85,20 +85,26 @@ public class Character : MonoBehaviour
 			m_Aim = -1; // invalidate aim
 			aim = _aimTemp;
 
-			if (value == null) 
+			var _weaponSimple = m_Weapon as SimpleWeapon;
+			if (_weaponSimple != null)
+			{
+				_weaponSimple.postOutOfAmmo += ListenOutOfAmmo;
+			}
+			
+			if (m_Weapon == null) 
 			{
 				m_NetworkAnimator.SetTrigger("unequip");
 			}
 			else 
 			{
-				m_NetworkAnimator.SetTrigger("equip_" + weapon.type);
-			}
+				m_NetworkAnimator.SetTrigger("equip_" + m_Weapon.type);
 
-			if (IsNetworkEnabled())
-			{
-				weapon.networkView.viewID = Network.AllocateViewID();
-				weapon.networkView.enabled = true;
-				networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.type);
+				if (IsNetworkEnabled())
+				{
+					m_Weapon.networkView.viewID = Network.AllocateViewID();
+					m_Weapon.networkView.enabled = true;
+					networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.type);
+				}
 			}
 		}
 	}
@@ -334,6 +340,12 @@ public class Character : MonoBehaviour
 		
 		var _weapon = GameObject.Instantiate(Resources.Load(_crate.weapon)) as GameObject;
 		weapon = _weapon.GetComponent<Weapon>();
+	}
+
+	private void ListenOutOfAmmo(SimpleWeapon _weapon)
+	{
+		// note: Unequip 은 animator 에서 호출합니다
+		m_NetworkAnimator.SetTrigger ("throw_away");
 	}
 
 	public void Unequip()

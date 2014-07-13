@@ -90,6 +90,12 @@ public class GameCharacter
 			if (character.shootable) 
 				character.Shoot();
 		}
+		else if (Input.GetButtonUp("Fire1")) 
+		{
+			if (character.weapon != null)
+				(character.weapon as SimpleWeapon).Rest();
+		}
+
 
 		if (Input.mousePresent)
 		{
