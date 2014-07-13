@@ -134,6 +134,7 @@ MonoBehaviour:
   shootAtOnce: 3
   ammoMax: 30
   relativeVelocityEnabled: 1
+  projectileOffset: {x: 1, y: 0, z: 0}
   prepareTime: .200000003
   chargeTime: .200000003
 --- !u!114 &11400006
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400004}
-  speed: 15
+  speed: 18
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

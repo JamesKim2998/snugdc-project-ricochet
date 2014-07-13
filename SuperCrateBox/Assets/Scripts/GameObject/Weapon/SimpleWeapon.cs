@@ -87,6 +87,8 @@ public class SimpleWeapon : Weapon {
 	// flag
 	public bool relativeVelocityEnabled = true;
 
+	public Vector3 projectileOffset;
+
 	// time
 	private float m_StateTime;
 	public float stateTime { get { return m_StateTime; } }
@@ -215,11 +217,10 @@ public class SimpleWeapon : Weapon {
 
 
 			if (owner) {
-				// todo: test
-				var projectilePosition = _projectile.transform.position;
+				_projectile.transform.rotation *= transform.rotation;
 
-				_projectile.transform.position = projectilePosition
-					+ transform.position;
+				_projectile.transform.position += transform.position;
+				_projectile.transform.Translate( projectileOffset);
 
 				if (relativeVelocityEnabled) {
 					_projectile.rigidbody2D.velocity 
