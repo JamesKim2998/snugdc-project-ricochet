@@ -32,7 +32,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 212: {fileID: 21200000}
   m_Layer: 0
-  m_Name: renderer
+  m_Name: ef_bullet_RS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -.0199999996, y: .0199999996, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
 --- !u!50 &5000000
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0c5809860bb4542a9070dfe1f0bfa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 0}
   mirrorX: 1
 --- !u!148 &14800000
 NetworkView:
@@ -188,7 +189,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: 61a10a1a99d9dac4f89e202f1fcfd770, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2d8e5806218dca4f99644cb378f87e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
