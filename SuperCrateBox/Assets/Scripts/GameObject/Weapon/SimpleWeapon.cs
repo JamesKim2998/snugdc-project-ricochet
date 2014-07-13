@@ -215,7 +215,6 @@ public class SimpleWeapon : Weapon {
 
 			consumeAmmo();
 
-
 			if (owner) {
 				_projectile.transform.rotation *= transform.rotation;
 

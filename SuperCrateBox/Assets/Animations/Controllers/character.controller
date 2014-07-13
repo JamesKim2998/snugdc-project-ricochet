@@ -110,6 +110,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: dead_lower
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: dead_upper
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -518,6 +530,26 @@ Transition:
   m_Solo: 0
   m_Mute: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &110100922
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 0}
+  m_DstState: {fileID: 110290077}
+  m_TransitionDuration: .100000001
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: dead_lower
+    m_EventTreshold: 0
+    m_ExitTime: .899999976
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110104960
 Transition:
   serializedVersion: 2
@@ -922,6 +954,26 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 1
+--- !u!1101 &110130017
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110269729}
+  m_DstState: {fileID: 110209412}
+  m_TransitionDuration: .132352933
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: dead_upper
+    m_EventTreshold: 0
+    m_ExitTime: .867647052
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110130164
 Transition:
   serializedVersion: 2
@@ -1966,6 +2018,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110209412
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: character_dead_upper
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: edafdb448251ee64aa9c3e2481d94e7f, type: 2}
+  m_ParentStateMachine: {fileID: 110759427}
+  m_Position: {x: -84, y: 108, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110213324
 State:
   m_ObjectHideFlags: 3
@@ -2356,6 +2423,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110290077
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: character_dead_lower
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: a82d6cef0ac5fca498b7e7f4ec417c6b, type: 2}
+  m_ParentStateMachine: {fileID: 110759091}
+  m_Position: {x: 267, y: -174, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110292768
 State:
   m_ObjectHideFlags: 3
@@ -2465,15 +2547,20 @@ StateMachine:
   - {fileID: 110299477}
   - {fileID: 110208022}
   - {fileID: 110273682}
+  - {fileID: 110290077}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
+    data:
+      first: {fileID: 110290077}
+      second: []
     data:
       first: {fileID: 0}
       second:
       - {fileID: 110119436}
       - {fileID: 110132571}
       - {fileID: 110119924}
+      - {fileID: 110100922}
     data:
       first: {fileID: 110207687}
       second:
@@ -2513,6 +2600,7 @@ StateMachine:
   - {fileID: 110269729}
   - {fileID: 110260259}
   - {fileID: 110249976}
+  - {fileID: 110209412}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
@@ -2522,7 +2610,8 @@ StateMachine:
       - {fileID: 110168494}
     data:
       first: {fileID: 110269729}
-      second: []
+      second:
+      - {fileID: 110130017}
     data:
       first: {fileID: 110260259}
       second:

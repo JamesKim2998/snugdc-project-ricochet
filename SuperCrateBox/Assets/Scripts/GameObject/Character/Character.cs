@@ -340,7 +340,9 @@ public class Character : MonoBehaviour
 		rigidbody2D.velocity = new Vector2(0, 0);
 		rigidbody2D.AddForce(_deadForce);
 		
-		m_NetworkAnimator.SetTrigger("Dead");
+		m_NetworkAnimator.SetTrigger("dead_lower");
+		m_NetworkAnimator.SetTrigger("dead_upper");
+
 		Game.Statistic().GetUserStatistic(networkView.owner).death.val += 1;
 		if (m_lastAttacked != null) {
 			Debug.Log(m_lastAttacked);
