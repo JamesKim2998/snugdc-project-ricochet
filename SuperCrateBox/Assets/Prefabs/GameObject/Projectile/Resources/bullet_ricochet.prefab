@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: bullet_ricochet
   m_TagString: Untagged
@@ -148,6 +149,7 @@ MonoBehaviour:
   attackData:
     velocity: {x: 0, y: 0}
     damage: 1
+    owner: {fileID: 0}
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
   relativeDrivingForce: {x: 0, y: 0}
@@ -176,6 +178,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 0}
   mirrorX: 1
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c06e62be7c78ef45bee15e37ab24453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
