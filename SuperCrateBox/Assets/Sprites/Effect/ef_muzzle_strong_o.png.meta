@@ -1,8 +1,6 @@
 fileFormatVersion: 2
-guid: c254047e314028043b15eea6709993db
+guid: 4b4eaccf6fb54394380f9f55a5ae06d0
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: ef_hit_01_01
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -35,10 +33,10 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 5
+  alignment: 4
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

@@ -136,6 +136,10 @@ public class SimpleWeapon : Weapon {
 	public delegate void PostCooldown(SimpleWeapon _weapon);
 	public event PostCooldown postCooldown;
 
+	// effects
+	public GameObject effectMuzzleFirePrf;
+	public Vector3 effectMuzzleFireOffset;
+
 	public void Start()
 	{
 		m_Ammo = ammoMax;
@@ -236,16 +240,14 @@ public class SimpleWeapon : Weapon {
 				if (_detector) _theProjectile.ownerDetecterID = _detector.GetInstanceID();
 			}
 
-			if (_theProjectile) {
-
-				if (damage.HasValue) {
+			if (_theProjectile) 
+			{
+				if (damage.HasValue) 
 					_theProjectile.damage = damage.Value;
-				}
 			}
 
-			if (doShoot != null) {
+			if (doShoot != null) 
 				doShoot(this, _projectile);
-			}
 
 			if (networkView.enabled)
 			{
@@ -267,6 +269,14 @@ public class SimpleWeapon : Weapon {
 				postShoot(this, _projectile.GetComponent<Projectile>());
 		}
 
+		if (networkView.enabled)
+		{
+			networkView.RPC("PlayMuzzleFireEffect", RPCMode.All);
+		}
+		else
+		{
+			PlayMuzzleFireEffect();
+		}
 	}
 
 	[RPC]
@@ -289,6 +299,13 @@ public class SimpleWeapon : Weapon {
 
 		_projectile.networkView.viewID = _viewID;
 		_projectile.networkView.enabled = true;
+	}
+
+	[RPC]
+	void PlayMuzzleFireEffect()
+	{
+		var _effect = GameObject.Instantiate (effectMuzzleFirePrf, transform.position, transform.rotation) as GameObject;
+		_effect.transform.Translate (effectMuzzleFireOffset);
 	}
 
 	public override void Stop() {
