@@ -1,16 +1,16 @@
 
 using UnityEngine;
 
+[RequireComponent(typeof(Weapon))]
 public class RocketLauncherDef : MonoBehaviour 
 {
-	public Weapon weapon;
 	public float drivingForce;
 	public float explosionRadius;
 
 	void Start() 
 	{
-		var _weapon = weapon as SimpleWeapon;
-		
+		var _weapon = GetComponent<Weapon>();
+
 		if (_weapon == null) return;
 		
 		var _drivingForce = drivingForce;

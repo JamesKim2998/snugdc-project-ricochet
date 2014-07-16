@@ -109,9 +109,8 @@ public class GameCharacter
 		else if (Input.GetButtonUp("Fire1")) 
 		{
 			if (character.weapon != null)
-				(character.weapon as SimpleWeapon).Rest();
+				character.weapon.Rest();
 		}
-
 
 		if (Input.mousePresent)
 		{

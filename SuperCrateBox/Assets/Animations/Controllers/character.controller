@@ -50,7 +50,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: equip_uzi_gun
+  - m_Name: equip_machine_gun
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -117,18 +117,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: dead_upper
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: equip_assault_rifle
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: equip_machine_gun
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

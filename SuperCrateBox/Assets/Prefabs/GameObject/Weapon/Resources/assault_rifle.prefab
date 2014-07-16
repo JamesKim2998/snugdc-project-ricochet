@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
-  - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
@@ -117,7 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36089159c4c2ff4cb0f68c7781f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400008}
   speed: 18
 --- !u!114 &11400004
 MonoBehaviour:
@@ -130,24 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400008}
   projectile: bullet_ricochet
 --- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd004576930dc24aa2070ffe3ef6607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 11400008}
-  cooldown: 1
-  useDamage: 1
-  damage: 1
---- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -158,16 +140,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08edc746b979a0418eed9f81c655efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: laser_gun
+  type: 
+  useDamage: 0
+  damageExpose: 0
   autoload: 0
-  shootAtOnce: 3
-  ammoMax: 30
+  shootAtOnce: 1
+  ammoMax: 1000
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: .100000001, z: 0}
   prepareTime: .200000003
-  chargeTime: .0500000007
+  chargeTime: .00999999978
+  cooldownExpose: 0
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
-  effectMuzzleFireOffset: {x: .5, y: .100000001, z: 0}
+  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

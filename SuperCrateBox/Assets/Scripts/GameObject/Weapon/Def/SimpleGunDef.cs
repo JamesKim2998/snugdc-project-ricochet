@@ -1,14 +1,14 @@
 
 using UnityEngine;
 
+[RequireComponent(typeof(Weapon))]
 public class SimpleGunDef : MonoBehaviour 
 {
-	public Weapon weapon;
 	public float speed;
 
 	void Start() 
 	{
-		var _weapon = weapon as SimpleWeapon;
+		var _weapon = GetComponent<Weapon>();
 
 		if (_weapon == null) return;
 

@@ -42,9 +42,9 @@ MonoBehaviour:
   multiplayer: 0
   camera_:
     cameraExpose: {fileID: 0}
-  audio:
+  audio_:
     pauseExpose: 1
-    volumeExpose: 1
+    volumeExpose: 0
   character:
     maxUpForce: 2
     upForce: 30

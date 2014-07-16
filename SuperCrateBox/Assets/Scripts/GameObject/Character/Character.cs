@@ -84,10 +84,9 @@ public class Character : MonoBehaviour
 			m_Aim = -1; // invalidate aim
 			aim = _aimTemp;
 
-			var _weaponSimple = m_Weapon as SimpleWeapon;
-			if (_weaponSimple != null)
+			if (m_Weapon != null)
 			{
-				_weaponSimple.postOutOfAmmo += ListenOutOfAmmo;
+				m_Weapon.postOutOfAmmo += ListenOutOfAmmo;
 			}
 			
 			if (m_Weapon == null) 
@@ -96,13 +95,13 @@ public class Character : MonoBehaviour
 			}
 			else 
 			{
-				m_NetworkAnimator.SetTrigger("equip_" + m_Weapon.type);
+				m_NetworkAnimator.SetTrigger("equip_" + m_Weapon.animationGroup);
 
 				if (IsNetworkEnabled())
 				{
 					m_Weapon.networkView.viewID = Network.AllocateViewID();
 					m_Weapon.networkView.enabled = true;
-					networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.type);
+					networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.animationGroup);
 				}
 			}
 
@@ -372,7 +371,7 @@ public class Character : MonoBehaviour
 		weapon = _weapon.GetComponent<Weapon>();
 	}
 
-	private void ListenOutOfAmmo(SimpleWeapon _weapon)
+	private void ListenOutOfAmmo(Weapon _weapon)
 	{
 		// note: Unequip 은 animator 에서 호출합니다
 		m_NetworkAnimator.SetTrigger ("throw_away");

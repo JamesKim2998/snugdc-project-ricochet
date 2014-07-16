@@ -55,7 +55,7 @@ public class HUDAmmo : MonoBehaviour
 
 	void ListenWeaponChanged(Character _character, Weapon _old)
 	{
-		var _weapon = _character.weapon as SimpleWeapon;
+		var _weapon = _character.weapon;
 
 		if (_weapon == null) 
 		{
@@ -70,7 +70,7 @@ public class HUDAmmo : MonoBehaviour
 		}
 	}
 
-	void ListenShoot(SimpleWeapon _weapon, Projectile _projectile)
+	void ListenShoot(Weapon _weapon, Projectile _projectile)
 	{
 		ammo = _weapon.ammo;
 		ammoMax = _weapon.ammoMax;
