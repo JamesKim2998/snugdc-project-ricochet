@@ -382,6 +382,7 @@ public class Character : MonoBehaviour
 		weapon = null;
 	}
 
+	/*
 	public void OnCollisionStay2D(Collision2D coll)
 	{
 		Vector3 _delta = coll.contacts[0].point - new Vector2(transform.position.x, transform.position.y);
@@ -391,6 +392,8 @@ public class Character : MonoBehaviour
 			Move(-Mathf.Sign(_delta.x));
 		}
 	}
+	*/
+
 	/*
 	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
 	{
