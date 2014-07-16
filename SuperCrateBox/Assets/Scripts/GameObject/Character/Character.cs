@@ -322,7 +322,6 @@ public class Character : MonoBehaviour
 		
 		var _direction = Mathf.Sign(_attackData.velocity.x);
 		m_lastAttacked = _attackData.owner;
-		Debug.Log (_attackData.owner);
 
 		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
 
@@ -350,7 +349,6 @@ public class Character : MonoBehaviour
 
 		Game.Statistic().GetUserStatistic(networkView.owner).death.val += 1;
 		if (m_lastAttacked != null) {
-			Debug.Log(m_lastAttacked);
 			if (Game.Statistic().GetUserStatistic(m_lastAttacked) != null) {
 				Game.Statistic().GetUserStatistic(m_lastAttacked).score.val += 1;
 			}

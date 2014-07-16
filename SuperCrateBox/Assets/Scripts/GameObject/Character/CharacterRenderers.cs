@@ -38,7 +38,6 @@ public class CharacterRenderers : MonoBehaviour
 		{
 			if (_renderer == null) continue;
 			_renderer.color = _color;
-			Debug.Log(_color);
 		}
 	}
 

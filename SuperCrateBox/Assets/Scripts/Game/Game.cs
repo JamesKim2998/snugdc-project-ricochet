@@ -7,6 +7,12 @@ public class Game : Singleton<Game>
 
 	public float timescale = 1f;
 	public bool multiplayer = false;
+	
+	public GameCamera camera_ = new GameCamera();
+	public static GameCamera Camera() { return Instance.camera_; }
+
+	public GameAudio audio_ = new GameAudio();
+	public static GameAudio Audio() { return Instance.audio_; }
 
 	public GameCharacter character = new GameCharacter();
 	public static GameCharacter Character() { return Instance.character; } 
@@ -16,9 +22,6 @@ public class Game : Singleton<Game>
 	
 	public GameWeapon weapon = new GameWeapon();
 	public static GameWeapon Weapon() { return Instance.weapon; }
-
-	public GameCamera camera_ = new GameCamera();
-	public static GameCamera Camera() { return Instance.camera_; }
 
 	public static GameCheat cheat = null;
 	public static GameCheat Cheat() 
@@ -33,6 +36,7 @@ public class Game : Singleton<Game>
 		DontDestroyOnLoad(transform.gameObject);
 
 		camera_.Start();
+		audio_.Start();
 
 		character.game = this;
 		character.Start();

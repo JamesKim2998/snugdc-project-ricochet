@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour {
 
 		m_Animator = GetComponent<Animator>();
 		if (m_Animator == null) {
-			Debug.Log("animator not set!");
+			Debug.Log("Animator not set!");
 		}
 
 		direction = 1;
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour {
 		if (isDead) return;
 
 		if (m_HP > 0) {
-			Debug.Log("trying to kill enemy has hp!");
+			Debug.Log("Trying to kill the unit has hp!");
 		}
 		
 		isDead = true;
