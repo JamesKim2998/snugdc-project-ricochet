@@ -48,7 +48,6 @@ Transform:
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -60,7 +59,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,7 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a97509423c71984ba7b36b75d7f59ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400004}
   drivingForce: 5
   explosionRadius: 1.5
 --- !u!114 &11400002
@@ -102,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: rocket_launcher
+  animationGroup: rocket_launcher
+  useDamage: 1
+  damageExpose: 0
   autoload: 0
   shootAtOnce: 3
   ammoMax: 1000
@@ -109,6 +109,10 @@ MonoBehaviour:
   projectileOffset: {x: 0, y: 0, z: 0}
   prepareTime: .100000001
   chargeTime: .100000001
+  shootTime: 0
+  cooldown: 0
+  effectMuzzleFirePrf: {fileID: 0}
+  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400004}
   projectile: rocket
 --- !u!148 &14800000
 NetworkView:
@@ -152,8 +155,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_Sprite: {fileID: 21300000, guid: 7db44cae71a677243bb504dc0bdd8e98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

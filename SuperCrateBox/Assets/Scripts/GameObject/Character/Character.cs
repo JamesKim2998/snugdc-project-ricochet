@@ -12,7 +12,8 @@ public class Character : MonoBehaviour
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
-	private NetworkPlayer m_lastAttacked = new NetworkPlayer ();
+	private AttackData m_LastAttackData;
+	public AttackData lastAttackData { get { return m_LastAttackData; }}
 
 	public int direction {
 		get { return transform.rotation.y > 0.5f ? -1 : 1; }
@@ -129,6 +130,7 @@ public class Character : MonoBehaviour
 	public float aim { 
 		get { return m_Aim; }
 		set { 
+			if (isDead) return;
 			if (m_Aim == value) return;
 
 			m_Aim = value;
@@ -282,7 +284,7 @@ public class Character : MonoBehaviour
 	}
 	
 	public bool jumpable {
-		get { return ! m_Floating && m_JumpCooltime <= 0; }
+		get { return ! m_Floating && m_JumpCooltime <= 0 && ! isDead; }
 	}
 	
 	public void Jump()
@@ -300,7 +302,8 @@ public class Character : MonoBehaviour
 
 	public bool shootable {
 		get {
-			return weapon != null && weapon.IsShootable(); 
+			return weapon != null && weapon.IsShootable()
+				&& ! isDead; 
 		}
 	}
 	
@@ -318,9 +321,10 @@ public class Character : MonoBehaviour
 		hitEnabled = false;
 		
 		Invoke("EnableHit", hitCooldown);
-		
+
+		m_LastAttackData = _attackData;
+
 		var _direction = Mathf.Sign(_attackData.velocity.x);
-		m_lastAttacked = _attackData.owner;
 
 		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
 
@@ -332,6 +336,11 @@ public class Character : MonoBehaviour
 	}
 	
 	void Die() {
+		if (isDead) {
+			Debug.LogWarning("Trying to kill already dead character. Ignore.");
+			return;
+		}
+
 		CancelInvoke("EnableHit");
 		
 		isDead = true;
@@ -339,23 +348,16 @@ public class Character : MonoBehaviour
 		
 		var _deadForce = deadForce;
 		_deadForce.x *= -direction;
-		
 		rigidbody2D.velocity = new Vector2(0, 0);
 		rigidbody2D.AddForce(_deadForce);
 		
 		m_NetworkAnimator.SetTrigger("dead_lower");
 		m_NetworkAnimator.SetTrigger("dead_upper");
-
-		Game.Statistic().GetUserStatistic(networkView.owner).death.val += 1;
-		if (m_lastAttacked != null) {
-			if (Game.Statistic().GetUserStatistic(m_lastAttacked) != null) {
-				Game.Statistic().GetUserStatistic(m_lastAttacked).score.val += 1;
-			}
-		}
-		if (postDead != null) postDead(this);
-
+		
 		var _effectDead = GameObject.Instantiate (effectDeadPrf, transform.position, transform.rotation) as GameObject;
 		_effectDead.transform.Translate (effectDeadOffset);
+
+		if (postDead != null) postDead(this);
 
 		Invoke("DestroySelf", deadDelay);
 	}

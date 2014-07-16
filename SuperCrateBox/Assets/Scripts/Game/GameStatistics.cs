@@ -35,10 +35,9 @@ public class Statistic<T> where T : System.IEquatable<T> {
 
 public class UserStatistic {
 	public NetworkPlayer player;
+	public readonly string name;
 	public readonly Statistic<int> score;
 	public readonly Statistic<int> death;
-	public readonly string username;
-	//public readonly Statistic<Weapon> weapon;
 
 	public UserStatistic(NetworkPlayer player) {
 		this.player = player;
@@ -52,23 +51,30 @@ public class UserStatistic {
 		death.val = 0;
 	}
 }
+
 public class GameStatistics {
-	private List<UserStatistic> userStatisticList;
-	public GameStatistics() {
-		userStatisticList = new List<UserStatistic> ();
+	private UserStatistic m_Mine;
+	public UserStatistic mine { get { return m_Mine; }}
+	private Dictionary<NetworkPlayer, UserStatistic> m_UserStatistics;
+
+	public void Start() {
+		m_Mine = new UserStatistic(Network.player);
+		m_UserStatistics = new Dictionary<NetworkPlayer, UserStatistic> ();
 	}
-	public UserStatistic myUserStatistic {
-		get {
-			if (Game.Character ().character == null)
-				return null;
-			var _myNetworkPlayer = Game.Character ().character.networkView.owner;
-			return userStatisticList.Find(el => el.player == _myNetworkPlayer);
+	
+	public UserStatistic Get(NetworkPlayer player) {
+		if (player == Network.player) return m_Mine;
+		return m_UserStatistics[player];
+	}
+
+	public void Add(NetworkPlayer player) {
+#if DEBUG
+		if ( Get (player) != null ) {
+			Debug.LogError("Trying to add already existing player!");
 		}
+#endif
+
+		m_UserStatistics[player] = new UserStatistic(player);
 	}
-	public void AddUserStatistic(NetworkPlayer player) {
-		userStatisticList.Add(new UserStatistic(player));
-	}
-	public UserStatistic GetUserStatistic(NetworkPlayer player) {
-		return userStatisticList.Find (el => el.player == player);
-	}
+
 }

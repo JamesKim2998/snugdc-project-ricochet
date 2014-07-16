@@ -45,6 +45,7 @@ public class GameCharacter
 					m_Character.weapon = _weapon.GetComponent<Weapon>();
 				}
 
+				m_Character.postDead += ListenDead;
 				m_Character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
 			}
 
@@ -156,5 +157,20 @@ public class GameCharacter
 	public void ListenDestroy(Destroyable _destroyable) 
 	{
 		character = null;
+	}
+
+	public void ListenDead(Character _character)
+	{
+		if (_character != character) {
+			Debug.LogWarning("GameCharacter dead character not match! Ignore.");
+			return;
+		}
+
+		Game.Statistic().mine.death.val += 1;
+		
+		if (_character != null && _character.lastAttackData.owner != null) {
+			var _statistic = Game.Statistic().Get(_character.lastAttackData.owner);
+			if (_statistic != null) _statistic.score.val += 1;
+		}
 	}
 }

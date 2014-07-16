@@ -38,6 +38,8 @@ public class Game : Singleton<Game>
 		camera_.Start();
 		audio_.Start();
 
+		statistic.Start();
+
 		character.game = this;
 		character.Start();
 	}

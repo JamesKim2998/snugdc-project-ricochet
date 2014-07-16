@@ -71,7 +71,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: simple_gun
+  animationGroup: simple_gun
+  useDamage: 1
+  damageExpose: 0
+  autoload: 0
+  shootAtOnce: 1
+  ammoMax: 1000
   relativeVelocityEnabled: 1
+  projectileOffset: {x: 0, y: 0, z: 0}
+  prepareTime: 0
+  chargeTime: 0
+  shootTime: 0
+  cooldown: 0
+  effectMuzzleFirePrf: {fileID: 0}
+  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36089159c4c2ff4cb0f68c7781f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000}
   speed: 5
 --- !u!114 &11400006
 MonoBehaviour:
@@ -111,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000}
   projectile: bullet
 --- !u!148 &14800000
 NetworkView:

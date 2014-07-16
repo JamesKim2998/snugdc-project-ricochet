@@ -41,7 +41,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400004}
   projectile: mine
 --- !u!114 &11400002
 MonoBehaviour:
@@ -70,7 +69,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: mine_weapon
+  animationGroup: grenade
+  useDamage: 1
+  damageExpose: 0
+  autoload: 0
+  shootAtOnce: 1
+  ammoMax: 1000
   relativeVelocityEnabled: 0
+  projectileOffset: {x: 0, y: 0, z: 0}
+  prepareTime: 0
+  chargeTime: 0
+  shootTime: 0
+  cooldown: 0
+  effectMuzzleFirePrf: {fileID: 0}
+  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
