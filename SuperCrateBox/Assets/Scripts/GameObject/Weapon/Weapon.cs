@@ -216,17 +216,11 @@ public class Weapon : MonoBehaviour
 		 	_bundle = doGetBundle(this);
 		}
 
-		for (m_ProjectileIdx = 0; m_ProjectileIdx < _bundle; ++m_ProjectileIdx) {
+		for (m_ProjectileIdx = 0; m_ProjectileIdx < _bundle && ammo > 0; ++m_ProjectileIdx) {
 
 			var _projectile = doCreateProjectile(this);
 
 			++m_ProjectileCount;
-
-			if (ammo <= 0)
-			{
-				Rest();
-				return;
-			}
 
 			consumeAmmo();
 
@@ -287,6 +281,11 @@ public class Weapon : MonoBehaviour
 		else
 		{
 			PlayMuzzleFireEffect();
+		}
+		
+		if (ammo <= 0)
+		{
+			Rest();
 		}
 	}
 
