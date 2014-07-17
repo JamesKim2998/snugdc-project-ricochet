@@ -8,7 +8,7 @@ public class InterpolatePosition : MonoBehaviour {
 	Vector3 m_LastSyncPosition = Vector3.zero;
 	Vector3 m_LastSyncVelocity = Vector3.zero;
 
-	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info)
+	public void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info)
 	{
 		Vector3 _syncPosition = Vector3.zero;
 		Vector3 _syncVelocity = Vector3.zero;

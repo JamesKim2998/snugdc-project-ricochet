@@ -161,6 +161,8 @@ public class Character : MonoBehaviour
 	private Animator m_Animator;
 	private NetworkAnimator m_NetworkAnimator;
 
+	private InterpolatePosition m_InterpolatePosition;
+
 	public GameObject crossHair;
 	
 	// detector
@@ -198,7 +200,8 @@ public class Character : MonoBehaviour
 		m_Renderers = GetComponent<CharacterRenderers> ();
 		m_Animator = GetComponent<Animator>();
 		m_NetworkAnimator = GetComponent<NetworkAnimator>();
-		
+		m_InterpolatePosition = gameObject.AddComponent<InterpolatePosition>();
+
 		// detector
 		crateDetector.doObtain = Obtain;
 		damageDetector.doDamage = Hit;
@@ -372,45 +375,23 @@ public class Character : MonoBehaviour
 
 	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
 	{
-		Vector3 _position = Vector3.zero;
-		Vector3 _scale = Vector3.zero;
-		Quaternion _rotation = Quaternion.identity;
-		Vector3 _velocity = Vector3.zero;
-
+		m_InterpolatePosition.OnSerializeNetworkView(_stream, _info);
+		
 		float _aim = 0;
 		int _direction = 0;
 
 		if (_stream.isWriting) 
 		{
-			_position = transform.position;
-			_scale = transform.localScale;
-//			_rotation = transform.rotation;
-			_velocity = rigidbody2D.velocity;
-
 			_aim = aim;
 			_direction = direction;
 
-			_stream.Serialize(ref _position);
-			_stream.Serialize(ref _scale);
-//			_stream.Serialize(ref _rotation);
-			_stream.Serialize(ref _velocity);
 			_stream.Serialize(ref _aim);
 			_stream.Serialize(ref _direction);
 		} 
 		else 
 		{
-			_stream.Serialize(ref _position);	
-			_stream.Serialize(ref _scale);	
-//			_stream.Serialize(ref _rotation);
-			_stream.Serialize(ref _velocity);
-
 			_stream.Serialize(ref _aim);
 			_stream.Serialize(ref _direction);
-
-			transform.position = _position;
-			transform.localScale = _scale;
-//			transform.rotation = _rotation;
-			rigidbody2D.velocity = _velocity;
 
 			aim = _aim;
 			direction = _direction;
