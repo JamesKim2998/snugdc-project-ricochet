@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: bullet_ricochet
+  projectile: Bullet_Rifle
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,23 +137,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a08edc746b979a0418eed9f81c655efc, type: 3}
+  m_Script: {fileID: 11500000, guid: eb246201d04eb754bba3ce58dbd215b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: assault_rifle
-  animationGroup: machine_gun
-  useDamage: 0
-  damageExpose: 1
+  type: 
+  animationGroup: simple_gun
+  useDamage: 1
+  damageExpose: 0
   autoload: 0
-  shootAtOnce: 3
-  ammoMax: 50
+  shootAtOnce: 1
+  ammoMax: 30
   relativeVelocityEnabled: 1
-  projectileOffset: {x: 1, y: .100000001, z: 0}
-  prepareTime: .200000003
-  chargeTime: .00999999978
-  shootTime: 0
-  cooldown: 0
-  effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
+  projectileOffset: {x: 0, y: 0, z: 0}
+  prepareTime: 1
+  chargeTime: 1
+  shootTime: 1
+  cooldown: 1
+  effectMuzzleFirePrf: {fileID: 0}
   effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!148 &14800000
 NetworkView:
