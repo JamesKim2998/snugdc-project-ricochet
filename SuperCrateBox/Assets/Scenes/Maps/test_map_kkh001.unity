@@ -455,7 +455,7 @@ Transform:
   - {fileID: 1067789087}
   - {fileID: 948069239}
   m_Father: {fileID: 1275425137}
-  m_RootOrder: 4
+  m_RootOrder: 1
 --- !u!212 &18554483
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2119,7 +2119,7 @@ Transform:
   - {fileID: 384963504}
   - {fileID: 650046370}
   m_Father: {fileID: 929533931}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!212 &82266606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2999,12 +2999,12 @@ Transform:
   m_LocalPosition: {x: -14, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1899164957}
-  - {fileID: 1347707159}
   - {fileID: 1660421586}
   - {fileID: 322139012}
   - {fileID: 1514394710}
   - {fileID: 1263556572}
+  - {fileID: 1899164957}
+  - {fileID: 1347707159}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 10
 --- !u!1001 &122433979
@@ -4770,12 +4770,12 @@ Transform:
   m_LocalPosition: {x: 7, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1791292391}
-  - {fileID: 2120545618}
   - {fileID: 1173803582}
   - {fileID: 1229791922}
   - {fileID: 403929438}
   - {fileID: 1172630903}
+  - {fileID: 1791292391}
+  - {fileID: 2120545618}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 8
 --- !u!1001 &184727499
@@ -6632,7 +6632,7 @@ Transform:
   - {fileID: 877111312}
   - {fileID: 1071188885}
   m_Father: {fileID: 579691116}
-  m_RootOrder: 0
+  m_RootOrder: 4
 --- !u!61 &248584148
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7302,7 +7302,7 @@ Transform:
   - {fileID: 2141673694}
   - {fileID: 1216845159}
   m_Father: {fileID: 1401911981}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!212 &279578180
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8463,7 +8463,7 @@ Transform:
   - {fileID: 1275338769}
   - {fileID: 1927680196}
   m_Father: {fileID: 118431939}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &322139013
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8620,10 +8620,10 @@ Transform:
   m_LocalPosition: {x: -18, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 512696593}
-  - {fileID: 1321591391}
   - {fileID: 1046965305}
   - {fileID: 904941369}
+  - {fileID: 512696593}
+  - {fileID: 1321591391}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 15
 --- !u!1001 &328350136
@@ -8894,7 +8894,7 @@ Transform:
   - {fileID: 351032706}
   - {fileID: 580953788}
   m_Father: {fileID: 636059387}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &342010451
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10084,7 +10084,7 @@ Transform:
   - {fileID: 1583211260}
   - {fileID: 1633333326}
   m_Father: {fileID: 1808474537}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!61 &395172864
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10252,7 +10252,7 @@ Transform:
   - {fileID: 2045101797}
   - {fileID: 2032163670}
   m_Father: {fileID: 184690545}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!212 &403929439
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10661,12 +10661,12 @@ Transform:
   m_LocalPosition: {x: -1, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1523038573}
   - {fileID: 2141874771}
   - {fileID: 912073203}
   - {fileID: 1293130153}
   - {fileID: 742003440}
   - {fileID: 583860455}
+  - {fileID: 1523038573}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 7
 --- !u!1 &412968023
@@ -11025,7 +11025,7 @@ Transform:
   - {fileID: 970326981}
   - {fileID: 856534301}
   m_Father: {fileID: 1985630760}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!61 &421564255
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11241,7 +11241,7 @@ Transform:
   - {fileID: 1852053301}
   - {fileID: 1522487359}
   m_Father: {fileID: 1808474537}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!61 &426471324
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13491,7 +13491,7 @@ Transform:
   - {fileID: 11816160}
   - {fileID: 1120193923}
   m_Father: {fileID: 326705565}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!212 &512696594
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13843,7 +13843,7 @@ Transform:
   - {fileID: 132027411}
   - {fileID: 2142674925}
   m_Father: {fileID: 1985630760}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!212 &522799064
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15105,12 +15105,12 @@ Transform:
   m_LocalPosition: {x: 12, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 248584147}
-  - {fileID: 2143639131}
   - {fileID: 1755527784}
   - {fileID: 896528076}
   - {fileID: 684384856}
   - {fileID: 604139247}
+  - {fileID: 248584147}
+  - {fileID: 2143639131}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 9
 --- !u!1 &580655709
@@ -15143,7 +15143,7 @@ Transform:
   - {fileID: 22195598}
   - {fileID: 64727991}
   m_Father: {fileID: 1275425137}
-  m_RootOrder: 1
+  m_RootOrder: 4
 --- !u!61 &580655711
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15260,7 +15260,7 @@ Transform:
   - {fileID: 1541790875}
   - {fileID: 423201547}
   m_Father: {fileID: 412196363}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!212 &583860456
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15865,7 +15865,7 @@ Transform:
   - {fileID: 90302249}
   - {fileID: 1689574090}
   m_Father: {fileID: 579691116}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!61 &604139248
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16563,10 +16563,10 @@ Transform:
   m_LocalPosition: {x: -6, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1525402844}
-  - {fileID: 1269642358}
   - {fileID: 1144713221}
   - {fileID: 342010450}
+  - {fileID: 1525402844}
+  - {fileID: 1269642358}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 5
 --- !u!1 &640500204
@@ -17743,7 +17743,7 @@ Transform:
   - {fileID: 492254300}
   - {fileID: 436462981}
   m_Father: {fileID: 579691116}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!212 &684384857
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18076,7 +18076,7 @@ Transform:
   - {fileID: 223007473}
   - {fileID: 1197854490}
   m_Father: {fileID: 1284006314}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!212 &692118392
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18703,7 +18703,7 @@ Transform:
   - {fileID: 804140120}
   - {fileID: 721448566}
   m_Father: {fileID: 1972338435}
-  m_RootOrder: 3
+  m_RootOrder: 0
 --- !u!212 &713398499
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18870,7 +18870,7 @@ Transform:
   - {fileID: 1248078621}
   - {fileID: 811983378}
   m_Father: {fileID: 1985630760}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!60 &718521705
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -19296,7 +19296,7 @@ Transform:
   - {fileID: 407660325}
   - {fileID: 1735792036}
   m_Father: {fileID: 412196363}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!212 &742003441
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20125,12 +20125,12 @@ Transform:
   m_LocalPosition: {x: -9, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1975638257}
-  - {fileID: 2090017413}
   - {fileID: 2032037636}
   - {fileID: 1412385079}
   - {fileID: 1611150959}
   - {fileID: 1551060317}
+  - {fileID: 1975638257}
+  - {fileID: 2090017413}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 4
 --- !u!1 &765708196
@@ -20664,7 +20664,7 @@ Transform:
   - {fileID: 1380542422}
   - {fileID: 499814093}
   m_Father: {fileID: 1284006314}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!61 &789772765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21319,7 +21319,7 @@ Transform:
   - {fileID: 1648612936}
   - {fileID: 1373028964}
   m_Father: {fileID: 1808474537}
-  m_RootOrder: 0
+  m_RootOrder: 5
 --- !u!212 &809270901
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22226,7 +22226,7 @@ Transform:
   - {fileID: 792622464}
   - {fileID: 1503292872}
   m_Father: {fileID: 1972338435}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!61 &838581712
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23305,7 +23305,7 @@ Transform:
   - {fileID: 921566314}
   - {fileID: 2097262208}
   m_Father: {fileID: 579691116}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!212 &896528077
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23451,7 +23451,7 @@ Transform:
   - {fileID: 1906120527}
   - {fileID: 1824713337}
   m_Father: {fileID: 326705565}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &904941370
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23517,7 +23517,7 @@ Transform:
   - {fileID: 1166517930}
   - {fileID: 711458255}
   m_Father: {fileID: 1985630760}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!61 &905731551
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23656,7 +23656,7 @@ Transform:
   - {fileID: 493933634}
   - {fileID: 737836641}
   m_Father: {fileID: 412196363}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!61 &912073204
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24033,9 +24033,9 @@ Transform:
   m_LocalPosition: {x: 18, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 82266605}
   - {fileID: 1360718433}
   - {fileID: 2084830297}
+  - {fileID: 82266605}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 13
 --- !u!1 &933060271
@@ -24701,7 +24701,7 @@ Transform:
   - {fileID: 1700163076}
   - {fileID: 1486514994}
   m_Father: {fileID: 1808474537}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!212 &952257038
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -26738,7 +26738,7 @@ Transform:
   - {fileID: 237454057}
   - {fileID: 156696811}
   m_Father: {fileID: 1275425137}
-  m_RootOrder: 3
+  m_RootOrder: 0
 --- !u!212 &992431879
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -27858,7 +27858,7 @@ Transform:
   - {fileID: 1394440677}
   - {fileID: 1362833851}
   m_Father: {fileID: 326705565}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!61 &1046965306
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27964,7 +27964,7 @@ Transform:
   - {fileID: 1244297119}
   - {fileID: 1669000843}
   m_Father: {fileID: 1985630760}
-  m_RootOrder: 0
+  m_RootOrder: 5
 --- !u!212 &1048722052
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28878,7 +28878,7 @@ Transform:
   - {fileID: 1935849897}
   - {fileID: 1949987211}
   m_Father: {fileID: 1284006314}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &1087587318
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30194,7 +30194,7 @@ Transform:
   - {fileID: 111858006}
   - {fileID: 1649686777}
   m_Father: {fileID: 636059387}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!61 &1144713222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30260,7 +30260,7 @@ Transform:
   - {fileID: 1774212824}
   - {fileID: 72148002}
   m_Father: {fileID: 1401911981}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!212 &1145036609
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -30946,7 +30946,7 @@ Transform:
   - {fileID: 763830237}
   - {fileID: 1193352664}
   m_Father: {fileID: 184690545}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!212 &1172630904
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31129,7 +31129,7 @@ Transform:
   - {fileID: 281544730}
   - {fileID: 480349638}
   m_Father: {fileID: 184690545}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!61 &1173803583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33498,7 +33498,7 @@ Transform:
   - {fileID: 1878809396}
   - {fileID: 1454041434}
   m_Father: {fileID: 184690545}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &1229791923
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33564,7 +33564,7 @@ Transform:
   - {fileID: 1173715423}
   - {fileID: 2092243503}
   m_Father: {fileID: 1808474537}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!212 &1234197429
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34378,7 +34378,7 @@ Transform:
   - {fileID: 1574115388}
   - {fileID: 103655578}
   m_Father: {fileID: 118431939}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!212 &1263556573
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34609,7 +34609,7 @@ Transform:
   - {fileID: 2129231719}
   - {fileID: 1010508247}
   m_Father: {fileID: 636059387}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!212 &1269642359
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34825,12 +34825,12 @@ Transform:
   m_LocalPosition: {x: -10, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1421168720}
-  - {fileID: 580655710}
-  - {fileID: 1846098257}
   - {fileID: 992431878}
   - {fileID: 18554482}
   - {fileID: 1738239249}
+  - {fileID: 1421168720}
+  - {fileID: 580655710}
+  - {fileID: 1846098257}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 11
 --- !u!1 &1277258976
@@ -35000,10 +35000,10 @@ Transform:
   m_LocalPosition: {x: 5, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1734040275}
-  - {fileID: 692118391}
   - {fileID: 789772764}
   - {fileID: 1087587317}
+  - {fileID: 1734040275}
+  - {fileID: 692118391}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 0
 --- !u!1 &1286338986
@@ -35237,7 +35237,7 @@ Transform:
   - {fileID: 1188615482}
   - {fileID: 1951985969}
   m_Father: {fileID: 412196363}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!61 &1293130154
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -35900,7 +35900,7 @@ Transform:
   - {fileID: 613108091}
   - {fileID: 2078848284}
   m_Father: {fileID: 326705565}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!212 &1321591392
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36594,7 +36594,7 @@ Transform:
   - {fileID: 128109770}
   - {fileID: 428169290}
   m_Father: {fileID: 118431939}
-  m_RootOrder: 1
+  m_RootOrder: 5
 --- !u!212 &1347707160
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36920,7 +36920,7 @@ Transform:
   - {fileID: 971057628}
   - {fileID: 464570280}
   m_Father: {fileID: 929533931}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!212 &1360718434
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37128,7 +37128,7 @@ Transform:
   - {fileID: 1020446253}
   - {fileID: 2119724059}
   m_Father: {fileID: 1972338435}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!212 &1363449427
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -38093,10 +38093,10 @@ Transform:
   m_LocalPosition: {x: 14, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 279578179}
-  - {fileID: 1145036608}
   - {fileID: 1525389095}
   - {fileID: 1402912941}
+  - {fileID: 279578179}
+  - {fileID: 1145036608}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 16
 --- !u!1 &1402912940
@@ -38129,7 +38129,7 @@ Transform:
   - {fileID: 282761576}
   - {fileID: 1438536500}
   m_Father: {fileID: 1401911981}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &1402912942
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38297,7 +38297,7 @@ Transform:
   - {fileID: 626887012}
   - {fileID: 701025356}
   m_Father: {fileID: 764028166}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &1412385080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38513,7 +38513,7 @@ Transform:
   - {fileID: 980541240}
   - {fileID: 1466436012}
   m_Father: {fileID: 1275425137}
-  m_RootOrder: 0
+  m_RootOrder: 3
 --- !u!61 &1421168721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38736,7 +38736,7 @@ Transform:
   - {fileID: 2106202484}
   - {fileID: 875978307}
   m_Father: {fileID: 1985630760}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!60 &1429196706
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -40299,7 +40299,7 @@ Transform:
   - {fileID: 729109282}
   - {fileID: 1972548789}
   m_Father: {fileID: 118431939}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!61 &1514394711
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -40675,7 +40675,7 @@ Transform:
   - {fileID: 686219323}
   - {fileID: 134904811}
   m_Father: {fileID: 412196363}
-  m_RootOrder: 0
+  m_RootOrder: 5
 --- !u!212 &1523038574
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -40741,7 +40741,7 @@ Transform:
   - {fileID: 597667257}
   - {fileID: 1079086722}
   m_Father: {fileID: 1401911981}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!61 &1525389096
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -40807,7 +40807,7 @@ Transform:
   - {fileID: 6196915}
   - {fileID: 809843233}
   m_Father: {fileID: 636059387}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!212 &1525402845
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -41546,7 +41546,7 @@ Transform:
   - {fileID: 496554541}
   - {fileID: 710213216}
   m_Father: {fileID: 764028166}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!212 &1551060318
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -42910,7 +42910,7 @@ Transform:
   - {fileID: 386204500}
   - {fileID: 501289178}
   m_Father: {fileID: 764028166}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!61 &1611150960
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -44449,7 +44449,7 @@ Transform:
   - {fileID: 2132280206}
   - {fileID: 42477274}
   m_Father: {fileID: 1808474537}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!212 &1653919289
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -44804,7 +44804,7 @@ Transform:
   - {fileID: 1145885700}
   - {fileID: 1868690701}
   m_Father: {fileID: 118431939}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!212 &1660421587
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -44987,7 +44987,7 @@ Transform:
   - {fileID: 383201050}
   - {fileID: 406647739}
   m_Father: {fileID: 1972338435}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!61 &1668347406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -46611,7 +46611,7 @@ Transform:
   - {fileID: 1014629921}
   - {fileID: 895356327}
   m_Father: {fileID: 1284006314}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!212 &1734040276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46845,7 +46845,7 @@ Transform:
   - {fileID: 1996438832}
   - {fileID: 1538451208}
   m_Father: {fileID: 1275425137}
-  m_RootOrder: 5
+  m_RootOrder: 2
 --- !u!212 &1738239250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47313,7 +47313,7 @@ Transform:
   - {fileID: 1340629320}
   - {fileID: 1820833160}
   m_Father: {fileID: 579691116}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!212 &1755527785
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -48243,7 +48243,7 @@ Transform:
   - {fileID: 755021757}
   - {fileID: 212084614}
   m_Father: {fileID: 184690545}
-  m_RootOrder: 0
+  m_RootOrder: 4
 --- !u!212 &1791292392
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -48619,12 +48619,12 @@ Transform:
   m_LocalPosition: {x: 8, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 809270900}
   - {fileID: 1653919288}
   - {fileID: 952257037}
   - {fileID: 1234197428}
   - {fileID: 395172863}
   - {fileID: 426471323}
+  - {fileID: 809270900}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 12
 --- !u!1001 &1812269024
@@ -49400,7 +49400,7 @@ Transform:
   - {fileID: 1341494476}
   - {fileID: 1400515861}
   m_Father: {fileID: 1275425137}
-  m_RootOrder: 2
+  m_RootOrder: 5
 --- !u!212 &1846098258
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -50788,7 +50788,7 @@ Transform:
   - {fileID: 1648368320}
   - {fileID: 687403865}
   m_Father: {fileID: 118431939}
-  m_RootOrder: 0
+  m_RootOrder: 4
 --- !u!1 &1903476251
 GameObject:
   m_ObjectHideFlags: 0
@@ -52590,10 +52590,10 @@ Transform:
   m_LocalPosition: {x: 4, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 713398498}
   - {fileID: 1668347405}
   - {fileID: 838581711}
   - {fileID: 1363449426}
-  - {fileID: 713398498}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 6
 --- !u!1 &1972548788
@@ -52677,7 +52677,7 @@ Transform:
   - {fileID: 1891388912}
   - {fileID: 1526006588}
   m_Father: {fileID: 764028166}
-  m_RootOrder: 0
+  m_RootOrder: 4
 --- !u!212 &1975638258
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -52852,12 +52852,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1048722051}
   - {fileID: 522799063}
   - {fileID: 718521704}
   - {fileID: 1429196705}
   - {fileID: 421564254}
   - {fileID: 905731550}
+  - {fileID: 1048722051}
   m_Father: {fileID: 1790377602}
   m_RootOrder: 2
 --- !u!1001 &1985659283
@@ -53863,7 +53863,7 @@ Transform:
   - {fileID: 1242380431}
   - {fileID: 1060667292}
   m_Father: {fileID: 764028166}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!212 &2032037637
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -54946,7 +54946,7 @@ Transform:
   - {fileID: 265556379}
   - {fileID: 837710098}
   m_Father: {fileID: 929533931}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!61 &2084830298
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55063,7 +55063,7 @@ Transform:
   - {fileID: 588772116}
   - {fileID: 424531978}
   m_Father: {fileID: 764028166}
-  m_RootOrder: 1
+  m_RootOrder: 5
 --- !u!212 &2090017414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -55841,7 +55841,7 @@ Transform:
   - {fileID: 2064626409}
   - {fileID: 50258080}
   m_Father: {fileID: 184690545}
-  m_RootOrder: 1
+  m_RootOrder: 5
 --- !u!212 &2120545619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -56395,7 +56395,7 @@ Transform:
   - {fileID: 823552921}
   - {fileID: 547390829}
   m_Father: {fileID: 412196363}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!212 &2141874772
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -56725,7 +56725,7 @@ Transform:
   - {fileID: 2026189279}
   - {fileID: 19167691}
   m_Father: {fileID: 579691116}
-  m_RootOrder: 1
+  m_RootOrder: 5
 --- !u!212 &2143639132
 SpriteRenderer:
   m_ObjectHideFlags: 0
