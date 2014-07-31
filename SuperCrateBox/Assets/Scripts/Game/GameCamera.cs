@@ -5,17 +5,24 @@ using System.Collections;
 public class GameCamera 
 {
 	private Camera m_Camera;
-	public Camera camera { get { return m_Camera; } set { m_Camera = value; }}
+	public Camera camera { 
+		get { return m_Camera; } 
+		set { 
+			m_Camera = value; 
+
+			if (m_Camera == null) return;
+
+			followObject = m_Camera.GetComponent<CameraFollowObject> ();
+			
+			if (followObject == null) 
+				followObject = m_Camera.gameObject.AddComponent<CameraFollowObject>();
+		}
+	}
 
 	private CameraFollowObject followObject;
 
 	public void Start() 
-	{
-		followObject = m_Camera.GetComponent<CameraFollowObject> ();
-
-		if (followObject == null) 
-			followObject = m_Camera.gameObject.AddComponent<CameraFollowObject>();
-	}
+	{}
 
 	public void Bind(int _key, Transform _transform)
 	{

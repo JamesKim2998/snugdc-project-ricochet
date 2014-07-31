@@ -100,7 +100,8 @@ public class PlayerManager : MonoBehaviour
 
 	void OnPlayerConnected(NetworkPlayer _player) 
 	{
-		networkView.RPC("PlayerManager_OnPlayerConnected", RPCMode.All, _player.guid);
+		if (Network.isServer)
+			networkView.RPC("PlayerManager_OnPlayerConnected", RPCMode.All, _player.guid);
 	}
 
 	[RPC]

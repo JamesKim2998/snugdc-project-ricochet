@@ -39,20 +39,28 @@ public class UIStartButton : MonoBehaviour
 
 	void StartGame()
 	{
-		var _transition = new GameTransition().Map(map);
+		var _mode = new GameModeTestDef().TestLevel("test_map_kkh001");
+		_mode.overrideMode = true;
+
+		var _transition = new GameTransition()
+			.Map(map)
+			.Mode(_mode);
+
 		Global.Transition().RequestStartGame(_transition);
 	}
 
 	void Refresh()
 	{
-		if (Global.Ready().IsReadyAll())
-			isStartable = true;
+		isStartable = Global.Ready().IsReadyAll();
 	}
 	
 	public void OnSubmit()
 	{
-		StartGame();
-//		button.isEnabled = false;	
+		// startable 값이 잘못 설정되는 경우가 있어서 refresh 합니다.
+		Refresh();
+
+		if (isStartable) 
+			StartGame();
 	}
 
 	void ListenServerInitialized()

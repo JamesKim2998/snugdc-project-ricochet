@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class GameModeTestDef : GameModeDef
 {
+	public GameModeTestDef() { mode = GameModeType.TEST; } 
 	public string testLevel = "";
+	public GameModeTestDef TestLevel(string _var) { testLevel = _var; return this; }
 }
 
 public class GameModeTest : GameMode
@@ -17,12 +20,27 @@ public class GameModeTest : GameMode
 		mode = GameModeType.TEST;
 	}
 
-	public override void Setup ()
+	public override bool Setup ()
 	{
-		base.Setup();
+		if (! base.Setup()) return false;
+
+		// catch up game progress...
+		if (Game.Progress().IsState(GameProgress.State.START))
+		{
+			ListenGameStart();
+		}
+		else if (Game.Progress().IsState(GameProgress.State.RUNNING))
+		{
+			ListenGameStart();
+			ListenGameRun();
+		}
+
 		Game.Progress().postStart += ListenGameStart;
 		Game.Progress().postRun += ListenGameRun;
+
 		TryToRunGame();
+
+		return true;
 	}
 
 	public override void Init(GameModeDef _def)

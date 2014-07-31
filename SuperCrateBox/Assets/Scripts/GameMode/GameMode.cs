@@ -11,12 +11,15 @@ public enum GameModeType
 public class GameModeDef 
 {
 	public GameModeType mode = GameModeType.NULL;
+	public bool overrideMode = false;
 }
 
 public class GameMode : MonoBehaviour 
 {
-	public float setupDelay = -1f;
 	public GameModeType mode = GameModeType.NULL;
+
+	public float setupDelay = -1f;
+	public bool overrideMode = false;
 
 	void Start()
 	{
@@ -24,21 +27,24 @@ public class GameMode : MonoBehaviour
 		else Invoke("Setup", setupDelay);
 	}
 
-	public virtual void Setup()
+	public virtual bool Setup()
 	{
+		if (! overrideMode && (Game.Mode() != null) && (Game.Mode().mode != GameModeType.NULL)) return false;
 		if (Game.Mode() != null && Game.Mode() != this) Destroy(Game.Mode());
 		Game.Instance.mode = this;
+		return true;
 	}
 
 	public virtual void Init(GameModeDef _def) 
 	{ 
 		mode = _def.mode;
+		overrideMode = _def.overrideMode;
 		return; 
 	}
 	
 	public static void Setup(GameModeDef _def)
 	{
-		if (Game.Mode() != null ) Destroy(Game.Mode());
+		if (Game.Mode() != null) Destroy(Game.Mode());
 
 		var _gameGO = Game.Instance.gameObject;
 		GameMode _gameMode = null;
@@ -51,6 +57,8 @@ public class GameMode : MonoBehaviour
 			break;
 
 		case GameModeType.TEST: _gameMode = _gameGO.AddComponent<GameModeTest>(); break;
+
+		default: Debug.LogError("Unknown game mode."); break;
 		}
 
 		if (_gameMode == null)

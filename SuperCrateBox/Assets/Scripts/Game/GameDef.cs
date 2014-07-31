@@ -17,6 +17,8 @@ public class GameDef : MonoBehaviour
 
 	void Start ()
 	{
+		// for instantiation...
+		if (Game.Instance.name == "") { int n; }
 		if (applyOnStart) Apply();
 	}
 

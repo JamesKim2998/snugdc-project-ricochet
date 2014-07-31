@@ -20,7 +20,7 @@ public class GameTransition
 
 public class TransitionManager : MonoBehaviour
 {
-	GameTransition gameTransition;
+	GameTransition m_GameTransition;
 
 	public void RequestStartGame(GameTransition _transition)
 	{
@@ -47,19 +47,19 @@ public class TransitionManager : MonoBehaviour
 		if (_transition.setupDelay < 0) 
 		{
 			Debug.Log("Trying to setup GameMode without delay. Sure?");
-			GameMode.Setup(_transition.mode);
+			SetupGame();
 		}
 		else 
 		{
-			gameTransition = _transition;
-			Invoke("SetupGame", gameTransition.setupDelay);
+			m_GameTransition = _transition;
+			Invoke("SetupGame", m_GameTransition.setupDelay);
 		}
 	}
 
 	void SetupGame()
 	{
-		gameTransition.Setup();
-		gameTransition = null;
+		m_GameTransition.Setup();
+		m_GameTransition = null;
 	}
 }
 

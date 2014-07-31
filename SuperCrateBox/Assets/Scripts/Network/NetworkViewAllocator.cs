@@ -33,11 +33,11 @@ public class NetworkViewAllocator : MonoBehaviour
 
 	void TryAssignSingletons()
 	{
-		if (Global.Instance.networkView.viewID == null)
+		if (Global.Instance.networkView.viewID == NetworkViewID.unassigned)
 			AllocateNetworkViewID("Global", Global.Instance.networkView);
 
-		if (Game.Instance.networkView.viewID == null)
-			AllocateNetworkViewID("Game", Global.Instance.networkView);
+		if (Game.Instance.networkView.viewID == NetworkViewID.unassigned)
+			AllocateNetworkViewID("Game", Game.Instance.networkView);
 	}
 
 	public void AllocateNetworkViewID(string _requestID, NetworkView _networkView)
