@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Character : MonoBehaviour 
@@ -174,8 +175,7 @@ public class Character : MonoBehaviour
 	#region events
 	public delegate void PostWeaponChanged(Character _character, Weapon _old);
 	public event PostWeaponChanged postWeaponChanged;
-	public delegate void PostDead(Character _character);
-	public event PostDead postDead;	
+	public event Action<Character> postDead;	
 	#endregion
 
 	#region network

@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
-public class GameWeapon {
+public class GameWeapon 
+{
+	public List<string> weaponSet = new List<string>();
 
-	public string[] weapons;
-
-	public int count { get { return weapons.Length; }}
+	public int count { get { return weaponSet.Count; }}
 
 	public string Random() {
-		return weapons[UnityEngine.Random.Range(0, count)];
+		return weaponSet[UnityEngine.Random.Range(0, count)];
 	}
 }

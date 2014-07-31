@@ -3,44 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Statistic<T> where T : System.IEquatable<T> {
-	private T m_Value;
-	private T m_OldValue;
-
-	public T val { 
-		get { 
-			return m_Value;
-		} 
-
-		set {
-			m_OldValue = m_Value;
-			m_Value = value;
-			if (!m_Value.Equals(m_OldValue)
-			    && postChanged != null) 
-			{
-				postChanged(this);
-			}
-		}
-	}
-
-	public T old { get { return m_OldValue; }}
-
-	public delegate void PostChanged(Statistic<T> _statistic);
-	public event PostChanged postChanged;
-
-	public static implicit operator T(Statistic<T> _statistic) {
-		return _statistic.val;
-	}
-}
-
-public class UserStatistic {
-	public NetworkPlayer player;
-	public readonly string name;
+public class PlayerStatistic 
+{
+	public string player;
 	public readonly Statistic<int> score;
 	public readonly Statistic<int> death;
 
-	public UserStatistic(NetworkPlayer player) {
-		this.player = player;
+	public PlayerStatistic(string _player) {
+		player = _player;
 		score = new Statistic<int>();
 		death = new Statistic<int>();
 		Reset ();
@@ -52,29 +22,54 @@ public class UserStatistic {
 	}
 }
 
+// todo: incomplete code
+public class TotalStatistic 
+{
+
+}
+
 public class GameStatistics {
-	private UserStatistic m_Mine;
-	public UserStatistic mine { get { return m_Mine; }}
-	private Dictionary<NetworkPlayer, UserStatistic> m_UserStatistics;
+	private PlayerStatistic m_Mine;
+	public PlayerStatistic mine { get { return m_Mine; }}
+	private Dictionary<string, PlayerStatistic> m_Statistics;
 
 	public void Start() {
-		m_Mine = new UserStatistic(Network.player);
-		m_UserStatistics = new Dictionary<NetworkPlayer, UserStatistic> ();
-	}
-	
-	public UserStatistic Get(NetworkPlayer player) {
-		if (player == Network.player) return m_Mine;
-		return m_UserStatistics[player];
+		m_Mine = new PlayerStatistic(Network.player.guid);
+		m_Statistics = new Dictionary<string, PlayerStatistic> ();
+		Global.Player().postConnected += ListenPlayerConnected;
 	}
 
-	public void Add(NetworkPlayer player) {
+	public void OnDestroy() 
+	{
+		Global.Player().postConnected -= ListenPlayerConnected;
+	}
+
+	public PlayerStatistic Get(string _player) 
+	{
+		if (_player == Network.player.guid) return m_Mine;
+		return m_Statistics[_player];
+	}
+
+	public void Add(string _player) 
+	{
 #if DEBUG
-		if ( Get (player) != null ) {
+		if ( Get (_player) != null ) {
 			Debug.LogError("Trying to add already existing player!");
 		}
 #endif
 
-		m_UserStatistics[player] = new UserStatistic(player);
+		m_Statistics[_player] = new PlayerStatistic(_player);
 	}
 
+	public void Purge() 
+	{
+		m_Mine.Reset();
+		m_Statistics.Clear();
+	}
+
+	void ListenPlayerConnected(PlayerInfo _playerInfo, bool _connected) 
+	{
+		if (_connected)
+			Add (_playerInfo.guid);
+	}
 }

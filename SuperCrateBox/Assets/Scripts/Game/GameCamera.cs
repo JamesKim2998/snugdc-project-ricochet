@@ -5,23 +5,16 @@ using System.Collections;
 public class GameCamera 
 {
 	private Camera m_Camera;
-	public Camera cameraExpose;
+	public Camera camera { get { return m_Camera; } set { m_Camera = value; }}
 
 	private CameraFollowObject followObject;
 
 	public void Start() 
 	{
-		if (cameraExpose == null) {
-			Debug.LogError("camera not exist!");
-			return;
-		}
-
-		m_Camera = cameraExpose;
-
 		followObject = m_Camera.GetComponent<CameraFollowObject> ();
 
 		if (followObject == null) 
-			Debug.LogError("FollowObject not exist!");
+			followObject = m_Camera.gameObject.AddComponent<CameraFollowObject>();
 	}
 
 	public void Bind(int _key, Transform _transform)

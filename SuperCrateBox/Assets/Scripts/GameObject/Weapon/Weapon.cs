@@ -218,60 +218,61 @@ public class Weapon : MonoBehaviour
 
 		for (m_ProjectileIdx = 0; m_ProjectileIdx < _bundle && ammo > 0; ++m_ProjectileIdx) {
 
-			var _projectile = doCreateProjectile(this);
+			var _projectileGO = doCreateProjectile(this);
 
 			++m_ProjectileCount;
 
 			consumeAmmo();
 
 			if (owner) {
-				_projectile.transform.rotation *= transform.rotation;
+				_projectileGO.transform.rotation *= transform.rotation;
 
-				_projectile.transform.position += transform.position;
-				_projectile.transform.Translate( projectileOffset);
+				_projectileGO.transform.position += transform.position;
+				_projectileGO.transform.Translate( projectileOffset);
 
 				if (relativeVelocityEnabled) {
-					_projectile.rigidbody2D.velocity 
+					_projectileGO.rigidbody2D.velocity 
 						+= owner.rigidbody2D.velocity;
 				}
 			}
 
-			var _theProjectile = _projectile.GetComponent<Projectile>();
+			var _projectile = _projectileGO.GetComponent<Projectile>();
 			
 			if (owner != null)
 			{
-				_theProjectile.ownerID = owner.GetInstanceID();
+				_projectile.ownerID = owner.GetInstanceID();
 				var _detector = owner.GetComponentInChildren<DamageDetector>();
-				if (_detector) _theProjectile.ownerDetecterID = _detector.GetInstanceID();
+				if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 			}
 
-			if (_theProjectile) 
+			if (_projectile) 
 			{
 				if (damage.HasValue) 
-					_theProjectile.damage = damage.Value;
+					_projectile.damage = damage.Value;
 			}
 
 			if (doShoot != null) 
-				doShoot(this, _projectile);
+				doShoot(this, _projectileGO);
 
 			if (IsNetworkEnabled())
 			{
-				_projectile.networkView.viewID = Network.AllocateViewID();
-				_projectile.networkView.enabled = true;
-				_theProjectile.attackData.owner = _projectile.networkView.owner;
+				_projectileGO.networkView.viewID = Network.AllocateViewID();
+				_projectileGO.networkView.enabled = true;
+				_projectile.attackData.owner = Network.player.guid;
 
-				networkView.RPC("CreateProjectileServer", 
+				networkView.RPC("Weapon_RequestCreateProjectileServer", 
 				                RPCMode.Others, 
 				                _projectile.networkView.viewID, 
-				                _projectile.transform.position, 
-				                _projectile.transform.localRotation, 
-				                (Vector3) _projectile.rigidbody2D.velocity, 
+				                Network.player.guid,
+				                _projectileGO.transform.position, 
+				                _projectileGO.transform.localRotation, 
+				                (Vector3) _projectileGO.rigidbody2D.velocity, 
 				                projectileCount, 
 				                projectileIdx);
 			}
 
 			if (postShoot != null) 
-				postShoot(this, _projectile.GetComponent<Projectile>());
+				postShoot(this, _projectileGO.GetComponent<Projectile>());
 		}
 
 		if (IsNetworkEnabled())
@@ -290,25 +291,25 @@ public class Weapon : MonoBehaviour
 	}
 
 	[RPC]
-	void CreateProjectileServer(NetworkViewID _viewID, Vector3 _position, Quaternion _rotation, Vector3 _velocity, int _count, int _idx)
+	void Weapon_RequestCreateProjectileServer(NetworkViewID _viewID, string _owner, Vector3 _position, Quaternion _rotation, Vector3 _velocity, int _count, int _idx)
 	{
-		var _projectile = doCreateProjectileServer(_count, _idx);
+		var _projectileGO = doCreateProjectileServer(_count, _idx);
 
-		_projectile.transform.position = _position;
-		_projectile.transform.rotation = _rotation;
-		_projectile.rigidbody2D.velocity = _velocity;
+		_projectileGO.transform.position = _position;
+		_projectileGO.transform.rotation = _rotation;
+		_projectileGO.rigidbody2D.velocity = _velocity;
 
 		if (owner != null)
 		{
-			var _theProjectile = _projectile.GetComponent<Projectile>();
-			_theProjectile.ownerID = owner.GetInstanceID();
-			_theProjectile.attackData.owner = _projectile.networkView.owner;
+			var _projectile = _projectileGO.GetComponent<Projectile>();
+			_projectile.ownerID = owner.GetInstanceID();
+			_projectile.attackData.owner = _owner;
 			var _detector = owner.GetComponentInChildren<DamageDetector>();
-			if (_detector) _theProjectile.ownerDetecterID = _detector.GetInstanceID();
+			if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 		}
 
-		_projectile.networkView.viewID = _viewID;
-		_projectile.networkView.enabled = true;
+		_projectileGO.networkView.viewID = _viewID;
+		_projectileGO.networkView.enabled = true;
 	}
 
 	[RPC]

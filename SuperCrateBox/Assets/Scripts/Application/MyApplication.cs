@@ -29,10 +29,10 @@ public class MyApplication : Singleton<MyApplication>
 		var _jsonTable = JSON.Parse(_rawTable);
 
 		var _masterServerIP = _jsonTable["master_server_ip"];
-		NetworkManager.masterServerIP = _masterServerIP;
-		NetworkManager.masterServerPort = _jsonTable["master_server_port"].AsInt;
-		NetworkManager.natFacilitatorIP = _masterServerIP;
-		NetworkManager.natFacilitatorPort = 50005;
+		MasterServerManager.masterServerIP = _masterServerIP;
+		MasterServerManager.masterServerPort = _jsonTable["master_server_port"].AsInt;
+		MasterServerManager.natFacilitatorIP = _masterServerIP;
+		MasterServerManager.natFacilitatorPort = 50005;
 
 	}
 

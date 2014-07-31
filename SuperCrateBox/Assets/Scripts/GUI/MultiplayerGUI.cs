@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +7,6 @@ public class MultiplayerGUI : MonoBehaviour {
 	public GameObject credit;
 	enum Context {
 		Main,
-		Singleplayer,
 		Multiplayer,
 		RoomList,
 		Credit,
@@ -46,7 +45,7 @@ public class MultiplayerGUI : MonoBehaviour {
 		case Context.RoomList:
 			m_HostList = MasterServer.PollHostList();
 			if (m_HostList.Length == 0) 
-				NetworkManager.RequestHostList();
+				MasterServerManager.RequestHostList();
 			break;
 		}
 
@@ -67,7 +66,6 @@ public class MultiplayerGUI : MonoBehaviour {
 	{
 		switch (m_Context) {
 		case Context.Main:         DisplayMain();         break;
-		case Context.Singleplayer: DisplaySingleplay();   break;
 		case Context.Multiplayer:  DisplayMultiplay();    break;
 		case Context.RoomList:     DisplayRoomList();      break;
 		case Context.Credit:	   DisplayCredit();		break;
@@ -97,9 +95,6 @@ public class MultiplayerGUI : MonoBehaviour {
 		
 		GUILayout.BeginVertical();
 
-		if (GUILayout.Button("SinglePlayer"))
-			Enter(Context.Singleplayer);
-
 		if (GUILayout.Button("MultiPlayer")) 
 			Enter(Context.Multiplayer);
 		
@@ -111,18 +106,6 @@ public class MultiplayerGUI : MonoBehaviour {
 		GUILayout.EndVertical();
 	}
 
-	void DisplaySingleplay() 
-	{
-		GUILayout.BeginVertical();
-
-		if (GUILayout.Button("Play"))
-			Application.LoadLevel("level_test");
-
-		DisplayBack();
-
-		GUILayout.EndVertical();
-	}
-	
 	void DisplayMultiplay() 
 	{
 		GUILayout.BeginVertical();
@@ -185,7 +168,7 @@ public class HostButton : MonoBehaviour
 		if (Network.isServer) 
 		{
 			if (GUILayout.Button("Disconnect")) 
-				NetworkManager.StopServer();
+				MasterServerManager.StopServer();
 		} 
 		else 
 		{
@@ -195,7 +178,7 @@ public class HostButton : MonoBehaviour
 				GUI.enabled = false;
 
 			if (GUILayout.Button("HostMasterServer")) 
-				NetworkManager.StartServer(m_RoomName);
+				MasterServerManager.StartServer(m_RoomName);
 
 			m_RoomName = GUILayout.TextField(m_RoomName);
 
@@ -213,7 +196,7 @@ public class JoinButton : MonoBehaviour
 		if (Network.isClient) 
 		{
 			if (GUILayout.Button("Disconnect")) 
-				NetworkManager.Disconnect();
+				MasterServerManager.Disconnect();
 		} 
 		else 
 		{

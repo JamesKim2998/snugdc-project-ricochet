@@ -18,7 +18,7 @@ public class GameCharacter
 	public event PostCharacterChanged postCharacterChanged;
 
 	private Character m_Character;
-	public Character characterExpose;
+
 	public Character character {
 		get { return m_Character; }
 		set { 
@@ -54,23 +54,18 @@ public class GameCharacter
 		}
 	}
 
-	public List<Color> characterColorPresets;
+	public List<Color> characterColors = new List<Color>();
 	[HideInInspector]
 	public Color characterColor;
 
 	public void Start()
 	{
-		if (characterColorPresets.Count == 0) 
+		if (characterColors.Count == 0) 
 		{
-			characterColor = Color.white;
-		}
-		else 
-		{
-			characterColor = GenericHelper.SelectRandom (characterColorPresets);
+			characterColors.Add(Color.white);
 		}
 
-		if (characterExpose)
-			character = characterExpose;
+		characterColor = GenericHelper.SelectRandom (characterColors);
 	}
 
 	public void Update () 

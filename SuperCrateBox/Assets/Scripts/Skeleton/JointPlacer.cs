@@ -9,7 +9,6 @@ public class JointPlacer : MonoBehaviour {
 	public Bone joint;
 	public Helper attachment;
 
-	// Update is called once per frame
 	void Update () 
 	{
 		var _root_position = Vector3.zero;

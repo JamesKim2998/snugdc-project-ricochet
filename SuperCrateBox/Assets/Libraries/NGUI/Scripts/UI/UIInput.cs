@@ -503,7 +503,12 @@ public class UIInput : MonoBehaviour
 
 			// There seems to be an inconsistency between IME on Windows, and IME on OSX.
 			// On Windows, Input.inputString is always empty while IME is active. On the OSX it is not.
-			if (string.IsNullOrEmpty(ime) && !string.IsNullOrEmpty(Input.inputString))
+			// note: 한글입력이 안되는 버그 수정.
+			if (
+//#if ! UNITY_EDITOR_WIN
+//				string.IsNullOrEmpty(ime) && 
+//#endif
+			    !string.IsNullOrEmpty(Input.inputString))
 			{
 				// Process input ignoring non-printable characters as they are not consistent.
 				// Windows has them, OSX may not. They get handled inside OnGUI() instead.

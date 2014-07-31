@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour {
 			StartSpawn();
 		}
 
-		NetworkManager.postBeforeDisconnected += ListenBeforeDisconnected;
+		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
 	
 	void Update () {

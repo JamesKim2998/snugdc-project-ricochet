@@ -46,6 +46,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
+  invinsibleTime: 1.5
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
@@ -53,8 +54,8 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 400000}
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 0}
   m_ViewID:
     m_ID: 0
     m_Type: 0

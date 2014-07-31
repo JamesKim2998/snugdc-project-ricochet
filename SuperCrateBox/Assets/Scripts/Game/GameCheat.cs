@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class GameCheat : MonoBehaviour
+// incomplete code
+public class GameCheat
 {
-	public string weapon;
-	public bool applyWeapon;
 }
 

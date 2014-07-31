@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class CharacterSpawner : MonoBehaviour
@@ -7,28 +8,15 @@ public class CharacterSpawner : MonoBehaviour
 
 	public Rect spawnRange;
 
-	public bool autoSpawn = false;
+	public Action<CharacterSpawner, Character> postDestroy;
 
-	public delegate void PostDestroy(CharacterSpawner _spawner, GameObject _obj);
-	public event PostDestroy postDestroy;
-	
-	void Start ()
-	{
-		
-	}
+	public float invinsibleTime = 1.5f;
 
-	void Update ()
-	{
-		if (! autoSpawn) return;
-
-		Spawn ();
-	}
-	
 	Vector2 Locate() 
 	{
 		Vector2 _position = Vector2.zero;
-		_position.x = transform.position.x + spawnRange.xMin + Random.Range(0, spawnRange.width);
-		_position.y = transform.position.y + spawnRange.yMin + Random.Range(0, spawnRange.height);
+		_position.x = transform.position.x + spawnRange.xMin + UnityEngine.Random.Range(0, spawnRange.width);
+		_position.y = transform.position.y + spawnRange.yMin + UnityEngine.Random.Range(0, spawnRange.height);
 		return _position;
 	}
 
@@ -43,26 +31,24 @@ public class CharacterSpawner : MonoBehaviour
 
 		var _character = _gameObj.GetComponent<Character>();
 		_character.hitEnabled = false;
-		_character.Invoke("EnableHit", 1.5f);
+		_character.Invoke("EnableHit", invinsibleTime);
 
 		if (networkView.enabled && Network.peerType != NetworkPeerType.Disconnected)
 		{
 			_character.networkView.viewID = Network.AllocateViewID();
 			_character.networkView.enabled = true;
-			networkView.RPC("SpawnUponServer", RPCMode.OthersBuffered, _character.networkView.viewID, _characterPosition);
+			networkView.RPC("CharacterSpawner_RequestSpawn", RPCMode.OthersBuffered, _character.networkView.viewID, _characterPosition);
 		}
 
-		Game.Statistic ().Add (_character.networkView.owner);
 		return _character;
 	}
 
 	[RPC]
-	void SpawnUponServer(NetworkViewID _viewID, Vector3 _position)
+	void CharacterSpawner_RequestSpawn(NetworkViewID _viewID, Vector3 _position)
 	{
 		var _character = GameObject.Instantiate(characterPrf, _position, Quaternion.identity) as GameObject;
 		_character.networkView.enabled = true;
 		_character.networkView.viewID = _viewID;
-		Game.Statistic ().Add (_character.networkView.owner);
 	}
 
 	void ListenDestroy(Destroyable _destroyable)
@@ -71,7 +57,7 @@ public class CharacterSpawner : MonoBehaviour
 			Network.RemoveRPCs(networkView.viewID);
 
 		if (postDestroy != null)
-			postDestroy (this, _destroyable.gameObject);
+			postDestroy (this, _destroyable.GetComponent<Character>());
 	}
 }
 
