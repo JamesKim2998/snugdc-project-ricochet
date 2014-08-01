@@ -21,11 +21,11 @@ public class NetworkAnimator : MonoBehaviour
 		animator.SetTrigger (_trigger);
 		
 		if (IsNetworkEnabled ())
-			networkView.RPC ("SetTriggerRPC", RPCMode.Others, _trigger);
+			networkView.RPC ("NetworkAnimator_SetTriggerRPC", RPCMode.Others, _trigger);
 	}
 
 	[RPC]
-	void SetTriggerRPC(string _trigger)
+	void NetworkAnimator_SetTriggerRPC(string _trigger)
 	{
 		animator.SetTrigger (_trigger);
 	}
@@ -34,11 +34,11 @@ public class NetworkAnimator : MonoBehaviour
 	{
 		animator.SetFloat (_key, _value);
 		if (IsNetworkEnabled ())
-			networkView.RPC ("SetFloatRPC", RPCMode.Others, _key, _value);
+			networkView.RPC ("NetworkAnimator_SetFloatRPC", RPCMode.Others, _key, _value);
 	}
 
 	[RPC]
-	public void SetFloatRPC(string _key, float _value)
+	public void NetworkAnimator_SetFloatRPC(string _key, float _value)
 	{
 		animator.SetFloat ( _key, _value);
 	}

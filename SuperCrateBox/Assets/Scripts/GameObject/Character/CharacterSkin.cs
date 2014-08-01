@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,7 +16,7 @@ public struct CharacterSkinData
 
 public class CharacterSkin : MonoBehaviour 
 {
-	public CharacterRenderers renderers;
+	public CharacterRenderer renderers;
 
 	[HideInInspector]
 	public List<CharacterSkinData> datas;

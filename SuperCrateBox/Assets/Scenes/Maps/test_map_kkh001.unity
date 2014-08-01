@@ -18,7 +18,7 @@ RenderSettings:
   m_FogDensity: .00999999978
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
+  m_AmbientLight: {r: .514705896, g: .514705896, b: .514705896, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
   m_FlareStrength: 1
@@ -1372,7 +1372,7 @@ SpriteRenderer:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 63135953}
@@ -1389,7 +1389,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   m_GameObject: {fileID: 63135952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13, y: 2, z: 0}
@@ -1402,7 +1402,7 @@ NetworkView:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   m_GameObject: {fileID: 63135952}
   m_Enabled: 1
   m_StateSynchronization: 0
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   m_GameObject: {fileID: 63135952}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1520,6 +1520,10 @@ Prefab:
       propertyPath: camera_.camera
       value: 
       objectReference: {fileID: 1658369782}
+    - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
+      propertyPath: audio_.pause
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
   m_RootGameObject: {fileID: 1358428507}
@@ -1803,11 +1807,13 @@ SpriteRenderer:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 76353193}
   - 108: {fileID: 76353194}
+  - 114: {fileID: 76353195}
+  - 111: {fileID: 76353196}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -1819,10 +1825,10 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   m_GameObject: {fileID: 76353192}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3, z: -.300000012}
+  m_LocalRotation: {x: .642787635, y: -1.07754587e-08, z: -1.07754587e-08, w: .766044497}
+  m_LocalPosition: {x: 0, y: 3.5, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 63135953}
@@ -1831,15 +1837,15 @@ Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 10800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 298520055}
+  m_PrefabInternal: {fileID: 1761763559}
   m_GameObject: {fileID: 76353192}
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 6.5
-  m_Range: 4
-  m_SpotAngle: 40
+  m_Intensity: 8
+  m_Range: 5
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -1862,6 +1868,294 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &76353195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1761763559}
+  m_GameObject: {fileID: 76353192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm:
+    usedInTemplate: {fileID: 0}
+    name: light_flicking
+    startState: IDLE
+    states:
+    - name: IDLE
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 62
+        y: 113
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: IDLE_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: FLICKER
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: eec9d9686e06efc0
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_idle
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 49444c455f444f4e450000a0400000040000009a99993e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f000000010000001400000012000000070000000f000000170000001700000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        paramDataPos: 0000000000000000090000000e00000000000000000000000f00000013000000180000001800000018000000
+        paramByteDataSize: 0000000009000000050000000100000000000000000000000400000005000000000000000000000001000000
+    - name: FLICKER
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 59
+        y: 221
+        width: 125
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FLICKER_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: IDLE
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 6e06efc0eec9d968
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_flicker
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 040000000000803f0000464c49434b45525f444f4e45cdcc4c3e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000070000000f0000001700000017000000010000001f000000170000000f00000001000000
+        paramName:
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000004000000090000000900000009000000000000000a000000160000001b000000
+        paramByteDataSize: 00000000000000000400000005000000000000000000000001000000000000000c0000000500000001000000
+    events:
+    - name: FLICKER_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: IDLE_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    globalTransitions: []
+    variables:
+      floatVariables: []
+      intVariables: []
+      boolVariables: []
+      stringVariables: []
+      vector2Variables: []
+      vector3Variables: []
+      colorVariables: []
+      rectVariables: []
+      quaternionVariables: []
+      gameObjectVariables: []
+      objectVariables: []
+      materialVariables: []
+      textureVariables: []
+    description: 
+    docUrl: 
+    showStateLabel: 1
+    maxLoopCount: 0
+    watermark: 
+    version: 0
+    ExposedEvents: []
+    RestartOnEnable: 1
+    EnableDebugFlow: 0
+    StepFrame: 0
+    activeStateName: 
+  fsmTemplate: {fileID: 0}
+--- !u!111 &76353196
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1761763559}
+  m_GameObject: {fileID: 76353192}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: bcb113732b4e39b4d9b5ac3bb410c641, type: 2}
+  - {fileID: 7400000, guid: 6da7eb84b50592f489e7430f7c082612, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &76419598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,7 +3370,7 @@ Transform:
   m_PrefabInternal: {fileID: 1727437274}
   m_GameObject: {fileID: 107733699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.293441772, y: 4.26482773, z: 0}
+  m_LocalPosition: {x: -36.0023727, y: -27.9089203, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 137353909}
@@ -5897,7 +6191,7 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 208873445}
@@ -5914,7 +6208,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   m_GameObject: {fileID: 208873444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 9, z: 0}
@@ -5927,7 +6221,7 @@ NetworkView:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   m_GameObject: {fileID: 208873444}
   m_Enabled: 1
   m_StateSynchronization: 0
@@ -5940,7 +6234,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   m_GameObject: {fileID: 208873444}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -7208,6 +7502,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 259737712}
   - 108: {fileID: 259737713}
+  - 114: {fileID: 259737715}
+  - 111: {fileID: 259737714}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -7221,8 +7517,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
   m_PrefabInternal: {fileID: 795385637}
   m_GameObject: {fileID: 259737711}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3, z: -.300000012}
+  m_LocalRotation: {x: .642787635, y: -1.07754587e-08, z: -1.07754587e-08, w: .766044497}
+  m_LocalPosition: {x: 0, y: 3.5, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 350369554}
@@ -7237,9 +7533,9 @@ Light:
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 6.5
-  m_Range: 4
-  m_SpotAngle: 40
+  m_Intensity: 8
+  m_Range: 5
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -7262,6 +7558,294 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!111 &259737714
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 795385637}
+  m_GameObject: {fileID: 259737711}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: bcb113732b4e39b4d9b5ac3bb410c641, type: 2}
+  - {fileID: 7400000, guid: 6da7eb84b50592f489e7430f7c082612, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &259737715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 795385637}
+  m_GameObject: {fileID: 259737711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm:
+    usedInTemplate: {fileID: 0}
+    name: light_flicking
+    startState: IDLE
+    states:
+    - name: IDLE
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 62
+        y: 113
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: IDLE_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: FLICKER
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: eec9d9686e06efc0
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_idle
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 49444c455f444f4e450000a0400000040000009a99993e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f000000010000001400000012000000070000000f000000170000001700000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        paramDataPos: 0000000000000000090000000e00000000000000000000000f00000013000000180000001800000018000000
+        paramByteDataSize: 0000000009000000050000000100000000000000000000000400000005000000000000000000000001000000
+    - name: FLICKER
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 59
+        y: 221
+        width: 125
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FLICKER_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: IDLE
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 6e06efc0eec9d968
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_flicker
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 040000000000803f0000464c49434b45525f444f4e45cdcc4c3e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000070000000f0000001700000017000000010000001f000000170000000f00000001000000
+        paramName:
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000004000000090000000900000009000000000000000a000000160000001b000000
+        paramByteDataSize: 00000000000000000400000005000000000000000000000001000000000000000c0000000500000001000000
+    events:
+    - name: FLICKER_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: IDLE_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    globalTransitions: []
+    variables:
+      floatVariables: []
+      intVariables: []
+      boolVariables: []
+      stringVariables: []
+      vector2Variables: []
+      vector3Variables: []
+      colorVariables: []
+      rectVariables: []
+      quaternionVariables: []
+      gameObjectVariables: []
+      objectVariables: []
+      materialVariables: []
+      textureVariables: []
+    description: 
+    docUrl: 
+    showStateLabel: 1
+    maxLoopCount: 0
+    watermark: 
+    version: 0
+    ExposedEvents: []
+    RestartOnEnable: 1
+    EnableDebugFlow: 0
+    StepFrame: 0
+    activeStateName: 
+  fsmTemplate: {fileID: 0}
 --- !u!1 &260713426
 GameObject:
   m_ObjectHideFlags: 0
@@ -8453,66 +9037,6 @@ SpriteRenderer:
   m_SortingLayerID: 4100583851
   m_Sprite: {fileID: 21300000, guid: 0d70081d18577ba43869a04c306dee56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!1001 &298520055
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1592333508}
-    m_Modifications:
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_RootMapOrder
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_ViewID.m_ID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_ViewID.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: characterPrf
-      value: 
-      objectReference: {fileID: 100042, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_RootGameObject: {fileID: 63135952}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &301219975
 GameObject:
   m_ObjectHideFlags: 0
@@ -9822,7 +10346,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 359817504}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14068,11 +14592,13 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 514970238}
   - 108: {fileID: 514970239}
+  - 114: {fileID: 514970241}
+  - 111: {fileID: 514970240}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -14084,10 +14610,10 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   m_GameObject: {fileID: 514970237}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3, z: -.300000012}
+  m_LocalRotation: {x: .642787635, y: -1.07754587e-08, z: -1.07754587e-08, w: .766044497}
+  m_LocalPosition: {x: 0, y: 3.5, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 889021984}
@@ -14096,15 +14622,15 @@ Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 10800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   m_GameObject: {fileID: 514970237}
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 6.5
-  m_Range: 4
-  m_SpotAngle: 40
+  m_Intensity: 8
+  m_Range: 5
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -14127,6 +14653,294 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!111 &514970240
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1895136739}
+  m_GameObject: {fileID: 514970237}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: bcb113732b4e39b4d9b5ac3bb410c641, type: 2}
+  - {fileID: 7400000, guid: 6da7eb84b50592f489e7430f7c082612, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &514970241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1895136739}
+  m_GameObject: {fileID: 514970237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm:
+    usedInTemplate: {fileID: 0}
+    name: light_flicking
+    startState: IDLE
+    states:
+    - name: IDLE
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 62
+        y: 113
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: IDLE_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: FLICKER
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: eec9d9686e06efc0
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_idle
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 49444c455f444f4e450000a0400000040000009a99993e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f000000010000001400000012000000070000000f000000170000001700000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        paramDataPos: 0000000000000000090000000e00000000000000000000000f00000013000000180000001800000018000000
+        paramByteDataSize: 0000000009000000050000000100000000000000000000000400000005000000000000000000000001000000
+    - name: FLICKER
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 59
+        y: 221
+        width: 125
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FLICKER_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: IDLE
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 6e06efc0eec9d968
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_flicker
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 040000000000803f0000464c49434b45525f444f4e45cdcc4c3e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000070000000f0000001700000017000000010000001f000000170000000f00000001000000
+        paramName:
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000004000000090000000900000009000000000000000a000000160000001b000000
+        paramByteDataSize: 00000000000000000400000005000000000000000000000001000000000000000c0000000500000001000000
+    events:
+    - name: FLICKER_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: IDLE_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    globalTransitions: []
+    variables:
+      floatVariables: []
+      intVariables: []
+      boolVariables: []
+      stringVariables: []
+      vector2Variables: []
+      vector3Variables: []
+      colorVariables: []
+      rectVariables: []
+      quaternionVariables: []
+      gameObjectVariables: []
+      objectVariables: []
+      materialVariables: []
+      textureVariables: []
+    description: 
+    docUrl: 
+    showStateLabel: 1
+    maxLoopCount: 0
+    watermark: 
+    version: 0
+    ExposedEvents: []
+    RestartOnEnable: 1
+    EnableDebugFlow: 0
+    StepFrame: 0
+    activeStateName: 
+  fsmTemplate: {fileID: 0}
 --- !u!1 &519605733
 GameObject:
   m_ObjectHideFlags: 0
@@ -16634,6 +17448,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 611211106}
   - 212: {fileID: 611211105}
+  - 95: {fileID: 611211107}
   m_Layer: 13
   m_Name: background
   m_TagString: Untagged
@@ -16675,6 +17490,20 @@ Transform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 3}
   m_Children: []
   m_Father: {fileID: 1162848387}
+--- !u!95 &611211107
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611211104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 493847293ccf1a442827c6f57c106703, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!1 &612601906
 GameObject:
   m_ObjectHideFlags: 0
@@ -23691,7 +24520,7 @@ SpriteRenderer:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 889021984}
@@ -23708,7 +24537,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   m_GameObject: {fileID: 889021983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9, y: -5, z: 0}
@@ -23721,20 +24550,20 @@ NetworkView:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   m_GameObject: {fileID: 889021983}
   m_Enabled: 1
   m_StateSynchronization: 0
   m_Observed: {fileID: 0}
   m_ViewID:
-    m_ID: 7
+    m_ID: 27
     m_Type: 1
 --- !u!114 &889021986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 1695044419}
+  m_PrefabInternal: {fileID: 1895136739}
   m_GameObject: {fileID: 889021983}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -27205,54 +28034,6 @@ Prefab:
   m_RootGameObject: {fileID: 4711008}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1001 &989447004
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1592333508}
-    m_Modifications:
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_ViewID.m_ID
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_ViewID.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_RootGameObject: {fileID: 208873444}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &990252897
 GameObject:
   m_ObjectHideFlags: 0
@@ -28325,6 +29106,52 @@ SpriteRenderer:
   m_SortingLayerID: 4100583851
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1022763939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1022763941}
+  - 114: {fileID: 1022763940}
+  m_Layer: 0
+  m_Name: PlayMakerGUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1022763940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022763939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -73581967, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewOnGUI: 1
+  enableGUILayout: 1
+  drawStateLabels: 1
+  GUITextureStateLabels: 1
+  GUITextStateLabels: 1
+  filterLabelsWithDistance: 0
+  maxLabelDistance: 10
+  controlMouseCursor: 1
+--- !u!4 &1022763941
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022763939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1032616200
 GameObject:
   m_ObjectHideFlags: 0
@@ -29187,6 +30014,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1070827188}
   - 108: {fileID: 1070827189}
+  - 114: {fileID: 1070827191}
+  - 111: {fileID: 1070827190}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -29200,8 +30029,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
   m_PrefabInternal: {fileID: 1881189963}
   m_GameObject: {fileID: 1070827187}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3, z: -.300000012}
+  m_LocalRotation: {x: .642787635, y: -1.07754587e-08, z: -1.07754587e-08, w: .766044497}
+  m_LocalPosition: {x: 0, y: 3.5, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1932464895}
@@ -29216,9 +30045,9 @@ Light:
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 6.5
-  m_Range: 4
-  m_SpotAngle: 40
+  m_Intensity: 8
+  m_Range: 5
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -29241,6 +30070,294 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!111 &1070827190
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1881189963}
+  m_GameObject: {fileID: 1070827187}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: bcb113732b4e39b4d9b5ac3bb410c641, type: 2}
+  - {fileID: 7400000, guid: 6da7eb84b50592f489e7430f7c082612, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &1070827191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1881189963}
+  m_GameObject: {fileID: 1070827187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm:
+    usedInTemplate: {fileID: 0}
+    name: light_flicking
+    startState: IDLE
+    states:
+    - name: IDLE
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 62
+        y: 113
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: IDLE_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: FLICKER
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: eec9d9686e06efc0
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_idle
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 49444c455f444f4e450000a0400000040000009a99993e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f000000010000001400000012000000070000000f000000170000001700000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        paramDataPos: 0000000000000000090000000e00000000000000000000000f00000013000000180000001800000018000000
+        paramByteDataSize: 0000000009000000050000000100000000000000000000000400000005000000000000000000000001000000
+    - name: FLICKER
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 59
+        y: 221
+        width: 125
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FLICKER_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: IDLE
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 6e06efc0eec9d968
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_flicker
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 040000000000803f0000464c49434b45525f444f4e45cdcc4c3e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000070000000f0000001700000017000000010000001f000000170000000f00000001000000
+        paramName:
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000004000000090000000900000009000000000000000a000000160000001b000000
+        paramByteDataSize: 00000000000000000400000005000000000000000000000001000000000000000c0000000500000001000000
+    events:
+    - name: FLICKER_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: IDLE_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    globalTransitions: []
+    variables:
+      floatVariables: []
+      intVariables: []
+      boolVariables: []
+      stringVariables: []
+      vector2Variables: []
+      vector3Variables: []
+      colorVariables: []
+      rectVariables: []
+      quaternionVariables: []
+      gameObjectVariables: []
+      objectVariables: []
+      materialVariables: []
+      textureVariables: []
+    description: 
+    docUrl: 
+    showStateLabel: 1
+    maxLoopCount: 0
+    watermark: 
+    version: 0
+    ExposedEvents: []
+    RestartOnEnable: 1
+    EnableDebugFlow: 0
+    StepFrame: 0
+    activeStateName: 
+  fsmTemplate: {fileID: 0}
 --- !u!1 &1072733752
 GameObject:
   m_ObjectHideFlags: 0
@@ -29578,6 +30695,54 @@ SpriteRenderer:
   m_SortingLayerID: 4100583851
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &1093152954
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1592333508}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+  m_RootGameObject: {fileID: 208873444}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &1094389001
 Prefab:
   m_ObjectHideFlags: 0
@@ -37553,7 +38718,7 @@ MonoBehaviour:
   applyOnStart: 1
   deleteAfterApply: 0
   audio_:
-    pause: 0
+    pause: 1
     volume: 1
   camera_:
     camera: {fileID: 1658369782}
@@ -39014,6 +40179,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1416899371}
   - 108: {fileID: 1416899372}
+  - 114: {fileID: 1416899374}
+  - 111: {fileID: 1416899373}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -39027,8 +40194,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
   m_PrefabInternal: {fileID: 997828429}
   m_GameObject: {fileID: 1416899370}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3, z: -.300000012}
+  m_LocalRotation: {x: .642787635, y: -1.07754587e-08, z: -1.07754587e-08, w: .766044497}
+  m_LocalPosition: {x: 0, y: 3.5, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 85545331}
@@ -39043,9 +40210,9 @@ Light:
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 6.5
-  m_Range: 4
-  m_SpotAngle: 40
+  m_Intensity: 8
+  m_Range: 5
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -39068,6 +40235,294 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!111 &1416899373
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 997828429}
+  m_GameObject: {fileID: 1416899370}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: bcb113732b4e39b4d9b5ac3bb410c641, type: 2}
+  - {fileID: 7400000, guid: 6da7eb84b50592f489e7430f7c082612, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &1416899374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 997828429}
+  m_GameObject: {fileID: 1416899370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm:
+    usedInTemplate: {fileID: 0}
+    name: light_flicking
+    startState: IDLE
+    states:
+    - name: IDLE
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 62
+        y: 113
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: IDLE_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: FLICKER
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: eec9d9686e06efc0
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_idle
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 49444c455f444f4e450000a0400000040000009a99993e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f000000010000001400000012000000070000000f000000170000001700000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        paramDataPos: 0000000000000000090000000e00000000000000000000000f00000013000000180000001800000018000000
+        paramByteDataSize: 0000000009000000050000000100000000000000000000000400000005000000000000000000000001000000
+    - name: FLICKER
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 59
+        y: 221
+        width: 125
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FLICKER_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: IDLE
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 6e06efc0eec9d968
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_flicker
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 040000000000803f0000464c49434b45525f444f4e45cdcc4c3e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000070000000f0000001700000017000000010000001f000000170000000f00000001000000
+        paramName:
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000004000000090000000900000009000000000000000a000000160000001b000000
+        paramByteDataSize: 00000000000000000400000005000000000000000000000001000000000000000c0000000500000001000000
+    events:
+    - name: FLICKER_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: IDLE_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    globalTransitions: []
+    variables:
+      floatVariables: []
+      intVariables: []
+      boolVariables: []
+      stringVariables: []
+      vector2Variables: []
+      vector3Variables: []
+      colorVariables: []
+      rectVariables: []
+      quaternionVariables: []
+      gameObjectVariables: []
+      objectVariables: []
+      materialVariables: []
+      textureVariables: []
+    description: 
+    docUrl: 
+    showStateLabel: 1
+    maxLoopCount: 0
+    watermark: 
+    version: 0
+    ExposedEvents: []
+    RestartOnEnable: 1
+    EnableDebugFlow: 0
+    StepFrame: 0
+    activeStateName: 
+  fsmTemplate: {fileID: 0}
 --- !u!1001 &1418359545
 Prefab:
   m_ObjectHideFlags: 0
@@ -40727,7 +42182,7 @@ Transform:
   m_PrefabInternal: {fileID: 1727437274}
   m_GameObject: {fileID: 1514512495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.5094147, y: 18.9749107, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1654926032}
@@ -42965,12 +44420,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 63135953}
   - {fileID: 350369554}
-  - {fileID: 208873445}
   - {fileID: 85545331}
-  - {fileID: 889021984}
+  - {fileID: 208873445}
+  - {fileID: 63135953}
   - {fileID: 1932464895}
+  - {fileID: 889021984}
   m_Father: {fileID: 412968024}
 --- !u!1 &1595241052
 GameObject:
@@ -43143,11 +44598,13 @@ SpriteRenderer:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1605472998}
   - 108: {fileID: 1605472999}
+  - 114: {fileID: 1605473001}
+  - 111: {fileID: 1605473000}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -43159,10 +44616,10 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   m_GameObject: {fileID: 1605472997}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3, z: -.300000012}
+  m_LocalRotation: {x: .642787635, y: -1.07754587e-08, z: -1.07754587e-08, w: .766044497}
+  m_LocalPosition: {x: 0, y: 3.5, z: -.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 208873445}
@@ -43171,15 +44628,15 @@ Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 10800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
     type: 2}
-  m_PrefabInternal: {fileID: 989447004}
+  m_PrefabInternal: {fileID: 1093152954}
   m_GameObject: {fileID: 1605472997}
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 6.5
-  m_Range: 4
-  m_SpotAngle: 40
+  m_Intensity: 8
+  m_Range: 5
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -43202,6 +44659,294 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!111 &1605473000
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1093152954}
+  m_GameObject: {fileID: 1605472997}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: bcb113732b4e39b4d9b5ac3bb410c641, type: 2}
+  - {fileID: 7400000, guid: 6da7eb84b50592f489e7430f7c082612, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &1605473001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1093152954}
+  m_GameObject: {fileID: 1605472997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm:
+    usedInTemplate: {fileID: 0}
+    name: light_flicking
+    startState: IDLE
+    states:
+    - name: IDLE
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 62
+        y: 113
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: IDLE_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: FLICKER
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: eec9d9686e06efc0
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_idle
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 49444c455f444f4e450000a0400000040000009a99993e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f000000010000001400000012000000070000000f000000170000001700000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        paramDataPos: 0000000000000000090000000e00000000000000000000000f00000013000000180000001800000018000000
+        paramByteDataSize: 0000000009000000050000000100000000000000000000000400000005000000000000000000000001000000
+    - name: FLICKER
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 59
+        y: 221
+        width: 125
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FLICKER_DONE
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: IDLE
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.PlayAnimation
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 6e06efc0eec9d968
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 0
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: light_flicker
+        fsmObjectParams: []
+        fsmVarParams: []
+        byteData: 040000000000803f0000464c49434b45525f444f4e45cdcc4c3e0001
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000070000000f0000001700000017000000010000001f000000170000000f00000001000000
+        paramName:
+        - gameObject
+        - animName
+        - playMode
+        - blendTime
+        - finishEvent
+        - loopEvent
+        - stopOnExit
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000004000000090000000900000009000000000000000a000000160000001b000000
+        paramByteDataSize: 00000000000000000400000005000000000000000000000001000000000000000c0000000500000001000000
+    events:
+    - name: FLICKER_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: IDLE_DONE
+      isSystemEvent: 0
+      isGlobal: 0
+    globalTransitions: []
+    variables:
+      floatVariables: []
+      intVariables: []
+      boolVariables: []
+      stringVariables: []
+      vector2Variables: []
+      vector3Variables: []
+      colorVariables: []
+      rectVariables: []
+      quaternionVariables: []
+      gameObjectVariables: []
+      objectVariables: []
+      materialVariables: []
+      textureVariables: []
+    description: 
+    docUrl: 
+    showStateLabel: 1
+    maxLoopCount: 0
+    watermark: 
+    version: 0
+    ExposedEvents: []
+    RestartOnEnable: 1
+    EnableDebugFlow: 0
+    StepFrame: 0
+    activeStateName: 
+  fsmTemplate: {fileID: 0}
 --- !u!1001 &1606769388
 Prefab:
   m_ObjectHideFlags: 0
@@ -45218,8 +46963,8 @@ Transform:
   m_PrefabInternal: {fileID: 1727437274}
   m_GameObject: {fileID: 1654926031}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -73.8936768, y: 41.0690536, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -24.3029671, y: 50.6451874, z: 0}
+  m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children:
   - {fileID: 1514512496}
   - {fileID: 107733701}
@@ -46517,66 +48262,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!1001 &1695044419
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1592333508}
-    m_Modifications:
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_RootMapOrder
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_ViewID.m_ID
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_ViewID.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-      propertyPath: characterPrf
-      value: 
-      objectReference: {fileID: 100042, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
-  m_RootGameObject: {fileID: 889021983}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1695385562
 GameObject:
   m_ObjectHideFlags: 0
@@ -47317,11 +49002,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -73.8936768
+      value: -24.3029671
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 41.0690536
+      value: 50.6451874
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
       propertyPath: m_LocalPosition.z
@@ -47349,11 +49034,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.293441772
+      value: -36.0023727
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.26482773
+      value: -27.9089203
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27e799151ce2a1941b64512ca813b562, type: 2}
@@ -48503,6 +50212,54 @@ SpriteRenderer:
   m_SortingLayerID: 4100583851
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &1761763559
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1592333508}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+  m_RootGameObject: {fileID: 63135952}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1761997623
 GameObject:
   m_ObjectHideFlags: 0
@@ -51908,6 +53665,54 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &1895136739
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1592333508}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 14800000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8cbe18c1cee715546ae1fb3ac7f04bbd, type: 2}
+  m_RootGameObject: {fileID: 889021983}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1897946764
 GameObject:
   m_ObjectHideFlags: 0

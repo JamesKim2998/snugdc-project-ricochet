@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 
@@ -156,8 +156,8 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region components
-	private CharacterRenderers m_Renderers;
-	public CharacterRenderers renderers { get { return m_Renderers; } }
+	private CharacterRenderer m_Renderers;
+	public CharacterRenderer renderers { get { return m_Renderers; } }
 
 	private Animator m_Animator;
 	private NetworkAnimator m_NetworkAnimator;
@@ -197,7 +197,7 @@ public class Character : MonoBehaviour
 		m_Hp.postDead = Die;
 
 		// components
-		m_Renderers = GetComponent<CharacterRenderers> ();
+		m_Renderers = GetComponent<CharacterRenderer> ();
 		m_Animator = GetComponent<Animator>();
 		m_NetworkAnimator = GetComponent<NetworkAnimator>();
 		m_InterpolatePosition = gameObject.AddComponent<InterpolatePosition>();
