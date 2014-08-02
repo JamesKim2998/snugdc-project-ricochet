@@ -61,7 +61,7 @@ AnimationClip:
   m_EditorCurves: []
   m_EulerEditorCurves: []
   m_Events:
-  - time: .200000003
+  - time: .100000001
     functionName: Destroy
     data: 
     objectReferenceParameter: {fileID: 0}
