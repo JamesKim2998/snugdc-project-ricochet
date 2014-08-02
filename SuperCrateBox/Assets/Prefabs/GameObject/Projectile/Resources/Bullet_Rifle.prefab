@@ -170,22 +170,22 @@ TrailRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 3
-  m_StartWidth: .100000001
-  m_EndWidth: .200000003
+  m_Time: 2
+  m_StartWidth: .0199999996
+  m_EndWidth: .0199999996
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
       rgba: 4294967295
     m_Color[1]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 3238002687
     m_Color[2]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 2164260863
     m_Color[3]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 1090519039
     m_Color[4]:
       serializedVersion: 2
       rgba: 16777215
