@@ -17,9 +17,12 @@ public class Crate : MonoBehaviour {
 
 	void DestroySelf() 
 	{
-		if (networkView.enabled) 
+		if (networkView.enabled)
 		{
-			Network.Destroy(gameObject);
+			if (networkView.isMine)
+			{
+				Network.Destroy(gameObject);
+			}
 		}
 		else 
 		{
