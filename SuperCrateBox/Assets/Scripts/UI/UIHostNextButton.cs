@@ -3,19 +3,18 @@ using System.Collections;
 
 public class UIHostNextButton : MonoBehaviour {
 
-	public UIButton button;
-	public string lobbyScene = SceneNames.LOBBY;
+	public PlayMakerFSM fsm;
 
-	public void Enable()
+	public void Fail()
 	{
 		Debug.Log("Initialize server is failed.");
-		button.isEnabled = true;
+		fsm.SendEvent ("FAIL");
 	}
 
 	public void OnSubmit()
 	{
-		button.isEnabled = false;
-		Invoke ("Enable", 0.5f);
+		fsm.SendEvent ("HOST");
+		Invoke ("Fail", 0.5f);
 
 		var _hostPort = GlobalVariables.HOST_PORT;
 		if (_hostPort != null) Network.InitializeServer(4, _hostPort.Value, false);
@@ -24,8 +23,8 @@ public class UIHostNextButton : MonoBehaviour {
 
 	public void OnServerInitialized()
 	{
-		CancelInvoke ("Enable");
-		Application.LoadLevel (lobbyScene);
+		CancelInvoke ("Fail");
+		fsm.SendEvent ("SUCCESS");
 		Global.Context ().context = ContextType.LOBBY;
 	}
 }

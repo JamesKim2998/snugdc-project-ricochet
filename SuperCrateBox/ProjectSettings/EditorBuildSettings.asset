@@ -5,10 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UI/ui_connection.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UI/ui_room.unity
+  - enabled: 1
+    path: Assets/Scenes/UI/ui_mainmenu.unity
   - enabled: 1
     path: Assets/Scenes/Maps/test_map_kkh001.unity
   - enabled: 0
@@ -19,3 +21,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Tests/test_multiplayer.unity
   - enabled: 0
     path: Assets/Scenes/Tests/test_singleplayer.unity
+  - enabled: 0
+    path: Assets/Scenes/Maps/test_map_kdw001.unity

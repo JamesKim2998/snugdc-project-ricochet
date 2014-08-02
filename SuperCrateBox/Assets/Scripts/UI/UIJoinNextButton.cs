@@ -2,19 +2,18 @@
 using System.Collections;
 
 public class UIJoinNextButton : MonoBehaviour {
-	public UIButton button;
-	public string lobbyScene = SceneNames.LOBBY;
+	public PlayMakerFSM fsm;
 	
-	public void Enable()
+	public void Fail()
 	{
 		Debug.Log("Join to server is failed.");
-		button.isEnabled = true;
+		fsm.SendEvent ("FAIL");
 	}
 	
 	public void OnSubmit()
 	{
-		button.isEnabled = false;
-		Invoke ("Enable", 0.5f);
+		fsm.SendEvent ("JOIN");
+		Invoke ("Fail", 0.5f);
 
 		if (GlobalVariables.JOIN_IP == null 
 		    || GlobalVariables.JOIN_PORT == null )
@@ -28,8 +27,8 @@ public class UIJoinNextButton : MonoBehaviour {
 
 	public void OnConnectedToServer()
 	{
-		CancelInvoke ("Enable");
-		Application.LoadLevel (lobbyScene);
+		CancelInvoke ("Fail");
+		fsm.SendEvent ("SUCCESS");
 		Global.Context ().context = ContextType.LOBBY;
 	}
 }
