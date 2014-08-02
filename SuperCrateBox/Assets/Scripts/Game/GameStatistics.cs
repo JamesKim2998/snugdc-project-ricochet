@@ -3,13 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerStatistic 
+public class PlayerStatistics 
 {
-	public string player;
+	public readonly string player;
 	public readonly Statistic<int> score;
 	public readonly Statistic<int> death;
 
-	public PlayerStatistic(string _player) {
+	public PlayerStatistics(string _player) {
 		player = _player;
 		score = new Statistic<int>();
 		death = new Statistic<int>();
@@ -23,19 +23,19 @@ public class PlayerStatistic
 }
 
 // todo: incomplete code
-public class TotalStatistic 
+public class TotalStatistics 
 {
 
 }
 
 public class GameStatistics {
-	private PlayerStatistic m_Mine;
-	public PlayerStatistic mine { get { return m_Mine; }}
-	private Dictionary<string, PlayerStatistic> m_Statistics;
+	private PlayerStatistics m_Mine;
+	public PlayerStatistics mine { get { return m_Mine; }}
+	private Dictionary<string, PlayerStatistics> m_Statistics;
 
 	public void Start() {
-		m_Mine = new PlayerStatistic(Network.player.guid);
-		m_Statistics = new Dictionary<string, PlayerStatistic> ();
+		m_Mine = new PlayerStatistics(Network.player.guid);
+		m_Statistics = new Dictionary<string, PlayerStatistics> ();
 		Global.Player().postConnected += ListenPlayerConnected;
 	}
 
@@ -44,7 +44,7 @@ public class GameStatistics {
 		Global.Player().postConnected -= ListenPlayerConnected;
 	}
 
-	public PlayerStatistic Get(string _player) 
+	public PlayerStatistics Get(string _player) 
 	{
 		if (_player == Network.player.guid) return m_Mine;
 		return m_Statistics[_player];
@@ -58,7 +58,7 @@ public class GameStatistics {
 		}
 #endif
 
-		m_Statistics[_player] = new PlayerStatistic(_player);
+		m_Statistics[_player] = new PlayerStatistics(_player);
 	}
 
 	public void Purge() 

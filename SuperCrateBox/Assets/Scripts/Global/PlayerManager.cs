@@ -39,6 +39,13 @@ public class PlayerManager : MonoBehaviour
 		m_Players.Add(Network.player.guid, m_Mine);	
 	}
 
+	public PlayerInfo Get(string _player)
+	{
+		if (! players.ContainsKey(_player))
+			return null;
+		return players[_player];
+	}
+
 	void Add(string _player)
 	{
 		if (! m_Players.ContainsKey(_player))
@@ -96,6 +103,11 @@ public class PlayerManager : MonoBehaviour
 			if (_player == Network.player.guid) continue;
 			Remove(_player);
 		}
+	}
+
+	void OnServerInitialized()
+	{
+		networkView.RPC("PlayerManager_OnPlayerConnected", RPCMode.All, Network.player.guid);
 	}
 
 	void OnPlayerConnected(NetworkPlayer _player) 
