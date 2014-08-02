@@ -65,6 +65,8 @@ public class GameCameraDef
 [System.Serializable]
 public class GameHUDDef 
 {
+	public GameObject uilayer;
+
 	public GameObject chatscreen;
 	public bool useChatscreenKey = false;
 	public KeyCode chatscreenActivateKey = KeyCode.None;
@@ -74,9 +76,13 @@ public class GameHUDDef
 	public bool useScoreBoardActivateKey = false;
 	public KeyCode scoreBoardActivateKey = KeyCode.None;
 
+	public GameObject resultBoardParent;
+	public GameObject resultBoardPrf;
+
 	public void Apply()
 	{
 		var _hud = Game.HUD ();
+
 		if (chatscreen != null) _hud.chatscreen = chatscreen;
 
 		if (useScoreBoardActivateKey) 
@@ -87,6 +93,9 @@ public class GameHUDDef
 
 		if (scoreBoard != null) _hud.scoreBoard = scoreBoard;
 		if (useChatscreenKey) _hud.chatscreenActivateKey = chatscreenActivateKey;
+
+		if (resultBoardPrf != null) _hud.resultBoardPrf = resultBoardPrf;
+		if (resultBoardParent != null) _hud.resultBoardParent = resultBoardParent;
 	}
 }
 

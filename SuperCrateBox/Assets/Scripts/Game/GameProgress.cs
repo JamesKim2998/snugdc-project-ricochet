@@ -10,17 +10,28 @@ public class GameProgress : MonoBehaviour
 		NULL,
 		START,
 		RUNNING,
+		OVER,
 		STOP,
 	}
 
 	private State m_State = State.STOP;
-	public State state { get { return m_State; }}
-	public bool IsState(State _state) { return m_State == _state; }
+	public State state { get { return m_State; } private set { m_State = value; stateTime = 0; }}
+	public bool IsState(State _state) { return state == _state; }
 
 	private State m_NextState = State.NULL;
 
+	private float m_TimeElapsed = 0f;
+	public float timeElapsed { get { return m_TimeElapsed; } private set {m_TimeElapsed = value; } }
+	
+	private float m_StateTime = 0f;
+	public float stateTime { get { return m_StateTime; } private set { m_StateTime = value; } }
+
+	private int m_GameID;
+	public int gameID { get { return m_GameID; } private set { m_GameID = value; } }
+
 	public Action postStart;
 	public Action postRun;
+	public Action postOver;
 	public Action postStop;
 
 	bool IsStateChangable()
@@ -34,8 +45,23 @@ public class GameProgress : MonoBehaviour
 		return true;
 	}
 
+	void Purge()
+	{
+		if (IsState(State.STOP))
+		{
+			Debug.LogError("Purge is only allowed for STOP state");
+			return;
+		}
+
+		timeElapsed = 0;
+		stateTime = 0;
+	}
+
 	void Update()
 	{
+		timeElapsed += Time.deltaTime;
+		stateTime += Time.deltaTime;
+		
 		if (m_NextState !=  State.NULL)
 		{
 			var _nextState = m_NextState;
@@ -45,6 +71,7 @@ public class GameProgress : MonoBehaviour
 			{
 			case State.START:   DoStartGame(); break;
 			case State.RUNNING: DoRunGame(); break;
+			case State.OVER:    DoOverGame(); break;
 			case State.STOP:    DoStopGame(); break;
 			}
 		}
@@ -65,15 +92,17 @@ public class GameProgress : MonoBehaviour
 			Debug.LogWarning("Game only can be started on STOP state.");
 			return;
 		}
-		
-		networkView.RPC("GameProgress_StartGame", RPCMode.All);
+
+		gameID = Global.Random ().Next ();
+		networkView.RPC("GameProgress_StartGame", RPCMode.All, gameID);
 	}
 		
 	[RPC]
-	void GameProgress_StartGame()
+	void GameProgress_StartGame(int _gameID)
 	{
 		Debug.Log("StartGame");
-		m_State = State.START;
+		state = State.START;
+		timeElapsed = 0;
 		if (postStart != null) postStart();
 	}
 
@@ -100,8 +129,35 @@ public class GameProgress : MonoBehaviour
 	void GameProgress_RunGame()
 	{
 		Debug.Log("RunGame");
-		m_State = State.RUNNING;
+		state = State.RUNNING;
 		if (postRun != null) postRun();
+	}
+	
+	public void OverGame()
+	{
+		m_NextState = State.OVER;
+	}
+	
+	void DoOverGame()
+	{
+		if (! IsStateChangable())
+			return;
+		
+		if (state != State.RUNNING) 
+		{
+			Debug.LogWarning("Game only can be over on RUNNING state.");
+			return;
+		}
+		
+		networkView.RPC("GameProgress_OverGame", RPCMode.All);
+	}
+	
+	[RPC]
+	void GameProgress_OverGame()
+	{
+		Debug.Log("OverGame");
+		state = State.OVER;
+		if (postOver != null) postOver();
 	}
 
 	public void StopGame()
@@ -111,24 +167,16 @@ public class GameProgress : MonoBehaviour
 
 	void DoStopGame()
 	{
-		if (! IsStateChangable())
-			return;
-
-		if (state != State.RUNNING) 
+		// stop은 클라이언트에서도 호출할 수 있습니다.
+		if (state != State.RUNNING && state != State.OVER) 
 		{
-			Debug.LogWarning("Game only can be stopped on RUNNING state.");
+			Debug.LogWarning("Game only can be stopped on RUNNING or OVER state. But now in " + state.ToString() + " state.");
 			return;
 		}
 		
-		networkView.RPC("GameProgress_StopGame", RPCMode.All);
-	}
-	
-	[RPC]
-	void GameProgress_StopGame()
-	{
 		Debug.Log("StopGame");
-		m_State = State.STOP;
+		state = State.STOP;
 		if (postStop != null) postStop();
-		// Game.Instance.Purge();
+		Game.Instance.Purge();
 	}
 }

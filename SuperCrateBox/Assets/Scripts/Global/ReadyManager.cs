@@ -26,6 +26,12 @@ public class ReadyManager : MonoBehaviour
 	public ReadyManager()
 	{
 		m_ReadyInfo = new HashSet<string>();
+		Global.Context ().postChanged += ListenContectChanged;
+	}
+
+	~ReadyManager()
+	{
+		Global.Context ().postChanged -= ListenContectChanged;
 	}
 
 	public void PollReadyInfo()
@@ -147,5 +153,14 @@ public class ReadyManager : MonoBehaviour
 	void OnServerInitialized()
 	{
 		ReadyLocal(Network.player.guid, true);
+	}
+
+	public void ListenContectChanged(ContextType _context, ContextType _old)
+	{
+		// note: game에 진입시 ready 정보를 제거합니다.
+		if (_context == ContextType.GAME)
+		{
+			m_ReadyInfo.Clear();
+		}
 	}
 }

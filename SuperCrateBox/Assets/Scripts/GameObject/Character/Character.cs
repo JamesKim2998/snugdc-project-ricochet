@@ -2,8 +2,16 @@ using UnityEngine;
 using System;
 using System.Collections;
 
+public enum CharacterType
+{
+	NONE,
+	BLUE,
+}
+
 public class Character : MonoBehaviour 
 {
+	public CharacterType type = CharacterType.NONE;
+
 	#region movement
 	private bool m_Floating = false;
 	public bool floating { get {return m_Floating; }}

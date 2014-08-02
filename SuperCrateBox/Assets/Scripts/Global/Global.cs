@@ -9,6 +9,14 @@ using System.Collections;
 public class Global : Singleton<Global> 
 {
 	[HideInInspector]
+	public ContextManager context = new ContextManager();
+	public static ContextManager Context() { return Instance.context; }
+
+	[HideInInspector]
+	public System.Random random;
+	public static System.Random Random() { return Instance.random; }
+
+	[HideInInspector]
 	public ServerManager server;
 	public static ServerManager Server() { return Instance.server; }
 
@@ -25,6 +33,12 @@ public class Global : Singleton<Global>
 	public static TransitionManager Transition() { return Instance.transition; }
 
 	void Awake () {
+		random = new System.Random ();
+
+		if (networkView == null) gameObject.AddComponent<NetworkView>();
+		networkView.stateSynchronization = NetworkStateSynchronization.Off;
+		networkView.observed = null;
+
 		server = GetComponent<ServerManager>();
 		if (server == null) server = gameObject.AddComponent<ServerManager>();
 
@@ -36,10 +50,6 @@ public class Global : Singleton<Global>
 
 		transition = GetComponent<TransitionManager>();
 		if (transition == null) transition = gameObject.AddComponent<TransitionManager>();
-
-		if (networkView == null) gameObject.AddComponent<NetworkView>();
-		networkView.stateSynchronization = NetworkStateSynchronization.Off;
-		networkView.observed = null;
 	}
 
 	void Start () {

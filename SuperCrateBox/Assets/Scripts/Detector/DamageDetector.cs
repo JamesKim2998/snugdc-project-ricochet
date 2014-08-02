@@ -12,8 +12,8 @@ public class DamageDetector : MonoBehaviour {
 
 	public void Damage(AttackData attackData) {
 		if (! enabled) 
-		{
-			Debug.Log("DamageDetector already disabled!");
+		{	
+			// Debug.Log("DamageDetector already disabled!");
 			return;
 		}
 

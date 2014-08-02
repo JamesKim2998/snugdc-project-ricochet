@@ -11,8 +11,8 @@ public class Game : Singleton<Game>
 
 	public GameAudio audio_ = new GameAudio();
 	public static GameAudio Audio() { return Instance.audio_; }
-	
-	public GameHUD hud = new GameHUD ();
+
+	public GameHUD hud = new GameHUD();
 	public static GameHUD HUD() { return Instance.hud; }
 
 	public GameProgress progress;
@@ -33,15 +33,25 @@ public class Game : Singleton<Game>
 	public GameWeapon weapon = new GameWeapon();
 	public static GameWeapon Weapon() { return Instance.weapon; }
 
+	public GameResult result;
+	public static GameResult Result() { return Instance.result; }
+
 	public GameCheat cheat = new GameCheat();
 	public static GameCheat Cheat() { return Instance.cheat; }
 
-	private Game() {}
+	private Game() {
+	}
 
 	void Start () 
 	{
 		Time.timeScale = timescale;
 		DontDestroyOnLoad(transform.gameObject);
+		
+		if (networkView == null)
+			gameObject.AddComponent<NetworkView>();
+		
+		networkView.stateSynchronization = NetworkStateSynchronization.Off;
+		networkView.observed = null;
 
 		camera_.Start();
 
@@ -49,22 +59,34 @@ public class Game : Singleton<Game>
 
 		character.game = this;
 		character.Start();
-		
+
 		if (progress == null) 
 		{
 			progress = gameObject.GetComponent<GameProgress>();
 			if (progress == null) progress = gameObject.AddComponent<GameProgress>();
 		}
+		
+		if (result == null) 
+		{
+			result = gameObject.GetComponent<GameResult>();
+			if (result == null) result = gameObject.AddComponent<GameResult>();
+			result.game = this;
+		}
 
-		if (networkView == null)
-			gameObject.AddComponent<NetworkView>();
-
-		networkView.stateSynchronization = NetworkStateSynchronization.Off;
-		networkView.observed = null;
+		hud.Start ();
 
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
-	
+
+	public void Purge()
+	{
+		character.Purge ();
+		hud.Purge ();
+		weapon.Purge ();
+		level = null;
+		Destroy(mode);
+	}
+
 	void Update () 
 	{
 		character.Update();
@@ -74,12 +96,6 @@ public class Game : Singleton<Game>
 	void FixedUpdate() 
 	{
 		character.FixedUpdate();
-	}
-
-	public void Purge() 
-	{
-		Destroy(mode);
-		level = null;
 	}
 
 	public static void InitLevel(LevelDef _def) 
