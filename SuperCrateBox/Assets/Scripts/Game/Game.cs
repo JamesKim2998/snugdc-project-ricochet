@@ -11,6 +11,9 @@ public class Game : Singleton<Game>
 
 	public GameAudio audio_ = new GameAudio();
 	public static GameAudio Audio() { return Instance.audio_; }
+	
+	public GameHUD hud = new GameHUD ();
+	public static GameHUD HUD() { return Instance.hud; }
 
 	public GameProgress progress;
 	public static GameProgress Progress() { return Instance.progress; }
@@ -65,6 +68,7 @@ public class Game : Singleton<Game>
 	void Update () 
 	{
 		character.Update();
+		hud.Update ();
 	}
 
 	void FixedUpdate() 

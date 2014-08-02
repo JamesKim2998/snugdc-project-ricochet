@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,10 +42,18 @@ MonoBehaviour:
   applyOnStart: 1
   deleteAfterApply: 0
   audio_:
-    pause: 0
+    pause: 1
     volume: 1
   camera_:
     camera: {fileID: 0}
+  hud:
+    chatscreen: {fileID: 0}
+    useChatscreenKey: 0
+    chatscreenActivateKey: 0
+    chatscreenDeactivateKey: 0
+    scoreBoard: {fileID: 0}
+    useScoreBoardActivateKey: 0
+    scoreBoardActivateKey: 0
   useCharacterDef: 1
   character:
     character: {fileID: 0}
