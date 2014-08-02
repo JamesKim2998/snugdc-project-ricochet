@@ -9,7 +9,7 @@ using System.Collections;
 public class Global : Singleton<Global> 
 {
 	[HideInInspector]
-	public ContextManager context = new ContextManager();
+	public ContextManager context;
 	public static ContextManager Context() { return Instance.context; }
 
 	[HideInInspector]
@@ -32,7 +32,18 @@ public class Global : Singleton<Global>
 	public TransitionManager transition;
 	public static TransitionManager Transition() { return Instance.transition; }
 
+	[HideInInspector]
+	public CacheManager localCache = new CacheManager();
+	public static CacheManager LocalCache() { return Instance.localCache; }
+
+	// please implement this.
+	/*
+	[HideInInspector]
+	public CacheManager networkCache = new 
+	*/
+
 	void Awake () {
+		context = new ContextManager ();
 		random = new System.Random ();
 
 		if (networkView == null) gameObject.AddComponent<NetworkView>();
@@ -54,6 +65,7 @@ public class Global : Singleton<Global>
 
 	void Start () {
 		DontDestroyOnLoad(transform.gameObject);
+		ready.Start ();
 	}
 
 }
