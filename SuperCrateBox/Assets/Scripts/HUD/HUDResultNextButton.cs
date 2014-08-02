@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HUDResultNextButton : MonoBehaviour 
 {
-	public string lobbyScene;
+	public string lobbyScene = SceneNames.LOBBY;
 
 	void Start()
 	{
@@ -22,8 +22,9 @@ public class HUDResultNextButton : MonoBehaviour
 
 	public void ListenGameStop()
 	{
-		var _transition = new LobbyTransition ();
+		var _transition = new SceneTransition ();
+		_transition.context = ContextType.LOBBY;
 		_transition.scene = lobbyScene;
-		Global.Transition ().RequestStartLobby (_transition);
+		Global.Transition ().RequestStartScene (_transition);
 	}
 }
