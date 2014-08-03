@@ -241,6 +241,7 @@ public class Weapon : MonoBehaviour
 			if (owner != null)
 			{
 				_projectile.ownerID = owner.GetInstanceID();
+				_projectile.ownerDeadZoneCollider = owner.GetComponent<Character>().deadZoneCollider;
 				var _detector = owner.GetComponentInChildren<DamageDetector>();
 				if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 			}
