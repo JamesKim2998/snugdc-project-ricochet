@@ -31,6 +31,8 @@ public class Spawner : MonoBehaviour {
 	public delegate void PostSpawn(Spawner _spawner, GameObject _gameObj);
 	public event PostSpawn postSpawn;
 
+	private bool m_RespawnEnabled = true;
+
 	void Start () {
 		if (! networkEnabled 
 		    || (! networkServerOnly || Network.isServer))
@@ -42,22 +44,32 @@ public class Spawner : MonoBehaviour {
 	}
 	
 	void Update () {
-		
+		if(! networkEnabled 
+		   || (! networkServerOnly || Network.isServer))
+		{
+			var _colliders = Physics2D.OverlapCircleAll (transform.position, 0.1f);
+			
+			m_RespawnEnabled= ! System.Array.Exists(_colliders, collider => {
+				return collider.gameObject.name == target.tag;
+			});
+		}
 	}
 
 	IEnumerator SpawnRoutine() {
 
 		yield return new WaitForSeconds(periodOffset);
-
+		Spawn();
+		
 		while(true) 
 		{
 			if (curUnits >= maxUnits) 
 			{
 				yield return new WaitForSeconds(0.5f);
-			} else 
+			} else if(m_RespawnEnabled)
 			{
-				Spawn();
 				yield return new WaitForSeconds(Random.Range(periodMin, periodMax));
+				Spawn();
+				Debug.Log ("Spwaned");
 			}
 
 		}
@@ -165,7 +177,7 @@ public class Spawner : MonoBehaviour {
 			
 			var _position = new Vector2(
 				Random.Range(range.xMin, range.xMax),
-				Random.Range(range.yMin, range.yMax));
+				Random.Range(range.yMin, range.yMax)); //could be deleted
 			
 			_position += new Vector2(transform.position.x, transform.position.y);
 

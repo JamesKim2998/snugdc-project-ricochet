@@ -195,9 +195,29 @@ public class PlayerManager : MonoBehaviour
 		}
 	}
 
-	void ListenInfoChanged(PlayerInfo _player)
+	void ListenInfoChanged(PlayerInfo _playerInfo)
+	{
+		if (Network.peerType == NetworkPeerType.Disconnected)
+		{
+			InformPlayerInfoChangedLocal(_playerInfo);
+		}
+		else
+		{
+			var _playerInfoSerial = NetworkSerializer.Serialize(_playerInfo);
+			networkView.RPC("PlayerManager_InformPlayerInfoChanged", RPCMode.All, _playerInfoSerial);
+		}
+	}
+
+	void InformPlayerInfoChangedLocal(PlayerInfo _player)
 	{
 		if (postInfoChanged != null) postInfoChanged(_player);
 	}
 
+	[RPC]
+	void PlayerManager_InformPlayerInfoChanged(string _playerInfoSerial)
+	{
+		PlayerInfo _playerInfo;
+		NetworkSerializer.Deserialize(_playerInfoSerial, out _playerInfo);
+		InformPlayerInfoChangedLocal (_playerInfo);
+	}
 }

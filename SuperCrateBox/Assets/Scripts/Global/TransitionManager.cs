@@ -2,6 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
+public class SceneTransition
+{
+	public ContextType context;
+	public string scene;
+}
+
+[System.Serializable]
 public class GameTransition
 {
 	public float setupDelay = 1f;
@@ -18,17 +25,35 @@ public class GameTransition
 	}
 }
 
-[System.Serializable]
-public class LobbyTransition
-{
-	public string scene;
-	public LobbyTransition Scene(string _var) { scene = _var; return this; }
-}
 
 public class TransitionManager : MonoBehaviour
 {
 	GameTransition m_GameTransition;
-	LobbyTransition m_LobbyTransition;
+	
+	public void RequestStartScene(SceneTransition _transition)
+	{
+		if (! Network.isServer)
+		{
+			Debug.Log("Only server is allowed to transfer to scene " + _transition.scene);
+			return;
+		}
+		
+		networkView.RPC("TransitionManager_RequestStartScene", RPCMode.All, NetworkSerializer.Serialize(_transition));
+	}
+	
+	[RPC]
+	void TransitionManager_RequestStartScene(string _transitionSerial)
+	{
+		var _transition = new SceneTransition();
+		NetworkSerializer.Deserialize(_transitionSerial, out _transition);
+		StartSceneLocal(_transition);
+	}
+	
+	void StartSceneLocal(SceneTransition _transition)
+	{
+		Application.LoadLevel(_transition.scene);
+		Global.Context ().context = _transition.context;
+	}
 
 	public void RequestStartGame(GameTransition _transition)
 	{
@@ -72,29 +97,5 @@ public class TransitionManager : MonoBehaviour
 		Global.Context ().context = ContextType.GAME;
 	}
 
-	public void RequestStartLobby(LobbyTransition _transition)
-	{
-		if (! Network.isServer)
-		{
-			Debug.Log("Only server is allowed to transfer to Lobby");
-			return;
-		}
-
-		networkView.RPC("TransitionManager_RequestStartLobby", RPCMode.All, NetworkSerializer.Serialize(_transition));
-	}
-
-	[RPC]
-	void TransitionManager_RequestStartLobby(string _transitionSerial)
-	{
-		var _transition = new LobbyTransition();
-		NetworkSerializer.Deserialize(_transitionSerial, out _transition);
-		StartLobbyLocal(_transition);
-	}
-	
-	void StartLobbyLocal(LobbyTransition _transition)
-	{
-		Application.LoadLevel(_transition.scene);
-		Global.Context ().context = ContextType.LOBBY;
-	}
 }
 

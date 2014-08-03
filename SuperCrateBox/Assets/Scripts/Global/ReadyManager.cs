@@ -26,6 +26,10 @@ public class ReadyManager : MonoBehaviour
 	public ReadyManager()
 	{
 		m_ReadyInfo = new HashSet<string>();
+	}
+	
+	public void Start()
+	{
 		Global.Context ().postChanged += ListenContectChanged;
 	}
 
