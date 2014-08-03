@@ -12278,6 +12278,7 @@ MonoBehaviour:
     - machine_gun
     - Revolver
     - BugLaserGun
+    - weapon_laser
 --- !u!1 &686219322
 GameObject:
   m_ObjectHideFlags: 0
@@ -21799,7 +21800,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
       propertyPath: weapon.weaponSet.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
       propertyPath: m_LocalPosition.x
@@ -21864,6 +21865,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
       propertyPath: weapon.weaponSet.Array.data[3]
       value: BugLaserGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
+      propertyPath: weapon.weaponSet.Array.data[4]
+      value: weapon_laser
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}

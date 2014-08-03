@@ -120,9 +120,9 @@ MonoBehaviour:
   shootAtOnce: 1
   ammoMax: 100
   relativeVelocityEnabled: 1
-  projectileOffset: {x: 1.10000002, y: .0500000007, z: 0}
+  projectileOffset: {x: 1.60000002, y: .0500000007, z: 0}
   prepareTime: 3
-  chargeTime: 1
+  chargeTime: .100000001
   shootTime: 0
   cooldown: 0
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
