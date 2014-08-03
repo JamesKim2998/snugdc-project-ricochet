@@ -25,9 +25,24 @@ public class UIJoinNextButton : MonoBehaviour {
 		Network.Connect(GlobalVariables.JOIN_IP, GlobalVariables.JOIN_PORT.Value);
 	}
 
+	bool m_Connected = false;
+
+	// todo: 버그로 인해서 다시 접속을 요청합니다.
 	public void OnConnectedToServer()
 	{
-		CancelInvoke ("Fail");
+		if (m_Connected) 
+		{
+			ConnectAgain();
+			return;
+		}
+
+		m_Connected = true;
+		Network.Disconnect ();
+		Network.Connect(GlobalVariables.JOIN_IP, GlobalVariables.JOIN_PORT.Value);
+	}
+
+	void ConnectAgain() 
+	{
 		fsm.SendEvent ("SUCCESS");
 		Global.Context ().context = ContextType.LOBBY;
 	}

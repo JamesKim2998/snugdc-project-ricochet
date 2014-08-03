@@ -22,7 +22,7 @@ public class UIMenuButton : MonoBehaviour
 	{
 		if (m_Selected) return;
 		m_Selected = true;
-		Debug.Log("selected");
+//		Debug.Log("selected");
 		normalTween.Play (false);
 		selectedTween.Play (true);
 	}
@@ -31,7 +31,7 @@ public class UIMenuButton : MonoBehaviour
 	{
 		if (! m_Selected) return;
 		m_Selected = false;
-		Debug.Log("deselected");
+//		Debug.Log("deselected");
 		normalTween.Play (true);
 		selectedTween.Play (false);
 	}
@@ -40,7 +40,7 @@ public class UIMenuButton : MonoBehaviour
 	{
 		if (m_Hovering) return;
 		m_Hovering = true;
-		Debug.Log("hover over");
+//		Debug.Log("hover over");
 		if (! m_Selected)
 		{
 			normalTween.Play (false);
@@ -52,7 +52,7 @@ public class UIMenuButton : MonoBehaviour
 	{
 		if (! m_Hovering) return;
 		m_Hovering = false;
-		Debug.Log("hover out");
+//		Debug.Log("hover out");
 		if (m_Selected) 
 		{
 			normalTween.Play (true	);
