@@ -42,15 +42,12 @@ public class HUDScoreBoard : MonoBehaviour
 		_entity.player = _player;
 		
 		grid.Reposition();
-		
 	}
 
 	void ListenPlayerConnected(PlayerInfo _player, bool _connected)
 	{
 		if (_connected)
-		{
 			Add (_player.guid);
-		}
 	}
 
 }

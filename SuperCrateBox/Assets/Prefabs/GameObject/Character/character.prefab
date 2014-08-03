@@ -1826,7 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13296b6e6f8c28d408ea1e96dba91559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 15
+  jumpForce: 20
   jumpCooldown: .100000001
   moveForce: 2000
   hpMax: 1
@@ -2423,9 +2423,9 @@ MonoBehaviour:
   useHneg: 1
   hneg: -2
   useVpos: 0
-  vpos: 8
+  vpos: 10
   useVneg: 0
-  vneg: -8
+  vneg: -10
 --- !u!114 &11400136
 MonoBehaviour:
   m_ObjectHideFlags: 1

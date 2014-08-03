@@ -5,11 +5,13 @@ public enum GameModeType
 {
 	NULL,
 	TEST,
+	DEATH_MATCH,
 }
 
 [System.Serializable]
 public class GameModeDef 
 {
+	[HideInInspector]
 	public GameModeType mode = GameModeType.NULL;
 	public bool overrideMode = false;
 }
@@ -57,7 +59,8 @@ public class GameMode : MonoBehaviour
 			break;
 
 		case GameModeType.TEST: _gameMode = _gameGO.AddComponent<GameModeTest>(); break;
-
+		case GameModeType.DEATH_MATCH: _gameMode = _gameGO.AddComponent<GameMode>(); break;
+			
 		default: Debug.LogError("Unknown game mode."); break;
 		}
 

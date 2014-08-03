@@ -12,7 +12,7 @@ public class GameModeTestDef : GameModeDef
 public class GameModeTest : GameMode
 {
 	public string testLevel = "";
-
+	
 	bool m_IsLevelInited = false;
 
 	public GameModeTest()

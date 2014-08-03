@@ -42,11 +42,12 @@ MonoBehaviour:
   applyOnStart: 1
   deleteAfterApply: 0
   audio_:
-    pause: 1
+    pause: 0
     volume: 1
   camera_:
     camera: {fileID: 0}
   hud:
+    uilayer: {fileID: 0}
     chatscreen: {fileID: 0}
     useChatscreenKey: 0
     chatscreenActivateKey: 0
@@ -54,6 +55,8 @@ MonoBehaviour:
     scoreBoard: {fileID: 0}
     useScoreBoardActivateKey: 0
     scoreBoardActivateKey: 0
+    resultBoardParent: {fileID: 0}
+    resultBoardPrf: {fileID: 100000, guid: c9183a82fbcaaa7499267c629a3519db, type: 2}
   useCharacterDef: 1
   character:
     character: {fileID: 0}

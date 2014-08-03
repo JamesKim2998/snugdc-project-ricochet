@@ -12,6 +12,21 @@ public class CharacterSpawner : MonoBehaviour
 
 	public float invinsibleTime = 1.5f;
 
+	private WeakReference m_CharacterRef;
+
+	void OnDestroy()
+	{
+		Character _character = null;
+		if (m_CharacterRef != null)
+			_character = m_CharacterRef.Target as Character;
+
+		if (_character != null)
+		{
+			var _destroyable = _character.gameObject.GetComponent<Destroyable>();
+			if (_destroyable != null) _destroyable.postDestroy -= ListenDestroy;
+		}
+	}
+
 	Vector2 Locate() 
 	{
 		Vector2 _position = Vector2.zero;
@@ -30,6 +45,7 @@ public class CharacterSpawner : MonoBehaviour
 		_destroyable.postDestroy += ListenDestroy;
 
 		var _character = _gameObj.GetComponent<Character>();
+		m_CharacterRef = new WeakReference( _character);
 		_character.hitEnabled = false;
 		_character.Invoke("EnableHit", invinsibleTime);
 
@@ -53,6 +69,8 @@ public class CharacterSpawner : MonoBehaviour
 
 	void ListenDestroy(Destroyable _destroyable)
 	{
+		m_CharacterRef = null;
+
 		if (networkView != null && networkView.enabled) 
 			Network.RemoveRPCs(networkView.viewID);
 

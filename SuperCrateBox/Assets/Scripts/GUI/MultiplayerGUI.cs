@@ -15,7 +15,7 @@ public class MultiplayerGUI : MonoBehaviour {
 	Context m_Context;
 	Stack<Context> m_ContextStack;
 
-	int m_DirectHostPort = 1234;
+	int m_DirectHostPort = new System.Random().Next() % 10000;
 	string m_DirectJoinIP = "127.0.0.1";
 	int m_DirectJoinPort = 1234;
 

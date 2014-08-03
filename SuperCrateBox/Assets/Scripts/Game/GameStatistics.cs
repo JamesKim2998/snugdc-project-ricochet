@@ -13,6 +13,11 @@ public class PlayerStatistics
 		player = _player;
 		score = new Statistic<int>();
 		death = new Statistic<int>();
+
+		death.postChanged += (Statistic<int> statistic) => {
+			++Game.Statistic ().total.death.val;
+		};
+
 		Reset ();
 	}
 
@@ -25,7 +30,12 @@ public class PlayerStatistics
 // todo: incomplete code
 public class TotalStatistics 
 {
+	public readonly Statistic<int> death;
 
+	public TotalStatistics() 
+	{
+		death = new Statistic<int>();
+	}
 }
 
 public class GameStatistics {
@@ -33,8 +43,12 @@ public class GameStatistics {
 	public PlayerStatistics mine { get { return m_Mine; }}
 	private Dictionary<string, PlayerStatistics> m_Statistics;
 
+	private TotalStatistics m_Total;
+	public TotalStatistics total { get { return m_Total; } }
+
 	public void Start() {
 		m_Mine = new PlayerStatistics(Network.player.guid);
+		m_Total = new TotalStatistics ();
 		m_Statistics = new Dictionary<string, PlayerStatistics> ();
 		Global.Player().postConnected += ListenPlayerConnected;
 	}
@@ -47,7 +61,15 @@ public class GameStatistics {
 	public PlayerStatistics Get(string _player) 
 	{
 		if (_player == Network.player.guid) return m_Mine;
-		return m_Statistics[_player];
+		if (m_Statistics.ContainsKey(_player))
+		{
+			return m_Statistics[_player];
+		}
+		else
+		{
+			Debug.Log("Statistic does not exist for player " + _player);
+			return null;
+		}
 	}
 
 	public void Add(string _player) 

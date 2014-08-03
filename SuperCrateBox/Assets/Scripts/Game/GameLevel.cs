@@ -18,7 +18,7 @@ public class GameLevel
 	}
 
 	public CharacterSpawners characterSpawners;
-	
+
 	void ListenConnectedToServer()
 	{
 		// cha

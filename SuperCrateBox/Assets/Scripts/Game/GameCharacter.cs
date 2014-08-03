@@ -68,6 +68,11 @@ public class GameCharacter
 		characterColor = GenericHelper.SelectRandom (characterColors);
 	}
 
+	public void Purge()
+	{
+		character = null;
+	}
+
 	public void Update () 
 	{
 		if (character == null) return;
