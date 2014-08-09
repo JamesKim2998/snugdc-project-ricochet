@@ -3,13 +3,7 @@ using System.Collections;
 
 public class UIJoinNextButton : MonoBehaviour {
 	public PlayMakerFSM fsm;
-	
-	public void Fail()
-	{
-		Debug.Log("Join to server is failed.");
-		fsm.SendEvent ("FAIL");
-	}
-	
+
 	public void OnSubmit()
 	{
 		fsm.SendEvent ("JOIN");
@@ -25,23 +19,13 @@ public class UIJoinNextButton : MonoBehaviour {
 		Network.Connect(GlobalVariables.JOIN_IP, GlobalVariables.JOIN_PORT.Value);
 	}
 
-	bool m_Connected = false;
-
-	// todo: 버그로 인해서 다시 접속을 요청합니다.
-	public void OnConnectedToServer()
+	public void Fail()
 	{
-		if (m_Connected) 
-		{
-			ConnectAgain();
-			return;
-		}
-
-		m_Connected = true;
-		Network.Disconnect ();
-		Network.Connect(GlobalVariables.JOIN_IP, GlobalVariables.JOIN_PORT.Value);
+		Debug.Log("Join to server is failed.");
+		fsm.SendEvent ("FAIL");
 	}
 
-	void ConnectAgain() 
+	public void OnConnectedToServer()
 	{
 		fsm.SendEvent ("SUCCESS");
 		Global.Context ().context = ContextType.LOBBY;

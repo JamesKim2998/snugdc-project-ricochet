@@ -3,8 +3,6 @@ using System.Collections;
 
 public class UIReadyButton : MonoBehaviour {
 	private bool m_IsReadying = false;
-	public UIButton button;
-	public UILabel label;
 
 	void Start() 
 	{
@@ -26,12 +24,6 @@ public class UIReadyButton : MonoBehaviour {
 	void SetReady(bool _ready) 
 	{
 		m_IsReadying = false;
-
-		if (button != null)
-			button.isEnabled = true;
-		
-		if (label != null)
-			label.text = ! _ready ? "ready" : "unready";
 	}
 
 	void ListenPollReadyInfo() 
@@ -61,12 +53,10 @@ public class UIReadyButton : MonoBehaviour {
 
 	void OnConnectedToServer() 
 	{
-		button.isEnabled = true;
 	}
 
 	void ListenDisconnectedFromServer()
 	{
-		button.isEnabled = false;
 		gameObject.SetActive(true);
 	}
 
@@ -85,12 +75,6 @@ public class UIReadyButton : MonoBehaviour {
 		}
 		
 		m_IsReadying = true;
-		
-		if (button != null)
-			button.isEnabled = false;
-		
-		if (label != null)
-			label.text = "patient";
 		
 		Global.Ready().RequestReady(! Global.Ready().IsReady());
 		

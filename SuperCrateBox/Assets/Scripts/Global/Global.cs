@@ -8,6 +8,17 @@ using System.Collections;
 [RequireComponent(typeof(TransitionManager))]
 public class Global : Singleton<Global> 
 {
+	static bool s_IsAwaken = false;
+	static bool s_IsStarted = false;
+
+	public static Global Instance { 
+		get { 
+			if (! s_IsAwaken || ! s_IsStarted) 
+				Debug.Log("Trying to access Instance before initialize.");
+			return Singleton<Global>.Instance; 
+		}
+	}
+
 	[HideInInspector]
 	public ContextManager context;
 	public static ContextManager Context() { return Instance.context; }
@@ -42,6 +53,8 @@ public class Global : Singleton<Global>
 	public CacheManager networkCache = new 
 	*/
 
+
+
 	void Awake () {
 		context = new ContextManager ();
 		random = new System.Random ();
@@ -61,11 +74,13 @@ public class Global : Singleton<Global>
 
 		transition = GetComponent<TransitionManager>();
 		if (transition == null) transition = gameObject.AddComponent<TransitionManager>();
+
+		s_IsAwaken = true;
 	}
 
 	void Start () {
-		DontDestroyOnLoad(transform.gameObject);
 		ready.Start ();
+		s_IsStarted = true;
 	}
 
 }
