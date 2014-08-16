@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour {
 
 	public int ownerID = 0;
 	public int ownerDetecterID = 0;
+	
+	public Collider2D ownerDeadZoneCollider;
 
 	// life
 	public float life = 10;
@@ -67,6 +69,10 @@ public class Projectile : MonoBehaviour {
 	public GameObject effectHitPrf;
 	public Vector3 effectHitOffset;
 	
+	// Dead-zone related variables.
+	// 총알은 최초에 데드존 내에서 발사되어서, 데드존을 벗어나야만 플레이어에 대한 충돌판정이 활성화된다.
+	private bool m_OutOfDeadZone;
+	
 	void Start () 
 	{
 		if (initialVelocity != Vector2.zero)
@@ -83,6 +89,24 @@ public class Projectile : MonoBehaviour {
 		{
 			activated = true;
 		}
+		
+		if(ownerDeadZoneCollider == null){
+			Debug.Log ("Character doesn't have an detector");
+			m_OutOfDeadZone = true;
+		} else {
+			if(IsProjectileInsideOfInitialDeadzone()){
+				m_OutOfDeadZone = false;
+			} else {
+				m_OutOfDeadZone = true;
+			}
+		}
+	}
+	
+	private bool IsProjectileInsideOfInitialDeadzone(){
+		// I don't know how to implements.
+		// 현재 생성된 Projectile이 deadzoneDetector 내부에 있는지 검사를했으면 좋겠는데
+		// 마땅한 API가 없는듯.
+		return true;
 	}
 
 	void DestroySelf() 
@@ -189,9 +213,21 @@ public class Projectile : MonoBehaviour {
 	{
 		OnCollision(_collider);
 	}
+	
+	void OnTriggerExit2D(Collider2D other){
+		if(other.isTrigger == true){
+			if(other == ownerDeadZoneCollider){
+				Debug.Log ("Projectile just leaved owner's deadzone");
+				m_OutOfDeadZone = true;
+			}
+		}
+	}
 
 	void OnCollision(Collider2D _collider) 
 	{
+		if(_collider.isTrigger == true){
+			return;
+		}
 		if (! activated) return;
 		if (decaying) return;
 
@@ -216,7 +252,12 @@ public class Projectile : MonoBehaviour {
 			if (! isHitOwner 
 			    && (_damageDetector.GetInstanceID() == ownerDetecterID))
 				return;
-
+			if ( isHitOwner && _damageDetector.GetInstanceID() == ownerDetecterID && !m_OutOfDeadZone){
+				Debug.Log("Projectile just hit owner before get out of the dead zone.");
+				// Projectile is ignore the owner as if he wasn't there.
+				return;
+			}
+				
 			if (_damageDetector != null
 			    && _damageDetector.enabled) 
 			{

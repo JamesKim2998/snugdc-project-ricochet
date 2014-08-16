@@ -34,7 +34,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 82: {fileID: 8200000}
   - 96: {fileID: 9600000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bullet_Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerID: 0
   ownerDetecterID: 0
+  ownerDeadZoneCollider: {fileID: 0}
   life: .600000024
   isHitOwner: 1
   attackData:
