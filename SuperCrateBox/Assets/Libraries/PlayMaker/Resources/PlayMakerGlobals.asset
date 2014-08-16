@@ -13,7 +13,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variables:
     floatVariables: []
-    intVariables: []
+    intVariables:
+    - useVariable: 1
+      name: ui_scene_height
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 768
+    - useVariable: 1
+      name: ui_scene_width
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 1024
     boolVariables: []
     stringVariables: []
     vector2Variables: []
