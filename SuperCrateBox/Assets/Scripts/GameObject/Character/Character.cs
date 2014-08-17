@@ -178,6 +178,8 @@ public class Character : MonoBehaviour
 	public CrateDetector crateDetector;
 	public DamageDetector damageDetector;
 	public LayerDetector terrainDetector;
+	
+	public Collider2D deadZoneCollider;
 	#endregion
 
 	#region events
