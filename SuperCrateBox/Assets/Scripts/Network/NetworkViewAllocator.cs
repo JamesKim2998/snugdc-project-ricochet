@@ -3,17 +3,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
 [RequireComponent(typeof(NetworkView))]
 public class NetworkViewAllocator : MonoBehaviour
 {
-	Dictionary<string, WeakReference> mAllocateRequests;
-	Dictionary<string, NetworkViewID> mAllocationCache;
+	struct AllocationJob 
+	{
+		private WeakReference m_NetworkView;
+		public NetworkView networkView { 
+			get { return m_NetworkView.Target as NetworkView;} 
+			set { m_NetworkView = new WeakReference(value); }
+		}
+
+		public Action callback;
+	}
+
+	Dictionary<string, AllocationJob> mAllocateRequests;
+	Dictionary<string, NetworkViewID> mAllocationBuffer;
 
 	void Start ()
 	{
-		mAllocateRequests = new Dictionary<string, WeakReference>();
-		mAllocationCache = new Dictionary<string, NetworkViewID>();
-		if (Network.isClient) TryAssignSingletons();
+		mAllocateRequests = new Dictionary<string, AllocationJob>();
+		mAllocationBuffer = new Dictionary<string, NetworkViewID>();
 	}
 
 	void Update ()
@@ -21,48 +32,38 @@ public class NetworkViewAllocator : MonoBehaviour
 
 	}
 
-	void OnServerInitialized()
+	public void Allocate(string _requestKey, NetworkView _networkView)
 	{
-		TryAssignSingletons();
+		Allocate(_requestKey, _networkView, null);
 	}
-
-	void OnConnectedToServer()
+	
+	public void Allocate(string _requestKey, NetworkView _networkView, Action _callback)
 	{
-		TryAssignSingletons();
-	}
-
-	void TryAssignSingletons()
-	{
-		if (Global.Instance.networkView.viewID == NetworkViewID.unassigned)
-			AllocateNetworkViewID("Global", Global.Instance.networkView);
-
-		if (Game.Instance.networkView.viewID == NetworkViewID.unassigned)
-			AllocateNetworkViewID("Game", Game.Instance.networkView);
-	}
-
-	public void AllocateNetworkViewID(string _requestID, NetworkView _networkView)
-	{
-		if (mAllocateRequests.ContainsKey(_requestID))
+		NetworkViewID _bufferedViewID;
+		if (mAllocationBuffer.TryGetValue(_requestKey, out _bufferedViewID)) 
 		{
-			Debug.Log("Request " + _requestID + " is incomplete. Please wait.");
+			_networkView.viewID = _bufferedViewID;
 			return;
 		}
 
-		if (mAllocationCache.ContainsKey(_requestID)) 
+		if (mAllocateRequests.ContainsKey(_requestKey))
 		{
-			_networkView.viewID = mAllocationCache[_requestID];
+			Debug.Log("Request " + _requestKey + " is incomplete. Please wait.");
 			return;
 		}
-
+		
 		if (Network.isServer) 
 		{
 			_networkView.viewID = Network.AllocateViewID();
-			mAllocationCache.Add(_requestID, _networkView.viewID);
+			mAllocationBuffer.Add(_requestKey, _networkView.viewID);
 		}
 		else if (Network.isClient)
 		{
-			mAllocateRequests.Add(_requestID, new WeakReference(_networkView));
-			networkView.RPC("NetworkViewAllocator_RequestViewID", RPCMode.Server, Network.player, _requestID);
+			var _job = new AllocationJob();
+			_job.networkView = _networkView;
+			_job.callback = _callback;
+			mAllocateRequests.Add(_requestKey, _job);
+			networkView.RPC("NetworkViewAllocator_RequestViewID", RPCMode.Server, Network.player, _requestKey);
 		}
 		else 
 		{
@@ -71,19 +72,27 @@ public class NetworkViewAllocator : MonoBehaviour
 		}
 	}
 
+	public void Cancel(string _requestKey)
+	{
+		if (mAllocateRequests.ContainsKey(_requestKey))
+		{
+			mAllocateRequests.Remove(_requestKey);
+		}
+	}
+
 	[RPC]
 	void NetworkViewAllocator_RequestViewID(NetworkPlayer _requestor, string _requestID)
 	{
 		NetworkViewID _viewID;
 
-		if (mAllocationCache.ContainsKey(_requestID)) 
+		if (mAllocationBuffer.ContainsKey(_requestID)) 
 		{
-			_viewID = mAllocationCache[_requestID];
+			_viewID = mAllocationBuffer[_requestID];
 		}
 		else 
 		{
 			_viewID = Network.AllocateViewID();
-			mAllocationCache.Add(_requestID, _viewID);
+			mAllocationBuffer.Add(_requestID, _viewID);
 		}
 
 		networkView.RPC("NetworkViewAllocator_ResponseViewID", _requestor, _viewID, _requestID);
@@ -92,24 +101,25 @@ public class NetworkViewAllocator : MonoBehaviour
 	[RPC]
 	void NetworkViewAllocator_ResponseViewID(NetworkViewID _viewID, string _requestID)
 	{
-		var _networkViewRef = mAllocateRequests[_requestID];
+		AllocationJob _allocationJob;
 
-		if (_networkViewRef == null)
+		if (! mAllocateRequests.TryGetValue(_requestID, out _allocationJob))
 		{
-			Debug.LogWarning("Network view does not exist!");
-		} 
+			Debug.Log("The request has been canceled.");
+			return;
+		}
+
+		var _networkView = _allocationJob.networkView;
+		if (_networkView != null)
+		{
+			mAllocationBuffer[_requestID] = _viewID;
+			_networkView.viewID = _viewID;
+			if (_allocationJob.callback != null)
+				_allocationJob.callback();
+		}
 		else
 		{
-			NetworkView _networkView = _networkViewRef.Target as NetworkView;
-			if (_networkView != null)
-			{
-				_networkView.viewID = _viewID;
-				mAllocationCache[_requestID] = _networkView.viewID;
-			}
-			else
-			{
-				Debug.Log("Network viewID is allocated but target view does not exist anymore.");
-			}
+			Debug.Log("Network viewID is allocated but target view does not exist anymore.");
 		}
 
 		mAllocateRequests.Remove(_requestID);

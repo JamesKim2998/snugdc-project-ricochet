@@ -44,10 +44,10 @@ public class HUDScoreBoard : MonoBehaviour
 		grid.Reposition();
 	}
 
-	void ListenPlayerConnected(PlayerInfo _player, bool _connected)
+	void ListenPlayerConnected(bool _connected, string _player)
 	{
 		if (_connected)
-			Add (_player.guid);
+			Add (_player);
 	}
 
 }

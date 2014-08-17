@@ -3,10 +3,16 @@ using System.Collections;
 
 public class UIJoinNextButton : MonoBehaviour {
 	public PlayMakerFSM fsm;
+	public AudioClip successSound;
+	public AudioClip failSound;
+
+	public string joinEvent = "JOIN";
+	public string successEvent = "SUCCESS";
+	public string failEvent = "FAIL";
 
 	public void OnSubmit()
 	{
-		fsm.SendEvent ("JOIN");
+		fsm.SendEvent (joinEvent);
 		Invoke ("Fail", 0.5f);
 
 		if (GlobalVariables.JOIN_IP == null 
@@ -16,18 +22,38 @@ public class UIJoinNextButton : MonoBehaviour {
 			return;
 		}
 		
-		Network.Connect(GlobalVariables.JOIN_IP, GlobalVariables.JOIN_PORT.Value);
+		Global.Server().Connect(GlobalVariables.JOIN_IP, GlobalVariables.JOIN_PORT.Value);
+	}
+
+	public void Success()
+	{
+		CancelInvoke ("Fail");
+
+		if (successSound != null)
+			Global.SFX().PlayOneShot(successSound);
+
+		fsm.SendEvent (successEvent);
+			
+		Global.Context ().context = ContextType.LOBBY;
 	}
 
 	public void Fail()
 	{
 		Debug.Log("Join to server is failed.");
-		fsm.SendEvent ("FAIL");
+		fsm.SendEvent (failEvent);
+
+		if (failSound != null)
+			Global.SFX().PlayOneShot(failSound);
 	}
 
 	public void OnConnectedToServer()
 	{
-		fsm.SendEvent ("SUCCESS");
-		Global.Context ().context = ContextType.LOBBY;
+		Success();
+	}
+
+	void OnFailedToConnect(NetworkConnectionError error) 
+	{
+		CancelInvoke ("Fail");
+		Fail();
 	}
 }

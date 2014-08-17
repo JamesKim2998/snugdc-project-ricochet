@@ -42,16 +42,19 @@ public class Game : Singleton<Game>
 	private Game() {
 	}
 
-	void Start () 
+	void Awake() 
 	{
-		Time.timeScale = timescale;
-		DontDestroyOnLoad(transform.gameObject);
-		
 		if (networkView == null)
 			gameObject.AddComponent<NetworkView>();
 		
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
+	}
+
+	void Start () 
+	{
+		Time.timeScale = timescale;
+		DontDestroyOnLoad(transform.gameObject);
 
 		camera_.Start();
 

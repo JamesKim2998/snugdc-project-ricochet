@@ -69,6 +69,12 @@ public class UIRoomPlayerEntry : MonoBehaviour
 		return;
 	}
 
+	void ListenPlayerSetup(PlayerInfo _playerInfo)
+	{
+		if (player == _playerInfo)
+			Refresh();
+	}
+
 	void ListenPlayerInfoChanged(PlayerInfo _playerInfo)
 	{
 		if (player == _playerInfo)

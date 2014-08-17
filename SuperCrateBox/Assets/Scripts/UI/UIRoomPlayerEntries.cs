@@ -17,8 +17,6 @@ public class UIRoomPlayerEntries : MonoBehaviour
 
 		m_Grid = GetComponent<UIGrid>();
 
-		Add(Global.Player().mine);
-
 		Global.Player().postConnected += ListenPlayerConnected;
 		Global.Ready().postPoll += ListenPollReadyInfo;
 	}
@@ -29,11 +27,17 @@ public class UIRoomPlayerEntries : MonoBehaviour
 		Global.Ready().postPoll -= ListenPollReadyInfo;
 	}
 		
-	void Add(PlayerInfo _player)
+	void Add(string _player)
 	{
-		if (m_Entries.ContainsKey(_player.guid)) 
+		if (Global.Server().server == _player )
 		{
-			Debug.LogError("Trying to add already existing player.");
+			Debug.LogWarning("Trying to add server.");
+			return;
+		}
+
+		if (m_Entries.ContainsKey(_player)) 
+		{
+			Debug.LogWarning("Trying to add already existing player.");
 			return;
 		}
 
@@ -41,32 +45,32 @@ public class UIRoomPlayerEntries : MonoBehaviour
 		var _scale = _obj.transform.localScale;
 		_obj.transform.parent = transform;
 		_obj.transform.localScale = _scale;
-		m_Entries[_player.guid] = _obj;
+		m_Entries[_player] = _obj;
 		
 		var _entry = _obj.GetComponent<UIRoomPlayerEntry>();
-		_entry.player = _player;
+		_entry.player = Global.Player().Get(_player);
 
 		m_Grid.Reposition();
 	}
 
-	void Remove(PlayerInfo _player)
+	void Remove(string _player)
 	{
-		var _entry = m_Entries[_player.guid];
+		GameObject _entry;
 
-		if (! _entry) 
+		if (! m_Entries.TryGetValue(_player, out _entry)) 
 		{
-			Debug.LogError("Trying to remove not existing player.");
+			Debug.LogWarning("Trying to remove not existing player.");
 			return;
 		}
 
 		GameObject.Destroy(_entry);
 
-		m_Entries.Remove(_player.guid);
+		m_Entries.Remove(_player);
 
 		m_Grid.Reposition();
 	}
 
-	void ListenPlayerConnected(PlayerInfo _player, bool _connected) 
+	void ListenPlayerConnected(bool _connected, string _player) 
 	{
 		if (_connected) 
 		{

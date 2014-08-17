@@ -74,7 +74,7 @@ public class UIStartButton : MonoBehaviour
 		gameObject.SetActive(false);
 	}
 
-	void ListenPlayerConnected(PlayerInfo _player, bool _connected)
+	void ListenPlayerConnected(bool _connected, string _player)
 	{
 		Refresh();
 	}

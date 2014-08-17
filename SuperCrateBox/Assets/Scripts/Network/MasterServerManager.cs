@@ -66,13 +66,13 @@ public static class MasterServerManager {
 	}
 
 	public static void StartServer(string _room) {
-		Network.InitializeServer(connection, port, false);//! Network.HavePublicAddress());
+		Global.Server().Initiate(connection, port, false);
 		MasterServer.RegisterHost(m_GameType, _room);
 	}
 
 	public static void StopServer() {
 		MasterServer.UnregisterHost();
-		Network.Disconnect();
+		Global.Server().Disconnect();
 	}
 
 	public static void RequestHostList() {

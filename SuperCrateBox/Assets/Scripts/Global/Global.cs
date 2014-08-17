@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(NetworkView))]
@@ -8,16 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(TransitionManager))]
 public class Global : Singleton<Global> 
 {
-	static bool s_IsAwaken = false;
-	static bool s_IsStarted = false;
-
-	public static Global Instance { 
-		get { 
-			if (! s_IsAwaken || ! s_IsStarted) 
-				Debug.Log("Trying to access Instance before initialize.");
-			return Singleton<Global>.Instance; 
-		}
-	}
+	public static new Global Instance { get { return Singleton<Global>.Instance; } }
 
 	[HideInInspector]
 	public ContextManager context;
@@ -28,8 +19,20 @@ public class Global : Singleton<Global>
 	public static System.Random Random() { return Instance.random; }
 
 	[HideInInspector]
+	public AudioSource bgm;
+	public static AudioSource BGM() { return Instance.bgm; }
+	
+	[HideInInspector]
+	public AudioSource sfx;
+	public static AudioSource SFX() { return Instance.sfx; }
+
+	[HideInInspector]
 	public ServerManager server;
 	public static ServerManager Server() { return Instance.server; }
+	
+	[HideInInspector]
+	public NetworkBridge networkBridge;
+	public static NetworkBridge NetworkBrigde() { return Instance.networkBridge; }
 
 	[HideInInspector]
 	public PlayerManager player;
@@ -53,11 +56,12 @@ public class Global : Singleton<Global>
 	public CacheManager networkCache = new 
 	*/
 
-
-
 	void Awake () {
 		context = new ContextManager ();
 		random = new System.Random ();
+
+		bgm = gameObject.AddComponent<AudioSource>();
+		sfx = gameObject.AddComponent<AudioSource>();
 
 		if (networkView == null) gameObject.AddComponent<NetworkView>();
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
@@ -74,13 +78,11 @@ public class Global : Singleton<Global>
 
 		transition = GetComponent<TransitionManager>();
 		if (transition == null) transition = gameObject.AddComponent<TransitionManager>();
-
-		s_IsAwaken = true;
 	}
 
-	void Start () {
+	void Start () 
+	{
 		ready.Start ();
-		s_IsStarted = true;
 	}
 
 }

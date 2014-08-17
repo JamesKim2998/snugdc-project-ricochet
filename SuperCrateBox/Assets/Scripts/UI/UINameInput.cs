@@ -11,9 +11,20 @@ public class UINameInput : MonoBehaviour {
 		label.text = Global.Player ().mine.name;
 	}
 
+	void Update()
+	{
+
+	}
+
 	public void OnSubmit()
 	{
-		Debug.Log ("Name input " + label.text);
+		// Debug.Log ("Name input " + label.text);
 		Global.Player().mine.name = label.text;
 	}
+
+	public void OnReturn()
+	{
+
+	}
+
 }

@@ -18,7 +18,7 @@ public class UIHostNextButton : MonoBehaviour {
 		}
 		
 		var _hostPort = GlobalVariables.HOST_PORT;
-		if (_hostPort != null) Network.InitializeServer(4, _hostPort.Value, false);
+		if (_hostPort != null) Global.Server().Initiate(_hostPort.Value);
 		else Debug.LogWarning("Host port does not exist.");
 
 	}

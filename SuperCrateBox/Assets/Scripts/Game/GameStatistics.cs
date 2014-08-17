@@ -89,9 +89,9 @@ public class GameStatistics {
 		m_Statistics.Clear();
 	}
 
-	void ListenPlayerConnected(PlayerInfo _playerInfo, bool _connected) 
+	void ListenPlayerConnected(bool _connected, string _player) 
 	{
 		if (_connected)
-			Add (_playerInfo.guid);
+			Add (_player);
 	}
 }
