@@ -2883,7 +2883,7 @@ MonoBehaviour:
   initializeOnStart: 1
   destroyAfterInitialize: 1
   bgmEnabled: 1
-  bgm: {fileID: 8300000, guid: acf482be9bd19df4aa658652bbdccfe5, type: 3}
+  bgm: {fileID: 8300000, guid: 32edc99834bae2e49a28d4375fe54c8c, type: 3}
   gameSetting:
     mapIdx: 0
     modeSelected:
@@ -4314,7 +4314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16a4ef03b902a0478d21bf84061d49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverSound: {fileID: 8300000, guid: 5e8a01e037de8004fb590b8e77a18e27, type: 3}
+  hoverSound: {fileID: 8300000, guid: de09da16915b42a41a3d9ac198bb95a1, type: 3}
 --- !u!1001 &1099183203
 Prefab:
   m_ObjectHideFlags: 0
@@ -9105,6 +9105,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: 32edc99834bae2e49a28d4375fe54c8c, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
   m_RootGameObject: {fileID: 602662372}
