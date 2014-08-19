@@ -55,6 +55,10 @@ public class Global : Singleton<Global>
 	[HideInInspector]
 	public CacheManager networkCache = new 
 	*/
+	
+	[HideInInspector]
+	public GameSetting gameSetting;
+	public static GameSetting GameSetting() { return Instance.gameSetting; }
 
 	void Awake () {
 		context = new ContextManager ();

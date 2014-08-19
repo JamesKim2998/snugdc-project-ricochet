@@ -18,8 +18,6 @@ public class ServerManager : MonoBehaviour
 	public Action postConnectionSetuped;
 	public Action postDisconnected;
 
-	public Action postGlobalNetworkViewAllocated;
-
 	public void Initiate(int _port) 
 	{
 		Initiate(defaultConnections, _port, false);

@@ -43,6 +43,24 @@ public class GameMode : MonoBehaviour
 		overrideMode = _def.overrideMode;
 		return; 
 	}
+
+	public static GameModeDef CreateDef(GameModeType _mode)
+	{
+		switch ( _mode)
+		{
+		case GameModeType.NULL: 
+			Debug.LogWarning("Trying to instantiate GameMode NULL.");
+			return new GameModeDef();
+
+		case GameModeType.TEST: return new GameModeTestDef();
+		case GameModeType.DEATH_MATCH: return new GameModeDeathMatchDef();
+
+		default: 
+			Debug.LogWarning("Undefined mode " + _mode.ToString() + ".");
+			return new GameModeDef();
+		}
+
+	}
 	
 	public static void Setup(GameModeDef _def)
 	{

@@ -6,8 +6,8 @@ public class GameModeDeathMatchDef : GameModeDef
 {
 	public GameModeDeathMatchDef() { mode = GameModeType.DEATH_MATCH; } 
 
-	public int respawnLimit = 10;
-	public GameModeDeathMatchDef TotalRespawn(int _var) { respawnLimit = _var; return this; }
+	public int respawnCount = 10;
+	public GameModeDeathMatchDef RespawnCount(int _var) { respawnCount = _var; return this; }
 
 	public int timeLimit = 300;
 	public GameModeDeathMatchDef TimeLimit(int _var) { timeLimit = _var; return this; }
@@ -54,7 +54,7 @@ public class GameModeDeathMatch : GameMode
 	{
 		base.Init(_def);
 		var _deathMatchDef = _def as GameModeDeathMatchDef;
-		respawnLimit = _deathMatchDef.respawnLimit;
+		respawnLimit = _deathMatchDef.respawnCount;
 		timeLimit = _deathMatchDef.timeLimit;
 	}
 

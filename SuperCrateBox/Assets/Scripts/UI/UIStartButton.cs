@@ -5,7 +5,6 @@ public class UIStartButton : MonoBehaviour
 {
 	public UIButton button;
 	public UILabel label;
-	public string map;
 	
 	private bool m_IsStartable = false;
 	public bool isStartable { 
@@ -39,11 +38,18 @@ public class UIStartButton : MonoBehaviour
 
 	void StartGame()
 	{
-		var _mode = new GameModeTestDef().TestLevel("test_map_kkh001");
+		if (! Global.GameSetting().valid)
+		{
+			Debug.LogWarning("GameSetting is not valid.");
+			return;
+		}
+
+		var _map = Global.GameSetting().map;
+		var _mode = Global.GameSetting().mode;
 		_mode.overrideMode = true;
 
 		var _transition = new GameTransition()
-			.Map(map)
+			.Map(_map)
 			.Mode(_mode);
 
 		Global.Transition().RequestStartGame(_transition);
