@@ -2817,13 +2817,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializeOnStart: 1
   destroyAfterInitialize: 1
-  bgmEnabled: 0
+  bgmEnabled: 1
   bgm: {fileID: 8300000, guid: acf482be9bd19df4aa658652bbdccfe5, type: 3}
   gameSetting:
     mapIdx: 0
-    maps:
-    - test_map_kkh001
-    - test_map_kdw001
     modeSelected:
       mode: 1
       overrideMode: 0
@@ -3394,10 +3391,7 @@ MonoBehaviour:
   pressedSprite: smallBack_down
   disabledSprite: 
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 745775128}
-    mMethodName: Instantiate
-    oneShot: 0
+  onClick: []
 --- !u!114 &745775124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3493,11 +3487,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 745775121}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08714ef0cd3078f45b64da284417297e, type: 3}
+  m_Script: {fileID: 11500000, guid: e769538bd6e97614289e2553fbb21c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 100018, guid: fca2487c750d0b1498b46305d31b60dd, type: 2}
+  button: {fileID: 0}
   parent: {fileID: 1400771940}
+  popupPrf: {fileID: 100018, guid: fca2487c750d0b1498b46305d31b60dd, type: 2}
 --- !u!1 &795975341
 GameObject:
   m_ObjectHideFlags: 0

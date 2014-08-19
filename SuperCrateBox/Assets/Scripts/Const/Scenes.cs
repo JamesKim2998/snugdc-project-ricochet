@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public static class SceneNames
+public static class Scenes
 {
 	public static string CONNECTION = "ui_connection";
 	public static string LOBBY = "ui_room";

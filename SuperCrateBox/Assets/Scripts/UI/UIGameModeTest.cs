@@ -14,8 +14,8 @@ public class UIGameModeTest : MonoBehaviour
 
 		m_ModeDef = Global.GameSetting().modeTest;
 
-		foreach (var _map in SceneNames.GAME_LEVEL)
-			mapSelector.items = new List<string>(SceneNames.GAME_LEVEL);
+		foreach (var _map in Scenes.GAME_LEVEL)
+			mapSelector.items = new List<string>(Scenes.GAME_LEVEL);
 
 		mapSelector.value = m_ModeDef.testLevel;
 

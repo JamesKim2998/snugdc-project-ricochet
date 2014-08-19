@@ -48,8 +48,9 @@ public class GameSetting
 		}
 	}
 
-	public List<string> maps = new List<string>();
-	
+	public readonly List<string> maps = new List<string>(Scenes.GAME_LEVEL);
+
+	[HideInInspector]
 	public GameModeDef modeSelected;
 	public readonly Dictionary<GameModeType, GameModeDef> modes;
 	public readonly GameModeDef modeNull = new GameModeDef();
