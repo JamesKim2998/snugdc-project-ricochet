@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class UIModeSelector : MonoBehaviour
 {
 	[System.Serializable]
-	public class Setting
+	public class Mode
 	{
 		public GameModeType mode;
 		public GameObject prefab;
@@ -15,14 +15,14 @@ public class UIModeSelector : MonoBehaviour
 
 	public UIPopupList popupList;
 
-	public GameObject settingParent;
-	public List<Setting> settingPrfs;
-	private GameObject m_Setting;
+	public GameObject modeParent;
+	public List<Mode> modePrfs;
+	private GameObject m_Mode;
 
 	void Start ()
 	{
-		if ( settingParent == null
-		    || settingPrfs == null)
+		if ( modeParent == null
+		    || modePrfs == null)
 		{
 			Debug.LogError("Missing component!");
 			return;
@@ -40,10 +40,8 @@ public class UIModeSelector : MonoBehaviour
 	{
 		popupList.items.Clear();
 		
-		var _setting = Global.GameSetting();
-		// new GameModeTestDef().TestLevel(_map);
-		foreach (var _gameMode in EnumHelper.GetValues<GameModeType>())
-			popupList.items.Add(_gameMode.ToString());
+		foreach (var _modePrf in modePrfs)
+			popupList.items.Add(_modePrf.mode.ToString());
 
 		popupList.value = Global.GameSetting().modeSelected.mode.ToString();
 	}
@@ -55,17 +53,17 @@ public class UIModeSelector : MonoBehaviour
 		if (Enum.IsDefined(typeof(GameModeType), _mode))
 			Global.GameSetting().modeSelected = Global.GameSetting().modes[_mode];
 
-		var _setting = settingPrfs.Find((_entity) => _entity.mode == _mode);
+		var _setting = modePrfs.Find((_entity) => _entity.mode == _mode);
 
 		if (_setting != null)
 		{
-			if (m_Setting != null)
-				GameObject.Destroy(m_Setting);
+			if (m_Mode != null)
+				GameObject.Destroy(m_Mode);
 
-			m_Setting = GameObject.Instantiate(_setting.prefab) as GameObject;
-			m_Setting.transform.parent = settingParent.transform;
-			m_Setting.transform.localPosition = Vector3.zero;
-			m_Setting.transform.localScale = Vector3.one;
+			m_Mode = GameObject.Instantiate(_setting.prefab) as GameObject;
+			m_Mode.transform.parent = modeParent.transform;
+			m_Mode.transform.localPosition = Vector3.zero;
+			m_Mode.transform.localScale = Vector3.one;
 		}
 		else 
 		{

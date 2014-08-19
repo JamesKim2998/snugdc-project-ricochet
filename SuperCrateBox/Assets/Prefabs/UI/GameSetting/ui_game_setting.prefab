@@ -812,15 +812,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupList: {fileID: 0}
-  settingParent: {fileID: 100020}
-  settingPrfs:
-  - mode: 0
-    prefab: {fileID: 0}
+  modeParent: {fileID: 100020}
+  modePrfs:
   - mode: 1
     prefab: {fileID: 100000, guid: 690f0d31e8ee5ec43bd8f1eca9aef750, type: 2}
   - mode: 2
     prefab: {fileID: 100012, guid: a8199f599f020cd44b40647284896a7a, type: 2}
-  m_Setting: {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -852,9 +849,6 @@ MonoBehaviour:
   onChange:
   - mTarget: {fileID: 11400020}
     mMethodName: SetCurrentSelection
-    oneShot: 0
-  - mTarget: {fileID: 11400012}
-    mMethodName: Reposition
     oneShot: 0
   mSelectedItem: mode1
   eventReceiver: {fileID: 0}

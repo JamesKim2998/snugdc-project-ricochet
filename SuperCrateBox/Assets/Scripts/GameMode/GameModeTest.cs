@@ -5,7 +5,7 @@ using System.Collections;
 public class GameModeTestDef : GameModeDef
 {
 	public GameModeTestDef() { mode = GameModeType.TEST; } 
-	public string testLevel = "";
+	public string testLevel = SceneNames.GAME_LEVEL[0];
 	public GameModeTestDef TestLevel(string _var) { testLevel = _var; return this; }
 }
 
