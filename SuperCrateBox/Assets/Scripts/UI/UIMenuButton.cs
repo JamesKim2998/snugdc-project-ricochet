@@ -6,57 +6,28 @@ public class UIMenuButton : MonoBehaviour
 	bool m_Selected = false;
 	bool m_Hovering = false;
 
-	public UITweener normalTween;
-	public UITweener selectedTween;
-	public UITweener hoverTween;
-	
-	void Start () {
-	
-	}
-	
-	void Update () {
-	
+	public Sprite normal;
+	public Sprite click;
+	public Sprite over;
+
+	UI2DSprite renderer;
+
+	void Awake(){
+		renderer = GetComponent<UI2DSprite>();
 	}
 
-	public void OnSelected()
+	public void OnOver()
 	{
-		if (m_Selected) return;
-		m_Selected = true;
-//		Debug.Log("selected");
-		normalTween.Play (false);
-		selectedTween.Play (true);
+		renderer.sprite2D = over;
 	}
 
-	public void OnDeselected()
+	public void OnIdle()
 	{
-		if (! m_Selected) return;
-		m_Selected = false;
-//		Debug.Log("deselected");
-		normalTween.Play (true);
-		selectedTween.Play (false);
+		renderer.sprite2D = normal;
 	}
 
-	public void OnHoverOver()
+	public void OnClick()
 	{
-		if (m_Hovering) return;
-		m_Hovering = true;
-//		Debug.Log("hover over");
-		if (! m_Selected)
-		{
-			normalTween.Play (false);
-			hoverTween.Play (true);
-		}
-	}
-
-	public void OnHoverOut()
-	{
-		if (! m_Hovering) return;
-		m_Hovering = false;
-//		Debug.Log("hover out");
-		if (m_Selected) 
-		{
-			normalTween.Play (true	);
-			hoverTween.Play (false);
-		}
+		renderer.sprite2D = click;
 	}
 }
