@@ -5,7 +5,7 @@ public class UILogo : MonoBehaviour {
 
 	public AudioClip hoverSound;
 
-	private bool m_IsHoverOver = false;
+	private bool m_PlayAnimation = false;
 	private float m_OriginalVolume;
 	private float m_FadeTime = 0.5f;
 	private float m_FadeElapsed = 0;
@@ -30,7 +30,7 @@ public class UILogo : MonoBehaviour {
 	{
 		bool _shouldChangeVolume = false;
 
-		if (m_IsHoverOver)
+		if (m_PlayAnimation)
 		{
 			if (m_FadeElapsed < m_FadeTime)
 			{
@@ -58,15 +58,31 @@ public class UILogo : MonoBehaviour {
 		}
 	}
 
-	void OnHoverOver()
+	void PlayAnimation() 
 	{
-		m_IsHoverOver = true;
+		if (m_PlayAnimation) 
+			return;
+
+		m_PlayAnimation = true;
+
 		if ( ! audio.isPlaying) 
 			audio.Play();
+
+		GetComponent<UIPlayAnimation>().Play(true);
+
+//		if (! animation.isPlaying)
+//			animation.Play();
+	}
+
+	void OnHoverOver()
+	{
+		Invoke("PlayAnimation", 2.0f);
 	}
 
 	void OnHoverOut()
 	{
-		m_IsHoverOver = false;
+		CancelInvoke("PlayAnimation");
+		m_PlayAnimation = false;
+		GetComponent<UIPlayAnimation>().Play(false);
 	}
 }
