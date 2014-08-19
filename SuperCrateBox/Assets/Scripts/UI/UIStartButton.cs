@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class UIStartButton : MonoBehaviour 
@@ -45,7 +45,7 @@ public class UIStartButton : MonoBehaviour
 		}
 
 		var _map = Global.GameSetting().map;
-		var _mode = Global.GameSetting().mode;
+		var _mode = Global.GameSetting().modeSelected;
 		_mode.overrideMode = true;
 
 		var _transition = new GameTransition()

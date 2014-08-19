@@ -5,10 +5,20 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameSetting 
 {
+	public GameSetting()
+	{
+		modeSelected = modeTest;
+		modes = new Dictionary<GameModeType, GameModeDef> {
+			{ GameModeType.NULL, modeNull },
+			{ GameModeType.TEST, modeTest },
+			{ GameModeType.DEATH_MATCH, modeDeathMatch },
+		};
+	}
+
 	public bool valid {
 		get {
 			return map != null
-				&& mode != null;
+				&& modeSelected != null;
 		}
 	}
 
@@ -39,7 +49,12 @@ public class GameSetting
 	}
 
 	public List<string> maps = new List<string>();
+	
+	public GameModeDef modeSelected;
+	public readonly Dictionary<GameModeType, GameModeDef> modes;
+	public readonly GameModeDef modeNull = new GameModeDef();
+	public readonly GameModeTestDef modeTest = new GameModeTestDef();
+	public readonly GameModeDeathMatchDef modeDeathMatch = new GameModeDeathMatchDef();
 
-	public GameModeDef mode;
 }
 

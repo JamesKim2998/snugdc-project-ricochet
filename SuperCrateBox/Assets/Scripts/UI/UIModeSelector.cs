@@ -17,7 +17,7 @@ public class UIModeSelector : MonoBehaviour
 
 	public GameObject settingParent;
 	public List<Setting> settingPrfs;
-	public GameObject m_Setting;
+	private GameObject m_Setting;
 
 	void Start ()
 	{
@@ -45,7 +45,7 @@ public class UIModeSelector : MonoBehaviour
 		foreach (var _gameMode in EnumHelper.GetValues<GameModeType>())
 			popupList.items.Add(_gameMode.ToString());
 
-		popupList.value = GameModeType.TEST.ToString();
+		popupList.value = Global.GameSetting().modeSelected.mode.ToString();
 	}
 	
 	void OnChange()
@@ -53,7 +53,7 @@ public class UIModeSelector : MonoBehaviour
 		GameModeType _mode = (GameModeType) Enum.Parse(typeof(GameModeType), popupList.value);
 
 		if (Enum.IsDefined(typeof(GameModeType), _mode))
-			Global.GameSetting().mode = GameMode.CreateDef(_mode);
+			Global.GameSetting().modeSelected = Global.GameSetting().modes[_mode];
 
 		var _setting = settingPrfs.Find((_entity) => _entity.mode == _mode);
 

@@ -195,7 +195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 247.281158, y: 175.149719, z: 0}
+  m_LocalPosition: {x: -2.88542175, y: 42.1497574, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -469,7 +469,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 248
   mHeight: 38
-  mDepth: 0
+  mDepth: 3
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 248
   mHeight: 38
-  mDepth: 1
+  mDepth: 3
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
