@@ -7,8 +7,8 @@ public static class Scenes
 	public static string LOBBY = "ui_room";
 
 	public static string[] GAME_LEVEL = {
-		"test_kkh001",
-		"test_kdw001",
+		"test_map_kkh001",
+		"test_map_kdw001",
 	};
 }
 
