@@ -23,11 +23,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.0529003, y: 6.82512999, z: 0}
+  m_LocalPosition: {x: 30, y: 8, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -47,16 +46,22 @@ MonoBehaviour:
   camera_:
     camera: {fileID: 0}
   hud:
-    uilayer: {fileID: 0}
-    chatscreen: {fileID: 0}
-    useChatscreenKey: 0
-    chatscreenActivateKey: 0
-    chatscreenDeactivateKey: 0
-    scoreBoard: {fileID: 0}
-    useScoreBoardActivateKey: 0
-    scoreBoardActivateKey: 0
-    resultBoardParent: {fileID: 0}
+    hudRoot: {fileID: 0}
+    chatscreenPrf: {fileID: 100006, guid: 0dd137f5917ac5b40bcf0d7a0bed27e4, type: 2}
+    useChatscreenKey: 1
+    chatscreenActivateKey: 13
+    chatscreenDeactivateKey: 27
+    scoreBoardPrf: {fileID: 100000, guid: c1e0b6e9dc10f384480d3e57762577f9, type: 2}
+    useScoreBoardActivateKey: 1
+    scoreBoardActivateKey: 9
     resultBoardPrf: {fileID: 100000, guid: c9183a82fbcaaa7499267c629a3519db, type: 2}
+    modeHUDs:
+    - mode: 1
+      prefab: {fileID: 100000, guid: c42e8adf57969d448b3b381d468a13ef, type: 2}
+    - mode: 2
+      prefab: {fileID: 100000, guid: 5a546920e4e524d49a9e1e914cf17c9c, type: 2}
+  modeManager:
+    mode: {fileID: 0}
   useCharacterDef: 1
   character:
     character: {fileID: 0}
@@ -71,6 +76,9 @@ MonoBehaviour:
     weaponSet:
     - assault_rifle
     - machine_gun
+    - Revolver
+    - BugLaserGun
+    - weapon_laser
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

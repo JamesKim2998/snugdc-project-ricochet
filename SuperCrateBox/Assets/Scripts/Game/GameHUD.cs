@@ -1,28 +1,41 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-// incomplete code
-public class GameHUD 
+public class GameHUD : MonoBehaviour
 {
-	public UIRoot hudLayer;
+	private GameHUDDef m_Def;
 
 	public GameObject chatscreen;
-	public KeyCode chatscreenActivateKey = KeyCode.Return;
-	public KeyCode chatscreenDeactivateKey = KeyCode.Escape;
-	
 	public HUDScoreBoard scoreBoard;
-	public KeyCode scoreBoardActivateKey = KeyCode.Tab;
 	
-	public GameObject resultBoardParent;
-	public GameObject resultBoardPrf;
-	public HUDResultBoard resultBoard;
-	
-	public void Start()
+	private HUDResultBoard m_ResultBoard;
+	public HUDResultBoard resultBoard { 
+		get { return m_ResultBoard; } 
+		private set { m_ResultBoard = value; } 
+	}
+
+	private GameObject m_ModeHUD;
+
+	void Start()
 	{
 		Game.Progress ().postOver += ListenGameOver;
 		Game.Progress ().postStop += ListenGameStop;
+		Game.ModeManager().postChanged += ListenModeChanged;
 	}
 
+	~GameHUD()
+	{
+		Game.Progress ().postOver -= ListenGameOver;
+		Game.Progress ().postStop -= ListenGameStop;
+		Game.ModeManager().postChanged -= ListenModeChanged;
+	}
+	
+	public void Apply(GameHUDDef _def)
+	{
+		m_Def = _def;
+	}
+	
 	public void Purge()
 	{
 		if (chatscreen != null) 
@@ -30,13 +43,13 @@ public class GameHUD
 			GameObject.Destroy(chatscreen);
 			chatscreen = null;
 		}
-
+		
 		if (scoreBoard != null)
 		{
 			GameObject.Destroy(scoreBoard);
 			scoreBoard = null;
 		}
-
+		
 		if (resultBoard != null)
 		{
 			GameObject.Destroy(resultBoard);
@@ -44,34 +57,28 @@ public class GameHUD
 		}
 	}
 
-	~GameHUD()
-	{
-		Game.Progress ().postOver -= ListenGameOver;
-		Game.Progress ().postStop -= ListenGameStop;
-	}
-
-	public void Update () 
+	void Update () 
 	{
 		// chatscreen activation.
-		if (chatscreen != null) 
+		if (chatscreen != null && m_Def.useChatscreenKey) 
 		{
-			if (Input.GetKeyDown(chatscreenActivateKey))
+			if (Input.GetKeyDown(m_Def.chatscreenActivateKey))
 				chatscreen.SetActive(true);
 
-			if (Input.GetKeyDown(chatscreenDeactivateKey))
+			if (Input.GetKeyDown(m_Def.chatscreenDeactivateKey))
 				chatscreen.SetActive(false);
 		}
 		
 		// scoreboard activation.
-		if (scoreBoard != null)
+		if (scoreBoard != null && m_Def.useScoreBoardActivateKey)
 		{
 			bool? _scoreBoardActivatePressed = null;
 			
-			if (Input.GetKeyDown(scoreBoardActivateKey))
+			if (Input.GetKeyDown(m_Def.scoreBoardActivateKey))
 			{
 				_scoreBoardActivatePressed = true;
 			}
-			else if (Input.GetKeyUp(scoreBoardActivateKey))
+			else if (Input.GetKeyUp(m_Def.scoreBoardActivateKey))
 			{
 				_scoreBoardActivatePressed = false;
 			}
@@ -79,6 +86,31 @@ public class GameHUD
 			if (_scoreBoardActivatePressed != null) 
 				scoreBoard.gameObject.SetActive(_scoreBoardActivatePressed.Value);
 		}
+	}
+
+	public void SetMode(GameModeType _mode)
+	{
+		if (m_ModeHUD != null)
+		{
+			Destroy(m_ModeHUD);
+			m_ModeHUD = null;
+		}
+
+		var _prefab = m_Def.modeHUDs.Find(_modeHUD => _modeHUD.mode == _mode).prefab;
+
+		if (_prefab == null) 
+		{
+			Debug.LogWarning("HUD for mode " + _mode + " not found.");
+			return;
+		}
+
+		m_ModeHUD = Instantiate(_prefab, Vector3.zero, Quaternion.identity) as GameObject;
+		TransformHelper.SetParentLocal(m_ModeHUD, m_Def.hudRoot.gameObject);
+	}
+
+	void ListenModeChanged(GameMode _mode )
+	{
+		SetMode(_mode.mode);
 	}
 
 	void ListenGameOver()
@@ -89,36 +121,11 @@ public class GameHUD
 			GameObject.Destroy(resultBoard);
 		}
 
-		if (resultBoardPrf != null)
+		if (m_Def.resultBoardPrf != null)
 		{
-			var _obj = GameObject.Instantiate(resultBoardPrf, Vector3.zero, Quaternion.identity) as GameObject;
+			var _obj = GameObject.Instantiate(m_Def.resultBoardPrf, Vector3.zero, Quaternion.identity) as GameObject;
 			resultBoard = _obj.GetComponent<HUDResultBoard>();
-
-			GameObject _parent = null;
-
-			if (resultBoardParent != null)
-			{
-				_parent = resultBoardParent;	
-			}
-			else 
-			{
-				if (hudLayer == null)
-				{
-					Debug.Log("No hud layer exist!");
-				}
-				else 
-				{
-					_parent = hudLayer.gameObject;
-				}
-			}
-
-			if (_parent != null)
-			{
-				var _scale = _obj.transform.localScale;
-				_obj.transform.parent = _parent.transform;
-				_obj.transform.localPosition = Vector3.zero;
-				_obj.transform.localScale = _scale;
-			}
+			TransformHelper.SetParentWithoutScale(resultBoard.gameObject, m_Def.hudRoot.gameObject);
 		}
 	}
 

@@ -12,7 +12,7 @@ public class Game : Singleton<Game>
 	public GameAudio audio_ = new GameAudio();
 	public static GameAudio Audio() { return Instance.audio_; }
 
-	public GameHUD hud = new GameHUD();
+	public GameHUD hud;
 	public static GameHUD HUD() { return Instance.hud; }
 
 	public GameProgress progress;
@@ -24,9 +24,10 @@ public class Game : Singleton<Game>
 	public GameLevel level;
 	public static GameLevel Level() { return Instance.level; }
 
-	public GameMode mode;
-	public static GameMode Mode() { return Instance.mode; }
-	
+	public GameModeManager modeManager;
+	public static GameModeManager ModeManager() { return Instance.modeManager; }
+	public static GameMode Mode() { return ModeManager().mode; }
+
 	public GameCharacter character = new GameCharacter();
 	public static GameCharacter Character() { return Instance.character; } 
 
@@ -49,6 +50,31 @@ public class Game : Singleton<Game>
 		
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
+		
+		if (hud == null)
+		{
+			hud = gameObject.GetComponent<GameHUD>();
+			if (hud == null) hud = gameObject.AddComponent<GameHUD>();
+		}
+
+		if (progress == null) 
+		{
+			progress = gameObject.GetComponent<GameProgress>();
+			if (progress == null) progress = gameObject.AddComponent<GameProgress>();
+		}
+		
+		if (modeManager == null)
+		{
+			modeManager = gameObject.GetComponent<GameModeManager>();
+			if (modeManager == null) modeManager = gameObject.AddComponent<GameModeManager>();
+		}
+		
+		if (result == null) 
+		{
+			result = gameObject.GetComponent<GameResult>();
+			if (result == null) result = gameObject.AddComponent<GameResult>();
+			result.game = this;
+		}
 	}
 
 	void Start () 
@@ -63,21 +89,6 @@ public class Game : Singleton<Game>
 		character.game = this;
 		character.Start();
 
-		if (progress == null) 
-		{
-			progress = gameObject.GetComponent<GameProgress>();
-			if (progress == null) progress = gameObject.AddComponent<GameProgress>();
-		}
-		
-		if (result == null) 
-		{
-			result = gameObject.GetComponent<GameResult>();
-			if (result == null) result = gameObject.AddComponent<GameResult>();
-			result.game = this;
-		}
-
-		hud.Start ();
-
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
 
@@ -87,13 +98,12 @@ public class Game : Singleton<Game>
 		hud.Purge ();
 		weapon.Purge ();
 		level = null;
-		Destroy(mode);
+		modeManager.Purge();
 	}
 
 	void Update () 
 	{
 		character.Update();
-		hud.Update ();
 	}
 
 	void FixedUpdate() 

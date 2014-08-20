@@ -20,9 +20,9 @@ public class GameModeTest : GameMode
 		mode = GameModeType.TEST;
 	}
 
-	public override bool Setup ()
+	public override void Setup ()
 	{
-		if (! base.Setup()) return false;
+		base.Setup();
 
 		// catch up game progress...
 		if (Game.Progress().IsState(GameProgress.State.START))
@@ -39,8 +39,6 @@ public class GameModeTest : GameMode
 		Game.Progress().postRun += ListenGameRun;
 
 		TryToRunGame();
-
-		return true;
 	}
 
 	public override void Init(GameModeDef _def)

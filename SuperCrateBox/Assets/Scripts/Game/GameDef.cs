@@ -10,6 +10,7 @@ public class GameDef : MonoBehaviour
 	public GameAudioDef audio_;
 	public GameCameraDef camera_;
 	public GameHUDDef hud;
+	public GameModeManagerDef modeManager;
 
 	public bool useCharacterDef = false;
 	public GameCharacterDef character;
@@ -19,8 +20,6 @@ public class GameDef : MonoBehaviour
 
 	void Start ()
 	{
-		// for instantiation...
-		if (Game.Instance.name == "") { int n; }
 		if (applyOnStart) Apply();
 	}
 
@@ -28,7 +27,8 @@ public class GameDef : MonoBehaviour
 	{
 		if (audio_ != null) audio_.Apply();
 		if (camera_ != null) camera_.Apply();
-		if (hud != null) hud.Apply();
+		if (hud != null) Game.HUD().Apply(hud);
+		if (modeManager != null) Game.ModeManager().Apply(modeManager);
 		if (useCharacterDef && character != null) character.Apply();
 		if (useWeaponDef && weapon != null) weapon.Apply();
 		if (deleteAfterApply) Destroy(gameObject);
@@ -65,38 +65,32 @@ public class GameCameraDef
 [System.Serializable]
 public class GameHUDDef 
 {
-	public GameObject uilayer;
+	public GameObject hudRoot;
 
-	public GameObject chatscreen;
-	public bool useChatscreenKey = false;
-	public KeyCode chatscreenActivateKey = KeyCode.None;
-	public KeyCode chatscreenDeactivateKey = KeyCode.None;
+	public GameObject chatscreenPrf;
+	public bool useChatscreenKey = true;
+	public KeyCode chatscreenActivateKey = KeyCode.Return;
+	public KeyCode chatscreenDeactivateKey = KeyCode.Escape;
 	
-	public HUDScoreBoard scoreBoard;
-	public bool useScoreBoardActivateKey = false;
-	public KeyCode scoreBoardActivateKey = KeyCode.None;
+	public GameObject scoreBoardPrf;
+	public bool useScoreBoardActivateKey = true;
+	public KeyCode scoreBoardActivateKey = KeyCode.Tab;
 
-	public GameObject resultBoardParent;
 	public GameObject resultBoardPrf;
-
-	public void Apply()
-	{
-		var _hud = Game.HUD ();
-
-		if (chatscreen != null) _hud.chatscreen = chatscreen;
-
-		if (useScoreBoardActivateKey) 
-		{
-			_hud.chatscreenActivateKey = chatscreenActivateKey;
-			_hud.chatscreenDeactivateKey = chatscreenDeactivateKey;
-		}
-
-		if (scoreBoard != null) _hud.scoreBoard = scoreBoard;
-		if (useChatscreenKey) _hud.chatscreenActivateKey = chatscreenActivateKey;
-
-		if (resultBoardPrf != null) _hud.resultBoardPrf = resultBoardPrf;
-		if (resultBoardParent != null) _hud.resultBoardParent = resultBoardParent;
+	
+	[System.Serializable]
+	public class ModeHUD {
+		public GameModeType mode;
+		public GameObject prefab;
 	}
+
+	public List<ModeHUD> modeHUDs;
+}
+
+[System.Serializable]
+public class GameModeManagerDef
+{
+	public GameMode mode;
 }
 
 [System.Serializable]

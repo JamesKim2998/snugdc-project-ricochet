@@ -19,5 +19,21 @@ public static class TransformHelper
 	{
 		return Mathf.Rad2Deg * VectorToRad(_vector);
 	}
+
+	public static void SetParentLocal(GameObject _child, GameObject _parent )
+	{
+		var _position = _child.transform.localPosition;
+		var _scale = _child.transform.localScale;
+		_child.transform.parent = _parent.transform;
+		_child.transform.localPosition = _position;
+		_child.transform.localScale = _scale;
+	}
+
+	public static void SetParentWithoutScale(GameObject _child, GameObject _parent )
+	{
+		var _scale = _child.transform.localScale;
+		_child.transform.parent = _parent.transform;
+		_child.transform.localScale = _scale;
+	}
 }
 

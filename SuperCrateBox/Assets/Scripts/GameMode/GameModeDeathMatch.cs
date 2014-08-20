@@ -25,9 +25,9 @@ public class GameModeDeathMatch : GameMode
 		mode = GameModeType.DEATH_MATCH;
 	}
 	
-	public override bool Setup ()
+	public override void Setup ()
 	{
-		if (! base.Setup()) return false;
+		base.Setup();
 		
 		// catch up game progress...
 		if (Game.Progress().IsState(GameProgress.State.START))
@@ -46,8 +46,6 @@ public class GameModeDeathMatch : GameMode
 		Game.Statistic ().total.death.postChanged += ListenTotalDeathChanged;
 
 		TryToRunGame();
-		
-		return true;
 	}
 	
 	public override void Init(GameModeDef _def)

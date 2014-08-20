@@ -21,7 +21,7 @@ public class GameTransition
 
 	public void Setup()
 	{
-		GameMode.Setup(mode);
+		Game.ModeManager().Setup(mode);
 	}
 }
 
