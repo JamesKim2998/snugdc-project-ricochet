@@ -23,7 +23,6 @@ public class UIStartButton : MonoBehaviour
 		m_IsStartable = Global.Ready().IsReadyAll();
 
 		Global.Server().postServerInitialized += ListenServerInitialized;
-		Global.Server().postDisconnected += ListenDisconnectedFromServer;
 		Global.Player().postConnected += ListenPlayerConnected;
 		Global.Ready().postReady += ListenReady;
 	}
@@ -31,7 +30,6 @@ public class UIStartButton : MonoBehaviour
 	void OnDestroy()
 	{
 		Global.Server().postServerInitialized -= ListenServerInitialized;
-		Global.Server().postDisconnected -= ListenDisconnectedFromServer;
 		Global.Player().postConnected -= ListenPlayerConnected;
 		Global.Ready().postReady -= ListenReady;
 	}
@@ -71,13 +69,7 @@ public class UIStartButton : MonoBehaviour
 
 	void ListenServerInitialized()
 	{
-		gameObject.SetActive(true);
 		Refresh();
-	}
-
-	void ListenDisconnectedFromServer()
-	{
-		gameObject.SetActive(false);
 	}
 
 	void ListenPlayerConnected(bool _connected, string _player)
