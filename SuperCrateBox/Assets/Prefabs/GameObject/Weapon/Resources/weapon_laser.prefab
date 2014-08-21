@@ -58,13 +58,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -11.5044641, y: 15.7997475, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
   - {fileID: 400002}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -76,7 +75,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 1
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -88,7 +86,6 @@ Transform:
   m_LocalScale: {x: .25, y: .25, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,14 +115,14 @@ MonoBehaviour:
   damageExpose: 1
   autoload: 1
   shootAtOnce: 1
-  ammoMax: 100
+  ammoMax: 30
   relativeVelocityEnabled: 1
-  projectileOffset: {x: 1.60000002, y: .0500000007, z: 0}
+  projectileOffset: {x: .800000012, y: .0500000007, z: 0}
   prepareTime: 3
   chargeTime: .100000001
   shootTime: 0
   cooldown: 0
-  effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
+  effectMuzzleFirePrf: {fileID: 0}
   effectMuzzleFireOffset: {x: .449999988, y: .100000001, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
@@ -188,9 +185,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b01d652583e82c4419b6821d2f572ee6, type: 3}
+  m_SortingLayerID: 0
+  m_Sprite: {fileID: 21300000, guid: 69c724c79fa2a3349b84cf27551e8e05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
