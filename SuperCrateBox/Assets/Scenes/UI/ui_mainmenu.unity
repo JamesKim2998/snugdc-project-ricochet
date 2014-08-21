@@ -1921,7 +1921,7 @@ MonoBehaviour:
   initializeOnStart: 1
   destroyAfterInitialize: 1
   bgmEnabled: 1
-  bgm: {fileID: 8300000, guid: 32edc99834bae2e49a28d4375fe54c8c, type: 3}
+  bgm: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
   gameSetting:
     mapIdx: 0
     modeSelected:
@@ -4204,7 +4204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewOnGUI: 1
   enableGUILayout: 1
-  drawStateLabels: 1
+  drawStateLabels: 0
   GUITextureStateLabels: 1
   GUITextStateLabels: 1
   filterLabelsWithDistance: 0
@@ -9899,7 +9899,7 @@ Prefab:
     - target: {fileID: 11400000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
       propertyPath: bgm
       value: 
-      objectReference: {fileID: 8300000, guid: 32edc99834bae2e49a28d4375fe54c8c, type: 3}
+      objectReference: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
   m_RootGameObject: {fileID: 602662372}
