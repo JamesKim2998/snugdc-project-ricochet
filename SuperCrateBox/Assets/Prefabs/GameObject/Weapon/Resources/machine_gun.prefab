@@ -106,23 +106,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a08edc746b979a0418eed9f81c655efc, type: 3}
+  m_Script: {fileID: 11500000, guid: eb246201d04eb754bba3ce58dbd215b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: machine_gun
-  animationGroup: machine_gun
+  type: 
+  animationGroup: 
   useDamage: 1
-  damageExpose: 1
-  autoload: 1
+  damageExpose: 0
+  autoload: 0
   shootAtOnce: 1
-  ammoMax: 100
+  ammoMax: 1000
   relativeVelocityEnabled: 1
   projectileOffset: {x: 0, y: 0, z: 0}
   prepareTime: 0
-  chargeTime: .100000001
+  chargeTime: 0
   shootTime: 0
   cooldown: 0
-  effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
+  effectMuzzleFirePrf: {fileID: 0}
   effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
