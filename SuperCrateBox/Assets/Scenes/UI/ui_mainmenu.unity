@@ -1945,7 +1945,7 @@ MonoBehaviour:
   initializeOnStart: 1
   destroyAfterInitialize: 1
   bgmEnabled: 1
-  bgm: {fileID: 8300000, guid: 32edc99834bae2e49a28d4375fe54c8c, type: 3}
+  bgm: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
   gameSetting:
     mapIdx: 0
     modeSelected:
@@ -2026,7 +2026,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.33333337
-  mSprite: {fileID: 21300000, guid: dc9d37828d698114e810b04c60d8fdf4, type: 3}
+  mSprite: {fileID: 21300000, guid: b13d859161435f743aac19149dbacc76, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   nextSprite: {fileID: 0}
@@ -3251,8 +3251,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 600, y: 118.260872, z: 0}
-  m_Center: {x: 300, y: -60.8695641, z: 0}
+  m_Size: {x: 600, y: 120, z: 0}
+  m_Center: {x: 300, y: -60, z: 0}
 --- !u!111 &1041687384
 Animation:
   m_ObjectHideFlags: 0
@@ -3914,7 +3914,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 68
+  mWidth: 72
   mHeight: 24
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -4233,7 +4233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewOnGUI: 1
   enableGUILayout: 1
-  drawStateLabels: 1
+  drawStateLabels: 0
   GUITextureStateLabels: 1
   GUITextStateLabels: 1
   filterLabelsWithDistance: 0
@@ -5970,7 +5970,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 68
+  mWidth: 72
   mHeight: 24
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -6137,7 +6137,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: .835294127, b: .486274511, a: 1}
   mPivot: 4
-  mWidth: 154
+  mWidth: 162
   mHeight: 24
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -9887,7 +9887,7 @@ Prefab:
     - target: {fileID: 11400000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
       propertyPath: bgm
       value: 
-      objectReference: {fileID: 8300000, guid: 32edc99834bae2e49a28d4375fe54c8c, type: 3}
+      objectReference: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
   m_RootGameObject: {fileID: 602662372}
