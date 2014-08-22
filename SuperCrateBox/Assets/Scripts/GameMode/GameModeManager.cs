@@ -78,7 +78,7 @@ public class GameModeManager : MonoBehaviour
 		switch (_def.mode)
 		{
 		case GameModeType.TEST: m_ModeToSet = _gameGO.AddComponent<GameModeTest>(); break;
-		case GameModeType.DEATH_MATCH: m_ModeToSet = _gameGO.AddComponent<GameMode>(); break;
+		case GameModeType.DEATH_MATCH: m_ModeToSet = _gameGO.AddComponent<GameModeDeathMatch>(); break;
 		default: Debug.LogError("Unknown game mode."); return;
 		}
 

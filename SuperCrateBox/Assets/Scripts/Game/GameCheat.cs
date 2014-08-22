@@ -1,8 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-// incomplete code
-public class GameCheat
+public class GameCheat : MonoBehaviour
 {
+	public void KillCharacter()
+	{
+		Game.Character().character.Hit(AttackData.DAMAGE_MAX);
+	}
+
 }
 

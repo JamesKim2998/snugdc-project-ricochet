@@ -5,14 +5,10 @@ using System.Collections;
 public class GameModeTestDef : GameModeDef
 {
 	public GameModeTestDef() { mode = GameModeType.TEST; } 
-	public string testLevel = Scenes.GAME_LEVEL[0];
-	public GameModeTestDef TestLevel(string _var) { testLevel = _var; return this; }
 }
 
 public class GameModeTest : GameMode
 {
-	public string testLevel = "";
-	
 	bool m_IsLevelInited = false;
 
 	public GameModeTest()
@@ -44,7 +40,6 @@ public class GameModeTest : GameMode
 	public override void Init(GameModeDef _def)
 	{
 		base.Init(_def);
-		testLevel = (_def as GameModeTestDef).testLevel;
 	}
 
 	void OnDestroy()
@@ -55,7 +50,7 @@ public class GameModeTest : GameMode
 
 	void TryToRunGame()
 	{
-		if (Network.isServer && Application.loadedLevelName == testLevel)
+		if (Network.isServer)
 		{
 			if ( Game.Progress().IsState(GameProgress.State.STOP))
 			{
@@ -72,10 +67,6 @@ public class GameModeTest : GameMode
 	{
 		if (m_IsLevelInited) return;
 		m_IsLevelInited = true;
-		
-		// todo: incomplete code
-//		if (Network.isServer)
-//			Game.Progress().StartGame();
 	}
 
 	void OnServerInitialized() 

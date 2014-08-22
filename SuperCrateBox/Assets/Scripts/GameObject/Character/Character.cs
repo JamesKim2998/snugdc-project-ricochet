@@ -315,7 +315,7 @@ public class Character : MonoBehaviour
 		hitEnabled = true;
 	}
 	
-	void Hit(AttackData _attackData) {
+	public void Hit(AttackData _attackData) {
 		if (! hitEnabled) return;
 		hitEnabled = false;
 		

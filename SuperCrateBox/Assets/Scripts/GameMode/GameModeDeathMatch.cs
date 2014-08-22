@@ -15,11 +15,14 @@ public class GameModeDeathMatchDef : GameModeDef
 
 public class GameModeDeathMatch : GameMode
 {
+	private bool m_IsLevelInited = false;
+
 	public int respawnLimit = 10;
 	public int timeLimit = 300;
-	
-	bool m_IsLevelInited = false;
-	
+
+	public int respawnLeft { get { return respawnLimit - Game.Statistic().total.death; } }
+	public int timeLeft { get { return Mathf.Max(0, timeLimit - (int) Game.Progress().stateTime); } }
+
 	public GameModeDeathMatch()
 	{
 		mode = GameModeType.DEATH_MATCH;
@@ -59,7 +62,7 @@ public class GameModeDeathMatch : GameMode
 	void Update()
 	{
 		if (Game.Progress().IsState(GameProgress.State.RUNNING) 
-		    && Game.Progress().stateTime > timeLimit)
+		    && timeLeft <= 0)
 		{
 			Debug.Log("timeLimit exceeded.");
 			if (Network.isServer)
@@ -94,10 +97,6 @@ public class GameModeDeathMatch : GameMode
 	{
 		if (m_IsLevelInited) return;
 		m_IsLevelInited = true;
-		
-		// todo: incomplete code
-		//		if (Network.isServer)
-		//			Game.Progress().StartGame();
 	}
 	
 	void OnServerInitialized() 

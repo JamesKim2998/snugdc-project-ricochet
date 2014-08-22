@@ -37,7 +37,7 @@ public class Game : Singleton<Game>
 	public GameResult result;
 	public static GameResult Result() { return Instance.result; }
 
-	public GameCheat cheat = new GameCheat();
+	public GameCheat cheat;
 	public static GameCheat Cheat() { return Instance.cheat; }
 
 	private Game() {
@@ -50,31 +50,12 @@ public class Game : Singleton<Game>
 		
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
-		
-		if (hud == null)
-		{
-			hud = gameObject.GetComponent<GameHUD>();
-			if (hud == null) hud = gameObject.AddComponent<GameHUD>();
-		}
 
-		if (progress == null) 
-		{
-			progress = gameObject.GetComponent<GameProgress>();
-			if (progress == null) progress = gameObject.AddComponent<GameProgress>();
-		}
-		
-		if (modeManager == null)
-		{
-			modeManager = gameObject.GetComponent<GameModeManager>();
-			if (modeManager == null) modeManager = gameObject.AddComponent<GameModeManager>();
-		}
-		
-		if (result == null) 
-		{
-			result = gameObject.GetComponent<GameResult>();
-			if (result == null) result = gameObject.AddComponent<GameResult>();
-			result.game = this;
-		}
+		ComponentHelper.AssignComponentIfNotExists(gameObject, ref hud);
+		ComponentHelper.AssignComponentIfNotExists(gameObject, ref progress);
+		ComponentHelper.AssignComponentIfNotExists(gameObject, ref modeManager);
+		ComponentHelper.AssignComponentIfNotExists(gameObject, ref result);
+		ComponentHelper.AssignComponentIfNotExists(gameObject, ref cheat);
 	}
 
 	void Start () 
