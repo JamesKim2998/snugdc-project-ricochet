@@ -68,7 +68,7 @@ public class Laser : MonoBehaviour {
 		_angle.z = TransformHelper.VectorToDeg(_direction);
 		transform.eulerAngles = _angle;
 
-		transform.localScale = new Vector3(1, 1, 1);
+		transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
 		transform.position = _rayResult.point;
 	}
 
