@@ -132,23 +132,41 @@ public class GameProgress : MonoBehaviour
 		state = State.RUNNING;
 		if (postRun != null) postRun();
 	}
-	
-	public void OverGame()
+
+	public bool CanOverGame()
+	{
+		if (! IsStateChangable())
+			return false;
+		
+		if (state != State.RUNNING) 
+		{
+//			Debug.LogWarning("Game only can be over on RUNNING state.");
+			return false;
+		}
+
+		return true;
+	}
+
+	public bool TryOverGame()
+	{
+		var _ret = CanOverGame();
+		if (_ret) OverGame();
+		return _ret;
+	}
+
+	void OverGame()
 	{
 		m_NextState = State.OVER;
 	}
 	
 	void DoOverGame()
 	{
-		if (! IsStateChangable())
-			return;
-		
-		if (state != State.RUNNING) 
+		if ( ! CanOverGame())
 		{
-			Debug.LogWarning("Game only can be over on RUNNING state.");
+			Debug.LogError("Cannot over game. Ignore.");
 			return;
 		}
-		
+
 		networkView.RPC("GameProgress_OverGame", RPCMode.All);
 	}
 	

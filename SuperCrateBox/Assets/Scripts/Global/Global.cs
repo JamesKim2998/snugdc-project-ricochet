@@ -57,7 +57,7 @@ public class Global : Singleton<Global>
 	*/
 	
 	[HideInInspector]
-	public GameSetting gameSetting;
+	public GameSetting gameSetting = new GameSetting();
 	public static GameSetting GameSetting() { return Instance.gameSetting; }
 
 	void Awake () {

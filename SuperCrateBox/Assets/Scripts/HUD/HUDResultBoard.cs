@@ -35,11 +35,10 @@ public class HUDResultBoard : MonoBehaviour
 			return;
 		}
 
-		var _obj = Object.Instantiate(entityPrf, Vector3.zero, Quaternion.identity) as GameObject;
-		var _scale = _obj.transform.localScale;
-		_obj.transform.parent = transform;
+		var _obj = Object.Instantiate(entityPrf) as GameObject;
+		_obj.transform.parent = grid.transform;
 		_obj.transform.localPosition = Vector3.zero;
-		_obj.transform.localScale = _scale;
+		_obj.transform.localScale = Vector3.one;
 		
 		var _entity = _obj.GetComponent<HUDResultBoardEntity>();
 		m_Entities[_player] = _entity;

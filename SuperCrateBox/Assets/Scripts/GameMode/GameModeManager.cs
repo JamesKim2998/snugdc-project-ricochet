@@ -86,6 +86,8 @@ public class GameModeManager : MonoBehaviour
 
 		m_ModeToSet.Init(_def);
 		
+		CancelInvoke("SetupProc");
+
 		if (setupDelay <= 0f) 
 		{
 			Debug.LogWarning("Setup mode without delay. Sure?");

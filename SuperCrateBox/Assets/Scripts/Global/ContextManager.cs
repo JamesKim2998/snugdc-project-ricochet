@@ -5,6 +5,7 @@ using System;
 public enum ContextType 
 {
 	NONE,
+	MAIN_MENU,
 	CONNECTION,
 	LOBBY,
 	GAME,
@@ -20,15 +21,14 @@ public class ContextManager
 			if (m_Context == value) return;
 			var _old = m_Context;
 			m_Context = value;
-			cache.Clear();
 			if (postChanged != null)
 				postChanged(m_Context, _old);
 		} 
 	}
-
+	
 	public Action<ContextType, ContextType> postChanged;
 
-	public CacheManager cache = new CacheManager();
+	public static implicit operator ContextType(ContextManager _mng) { return _mng.context; }
 
 	public ContextManager() {}
 }

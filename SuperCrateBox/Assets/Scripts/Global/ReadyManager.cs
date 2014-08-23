@@ -7,7 +7,19 @@ using System.Collections.Generic;
 public class ReadyManager : MonoBehaviour 
 {
 	public bool IsReady() { return m_ReadyInfo.Contains(Network.player.guid); }
-	public bool IsReady(string _player) { return m_ReadyInfo.Contains(_player); }
+	public bool IsReady(string _player) { 
+		if (Global.Server ().server == _player)
+		{
+			if (! m_ReadyInfo.Contains(_player))
+			{
+				Debug.LogWarning("Ready info doesn't contain server. Add.");
+				m_ReadyInfo.Add(_player);
+			}
+			return true;
+		}
+		return m_ReadyInfo.Contains(_player); 
+	}
+
 	public bool IsReadyAll() 
 	{ 
 		foreach (var _playerKV in Global.Player().players)
@@ -30,12 +42,12 @@ public class ReadyManager : MonoBehaviour
 	
 	public void Start()
 	{
-		Global.Context ().postChanged += ListenContectChanged;
+		Global.Context ().postChanged += ListenContextChanged;
 	}
 
 	~ReadyManager()
 	{
-		Global.Context ().postChanged -= ListenContectChanged;
+		Global.Context ().postChanged -= ListenContextChanged;
 	}
 
 	public void PollReadyInfo()
@@ -159,12 +171,14 @@ public class ReadyManager : MonoBehaviour
 		ReadyLocal(Network.player.guid, true);
 	}
 
-	public void ListenContectChanged(ContextType _context, ContextType _old)
+	public void ListenContextChanged(ContextType _context, ContextType _old)
 	{
 		// note: game에 진입시 ready 정보를 제거합니다.
 		if (_context == ContextType.GAME)
 		{
 			m_ReadyInfo.Clear();
 		}
+
+		m_ReadyInfo.Add(Global.Server().server);
 	}
 }

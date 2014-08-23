@@ -7,7 +7,7 @@ public class GameSetting
 {
 	public GameSetting()
 	{
-		modeSelected = modeTest;
+		modeSelected = modeDeathMatch;
 		modes = new Dictionary<GameModeType, GameModeDef> {
 			{ GameModeType.NULL, modeNull },
 			{ GameModeType.TEST, modeTest },
@@ -48,7 +48,7 @@ public class GameSetting
 		}
 	}
 
-	public readonly List<string> maps = new List<string>(Scenes.GAME_LEVEL);
+	public readonly List<string> maps = new List<string>(SceneNames.GAME_LEVEL);
 
 	[HideInInspector]
 	public GameModeDef modeSelected;

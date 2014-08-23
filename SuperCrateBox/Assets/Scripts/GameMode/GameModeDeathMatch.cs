@@ -21,7 +21,18 @@ public class GameModeDeathMatch : GameMode
 	public int timeLimit = 300;
 
 	public int respawnLeft { get { return respawnLimit - Game.Statistic().total.death; } }
-	public int timeLeft { get { return Mathf.Max(0, timeLimit - (int) Game.Progress().stateTime); } }
+	public int timeLeft { 
+		get { 
+			if (Game.Progress().IsState(GameProgress.State.RUNNING))
+			{
+				return Mathf.Max(0, timeLimit - (int) Game.Progress().stateTime); 
+			}
+			else
+			{
+				return 0;
+			}
+		} 
+	}
 
 	public GameModeDeathMatch()
 	{
@@ -65,8 +76,12 @@ public class GameModeDeathMatch : GameMode
 		    && timeLeft <= 0)
 		{
 			Debug.Log("timeLimit exceeded.");
+
 			if (Network.isServer)
-				Game.Progress().OverGame();
+			{
+				if (! Game.Progress().TryOverGame()) 
+					Debug.LogError("Over game failed.");
+			}
 		}
 	}
 
@@ -120,6 +135,7 @@ public class GameModeDeathMatch : GameMode
 
 	void ListenGameOver()
 	{
+		CancelInvoke("SpawnCharacter");
 		Game.Character ().character = null;
 	}
 
@@ -142,11 +158,11 @@ public class GameModeDeathMatch : GameMode
 
 	void ListenTotalDeathChanged(Statistic<int> _statistic)
 	{
-		if (_statistic > respawnLimit)
+		if (_statistic >= respawnLimit)
 		{
 			Debug.Log("respawnLimit over.");
 			if (Network.isServer)
-				Game.Progress().OverGame();
+				Game.Progress().TryOverGame();
 		}
 	}
 }

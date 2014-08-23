@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HUDResultNextButton : MonoBehaviour 
 {
-	public string lobbyScene = Scenes.LOBBY;
+	public string lobbyScene = SceneNames.MAIN_MENU;
 
 	void Start()
 	{

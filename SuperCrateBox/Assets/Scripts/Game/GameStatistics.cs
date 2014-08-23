@@ -36,6 +36,11 @@ public class TotalStatistics
 	{
 		death = new Statistic<int>();
 	}
+
+	public void Reset()
+	{
+		death.val = 0;
+	}
 }
 
 public class GameStatistics {
@@ -87,6 +92,15 @@ public class GameStatistics {
 	{
 		m_Mine.Reset();
 		m_Statistics.Clear();
+	}
+
+	public void Reset()
+	{
+		Debug.Log("Statistics reset");
+		mine.Reset();
+		foreach(var _statistics in m_Statistics)
+			_statistics.Value.Reset();
+		total.Reset();
 	}
 
 	void ListenPlayerConnected(bool _connected, string _player) 

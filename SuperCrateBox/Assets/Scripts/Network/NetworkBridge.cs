@@ -23,7 +23,8 @@ public class NetworkBridge : MonoBehaviour
 		    || global == null
 		    || game == null)
 		{
-			Debug.LogError("Missing property!");
+			LogCommon.MissingComponent();
+			return;
 		}
 		
 		sInitialized = true;
@@ -34,9 +35,11 @@ public class NetworkBridge : MonoBehaviour
 		Global.Instance.networkBridge = this;
 		Global.Instance.networkView.viewID = global.viewID;
 		global.viewID = NetworkViewID.unassigned;
+		Destroy(global);
 
 		Game.Instance.networkView.viewID = game.viewID;
 		game.viewID = NetworkViewID.unassigned;
+		Destroy(game);
 	}
 
 	void OnDestroy()

@@ -8,5 +8,8 @@ public class GameCheat : MonoBehaviour
 		Game.Character().character.Hit(AttackData.DAMAGE_MAX);
 	}
 
+	public void OverGame()
+	{
+		Game.Progress().TryOverGame();
+	}
 }
-

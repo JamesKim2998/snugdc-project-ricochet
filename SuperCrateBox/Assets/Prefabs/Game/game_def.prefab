@@ -41,8 +41,8 @@ MonoBehaviour:
   applyOnStart: 1
   deleteAfterApply: 0
   audio_:
-    pause: 0
-    volume: 1
+    pause: 1
+    volume: 0
   camera_:
     camera: {fileID: 0}
   hud:
@@ -54,6 +54,7 @@ MonoBehaviour:
     scoreBoardPrf: {fileID: 100000, guid: c1e0b6e9dc10f384480d3e57762577f9, type: 2}
     useScoreBoardActivateKey: 1
     scoreBoardActivateKey: 9
+    resultBoardPosition: {x: 0, y: 0, z: 0}
     resultBoardPrf: {fileID: 100000, guid: c9183a82fbcaaa7499267c629a3519db, type: 2}
     modeHUDs:
     - mode: 1

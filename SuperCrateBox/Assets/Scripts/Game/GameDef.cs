@@ -76,6 +76,7 @@ public class GameHUDDef
 	public bool useScoreBoardActivateKey = true;
 	public KeyCode scoreBoardActivateKey = KeyCode.Tab;
 
+	public Vector3 resultBoardPosition = Vector3.zero;
 	public GameObject resultBoardPrf;
 	
 	[System.Serializable]

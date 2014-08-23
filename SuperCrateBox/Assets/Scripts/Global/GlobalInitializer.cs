@@ -10,7 +10,7 @@ public class GlobalInitializer : MonoBehaviour
 	public bool bgmEnabled = true;
 	public AudioClip bgm;
 
-	public GameSetting gameSetting;
+//	public GameSetting gameSetting;
 
 	void Start ()
 	{
@@ -31,8 +31,8 @@ public class GlobalInitializer : MonoBehaviour
 			_global.bgm.Play();
 		}
 
-		if (gameSetting != null)
-			Global.Instance.gameSetting = gameSetting;
+//		if (gameSetting != null)
+//			Global.Instance.gameSetting = gameSetting;
 
 		if (destroyAfterInitialize)
 			Destroy( gameObject);

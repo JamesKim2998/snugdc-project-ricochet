@@ -15,8 +15,6 @@ public class PlayerResult
 
 public class GameResult : MonoBehaviour
 {
-	public Game game;
-
 	public int gameID = 0;
 	public Dictionary<string, PlayerResult> results;
 
@@ -72,7 +70,7 @@ public class GameResult : MonoBehaviour
 		if (! IsLatest ())
 			FillIn ();
 
-		game.networkView.RPC("GameResult_Propagate", RPCMode.All, gameID, NetworkSerializer.Serialize (results));
+		Game.Instance.networkView.RPC("GameResult_Propagate", RPCMode.All, gameID, NetworkSerializer.Serialize (results));
 	}
 
 	[RPC]
@@ -89,6 +87,7 @@ public class GameResult : MonoBehaviour
 		NetworkSerializer.Deserialize (_resultsSerial, out results);
 
 		if (postPropagated != null) postPropagated();
+		Game.Statistic().Reset();
 	}
 
 	private void ListenGameOver()

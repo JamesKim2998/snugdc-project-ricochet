@@ -8,6 +8,13 @@ public class SendFSMEvent : MonoBehaviour {
 
 	public void Send() 
 	{
-		fsm.SendEvent (event_);
+		if (fsm)
+		{
+			fsm.SendEvent (event_);
+		}
+		else
+		{
+			Debug.Log("FSM is not specified.");
+		}
 	}
 }

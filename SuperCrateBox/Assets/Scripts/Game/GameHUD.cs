@@ -123,9 +123,9 @@ public class GameHUD : MonoBehaviour
 
 		if (m_Def.resultBoardPrf != null)
 		{
-			var _obj = GameObject.Instantiate(m_Def.resultBoardPrf, Vector3.zero, Quaternion.identity) as GameObject;
+			var _obj = GameObject.Instantiate(m_Def.resultBoardPrf, m_Def.resultBoardPosition, Quaternion.identity) as GameObject;
 			resultBoard = _obj.GetComponent<HUDResultBoard>();
-			TransformHelper.SetParentWithoutScale(resultBoard.gameObject, m_Def.hudRoot.gameObject);
+			TransformHelper.SetParentLocal(resultBoard.gameObject, m_Def.hudRoot.gameObject);
 		}
 	}
 
