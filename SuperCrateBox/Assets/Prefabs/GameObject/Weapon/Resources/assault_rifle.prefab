@@ -150,7 +150,7 @@ MonoBehaviour:
   relativeVelocityEnabled: 1
   projectileOffset: {x: 0, y: 0, z: 0}
   prepareTime: 0
-  chargeTime: .300000012
+  chargeTime: .150000006
   shootTime: 0
   cooldown: 0
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
