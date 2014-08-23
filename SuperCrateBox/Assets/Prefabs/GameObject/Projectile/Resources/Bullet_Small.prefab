@@ -52,7 +52,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
-  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -65,7 +64,6 @@ Transform:
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!50 &5000000
 Rigidbody2D:
   m_ObjectHideFlags: 1
@@ -168,8 +166,9 @@ TrailRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_Time: 2
   m_StartWidth: .0199999996
   m_EndWidth: .0199999996
@@ -219,7 +218,7 @@ MonoBehaviour:
   penetrationForced:
     serializedVersion: 2
     m_Bits: 0
-  reflectionCount: 0
+  reflectionCount: 2
   reflectionMask:
     serializedVersion: 2
     m_Bits: 256
@@ -264,7 +263,7 @@ MonoBehaviour:
   ownerID: 0
   ownerDetecterID: 0
   ownerDeadZoneCollider: {fileID: 0}
-  life: 10
+  life: 1
   isHitOwner: 1
   attackData:
     owner: 
@@ -317,8 +316,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_Sprite: {fileID: 21300000, guid: f646f29083a019e46b89fffd7fa2bffa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
