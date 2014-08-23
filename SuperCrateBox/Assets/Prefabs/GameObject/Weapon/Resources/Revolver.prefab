@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: Bullet_Small
+  projectile: Bullet_Red
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
