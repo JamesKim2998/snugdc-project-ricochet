@@ -316,8 +316,11 @@ public class Weapon : MonoBehaviour
 	[RPC]
 	void PlayMuzzleFireEffect()
 	{
-		var _effect = GameObject.Instantiate (effectMuzzleFirePrf, transform.position, transform.rotation) as GameObject;
-		_effect.transform.Translate (effectMuzzleFireOffset);
+		if(effectMuzzleFirePrf != null)
+		{
+			var _effect = GameObject.Instantiate (effectMuzzleFirePrf, transform.position, transform.rotation) as GameObject;
+			_effect.transform.Translate (effectMuzzleFireOffset);
+		}
 	}
 
 	public void Stop() {
