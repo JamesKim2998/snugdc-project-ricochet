@@ -266,9 +266,9 @@ MonoBehaviour:
   life: 10
   isHitOwner: 1
   attackData:
+    owner: 
     velocity: {x: 0, y: 0}
     damage: 1
-    owner: 
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
   relativeDrivingForce: {x: 0, y: 0}
