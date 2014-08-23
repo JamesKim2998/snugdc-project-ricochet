@@ -12430,8 +12430,8 @@ MonoBehaviour:
   applyOnStart: 1
   deleteAfterApply: 0
   audio_:
-    pause: 0
-    volume: 1
+    pause: 1
+    volume: 0
   camera_:
     camera: {fileID: 1658369782}
   hud:
@@ -18022,7 +18022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &891142153
 Transform:
   m_ObjectHideFlags: 0
@@ -26596,6 +26596,14 @@ Prefab:
       propertyPath: modeManager.mode
       value: 
       objectReference: {fileID: 385731711}
+    - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
+      propertyPath: audio_.pause
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
+      propertyPath: audio_.volume
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
   m_RootGameObject: {fileID: 685520439}
@@ -33478,6 +33486,10 @@ Prefab:
     - target: {fileID: 400000, guid: 5a546920e4e524d49a9e1e914cf17c9c, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5a546920e4e524d49a9e1e914cf17c9c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5a546920e4e524d49a9e1e914cf17c9c, type: 2}

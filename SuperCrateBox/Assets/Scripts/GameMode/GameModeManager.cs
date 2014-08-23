@@ -24,6 +24,8 @@ public class GameModeManager : MonoBehaviour
 			}
 			
 			m_ModeToSet = _def.mode;
+			
+			CancelInvoke("SetupProc");
 
 			if (setupDelay <= 0f) 
 			{
