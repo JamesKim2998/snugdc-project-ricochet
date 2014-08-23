@@ -144,13 +144,13 @@ MonoBehaviour:
   animationGroup: machine_gun
   useDamage: 1
   damageExpose: 1
-  autoload: 0
+  autoload: 1
   shootAtOnce: 1
   ammoMax: 1
   relativeVelocityEnabled: 1
   projectileOffset: {x: 0, y: 0, z: 0}
   prepareTime: 0
-  chargeTime: .100000001
+  chargeTime: .00100000005
   shootTime: 0
   cooldown: 0
   effectMuzzleFirePrf: {fileID: 0}
