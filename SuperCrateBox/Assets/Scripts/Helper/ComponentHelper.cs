@@ -12,8 +12,7 @@ public static class ComponentHelper
 
 	public static void AssignComponentIfNotExists<T>( GameObject _go, ref T _component ) where T: Component
 	{
-		if (_component != null) 
-			return;
+		if (_component != null) return;
 		_component = AddComponentIfNotExists<T>(_go);
 	}
 }

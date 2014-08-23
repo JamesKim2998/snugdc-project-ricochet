@@ -89,4 +89,25 @@ public class Global : Singleton<Global>
 		ready.Start ();
 	}
 
+	bool m_IsLoaded = false;
+
+	void load()
+	{
+		m_IsLoaded = true;
+
+	}
+
+	void save()
+	{
+		if (! m_IsLoaded)
+		{
+			Debug.LogWarning("Trying to save but not loaded yet! Ignore.");
+			return;
+		}
+	}
+
+	void OnApplicationQuit()
+	{
+		save ();
+	}
 }

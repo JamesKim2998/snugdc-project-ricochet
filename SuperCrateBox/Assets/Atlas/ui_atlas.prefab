@@ -54,19 +54,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: client_off
-    x: 703
-    y: 1307
-    width: 575
-    height: 60
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 0
-    paddingTop: 1
-    paddingBottom: 0
-  - name: client_on
     x: 1279
     y: 1307
     width: 575
@@ -79,9 +66,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 1
     paddingBottom: 0
+  - name: client_on
+    x: 703
+    y: 1307
+    width: 575
+    height: 60
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 0
+    paddingTop: 1
+    paddingBottom: 0
   - name: fullButton
-    x: 1025
-    y: 1486
+    x: 0
+    y: 113
     width: 611
     height: 103
     borderLeft: 0
@@ -93,8 +93,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: fullButton_down
-    x: 703
-    y: 1368
+    x: 0
+    y: 217
     width: 611
     height: 103
     borderLeft: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: fullButton_over
     x: 0
-    y: 217
+    y: 321
     width: 611
     height: 103
     borderLeft: 0
@@ -133,19 +133,6 @@ MonoBehaviour:
     paddingBottom: 107
   - name: go
     x: 500
-    y: 502
-    width: 115
-    height: 190
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: go_down
-    x: 500
     y: 693
     width: 115
     height: 190
@@ -157,7 +144,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: go_over
+  - name: go_down
     x: 749
     y: 1116
     width: 115
@@ -170,9 +157,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: go_over
+    x: 500
+    y: 502
+    width: 115
+    height: 190
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: longButton
-    x: 0
-    y: 321
+    x: 703
+    y: 1368
     width: 611
     height: 103
     borderLeft: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: longButton_over
-    x: 0
-    y: 113
+    x: 1025
+    y: 1486
     width: 611
     height: 103
     borderLeft: 0
@@ -223,19 +223,6 @@ MonoBehaviour:
     paddingTop: 216
     paddingBottom: 142
   - name: navi
-    x: 1659
-    y: 1542
-    width: 21
-    height: 47
-    borderLeft: 2
-    borderRight: 2
-    borderTop: 9
-    borderBottom: 9
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: navi_down
     x: 1637
     y: 1494
     width: 21
@@ -248,8 +235,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: navi_over
+  - name: navi_down
     x: 1637
+    y: 1542
+    width: 21
+    height: 47
+    borderLeft: 2
+    borderRight: 2
+    borderTop: 9
+    borderBottom: 9
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: navi_over
+    x: 1659
     y: 1542
     width: 21
     height: 47
@@ -275,8 +275,8 @@ MonoBehaviour:
     paddingTop: 131
     paddingBottom: 50
   - name: smallBack
-    x: 1467
-    y: 1236
+    x: 865
+    y: 1165
     width: 293
     height: 70
     borderLeft: 8
@@ -288,8 +288,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: smallBack_down
-    x: 865
-    y: 1165
+    x: 1467
+    y: 1236
     width: 293
     height: 70
     borderLeft: 0
@@ -314,19 +314,6 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: smallReady
-    x: 1693
-    y: 1496
-    width: 307
-    height: 70
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 1
-    paddingBottom: 0
-  - name: smallReady_down
     x: 865
     y: 1236
     width: 307
@@ -339,9 +326,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 1
     paddingBottom: 0
-  - name: smallReady_over
+  - name: smallReady_down
     x: 1693
     y: 1567
+    width: 307
+    height: 70
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 1
+    paddingBottom: 0
+  - name: smallReady_over
+    x: 1693
+    y: 1496
     width: 307
     height: 70
     borderLeft: 0
@@ -365,6 +365,32 @@ MonoBehaviour:
     paddingRight: 205
     paddingTop: 203
     paddingBottom: 107
+  - name: ui_checkbox_empty
+    x: 1980
+    y: 1924
+    width: 60
+    height: 60
+    borderLeft: 8
+    borderRight: 8
+    borderTop: 8
+    borderBottom: 8
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_checkbox_mark
+    x: 1980
+    y: 1985
+    width: 60
+    height: 63
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: ui_logo
     x: 1315
     y: 1406
