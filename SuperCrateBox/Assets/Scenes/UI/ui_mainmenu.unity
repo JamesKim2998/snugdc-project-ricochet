@@ -184,8 +184,8 @@ MonoBehaviour:
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
-  hoverSprite: smallBack_over
-  pressedSprite: smallBack_down
+  hoverSprite: smallReady_over
+  pressedSprite: smallReady_down
   disabledSprite: 
   pixelSnap: 0
   onClick:
@@ -1305,7 +1305,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515307963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 391.460938, y: 306.552917, z: 0}
+  m_LocalPosition: {x: 1202, y: 227, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1791061673}
@@ -2890,17 +2890,19 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 112
-  mHeight: 20
+  mWidth: 98
+  mHeight: 40
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.5999999
+  aspectRatio: 2.45000005
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
-  mText: settings
+  mText: 'Game
+
+    setting'
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -4486,7 +4488,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1373112706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -768, z: 0}
+  m_LocalPosition: {x: 0, y: 768, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2112059435}
@@ -4883,7 +4885,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
-      value: 112
+      value: 98
       objectReference: {fileID: 0}
     - target: {fileID: 14800000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: m_ViewID.m_ID
@@ -4911,7 +4913,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
-      value: 5.5999999
+      value: 2.0999999
       objectReference: {fileID: 0}
     - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
@@ -4960,6 +4962,24 @@ Prefab:
     - target: {fileID: 400032, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: m_LocalPosition.y
       value: -322
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400056, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: hoverSprite
+      value: smallReady_over
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400056, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: pressedSprite
+      value: smallReady_down
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: mText
+      value: 'Game
+
+        setting'
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: mHeight
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
@@ -5776,7 +5796,7 @@ Transform:
   m_PrefabInternal: {fileID: 1571163813}
   m_GameObject: {fileID: 1527973990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 768, z: 0}
+  m_LocalPosition: {x: 0, y: -768, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 278913099}
@@ -6084,7 +6104,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 233b42dfb27682e408417d87d0428369, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 768
+      value: -768
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 233b42dfb27682e408417d87d0428369, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6114,6 +6134,10 @@ Prefab:
       propertyPath: fsm
       value: 
       objectReference: {fileID: 1717031875}
+    - target: {fileID: 400004, guid: 233b42dfb27682e408417d87d0428369, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 233b42dfb27682e408417d87d0428369, type: 2}
   m_RootGameObject: {fileID: 1527973990}
@@ -8164,7 +8188,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 000000000000004000000000017363656e655f6865696768740000003f0000000000000000000001040000000000000001000000000000000000000000000000000001000000000000000000000001000100
+        byteData: 00000000000000c0000000000173637265656e5f6865696768745f6e65670000003f0000000000000000000001040000000000000001000000000000000000000000000000000001000000000000000000000001000100
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
@@ -8190,8 +8214,8 @@ MonoBehaviour:
         - realTime
         - stopOnExit
         - loopDontFinish
-        paramDataPos: 000000000000000000000000190000001e00000023000000280000002c0000003000000034000000000000003600000043000000480000004c0000004c0000004c0000004e00000050000000
-        paramByteDataSize: 00000000000000001900000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000000000000020000000200000002000000
+        paramDataPos: 0000000000000000000000001e00000023000000280000002d000000310000003500000039000000000000003b000000480000004d0000005100000051000000510000005300000055000000
+        paramByteDataSize: 00000000000000001e00000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000000000000020000000200000002000000
     - name: CREDITS
       description: 
       colorIndex: 0
@@ -8254,7 +8278,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 00000000000000c0000000000173637265656e5f6865696768745f6e65670000003f0000000000000000000001040000000000000001000000000000000000000000000000000001000000000000000000000001000100
+        byteData: 000000000000004000000000017363656e655f6865696768740000003f0000000000000000000001040000000000000001000000000000000000000000000000000001000000000000000000000001000100
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
@@ -8280,8 +8304,8 @@ MonoBehaviour:
         - realTime
         - stopOnExit
         - loopDontFinish
-        paramDataPos: 0000000000000000000000001e00000023000000280000002d000000310000003500000039000000000000003b000000480000004d0000005100000051000000510000005300000055000000
-        paramByteDataSize: 00000000000000001e00000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000000000000020000000200000002000000
+        paramDataPos: 000000000000000000000000190000001e00000023000000280000002c0000003000000034000000000000003600000043000000480000004c0000004c0000004c0000004e00000050000000
+        paramByteDataSize: 00000000000000001900000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000000000000020000000200000002000000
     - name: PLAY_GAME
       description: 
       colorIndex: 0
@@ -8499,7 +8523,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 00000000000000c0000000000173637265656e5f6865696768745f6e65670000003f000000000000000000000104000000000000000100000000000000000000000000000000000100000000000000000046494e4953484544000001000100
+        byteData: 000000000000004000000000017363656e655f6865696768740000003f000000000000000000000104000000000000000100000000000000000000000000000000000100000000000000000046494e4953484544000001000100
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
@@ -8525,8 +8549,8 @@ MonoBehaviour:
         - realTime
         - stopOnExit
         - loopDontFinish
-        paramDataPos: 0000000000000000000000001e00000023000000280000002d000000310000003500000039000000000000003b000000480000004d0000005100000051000000590000005b0000005d000000
-        paramByteDataSize: 00000000000000001e00000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000008000000020000000200000002000000
+        paramDataPos: 000000000000000000000000190000001e00000023000000280000002c0000003000000034000000000000003600000043000000480000004c0000004c000000540000005600000058000000
+        paramByteDataSize: 00000000000000001900000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000008000000020000000200000002000000
     - name: PLAY_GAME_RESTORE
       description: 
       colorIndex: 0
@@ -8736,7 +8760,7 @@ MonoBehaviour:
           value: 
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 000000000000004000000000017363656e655f6865696768740000003f0000000000000000000001040000000000000000000000000000000000000000000000000001000000000000000000000001000100
+        byteData: 00000000000000c0000000000173637265656e5f6865696768745f6e65670000003f0000000000000000000001040000000000000000000000000000000000000000000000000001000000000000000000000001000100
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
@@ -8762,8 +8786,8 @@ MonoBehaviour:
         - realTime
         - stopOnExit
         - loopDontFinish
-        paramDataPos: 000000000000000000000000190000001e00000023000000280000002c0000003000000034000000000000003600000043000000480000004c0000004c0000004c0000004e00000050000000
-        paramByteDataSize: 00000000000000001900000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000000000000020000000200000002000000
+        paramDataPos: 0000000000000000000000001e00000023000000280000002d000000310000003500000039000000000000003b000000480000004d0000005100000051000000510000005300000055000000
+        paramByteDataSize: 00000000000000001e00000005000000050000000500000004000000040000000400000002000000000000000d00000005000000040000000000000000000000020000000200000002000000
     - name: LOBBY_RESTORE
       description: 
       colorIndex: 0
