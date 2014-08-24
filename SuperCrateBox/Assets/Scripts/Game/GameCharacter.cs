@@ -35,6 +35,7 @@ public class GameCharacter
 
 			if (m_Character != null) 
 			{
+				m_Character.owner = Network.player.guid;
 				m_Character.renderers.SetColor(characterColor);
 
 				game.camera_.Bind(GetHashCode(), m_Character.transform);
@@ -168,7 +169,8 @@ public class GameCharacter
 
 		Game.Statistic().mine.death.val += 1;
 		
-		if (_character != null && _character.lastAttackData.owner != null) {
+		if (_character != null && _character.lastAttackData.owner != null) 
+		{
 			var _statistic = Game.Statistic().Get(_character.lastAttackData.owner);
 			if (_statistic != null) _statistic.score.val += 1;
 		}

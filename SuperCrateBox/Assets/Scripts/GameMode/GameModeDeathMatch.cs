@@ -141,6 +141,7 @@ public class GameModeDeathMatch : GameMode
 
 	void SpawnCharacter()
 	{
+//		Debug.Log("SpawnCharacter");
 		var _character = Game.Level().characterSpawners.Spawn();
 		
 		if (_character != null) 
@@ -152,6 +153,7 @@ public class GameModeDeathMatch : GameMode
 	
 	void ListenCharacterDead(Character _character)
 	{
+//		Debug.Log("Character Dead");
 		if (Game.Progress().IsState(GameProgress.State.RUNNING))
 			Invoke("SpawnCharacter", 0.5f);
 	}

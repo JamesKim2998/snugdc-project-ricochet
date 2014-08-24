@@ -4,8 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(NetworkView))]
 public class NetworkBridge : MonoBehaviour
 {
-	public static bool sInitialized = false;
-
 	public NetworkViewAllocator allocator;
 
 	public NetworkView global;
@@ -13,12 +11,6 @@ public class NetworkBridge : MonoBehaviour
 
 	void Start()
 	{
-		if (sInitialized) 
-		{
-			Destroy(gameObject);
-			return;
-		}
-
 		if (networkView == null
 		    || global == null
 		    || game == null)
@@ -27,9 +19,6 @@ public class NetworkBridge : MonoBehaviour
 			return;
 		}
 		
-		sInitialized = true;
-		DontDestroyOnLoad(gameObject);
-
 		allocator = gameObject.AddComponent<NetworkViewAllocator>();
 
 		Global.Instance.networkBridge = this;

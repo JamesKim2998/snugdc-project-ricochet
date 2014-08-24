@@ -42,6 +42,7 @@ public class GameModeManager : MonoBehaviour
 	public void Purge()
 	{
 		Destroy(mode);
+		m_Mode = null;
 	}
 
 	void SetMode(GameMode _mode)
@@ -50,6 +51,7 @@ public class GameModeManager : MonoBehaviour
 			Destroy(m_Mode);
 
 		m_Mode = _mode;
+		m_ModeToSet = null;
 
 		if (m_Mode) 
 			m_Mode.Setup();
@@ -102,6 +104,7 @@ public class GameModeManager : MonoBehaviour
 	void SetupProc()
 	{
 		SetMode(m_ModeToSet);
+		m_ModeToSet = null;
 	}
 
 }

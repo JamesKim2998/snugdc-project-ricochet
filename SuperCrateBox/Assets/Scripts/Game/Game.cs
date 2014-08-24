@@ -80,6 +80,7 @@ public class Game : Singleton<Game>
 		weapon.Purge ();
 		level = null;
 		modeManager.Purge();
+		statistic.Reset();
 	}
 
 	void Update () 

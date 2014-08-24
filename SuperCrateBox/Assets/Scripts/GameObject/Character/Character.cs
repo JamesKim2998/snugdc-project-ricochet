@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
 {
 	public CharacterType type = CharacterType.NONE;
 
+	public string owner;
+
 	#region movement
 	private bool m_Floating = false;
 	public bool floating { get {return m_Floating; }}
@@ -83,35 +85,32 @@ public class Character : MonoBehaviour
 
 			m_Weapon = value;
 
-			if (m_Weapon != null) {
-				m_Weapon.transform.parent = weaponPivot.transform;
-				m_Weapon.transform.localPosition = Vector3.zero;
-				m_Weapon.transform.localEulerAngles = Vector3.zero;
-				m_Weapon.owner = gameObject;
-			}
-
 			var _aimTemp = aim;
 			m_Aim = -1; // invalidate aim
 			aim = _aimTemp;
 
-			if (m_Weapon != null)
-			{
-				m_Weapon.postOutOfAmmo += ListenOutOfAmmo;
-			}
-			
 			if (m_Weapon == null) 
 			{
 				m_NetworkAnimator.SetTrigger("unequip");
 			}
 			else 
 			{
+				m_Weapon.owner = gameObject;
+				m_Weapon.transform.parent = weaponPivot.transform;
+				m_Weapon.transform.localPosition = Vector3.zero;
+				m_Weapon.transform.localEulerAngles = Vector3.zero;
+				m_Weapon.postOutOfAmmo += ListenOutOfAmmo;
+//				Debug.Log("Set weapon " + m_Weapon.type);
 				m_NetworkAnimator.SetTrigger("equip_" + m_Weapon.animationGroup);
 
-				if (IsNetworkEnabled())
+				if (IsMine() && IsNetworkEnabled())
 				{
 					m_Weapon.networkView.viewID = Network.AllocateViewID();
 					m_Weapon.networkView.enabled = true;
-					networkView.RPC("SetWeaponRPC", RPCMode.OthersBuffered, weapon.networkView.viewID, weapon.animationGroup);
+					networkView.RPC("Character_SetWeapon", 
+					                RPCMode.Others, 
+					                m_Weapon.networkView.viewID, 
+					                m_Weapon.type);
 				}
 			}
 
@@ -127,7 +126,7 @@ public class Character : MonoBehaviour
 	public WeaponPivot weaponPivot;
 
 	[RPC]
-	private void SetWeaponRPC(NetworkViewID _viewID, string _weapon)
+	private void Character_SetWeapon(NetworkViewID _viewID, string _weapon)
 	{
 		var _weaponObj = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
 		weapon = _weaponObj.GetComponent<Weapon>();
@@ -189,9 +188,14 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region network
+	public bool IsMine()
+	{
+		return owner == Network.player.guid;
+	}
+
 	public bool IsNetworkEnabled() 
 	{
-		return networkView.isMine && (Network.peerType != NetworkPeerType.Disconnected);
+		return networkView.enabled && Network.peerType != NetworkPeerType.Disconnected;
 	}
 
 	#endregion
@@ -228,7 +232,6 @@ public class Character : MonoBehaviour
 		if (networkView.enabled)
 		{
 			Network.Destroy(networkView.viewID);
-
 		}
 		else
 		{
@@ -248,7 +251,7 @@ public class Character : MonoBehaviour
 		m_IsStanding = true;
 		m_NetworkAnimator.SetTrigger("stand_lower");
 
-		if (IsNetworkEnabled ())
+		if (IsMine() && IsNetworkEnabled ())
 			networkView.RPC ("StandRPC", RPCMode.Others);
 	}
 
@@ -263,7 +266,7 @@ public class Character : MonoBehaviour
 		m_IsStanding = false;
 		m_NetworkAnimator.SetTrigger("crouch_lower");
 
-		if (IsNetworkEnabled ())
+		if (IsMine() && IsNetworkEnabled ())
 			networkView.RPC ("CrouchRPC", RPCMode.Others);
 	}
 	
@@ -314,26 +317,50 @@ public class Character : MonoBehaviour
 	void EnableHit() {
 		hitEnabled = true;
 	}
-	
-	public void Hit(AttackData _attackData) {
+
+	public void Hit(AttackData _attackData) 
+	{
+//		Debug.Log("Hit");
+
 		if (! hitEnabled) return;
-		hitEnabled = false;
-		
-		Invoke("EnableHit", hitCooldown);
 
-		m_LastAttackData = _attackData;
-
-		var _direction = Mathf.Sign(_attackData.velocity.x);
-
-		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
-
-		m_Hp.damage(_attackData);
-		
-		if (m_Hp > 0) {
-			m_NetworkAnimator.SetTrigger("Hit");
+		if (IsNetworkEnabled())
+		{
+			networkView.RPC("Character_Hit", RPCMode.All, _attackData.Serialize());
+		}
+		else
+		{
+			HitLocal(_attackData);
 		}
 	}
 	
+	void HitLocal(AttackData _attackData)
+	{
+//		Debug.Log("Hit Local");
+		hitEnabled = false;
+		CancelInvoke("EnableHit");
+		Invoke("EnableHit", hitCooldown);
+		
+		m_LastAttackData = _attackData;
+		
+		var _direction = Mathf.Sign(_attackData.velocity.x);
+		
+		rigidbody2D.AddForce(new Vector2(_direction * hitForce.x, hitForce.y));
+		
+		m_Hp.damage(_attackData);
+		
+		if (m_Hp > 0) 
+			m_NetworkAnimator.SetTrigger("Hit");
+	}
+
+	[RPC]
+	void Character_Hit(string _attackDataSerial)
+	{
+//		Debug.Log("Hit Network");
+		AttackData _attackData = AttackData.Deserialize(_attackDataSerial);
+		HitLocal(_attackData);
+	}
+
 	void Die() {
 		if (isDead) {
 			Debug.LogWarning("Trying to kill already dead character. Ignore.");
@@ -363,10 +390,11 @@ public class Character : MonoBehaviour
 	
 	void Obtain(Crate _crate) 
 	{
-		if (networkView.enabled && ! networkView.isMine) 
+		if ( IsNetworkEnabled() && ! IsMine()) 
 			return;
 		
-		if (_crate.empty) return;
+		if (_crate.empty) 
+			return;
 		
 		var _weapon = GameObject.Instantiate(Resources.Load(_crate.weapon)) as GameObject;
 		weapon = _weapon.GetComponent<Weapon>();
@@ -405,7 +433,6 @@ public class Character : MonoBehaviour
 
 			aim = _aim;
 			direction = _direction;
-
 		}
 	}
 

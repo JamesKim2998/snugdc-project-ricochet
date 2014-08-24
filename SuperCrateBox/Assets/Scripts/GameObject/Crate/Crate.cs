@@ -1,9 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class Crate : MonoBehaviour {
-
-	public string weapon;
+public class Crate : MonoBehaviour 
+{
+	private string m_Weapon;
+	public string weapon {
+		get { return m_Weapon; }
+		set { m_Weapon = value; }
+	}
 
 	public bool empty { get { return weapon == null; } }
 
@@ -11,8 +15,7 @@ public class Crate : MonoBehaviour {
 
 	void Start() 
 	{
-		if (empty)
-			Debug.Log("empty crate!");
+
 	}
 
 	void DestroySelf() 
@@ -34,20 +37,30 @@ public class Crate : MonoBehaviour {
 	{
 		if (_collider.gameObject.tag == "Character") 
 		{
+			// note: 자신이 생성한 캐릭터만 crate를 획득할 수 있습니다.
+			var _character = _collider.gameObject.GetComponent<Character>();
+			if (_character.owner != Network.player.guid)
+				return;
+
 			var detector = _collider.gameObject.GetComponent<CrateDetector>();
 
 			if (detector) 
 			{
 				if (! detector.enabled) return;
 				detector.Obtain(this);
-				DestroySelf();
+//				networkView.RPC("Crate_RequestObtain", RPCMode.All);
+				Network.Destroy(networkView.viewID);
 			} 
 			else 
 			{
 				Debug.Log("detector not found!");
 			}
-
 		}
 	}
 
+//	[RPC]
+//	void Crate_RequestObtain()
+//	{
+//		DestroySelf();
+//	}
 }

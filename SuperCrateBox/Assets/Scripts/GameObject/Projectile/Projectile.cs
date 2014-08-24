@@ -17,7 +17,20 @@ public class Projectile : MonoBehaviour {
 	public int ownerID = 0;
 	public int ownerDetecterID = 0;
 	
-	public Collider2D ownerDeadZoneCollider;
+	public Collider2D ownerDeadZoneCollider {
+		set { 
+			if ( value != null)
+			{
+				m_OwnerDeadZoneColliderID = value.GetInstanceID();
+			}
+			else
+			{
+				m_OwnerDeadZoneColliderID = 0;
+			}
+		}
+	}
+
+	private int m_OwnerDeadZoneColliderID = 0;
 
 	// life
 	public float life = 10;
@@ -90,19 +103,26 @@ public class Projectile : MonoBehaviour {
 			activated = true;
 		}
 		
-		if(ownerDeadZoneCollider == null){
+		if (m_OwnerDeadZoneColliderID == 0)
+		{
 			Debug.Log ("Character doesn't have an detector");
 			m_OutOfDeadZone = true;
-		} else {
-			if(IsProjectileInsideOfInitialDeadzone()){
+		} 
+		else 
+		{
+			if(IsProjectileInsideOfInitialDeadzone())
+			{
 				m_OutOfDeadZone = false;
-			} else {
+			} 
+			else 
+			{
 				m_OutOfDeadZone = true;
 			}
 		}
 	}
 	
-	private bool IsProjectileInsideOfInitialDeadzone(){
+	private bool IsProjectileInsideOfInitialDeadzone()
+	{
 		// I don't know how to implements.
 		// 현재 생성된 Projectile이 deadzoneDetector 내부에 있는지 검사를했으면 좋겠는데
 		// 마땅한 API가 없는듯.
@@ -121,7 +141,8 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 	
-	void StartDecay() {
+	void StartDecay() 
+	{
 		if (decaying) return;
 		
 		m_Decaying = true;
@@ -214,9 +235,12 @@ public class Projectile : MonoBehaviour {
 		OnCollision(_collider);
 	}
 	
-	void OnTriggerExit2D(Collider2D other){
-		if(other.isTrigger == true){
-			if(other == ownerDeadZoneCollider){
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if(other.isTrigger )
+		{
+			if ( other.GetInstanceID() == m_OwnerDeadZoneColliderID)
+			{
 				Debug.Log ("Projectile just leaved owner's deadzone");
 				m_OutOfDeadZone = true;
 			}
@@ -225,18 +249,18 @@ public class Projectile : MonoBehaviour {
 
 	void OnCollision(Collider2D _collider) 
 	{
-		if(_collider.isTrigger == true){
-			return;
-		}
+		// todo: trigger라고 맞지 않는다는 보장이 없음. 위험함. 
+		if (_collider.isTrigger) return;
 		if (! activated) return;
 		if (decaying) return;
 
 		if (LayerHelper.Exist(collisionIgnores, _collider)) return;
 
-		if (m_Ricochet && ! m_Ricochet.ShouldCollide(_collider)) return;
-
 		if (m_Ricochet)
 		{
+			if (! m_Ricochet.ShouldCollide(_collider))
+				return;
+
 			if (! m_Ricochet.OnCollision(_collider))
 				StartDecay();
 		}
@@ -248,18 +272,19 @@ public class Projectile : MonoBehaviour {
 		if (LayerHelper.Exist(collisionTargets, _collider)) 
 		{
 			var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
+			var _isOwner = _damageDetector.GetInstanceID() == ownerDetecterID;
 
-			if (! isHitOwner 
-			    && (_damageDetector.GetInstanceID() == ownerDetecterID))
+			if (! isHitOwner && _isOwner)
 				return;
-			if ( isHitOwner && _damageDetector.GetInstanceID() == ownerDetecterID && !m_OutOfDeadZone){
+
+			if ( isHitOwner && _isOwner && ! m_OutOfDeadZone)
+			{
 				Debug.Log("Projectile just hit owner before get out of the dead zone.");
 				// Projectile is ignore the owner as if he wasn't there.
 				return;
 			}
 				
-			if (_damageDetector != null
-			    && _damageDetector.enabled) 
+			if (_damageDetector != null && _damageDetector.enabled) 
 			{
 				attackData.velocity = rigidbody2D.velocity;
 				_damageDetector.Damage(attackData);

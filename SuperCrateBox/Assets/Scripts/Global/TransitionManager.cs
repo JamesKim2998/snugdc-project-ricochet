@@ -5,7 +5,7 @@ using System.Collections;
 public class SceneTransition
 {
 	public ContextType context;
-	public string scene;
+	public Scene scene;
 }
 
 [System.Serializable]
@@ -24,7 +24,6 @@ public class GameTransition
 		Game.ModeManager().Setup(mode);
 	}
 }
-
 
 public class TransitionManager : MonoBehaviour
 {
@@ -51,8 +50,23 @@ public class TransitionManager : MonoBehaviour
 	
 	void StartSceneLocal(SceneTransition _transition)
 	{
-		Application.LoadLevel(_transition.scene);
+		Application.LoadLevel(SceneNames.Get(_transition.scene));
 		Global.Context ().context = _transition.context;
+	}
+
+	// working locally
+	public void StartLobby()
+	{
+		if (! Game.Progress().IsState(GameProgress.State.STOP))
+		{
+			if (! Game.Progress().TryStopGame())
+			{
+				Debug.LogError("Stoping game failed. Transfer abort.");
+			}
+		}
+		
+		Application.LoadLevel(SceneNames.Get(Scene.LOBBY));
+		Global.Context().context = ContextType.LOBBY;
 	}
 
 	public void RequestStartGame(GameTransition _transition)

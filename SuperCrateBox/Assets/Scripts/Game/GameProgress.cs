@@ -103,6 +103,7 @@ public class GameProgress : MonoBehaviour
 		Debug.Log("StartGame");
 		state = State.START;
 		timeElapsed = 0;
+		gameID = _gameID;
 		if (postStart != null) postStart();
 	}
 
@@ -178,21 +179,38 @@ public class GameProgress : MonoBehaviour
 		if (postOver != null) postOver();
 	}
 
-	public void StopGame()
+	public bool CanStopGame()
+	{
+		// stop은 클라이언트에서도 호출할 수 있습니다.
+		if (state != State.RUNNING && state != State.OVER) 
+		{
+//			Debug.LogWarning("Game only can be stopped on RUNNING or OVER state. But now in " + state.ToString() + " state.");
+			return false;
+		}
+		
+		return true;
+	}
+
+	public bool TryStopGame()
+	{
+		var _ret = CanStopGame();
+		if (_ret) StopGame();
+		return _ret;
+	}
+
+	void StopGame()
 	{
 		m_NextState = State.STOP;
 	}
 
 	void DoStopGame()
 	{
-		// stop은 클라이언트에서도 호출할 수 있습니다.
-		if (state != State.RUNNING && state != State.OVER) 
+		if (! CanStopGame())
 		{
-			Debug.LogWarning("Game only can be stopped on RUNNING or OVER state. But now in " + state.ToString() + " state.");
+			Debug.LogError("Cannot stop game. Ignore. Now: " + state + ".");
 			return;
 		}
-		
-		Debug.Log("StopGame");
+
 		state = State.STOP;
 		if (postStop != null) postStop();
 		Game.Instance.Purge();

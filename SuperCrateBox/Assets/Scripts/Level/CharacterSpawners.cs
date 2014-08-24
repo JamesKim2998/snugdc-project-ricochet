@@ -16,7 +16,7 @@ public class CharacterSpawners
 			{
 				_spawner.enabled = false;
 				_spawner.networkView.enabled = true;
-				_spawner.postDestroy += ListenCharacterDestroyed;
+//				_spawner.postDestroy += ListenCharacterDestroyed;
 			}
 		}
 	}
@@ -39,10 +39,8 @@ public class CharacterSpawners
 
 	public Character Spawn()
 	{
-#if DEBUG
 		if (Game.Character().character != null)
 			Debug.LogWarning("Trying to spawn a character, but already exist. ");
-#endif
 
 		if (m_Spawners.Count == 0)
 		{

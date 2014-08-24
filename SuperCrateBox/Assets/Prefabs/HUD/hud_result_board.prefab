@@ -26,8 +26,8 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400006}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   m_Layer: 5
   m_Name: next_button
   m_TagString: Untagged
@@ -499,10 +499,7 @@ MonoBehaviour:
   pressedSprite: smallReady_down
   disabledSprite: 
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 11400010}
-    mMethodName: OnSubmit
-    oneShot: 0
+  onClick: []
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,10 +557,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a175eda1fc6a244a9895d81d85e56a, type: 3}
+  m_Script: {fileID: 11500000, guid: a87faaa8fe048fa4f9104d4df9220ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyScene: ui_room
+  button: {fileID: 0}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1

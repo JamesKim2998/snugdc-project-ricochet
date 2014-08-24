@@ -44,6 +44,7 @@ public class CharacterSpawner : MonoBehaviour
 		var _destroyable = _gameObj.GetComponent<Destroyable>();
 		_destroyable.postDestroy += ListenDestroy;
 
+//		Debug.Log("Spawn character local.");
 		var _character = _gameObj.GetComponent<Character>();
 		m_CharacterRef = new WeakReference( _character);
 		_character.hitEnabled = false;
@@ -53,7 +54,7 @@ public class CharacterSpawner : MonoBehaviour
 		{
 			_character.networkView.viewID = Network.AllocateViewID();
 			_character.networkView.enabled = true;
-			networkView.RPC("CharacterSpawner_RequestSpawn", RPCMode.OthersBuffered, _character.networkView.viewID, _characterPosition);
+			networkView.RPC("CharacterSpawner_RequestSpawn", RPCMode.Others, _character.networkView.viewID, _characterPosition);
 		}
 
 		return _character;
@@ -62,6 +63,7 @@ public class CharacterSpawner : MonoBehaviour
 	[RPC]
 	void CharacterSpawner_RequestSpawn(NetworkViewID _viewID, Vector3 _position)
 	{
+//		Debug.Log("Spawn character network.");
 		var _character = GameObject.Instantiate(characterPrf, _position, Quaternion.identity) as GameObject;
 		_character.networkView.enabled = true;
 		_character.networkView.viewID = _viewID;

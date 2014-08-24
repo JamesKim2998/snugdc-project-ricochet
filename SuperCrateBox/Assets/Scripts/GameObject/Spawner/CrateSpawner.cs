@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrateSpawner : MonoBehaviour {
-	
-	void Start () {
-
+[RequireComponent(typeof(Spawner))]
+public class CrateSpawner : MonoBehaviour 
+{
+	void Start () 
+	{
 		var _spawner = GetComponent<Spawner>();
 
 		_spawner.doInitialize = (Spawner _theSpawner, GameObject _gameObj) => {

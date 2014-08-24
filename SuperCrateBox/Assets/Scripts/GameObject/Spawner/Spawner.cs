@@ -69,7 +69,6 @@ public class Spawner : MonoBehaviour {
 			{
 				yield return new WaitForSeconds(Random.Range(periodMin, periodMax));
 				Spawn();
-				Debug.Log ("Spwaned");
 			}
 
 		}
@@ -153,10 +152,10 @@ public class Spawner : MonoBehaviour {
 		if (_serializable) _serializable.Deserialize(_data);
 	}
 
-	public void Spawn() {
-
+	public void Spawn() 
+	{
 		if (target == null) {
-			Debug.Log("trying to spawn empty spawner!");
+			Debug.Log("Target is not specified! Ignore.");
 			return;
 		}
 
@@ -164,17 +163,16 @@ public class Spawner : MonoBehaviour {
 
 		++m_CurUnits;
 
-		if ( postSpawn != null) {
+		if ( postSpawn != null) 
 			postSpawn(this, _gameObj);
-		}
 	}
 
 	public Vector2 Locate() {
 
 		int _hop = 5;
 
-		while (_hop > 0) {
-			
+		while (_hop > 0) 
+		{
 			var _position = new Vector2(
 				Random.Range(range.xMin, range.xMax),
 				Random.Range(range.yMin, range.yMax)); //could be deleted

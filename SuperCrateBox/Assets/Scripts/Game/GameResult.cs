@@ -15,36 +15,34 @@ public class PlayerResult
 
 public class GameResult : MonoBehaviour
 {
-	public int gameID = 0;
-	public Dictionary<string, PlayerResult> results;
+	private int m_GameID = 0;
+	private bool m_IsLatest = false;
+	public bool isLatest { get { return (m_GameID == Game.Progress().gameID) && m_IsLatest; } }
 
+	public Dictionary<string, PlayerResult> results = new Dictionary<string, PlayerResult>();
 	public Action postPropagated;
 
 	void Start()
 	{
-		results = new Dictionary<string, PlayerResult> ();
+		Game.Progress().postStart += ListenGameStart;
 		Game.Progress ().postOver += ListenGameOver;
 	}
 
 	void OnDestroy()
 	{
+		Game.Progress().postStart -= ListenGameStart;
 		Game.Progress ().postOver -= ListenGameOver;
-	}
-
-	public bool IsLatest()
-	{
-		return gameID == Game.Progress ().gameID;
 	}
 
 	public void FillIn()
 	{
-		if (IsLatest())
+		if (isLatest)
 		{
-			Debug.LogWarning("Trying to reset again. Ignore.");
+			Debug.LogWarning("Trying to fill in again. Ignore.");
 			return;
 		}
 
-		gameID = Game.Progress().gameID;
+		m_IsLatest = true;
 
 		results = new Dictionary<string, PlayerResult> ();
 
@@ -67,27 +65,32 @@ public class GameResult : MonoBehaviour
 			return;
 		}
 
-		if (! IsLatest ())
+		if (! isLatest )
 			FillIn ();
 
-		Game.Instance.networkView.RPC("GameResult_Propagate", RPCMode.All, gameID, NetworkSerializer.Serialize (results));
+		Game.Instance.networkView.RPC("GameResult_Propagate", RPCMode.All, m_GameID, NetworkSerializer.Serialize (results));
 	}
 
 	[RPC]
 	private void GameResult_Propagate(int _gameID, string _resultsSerial) 
 	{
-		if (gameID != _gameID)
+		results = new Dictionary<string, PlayerResult> ();
+
+		if (m_GameID != _gameID)
 		{
 			Debug.LogError("Received result of wrong game id. Ignore.");
-			results = null;
 			return;
 		}
 
-		results = new Dictionary<string, PlayerResult> ();
 		NetworkSerializer.Deserialize (_resultsSerial, out results);
 
 		if (postPropagated != null) postPropagated();
-		Game.Statistic().Reset();
+	}
+	
+	private void ListenGameStart()
+	{
+		m_GameID = Game.Progress().gameID;
+		m_IsLatest = false;
 	}
 
 	private void ListenGameOver()

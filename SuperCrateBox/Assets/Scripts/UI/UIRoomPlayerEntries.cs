@@ -14,8 +14,13 @@ public class UIRoomPlayerEntries : MonoBehaviour
 	void Start() 
 	{
 		m_Entries = new Dictionary<string, GameObject>();
-
 		m_Grid = GetComponent<UIGrid>();
+
+		if (Network.peerType != NetworkPeerType.Disconnected)
+		{
+			foreach ( var _player in Global.Player().players )
+				Add(_player.Key); 
+		}
 
 		Global.Player().postConnected += ListenPlayerConnected;
 		Global.Ready().postPoll += ListenPollReadyInfo;
