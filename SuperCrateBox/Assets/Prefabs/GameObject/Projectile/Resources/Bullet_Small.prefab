@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
   m_Layer: 0
-  m_Name: ef_bullet_RS
+  m_Name: Small Gun Bullet_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
 --- !u!4 &400002
@@ -160,7 +160,7 @@ TrailRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: b9bc5aeae18797c449bf53553270cd92, type: 2}
+  - {fileID: 2100000, guid: e2751893a51d7ca438aae4d6b8ac5ed8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -178,13 +178,13 @@ TrailRenderer:
       rgba: 4294967295
     m_Color[1]:
       serializedVersion: 2
-      rgba: 3238002687
+      rgba: 4294967295
     m_Color[2]:
       serializedVersion: 2
-      rgba: 2164260863
+      rgba: 4294967295
     m_Color[3]:
       serializedVersion: 2
-      rgba: 1090519039
+      rgba: 4294967295
     m_Color[4]:
       serializedVersion: 2
       rgba: 16777215
@@ -218,7 +218,7 @@ MonoBehaviour:
   penetrationForced:
     serializedVersion: 2
     m_Bits: 0
-  reflectionCount: 0
+  reflectionCount: 2
   reflectionMask:
     serializedVersion: 2
     m_Bits: 256
@@ -263,7 +263,7 @@ MonoBehaviour:
   ownerID: 0
   ownerDetecterID: 0
   ownerDeadZoneCollider: {fileID: 0}
-  life: 10
+  life: 1
   isHitOwner: 1
   attackData:
     owner: 
@@ -319,7 +319,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: 2be8e3fd3b01bd54cae8bc37dfcfe0a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f646f29083a019e46b89fffd7fa2bffa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

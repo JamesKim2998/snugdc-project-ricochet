@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: Bullet_Rifle
+  projectile: Bullet_Small
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
   shootTime: 0
   cooldown: 0
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
-  effectMuzzleFireOffset: {x: 0, y: 0, z: 0}
+  effectMuzzleFireOffset: {x: .74000001, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36089159c4c2ff4cb0f68c7781f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 18
+  speed: 24
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

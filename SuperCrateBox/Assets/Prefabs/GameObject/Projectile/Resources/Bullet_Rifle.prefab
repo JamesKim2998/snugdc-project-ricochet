@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
   m_Layer: 0
-  m_Name: ef_bullet_RS
+  m_Name: Small Gun Bullet_y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,9 +254,9 @@ MonoBehaviour:
   life: .600000024
   isHitOwner: 1
   attackData:
+    owner: 
     velocity: {x: 0, y: 0}
     damage: 1
-    owner: 
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
   relativeDrivingForce: {x: 0, y: 0}
@@ -319,7 +319,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b2d8e5806218dca4f99644cb378f87e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97ed3a4bb576ccd40ba371832355c903, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

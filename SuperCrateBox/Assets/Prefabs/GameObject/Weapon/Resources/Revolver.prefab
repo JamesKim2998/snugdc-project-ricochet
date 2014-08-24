@@ -62,6 +62,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 400004}
+  m_RootOrder: 1
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -73,6 +74,7 @@ Transform:
   m_LocalScale: {x: .25, y: .25, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
+  m_RootOrder: 0
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -86,6 +88,7 @@ Transform:
   - {fileID: 400002}
   - {fileID: 400000}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: Bullet_Small
+  projectile: Bullet_Red
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,7 +157,7 @@ MonoBehaviour:
   shootTime: 0
   cooldown: 0
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
-  effectMuzzleFireOffset: {x: .100000001, y: .0500000007, z: 0}
+  effectMuzzleFireOffset: {x: .200000003, y: .0500000007, z: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
@@ -185,9 +188,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 1
   m_SortingLayerID: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cb0ffef81a0c8a44a9bb53c29b159e52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

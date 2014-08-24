@@ -61,7 +61,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: .133861333, y: .586237788, z: 0}
+        value: {x: .145599425, y: .57449913, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -86,7 +86,7 @@ AnimationClip:
         value: {x: -.322383761, y: .738085747, z: -3.42726707e-07}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 656076808
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: Skeleton/ik_arm_upper_l
@@ -333,7 +333,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .133861333
+        value: .145599425
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -347,7 +347,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .586237788
+        value: .57449913
         inSlope: 0
         outSlope: 0
         tangentMode: 10
