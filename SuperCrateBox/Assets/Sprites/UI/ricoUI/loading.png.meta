@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 713f46301ead9264ca7901e6b57a8a92
+guid: f86396aec85a24d3ba42bc85528223c1
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Crate03
+    21300000: loading
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +38,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 76.8000031
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

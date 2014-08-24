@@ -50,7 +50,10 @@ public class TransitionManager : MonoBehaviour
 	
 	void StartSceneLocal(SceneTransition _transition)
 	{
-		Application.LoadLevel(SceneNames.Get(_transition.scene));
+		if(UILoading.shutter!=null)
+			UILoading.shutter.LoadLevel(SceneNames.Get(_transition.scene));
+		else
+			Application.LoadLevel(SceneNames.Get(_transition.scene));
 		Global.Context ().context = _transition.context;
 	}
 
@@ -64,8 +67,11 @@ public class TransitionManager : MonoBehaviour
 				Debug.LogError("Stoping game failed. Transfer abort.");
 			}
 		}
-		
-		Application.LoadLevel(SceneNames.Get(Scene.LOBBY));
+		if(UILoading.shutter!=null)
+			UILoading.shutter.LoadLevel(SceneNames.Get(Scene.LOBBY));
+		else
+			Application.LoadLevel(SceneNames.Get(Scene.LOBBY));
+
 		Global.Context().context = ContextType.LOBBY;
 	}
 
@@ -90,7 +96,10 @@ public class TransitionManager : MonoBehaviour
 
 	void StartGameLocal(GameTransition _transition)
 	{
-		Application.LoadLevel(_transition.map);
+		if(UILoading.shutter!=null)
+			UILoading.shutter.LoadLevel(_transition.map);
+		else
+			Application.LoadLevel(_transition.map);
 
 		if (_transition.setupDelay < 0) 
 		{
