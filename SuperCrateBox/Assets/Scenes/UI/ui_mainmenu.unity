@@ -1663,7 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializeOnStart: 1
   destroyAfterInitialize: 1
-  bgmEnabled: 0
+  bgmEnabled: 1
   bgm: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
 --- !u!4 &602662374
 Transform:
@@ -2825,7 +2825,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 120
+  mWidth: 112
   mHeight: 20
   mDepth: 2
   autoResizeBoxCollider: 0
@@ -9076,7 +9076,7 @@ Prefab:
       objectReference: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
     - target: {fileID: 11400000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
       propertyPath: bgmEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
@@ -9139,13 +9139,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 120
+  mWidth: 112
   mHeight: 20
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6
+  aspectRatio: 5.5999999
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}

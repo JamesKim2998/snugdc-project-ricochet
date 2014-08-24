@@ -41,7 +41,7 @@ MonoBehaviour:
   applyOnStart: 1
   deleteAfterApply: 0
   audio_:
-    pause: 1
+    pause: 0
     volume: 0
   camera_:
     camera: {fileID: 0}
@@ -71,7 +71,13 @@ MonoBehaviour:
     useUpForce: 1
     upForce: 30
     weaponDefault: {fileID: 0}
-    characterColors: []
+    characterColors:
+    - {r: 1, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 1, a: 0}
+    - {r: 0, g: 1, b: 0, a: 0}
+    - {r: 1, g: 0, b: 1, a: 0}
+    - {r: 0, g: 1, b: 1, a: 0}
+    - {r: 1, g: 1, b: 0, a: 0}
   useWeaponDef: 1
   weapon:
     weaponSet:
@@ -80,6 +86,7 @@ MonoBehaviour:
     - Revolver
     - BugLaserGun
     - weapon_laser
+    - BlackLaserGun
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
