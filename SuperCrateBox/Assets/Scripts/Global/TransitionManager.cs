@@ -28,7 +28,7 @@ public class GameTransition
 public class TransitionManager : MonoBehaviour
 {
 	GameTransition m_GameTransition;
-	
+
 	public void RequestStartScene(SceneTransition _transition)
 	{
 		if (! Network.isServer)
@@ -64,8 +64,7 @@ public class TransitionManager : MonoBehaviour
 				Debug.LogError("Stoping game failed. Transfer abort.");
 			}
 		}
-		
-		Application.LoadLevel(SceneNames.Get(Scene.LOBBY));
+		LevelLoader.Instance.LoadLevel(SceneNames.Get(Scene.LOBBY));
 		Global.Context().context = ContextType.LOBBY;
 	}
 
@@ -90,8 +89,7 @@ public class TransitionManager : MonoBehaviour
 
 	void StartGameLocal(GameTransition _transition)
 	{
-		Application.LoadLevel(_transition.map);
-
+		LevelLoader.Instance.LoadLevel(_transition.map);
 		if (_transition.setupDelay < 0) 
 		{
 			Debug.Log("Trying to setup GameMode without delay. Sure?");

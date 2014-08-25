@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 2be8e3fd3b01bd54cae8bc37dfcfe0a9
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Small Gun Bullet
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
