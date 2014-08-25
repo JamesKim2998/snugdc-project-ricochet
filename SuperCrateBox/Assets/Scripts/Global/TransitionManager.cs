@@ -28,7 +28,7 @@ public class GameTransition
 public class TransitionManager : MonoBehaviour
 {
 	GameTransition m_GameTransition;
-	
+
 	public void RequestStartScene(SceneTransition _transition)
 	{
 		if (! Network.isServer)
@@ -50,10 +50,7 @@ public class TransitionManager : MonoBehaviour
 	
 	void StartSceneLocal(SceneTransition _transition)
 	{
-		if(UILoading.shutter!=null)
-			UILoading.shutter.LoadLevel(SceneNames.Get(_transition.scene));
-		else
-			Application.LoadLevel(SceneNames.Get(_transition.scene));
+		LevelLoader.Instance.LoadLevel(SceneNames.Get(_transition.scene));
 		Global.Context ().context = _transition.context;
 	}
 
@@ -67,11 +64,7 @@ public class TransitionManager : MonoBehaviour
 				Debug.LogError("Stoping game failed. Transfer abort.");
 			}
 		}
-		if(UILoading.shutter!=null)
-			UILoading.shutter.LoadLevel(SceneNames.Get(Scene.LOBBY));
-		else
-			Application.LoadLevel(SceneNames.Get(Scene.LOBBY));
-
+		LevelLoader.Instance.LoadLevel(SceneNames.Get(Scene.LOBBY));
 		Global.Context().context = ContextType.LOBBY;
 	}
 
@@ -96,11 +89,7 @@ public class TransitionManager : MonoBehaviour
 
 	void StartGameLocal(GameTransition _transition)
 	{
-		if(UILoading.shutter!=null)
-			UILoading.shutter.LoadLevel(_transition.map);
-		else
-			Application.LoadLevel(_transition.map);
-
+		LevelLoader.Instance.LoadLevel(_transition.map);
 		if (_transition.setupDelay < 0) 
 		{
 			Debug.Log("Trying to setup GameMode without delay. Sure?");
