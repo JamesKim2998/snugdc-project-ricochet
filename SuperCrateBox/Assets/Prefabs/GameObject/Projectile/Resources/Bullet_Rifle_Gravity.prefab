@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.35237455, y: 10.9206133, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -97,7 +97,7 @@ AudioSource:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 4abaf9e704b0ad448882f3127a66c705, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 16cda1b18b32f264da74ef917766a32d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -222,7 +222,7 @@ MonoBehaviour:
   life: 1.20000005
   isHitOwner: 1
   attackData:
-    velocity: {x: 0, y: 0}
+    owner: 
     damage: 1
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
@@ -274,7 +274,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: b2d8e5806218dca4f99644cb378f87e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69d536e73c32d8e48a02a0bacc98a204, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
