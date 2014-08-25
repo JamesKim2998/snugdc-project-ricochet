@@ -102,12 +102,19 @@ public class Projectile : MonoBehaviour {
 		{
 			activated = true;
 		}
+
+		bool isLaser = GetComponent<Laser>() != null;
 		
 		if (m_OwnerDeadZoneColliderID == 0)
 		{
 			Debug.Log ("Character doesn't have an detector");
 			m_OutOfDeadZone = true;
 		} 
+		else if (isLaser)
+		{
+			// Laser does not need dead zone.
+			m_OutOfDeadZone = true;
+		}
 		else 
 		{
 			if(IsProjectileInsideOfInitialDeadzone())
