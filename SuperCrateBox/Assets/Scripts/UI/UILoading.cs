@@ -2,24 +2,23 @@
 using System.Collections;
 
 public class UILoading : LevelLoader {
-	public bool isMainMenu = false;
+	public float imagePosition = 16f;
 	string sceneName;
 	void Start(){
-		if(!isMainMenu)
-			iTween.MoveTo(gameObject,iTween.Hash("position",Vector3.up*16f,
-			                                     "time",1f,
-			                                     "oncomplete","startScene",
-			                                     "oncompletetarget",gameObject,
-			                                       "easetype",iTween.EaseType.easeInCirc,
-			                                       "delay",0.5f,
-			                                       "islocal",true));
+		iTween.MoveTo(gameObject,iTween.Hash("position",new Vector3(0,imagePosition,10),
+		                                     "time",1f,
+		                                     "oncomplete","startScene",
+		                                     "oncompletetarget",gameObject,
+		                                     "easetype",iTween.EaseType.easeInCirc,
+		                                     "delay",0.5f,
+		                                     "islocal",true));
 	}
 	void startScene(){
 //		gameObject.SetActive(false);
 	}
 	override public void LoadLevel(string _sceneName){
 		sceneName = _sceneName;
-		iTween.MoveTo(gameObject,iTween.Hash("position",Vector3.zero,
+		iTween.MoveTo(gameObject,iTween.Hash("position",new Vector3(0,0,10),
 		                                     "time",0.5f,
 		                                     "oncomplete","loadScene",
 		                                     "oncompletetarget",gameObject,
