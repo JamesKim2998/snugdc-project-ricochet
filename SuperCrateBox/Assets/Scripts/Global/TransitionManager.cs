@@ -50,7 +50,7 @@ public class TransitionManager : MonoBehaviour
 	
 	void StartSceneLocal(SceneTransition _transition)
 	{
-		LevelLoader.Instance.LoadLevel(SceneNames.Get(_transition.scene));
+		Application.LoadLevel(SceneNames.Get(_transition.scene));
 		Global.Context ().context = _transition.context;
 	}
 
