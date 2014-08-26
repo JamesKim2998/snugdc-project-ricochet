@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: character_red_skin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e8114845cdf0b4aa433ad4afb9cf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f03d73306d472b4cabe212bed0fd1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head:
+    sprite: {fileID: 21300000, guid: 6092ae1b929d8a84782f48c4119c6352, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  body:
+    sprite: {fileID: 21300000, guid: dc1ca17ba6fe92749945ab9c9ba78e6b, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainArm:
+    sprite: {fileID: 21300000, guid: 519a0404ef6838047bd7e1673db3407f, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subArm:
+    sprite: {fileID: 21300000, guid: fd7d8a5b0bedaa64a96c15ab7b811b72, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainLeg:
+    sprite: {fileID: 21300000, guid: 21edc54cf9f05c0438dc78dfc4574fd7, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subLeg:
+    sprite: {fileID: 21300000, guid: 1ba11fa314265f74c8755bcb2dddf497, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

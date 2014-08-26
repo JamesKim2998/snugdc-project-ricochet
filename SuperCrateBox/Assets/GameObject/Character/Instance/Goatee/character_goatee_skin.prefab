@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: character_goatee_skin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e8114845cdf0b4aa433ad4afb9cf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f03d73306d472b4cabe212bed0fd1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head:
+    sprite: {fileID: 21300000, guid: cc48b2d9e297f024b959eacd2d285de1, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  body:
+    sprite: {fileID: 21300000, guid: c6e5663d05ad95841a9b2ded05e82cf0, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainArm:
+    sprite: {fileID: 21300000, guid: 08c0dbc9baae9cd49a855fa6bfcff238, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subArm:
+    sprite: {fileID: 21300000, guid: d823cb2a11087f44bb48c21eebdf6c36, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainLeg:
+    sprite: {fileID: 21300000, guid: c241e44d044c9c248b8c6edc2b87af21, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subLeg:
+    sprite: {fileID: 21300000, guid: df05f4d6de17c634091af9a97e4c742c, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: character_skellington_skin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e8114845cdf0b4aa433ad4afb9cf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f03d73306d472b4cabe212bed0fd1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head:
+    sprite: {fileID: 21300000, guid: 7e9faee9445169f4f8bf8908aee92352, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  body:
+    sprite: {fileID: 21300000, guid: c8b29ccda929be9449f76534be7dc8a1, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainArm:
+    sprite: {fileID: 21300000, guid: 6930dbd69e2c00345897a4c1ab2f9829, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subArm:
+    sprite: {fileID: 21300000, guid: aab6d9caeaa979c4a8304084abb4aa97, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainLeg:
+    sprite: {fileID: 21300000, guid: 1634da4128815ad4c94fc08ceab2b9ce, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subLeg:
+    sprite: {fileID: 21300000, guid: 91daece6406232f43b61b5955e74a6c4, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
