@@ -42,7 +42,7 @@ MonoBehaviour:
   deleteAfterApply: 0
   audio_:
     pause: 0
-    volume: 0
+    volume: 1
   camera_:
     camera: {fileID: 0}
   hud:
@@ -56,7 +56,6 @@ MonoBehaviour:
     scoreBoardActivateKey: 9
     resultBoardPosition: {x: 0, y: 0, z: 0}
     resultBoardPrf: {fileID: 100000, guid: c9183a82fbcaaa7499267c629a3519db, type: 2}
-    loadingCutScenePrf: {fileID: 100000, guid: 5335eed2e516f2b4c8b8a633c4e0bc5b, type: 2}
     modeHUDs:
     - mode: 1
       prefab: {fileID: 100000, guid: c42e8adf57969d448b3b381d468a13ef, type: 2}
