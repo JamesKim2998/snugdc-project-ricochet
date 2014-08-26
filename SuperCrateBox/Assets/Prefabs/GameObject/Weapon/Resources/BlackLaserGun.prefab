@@ -148,7 +148,7 @@ MonoBehaviour:
   shootAtOnce: 1
   ammoMax: 1
   relativeVelocityEnabled: 1
-  projectileOffset: {x: 1.5, y: 0, z: 0}
+  projectileOffset: {x: 2.5, y: 0, z: 0}
   prepareTime: 0
   chargeTime: .00100000005
   shootTime: 0
