@@ -4,6 +4,7 @@ using System.Collections;
 public enum CharacterType
 {
 	NONE,
+	BEGIN,
 	BLUE,
 	BURD,
 	EYEBALL,
@@ -15,4 +16,5 @@ public enum CharacterType
 	SKELLINGTON,
 	SPIDER,
 	YELLOW,
+	END,
 }

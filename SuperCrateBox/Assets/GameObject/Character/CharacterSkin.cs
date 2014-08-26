@@ -21,14 +21,6 @@ public class CharacterSkin : MonoBehaviour
 	public CharacterSkinPart mainLeg;
 	public CharacterSkinPart subLeg;
 
-	public void Awake()
-	{
-	}
-
-	public void Start()
-	{
-	}
-
 	public void Apply(CharacterRenderer _renderer)
 	{
 		var _datas = new List<CharacterSkinPart> {

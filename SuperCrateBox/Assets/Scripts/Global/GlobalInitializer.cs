@@ -13,9 +13,6 @@ public class GlobalInitializer : MonoBehaviour
 	public bool overrideTransitionGameCutScene = false;
 	public GameObject transitionGameCutScenePrf;
 	
-	public bool overrideDatabaseDef = false;
-	public DatabaseDef databaseDef;
-
 	void Start ()
 	{
 		if (initializeOnStart)

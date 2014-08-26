@@ -11,6 +11,7 @@ public class UIRoomPlayerEntry : MonoBehaviour
 			if (m_Player != null) m_Player.postChanged -= ListenPlayerInfoChanged;
 
 			m_Player = value;
+			characterSelector.player = m_Player.guid;
 			Refresh();
 
 			if (m_Player != null) m_Player.postChanged += ListenPlayerInfoChanged;
@@ -18,6 +19,7 @@ public class UIRoomPlayerEntry : MonoBehaviour
 	}
 
 	public UILabel nameLabel;
+	public UICharacterSelector characterSelector;
 
 	private bool m_PrevReadyState = false;
 	public List<UITweener> readyTweens;

@@ -7,6 +7,20 @@ public class CharacterSkinDatabase : MonoBehaviour
 	private Dictionary<CharacterType, CharacterSkin> m_Skins = new Dictionary<CharacterType, CharacterSkin>();
 	public Dictionary<CharacterType, CharacterSkin> skins { get { return m_Skins; } }
 
+	public Sprite GetIcon(CharacterType _type) 
+	{ 
+		CharacterSkin _skin;
+		if (skins.TryGetValue(_type, out _skin))
+		{
+			return _skin.head.sprite;
+		}
+		else 
+		{
+			Debug.LogError("Skin " + _type + " is not exists!");
+			return null;
+		}
+	}
+
 	public List<GameObject> editorSkinPrfs;
 
 	public CharacterSkin this[CharacterType type] { get { return skins[type]; } }

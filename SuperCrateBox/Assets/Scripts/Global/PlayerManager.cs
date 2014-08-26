@@ -18,6 +18,16 @@ public class PlayerInfo
 		}
 	}
 
+	private CharacterType m_CharacterSelected = CharacterType.BLUE;
+	public CharacterType characterSelected { 
+		get { return m_CharacterSelected; } 
+		set { 
+			if (m_CharacterSelected == value) return; 
+			m_CharacterSelected = value; 
+			if (postChanged != null) postChanged(this); 
+		}
+	}
+
 	[System.NonSerialized]
 	public Action<PlayerInfo> postChanged;
 }
@@ -48,6 +58,8 @@ public class PlayerManager : MonoBehaviour
 	public bool IsMine(PlayerInfo _player) { return _player.guid == m_Mine.guid; }
 	public bool IsServer(PlayerInfo _player ) { if (server != null) return _player.guid == server.guid; return false;}
 	public bool IsClient(PlayerInfo _player ) { if (server != null) return _player.guid != server.guid; return false;}
+
+	public PlayerInfo this[string _player] { get { return players[_player]; } }
 
 	void Awake() 
 	{
@@ -227,7 +239,7 @@ public class PlayerManager : MonoBehaviour
 		}
 	}
 
-	void UpdateInfo()
+	public void UpdateInfo()
 	{
 		if (Network.peerType == NetworkPeerType.Disconnected)
 		{
@@ -254,7 +266,8 @@ public class PlayerManager : MonoBehaviour
 		}
 
 		_playerLocal.name = _player.name;
-
+		_playerLocal.characterSelected = _player.characterSelected;
+		
 		if (postInfoChanged != null) postInfoChanged(_player);
 	}
 
@@ -266,3 +279,4 @@ public class PlayerManager : MonoBehaviour
 		UpdateInfoLocal (_playerInfo);
 	}
 }
+
