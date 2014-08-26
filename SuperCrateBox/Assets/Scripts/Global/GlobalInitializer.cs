@@ -12,6 +12,9 @@ public class GlobalInitializer : MonoBehaviour
 
 	public bool overrideTransitionGameCutScene = false;
 	public GameObject transitionGameCutScenePrf;
+	
+	public bool overrideDatabaseDef = false;
+	public DatabaseDef databaseDef;
 
 	void Start ()
 	{
@@ -32,9 +35,6 @@ public class GlobalInitializer : MonoBehaviour
 			_global.bgm.Play();
 		}
 
-//		if (gameSetting != null)
-//			Global.Instance.gameSetting = gameSetting;
-
 		if (overrideTransitionGameCutScene)
 			_global.transition.gameCutScene = transitionGameCutScenePrf;
 
@@ -42,4 +42,3 @@ public class GlobalInitializer : MonoBehaviour
 			Destroy( gameObject);
 	}
 }
-

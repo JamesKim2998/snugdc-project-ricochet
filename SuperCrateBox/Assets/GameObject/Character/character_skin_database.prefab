@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: global_initializer
+  m_Name: character_skin_database
   m_TagString: Untagged
-  m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -35,18 +35,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eca565e955acfdc41b83e5ea4e413676, type: 3}
+  m_Script: {fileID: 11500000, guid: 8532652cef38e6c4ebc15dd293be83a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeOnStart: 1
-  destroyAfterInitialize: 1
-  bgmEnabled: 1
-  bgm: {fileID: 8300000, guid: 8f491c6575b550d4fba61078f85562fc, type: 3}
-  overrideTransitionGameCutScene: 0
-  transitionGameCutScenePrf: {fileID: 100002, guid: a288f482eed8313409e2fbb60f494850,
-    type: 2}
-  overrideDatabaseDef: 0
-  databaseDef: {fileID: 11400000, guid: d54cdab7ea360bc4cb28f15982517f3e, type: 2}
+  editorSkinPrfs:
+  - {fileID: 100000, guid: 111649a0c32ebda46ae57f9a5ad0169e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

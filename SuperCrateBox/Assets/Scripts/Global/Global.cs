@@ -64,24 +64,16 @@ public class Global : Singleton<Global>
 		context = new ContextManager ();
 		random = new System.Random ();
 
-		bgm = gameObject.AddComponent<AudioSource>();
-		sfx = gameObject.AddComponent<AudioSource>();
-
 		if (networkView == null) gameObject.AddComponent<NetworkView>();
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
-
-		server = GetComponent<ServerManager>();
-		if (server == null) server = gameObject.AddComponent<ServerManager>();
-
-		player = GetComponent<PlayerManager>();
-		if (player == null) player = gameObject.AddComponent<PlayerManager>();
-
-		ready = GetComponent<ReadyManager>();
-		if (ready == null) ready = gameObject.AddComponent<ReadyManager>();
-
-		transition = GetComponent<TransitionManager>();
-		if (transition == null) transition = gameObject.AddComponent<TransitionManager>();
+		
+		bgm = gameObject.AddComponent<AudioSource>();
+		sfx = gameObject.AddComponent<AudioSource>();
+		server = ComponentHelper.AddComponentIfNotExists<ServerManager>(gameObject);
+		player = ComponentHelper.AddComponentIfNotExists<PlayerManager>(gameObject);
+		ready = ComponentHelper.AddComponentIfNotExists<ReadyManager>(gameObject);
+		transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
 	}
 
 	void Start () 
