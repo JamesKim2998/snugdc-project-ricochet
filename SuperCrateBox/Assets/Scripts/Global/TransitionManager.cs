@@ -29,6 +29,8 @@ public class TransitionManager : MonoBehaviour
 {
 	GameTransition m_GameTransition;
 
+	public GameObject gameCutScene;
+
 	public void RequestStartScene(SceneTransition _transition)
 	{
 		if (! Network.isServer)
@@ -90,6 +92,7 @@ public class TransitionManager : MonoBehaviour
 	void StartGameLocal(GameTransition _transition)
 	{
 		LevelLoader.Instance.LoadLevel(_transition.map);
+		Game.Progress().TryIntroGame();
 		if (_transition.setupDelay < 0) 
 		{
 			Debug.Log("Trying to setup GameMode without delay. Sure?");
@@ -100,6 +103,9 @@ public class TransitionManager : MonoBehaviour
 			m_GameTransition = _transition;
 			Invoke("SetupGame", m_GameTransition.setupDelay);
 		}
+
+		if (gameCutScene)
+			Instantiate(gameCutScene);
 	}
 
 	void SetupGame()

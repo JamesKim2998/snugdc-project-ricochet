@@ -78,7 +78,7 @@ public class GameHUDDef
 
 	public Vector3 resultBoardPosition = Vector3.zero;
 	public GameObject resultBoardPrf;
-	
+
 	[System.Serializable]
 	public class ModeHUD {
 		public GameModeType mode;

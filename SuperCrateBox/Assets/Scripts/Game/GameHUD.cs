@@ -19,6 +19,7 @@ public class GameHUD : MonoBehaviour
 
 	void Start()
 	{
+		Game.Progress ().postIntro += ListenGameIntro;
 		Game.Progress ().postOver += ListenGameOver;
 		Game.Progress ().postStop += ListenGameStop;
 		Game.ModeManager().postChanged += ListenModeChanged;
@@ -26,6 +27,7 @@ public class GameHUD : MonoBehaviour
 
 	~GameHUD()
 	{
+		Game.Progress ().postIntro -= ListenGameIntro;
 		Game.Progress ().postOver -= ListenGameOver;
 		Game.Progress ().postStop -= ListenGameStop;
 		Game.ModeManager().postChanged -= ListenModeChanged;
@@ -111,6 +113,10 @@ public class GameHUD : MonoBehaviour
 	void ListenModeChanged(GameMode _mode )
 	{
 		SetMode(_mode.mode);
+	}
+
+	void ListenGameIntro()
+	{
 	}
 
 	void ListenGameOver()

@@ -20,6 +20,8 @@ public class GameProgress : MonoBehaviour
 
 	private State m_NextState = State.NULL;
 
+	public bool m_IntroOnce = false;
+
 	private float m_TimeElapsed = 0f;
 	public float timeElapsed { get { return m_TimeElapsed; } private set {m_TimeElapsed = value; } }
 	
@@ -29,6 +31,7 @@ public class GameProgress : MonoBehaviour
 	private int m_GameID;
 	public int gameID { get { return m_GameID; } private set { m_GameID = value; } }
 
+	public Action postIntro;
 	public Action postStart;
 	public Action postRun;
 	public Action postOver;
@@ -75,6 +78,25 @@ public class GameProgress : MonoBehaviour
 			case State.STOP:    DoStopGame(); break;
 			}
 		}
+	}
+
+	public bool TryIntroGame()
+	{
+		if (state != State.STOP)
+		{
+			Debug.LogWarning("Intro only can be started from STOP state. Ignore.");
+			return false;
+		}
+
+		if (m_IntroOnce)
+		{
+			Debug.LogWarning("Intro already has been entered. Ignore.");
+			return false;
+		}
+
+		m_IntroOnce = true;
+		if (postIntro != null) postIntro();
+		return true;
 	}
 
 	public void StartGame()
@@ -212,6 +234,7 @@ public class GameProgress : MonoBehaviour
 		}
 
 		state = State.STOP;
+		m_IntroOnce = false;
 		if (postStop != null) postStop();
 		Game.Instance.Purge();
 	}
