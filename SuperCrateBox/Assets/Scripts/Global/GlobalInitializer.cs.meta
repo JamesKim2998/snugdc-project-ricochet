@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: eca565e955acfdc41b83e5ea4e413676
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bgm: {instanceID: 0}
+  - transitionGameCutScenePrf: {fileID: 100002, guid: a288f482eed8313409e2fbb60f494850,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

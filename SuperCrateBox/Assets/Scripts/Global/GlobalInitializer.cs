@@ -10,7 +10,8 @@ public class GlobalInitializer : MonoBehaviour
 	public bool bgmEnabled = true;
 	public AudioClip bgm;
 
-//	public GameSetting gameSetting;
+	public bool overrideTransitionGameCutScene = false;
+	public GameObject transitionGameCutScenePrf;
 
 	void Start ()
 	{
@@ -33,6 +34,9 @@ public class GlobalInitializer : MonoBehaviour
 
 //		if (gameSetting != null)
 //			Global.Instance.gameSetting = gameSetting;
+
+		if (overrideTransitionGameCutScene)
+			_global.transition.gameCutScene = transitionGameCutScenePrf;
 
 		if (destroyAfterInitialize)
 			Destroy( gameObject);

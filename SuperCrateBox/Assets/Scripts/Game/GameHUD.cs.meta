@@ -3,12 +3,9 @@ guid: beaa30136e81bed4f8ba2bde4a4f376b
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - hudLayer: {instanceID: 0}
+  - loadingCutScenePrf: {fileID: 100000, guid: 5335eed2e516f2b4c8b8a633c4e0bc5b, type: 2}
   - chatscreen: {instanceID: 0}
   - scoreBoard: {instanceID: 0}
-  - resultBoardParent: {instanceID: 0}
-  - resultBoardPrf: {fileID: 100000, guid: c9183a82fbcaaa7499267c629a3519db, type: 2}
-  - resultBoard: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
