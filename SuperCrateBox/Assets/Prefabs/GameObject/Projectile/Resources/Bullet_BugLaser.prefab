@@ -348,7 +348,7 @@ MonoBehaviour:
   reflectionMask:
     serializedVersion: 2
     m_Bits: 256
-  effectReflectPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
+  effectReflectPrf: {fileID: 0}
   effectReflectOffset: {x: 0, y: 0, z: 0}
   effectPenetratePrf: {fileID: 0}
   effectPenetrateOffset: {x: 0, y: 0, z: 0}
@@ -388,13 +388,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerID: 0
   ownerDetecterID: 0
-  ownerDeadZoneCollider: {fileID: 0}
-  life: .300000012
+  life: .5
   isHitOwner: 1
   attackData:
-    velocity: {x: 0, y: 0}
-    damage: 1
     owner: 
+    damage: 1
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
   relativeDrivingForce: {x: 0, y: 0}
