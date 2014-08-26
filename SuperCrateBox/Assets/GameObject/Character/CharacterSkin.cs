@@ -59,7 +59,9 @@ public class CharacterSkin : MonoBehaviour
 		var _angle = _renderer.transform.localEulerAngles;
 		_angle.z = _skin.angle;
 		_renderer.transform.localEulerAngles = _angle;
-		_renderer.transform.localScale = _skin.scale;
+
+		Vector3 _scale = new Vector3(_skin.scale.x, _skin.scale.y, 1);
+		_renderer.transform.localScale = _scale;
 	}
 
 }
