@@ -1894,7 +1894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   owner: 
-  jumpForce: 20
+  jumpForce: 10
   jumpCooldown: .100000001
   moveForce: 2000
   hpMax: 1

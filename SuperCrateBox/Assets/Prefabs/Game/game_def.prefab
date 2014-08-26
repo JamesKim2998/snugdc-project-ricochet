@@ -67,9 +67,9 @@ MonoBehaviour:
   character:
     character: {fileID: 0}
     useMaxUpForce: 1
-    maxUpForce: 2
+    maxUpForce: 80
     useUpForce: 1
-    upForce: 30
+    upForce: 400
     weaponDefault: {fileID: 0}
     characterColors:
     - {r: 1, g: 0, b: 0, a: 0}

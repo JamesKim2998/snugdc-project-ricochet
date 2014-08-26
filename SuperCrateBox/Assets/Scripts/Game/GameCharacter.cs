@@ -144,12 +144,13 @@ public class GameCharacter
 			if (! _horizontal.Equals(0)) 
 				character.Move(_horizontal);
 			
-			float _vertical = Input.GetAxis("Vertical");
-			
-			if (character.floating && _vertical > 0 && m_UpForceLeft > 0) 
+			if (Input.GetButton("Jump")) 
 			{
-				m_UpForceLeft -= upForce * Time.fixedDeltaTime;
-				m_Character.rigidbody2D.AddForce(new Vector2(0, upForce));
+				if (character.floating && m_UpForceLeft > 0) 
+				{
+					m_UpForceLeft -= upForce * Time.fixedDeltaTime;
+					m_Character.rigidbody2D.AddForce(new Vector2(0, upForce));
+				}
 			}
 		}
 		
