@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   head:
-    sprite: {fileID: 21300000, guid: 5b27854c9d6a0bb4dbc98358292987de, type: 3}
+    sprite: {fileID: 21300000, guid: 984c1758dc132cd4aafd2c09dffb1cf4, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
@@ -55,7 +55,7 @@ MonoBehaviour:
     angle: 0
     scale: {x: 1, y: 1}
   subArm:
-    sprite: {fileID: 21300000, guid: 0f2e7c3741189414f8e38f9b2e4992cc, type: 3}
+    sprite: {fileID: 21300000, guid: 54461492065a1444f81ea0ab56e26f74, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
@@ -65,11 +65,10 @@ MonoBehaviour:
     angle: 0
     scale: {x: 1, y: 1}
   subLeg:
-    sprite: {fileID: 21300000, guid: 44a35640c80de0945a85322e44671e3d, type: 3}
+    sprite: {fileID: 21300000, guid: 5d102adde2b913d49927a35f442189f3, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
-  datas: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
