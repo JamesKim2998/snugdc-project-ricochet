@@ -9,4 +9,10 @@ public class CharacterName : MonoBehaviour {
 	{
 		text.text = _name;
 	}
+
+	void LateUpdate()
+	{
+		GameObject _textGameObject = text.gameObject;
+		_textGameObject.transform.rotation = Quaternion.identity;
+	}
 }
