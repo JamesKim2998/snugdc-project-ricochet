@@ -98,7 +98,7 @@ AudioSource:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 4abaf9e704b0ad448882f3127a66c705, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f45d5231a81561048b0cfe641dbb334f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -262,12 +262,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerID: 0
   ownerDetecterID: 0
-  ownerDeadZoneCollider: {fileID: 0}
   life: 1
   isHitOwner: 1
   attackData:
     owner: 
-    velocity: {x: 0, y: 0}
     damage: 1
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
