@@ -18,7 +18,6 @@ public class UIHostEntry : MonoBehaviour {
 			Refresh();
 
 		Global.Player().postSetuped += ListenPlayerSetuped;
-		Global.Server().postConnectionSetuped += ListenConnectionSetuped;
 	}
 
 	void OnDestroy()
@@ -55,12 +54,8 @@ public class UIHostEntry : MonoBehaviour {
 
 	void ListenPlayerSetuped(PlayerInfo _player)
 	{
-		Refresh();
-	}
-
-	void ListenConnectionSetuped()
-	{
 		characterSelector.player = Global.Server().server;
+		Refresh();
 	}
 
 	void OnDisconnectedFromServer()
