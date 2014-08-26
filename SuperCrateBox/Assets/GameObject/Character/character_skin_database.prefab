@@ -40,6 +40,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorSkinPrfs:
   - {fileID: 100000, guid: 111649a0c32ebda46ae57f9a5ad0169e, type: 2}
+  - {fileID: 100000, guid: 81e1d5472086e7847bbc09a2ace60b6f, type: 2}
+  - {fileID: 100000, guid: ce234249ada3ff544b80f7a63870c940, type: 2}
+  - {fileID: 100000, guid: a68fe0e51b15d6f419c5d635148191f0, type: 2}
+  - {fileID: 100000, guid: eb3e00c749d319b4fb7ab15b0f3a6604, type: 2}
+  - {fileID: 100000, guid: 4811f36c8549d0747b23bbf32bfd738d, type: 2}
+  - {fileID: 100000, guid: c476f6ea72945514d849408ab032c6d5, type: 2}
+  - {fileID: 100000, guid: 89abb793c36bf944b80f5fccb3f1dab9, type: 2}
+  - {fileID: 100000, guid: e34c07a6206825543a4cbdac4b082c7a, type: 2}
+  - {fileID: 100000, guid: e9fbe42a99e995e4e8fc27a60051db45, type: 2}
+  - {fileID: 100000, guid: 5295ffb2f06422a40a6c323f30027942, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

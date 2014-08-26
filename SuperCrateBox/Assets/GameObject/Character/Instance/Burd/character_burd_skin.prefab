@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: character_burd_skin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e8114845cdf0b4aa433ad4afb9cf24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f03d73306d472b4cabe212bed0fd1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head:
+    sprite: {fileID: 21300000, guid: 20c62aa88f315824da3341dc5510cea3, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  body:
+    sprite: {fileID: 21300000, guid: bd3536bf3adf61643b0faa9446c25e80, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainArm:
+    sprite: {fileID: 21300000, guid: 84fe4725228d2f2469c3f8a15837269c, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subArm:
+    sprite: {fileID: 21300000, guid: e917e23d527cc70469bbf866db959d09, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  mainLeg:
+    sprite: {fileID: 21300000, guid: d1c6f512ad58b484daa8596b6e2814b0, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+  subLeg:
+    sprite: {fileID: 21300000, guid: b390ec3b5ac3f3a4db015200c53590e8, type: 3}
+    position: {x: 0, y: 0}
+    angle: 0
+    scale: {x: 1, y: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
