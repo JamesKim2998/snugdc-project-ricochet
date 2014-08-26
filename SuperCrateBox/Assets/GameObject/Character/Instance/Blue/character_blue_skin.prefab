@@ -45,7 +45,7 @@ MonoBehaviour:
     angle: 0
     scale: {x: 1, y: 1}
   body:
-    sprite: {fileID: 21300000, guid: 8598f357e7860f141945add72cabdcbb, type: 3}
+    sprite: {fileID: 21300000, guid: f3b4bcd8fd712a94d8dfe36b6e3e18c5, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}

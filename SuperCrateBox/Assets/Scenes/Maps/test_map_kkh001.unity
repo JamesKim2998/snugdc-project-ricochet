@@ -5134,12 +5134,10 @@ MonoBehaviour:
   initializeOnStart: 1
   destroyAfterInitialize: 1
   bgmEnabled: 1
-  bgm: {fileID: 8300000, guid: 810eb4e2804fac944a6901003b8668ef, type: 3}
+  bgm: {fileID: 8300000, guid: f308d4d00d3e96844a35636e0b426f71, type: 3}
   overrideTransitionGameCutScene: 0
   transitionGameCutScenePrf: {fileID: 100002, guid: a288f482eed8313409e2fbb60f494850,
     type: 2}
-  overrideDatabaseDef: 0
-  databaseDef: {fileID: 11400000, guid: d54cdab7ea360bc4cb28f15982517f3e, type: 2}
 --- !u!4 &391190585
 Transform:
   m_ObjectHideFlags: 0
@@ -5238,7 +5236,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 406049310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -586.666748, y: -440, z: 0}
+  m_LocalPosition: {x: -500.666718, y: -375.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 937460871}
@@ -13090,7 +13088,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 885818658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -586.666748, y: 440, z: 0}
+  m_LocalPosition: {x: -500.666718, y: 375.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 367111260}
@@ -22450,7 +22448,7 @@ Prefab:
     - target: {fileID: 11400000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
       propertyPath: bgm
       value: 
-      objectReference: {fileID: 8300000, guid: 810eb4e2804fac944a6901003b8668ef, type: 3}
+      objectReference: {fileID: 8300000, guid: f308d4d00d3e96844a35636e0b426f71, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
   m_RootGameObject: {fileID: 391190583}
@@ -22482,7 +22480,7 @@ Transform:
   m_GameObject: {fileID: 1494340043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.923492432, y: 45.3751907, z: 0}
-  m_LocalScale: {x: .0022727272, y: .0022727272, z: .0022727272}
+  m_LocalScale: {x: .00266311574, y: .00266311574, z: .00266311574}
   m_Children:
   - {fileID: 1091188176}
   - {fileID: 885818659}

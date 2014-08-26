@@ -62,7 +62,7 @@ MonoBehaviour:
     angle: 0
     scale: {x: 1, y: 1}
   mainArm:
-    sprite: {fileID: 21300000, guid: 84fe4725228d2f2469c3f8a15837269c, type: 3}
+    sprite: {fileID: 21300000, guid: f9765b6a4e7445a458ca936440b3500f, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}

@@ -62,22 +62,22 @@ MonoBehaviour:
     angle: 0
     scale: {x: 1, y: 1}
   mainArm:
-    sprite: {fileID: 21300000, guid: edbeb120f321a18488d4b841ef3e22be, type: 3}
+    sprite: {fileID: 21300000, guid: 5c602b8dbd802f74597fe231e31def5a, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
   subArm:
-    sprite: {fileID: 21300000, guid: 41c2b7e4108118f4bb95fbc08da583e5, type: 3}
+    sprite: {fileID: 21300000, guid: 5102d88928182774299dfaf4e10e49b7, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
   mainLeg:
-    sprite: {fileID: 21300000, guid: 508515f49ba508c44be4cad25e59d9a8, type: 3}
+    sprite: {fileID: 21300000, guid: eff66e31a205a4f4085fdd5fc73d8b9a, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
   subLeg:
-    sprite: {fileID: 21300000, guid: 4838b7037bee5594c86e2f987f8a9570, type: 3}
+    sprite: {fileID: 21300000, guid: 81c33b1bf365925419bd021ba418dd40, type: 3}
     position: {x: 0, y: 0}
     angle: 0
     scale: {x: 1, y: 1}
