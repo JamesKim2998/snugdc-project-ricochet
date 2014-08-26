@@ -275,13 +275,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1365
-  mHeight: 786
+  mWidth: 1200
+  mHeight: 900
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.73664117
+  aspectRatio: 1.33329999
   mSprite: {fileID: 21300000, guid: 72167de3714ea7345ab5ece336f97457, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}

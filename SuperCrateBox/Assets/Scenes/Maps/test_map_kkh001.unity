@@ -5134,7 +5134,7 @@ MonoBehaviour:
   initializeOnStart: 1
   destroyAfterInitialize: 1
   bgmEnabled: 1
-  bgm: {fileID: 8300000, guid: fa31fb87a8ad3e84680f259e2d9ee312, type: 3}
+  bgm: {fileID: 8300000, guid: 810eb4e2804fac944a6901003b8668ef, type: 3}
   overrideTransitionGameCutScene: 0
   transitionGameCutScenePrf: {fileID: 100002, guid: a288f482eed8313409e2fbb60f494850,
     type: 2}
@@ -8912,7 +8912,7 @@ MonoBehaviour:
   deleteAfterApply: 0
   audio_:
     pause: 0
-    volume: 0
+    volume: 1
   camera_:
     camera: {fileID: 1658369782}
   hud:
@@ -22450,7 +22450,7 @@ Prefab:
     - target: {fileID: 11400000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
       propertyPath: bgm
       value: 
-      objectReference: {fileID: 8300000, guid: fa31fb87a8ad3e84680f259e2d9ee312, type: 3}
+      objectReference: {fileID: 8300000, guid: 810eb4e2804fac944a6901003b8668ef, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a87768966ff69d04f8e58e929f28b7c1, type: 2}
   m_RootGameObject: {fileID: 391190583}
