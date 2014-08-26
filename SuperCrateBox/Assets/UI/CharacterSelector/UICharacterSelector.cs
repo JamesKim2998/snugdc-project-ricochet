@@ -23,7 +23,7 @@ public class UICharacterSelector : MonoBehaviour
 
 			icon.sprite2D = Database.Skin.GetIcon(m_Type);
 
-			if (m_Player == null)
+			if (player == null)
 			{
 				Debug.LogWarning("Player is not specified. Ignore.");
 				return;

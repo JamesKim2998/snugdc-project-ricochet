@@ -49,26 +49,36 @@ public class CharacterSpawner : MonoBehaviour
 		m_CharacterRef = new WeakReference( _character);
 		_character.hitEnabled = false;
 		_character.Invoke("EnableHit", invinsibleTime);
-		_character.SendMessage("SetName", Global.Player().mine.name,SendMessageOptions.RequireReceiver);
+		_character.SendMessage("SetName", Global.Player().mine.name, SendMessageOptions.RequireReceiver);
+
+		// set skin
+		var _characterSelected = Global.Player().mine.characterSelected;
+		Database.Skin[_characterSelected].Apply(_character.renderers);
 
 		if (networkView.enabled && Network.peerType != NetworkPeerType.Disconnected)
 		{
 			_character.networkView.viewID = Network.AllocateViewID();
 			_character.networkView.enabled = true;
-			networkView.RPC("CharacterSpawner_RequestSpawn", RPCMode.Others, _character.networkView.viewID, _characterPosition, Global.Player ().mine.name);
+			networkView.RPC("CharacterSpawner_RequestSpawn", RPCMode.Others, 
+			                Network.player.guid, 
+			                _character.networkView.viewID, 
+			                _characterPosition);
 		}
 
 		return _character;
 	}
 
 	[RPC]
-	void CharacterSpawner_RequestSpawn(NetworkViewID _viewID, Vector3 _position, string _name)
+	void CharacterSpawner_RequestSpawn(string _player, NetworkViewID _viewID, Vector3 _position)
 	{
 //		Debug.Log("Spawn character network.");
 		var _character = GameObject.Instantiate(characterPrf, _position, Quaternion.identity) as GameObject;
 		_character.networkView.enabled = true;
 		_character.networkView.viewID = _viewID;
-		_character.SendMessage("SetName", _name, SendMessageOptions.RequireReceiver);
+
+		var _playerInfo = Global.Player()[_player];
+		_character.SendMessage("SetName", _playerInfo.name, SendMessageOptions.RequireReceiver);
+		Database.Skin[_playerInfo.characterSelected].Apply(_character.GetComponent<Character>().renderers);
 	}
 
 	void ListenDestroy(Destroyable _destroyable)
