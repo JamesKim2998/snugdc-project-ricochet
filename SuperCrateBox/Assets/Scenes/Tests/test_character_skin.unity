@@ -2017,27 +2017,28 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
-  mWidth: 768
-  mHeight: 432
+  mWidth: 704
+  mHeight: 448
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.77777779
+  aspectRatio: 1.57142854
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
   mText: "how to make skin.\n\n1. prepare image\nrotate your image resource in the
     same direction\nwith \"blue\". just same as \"blue\" please.\n\n2. make character
-    skin \ncopy character_blue_skin and paste.\n-> retarget type.\n-> retarget all
-    sprites. \n-> position and scale sprites with \"import setting\".\n   not by component
-    parameter!\n   scale can be set by pixel ratio, and the proper value is 400.\n->
-    set angles.\n-> activate \"test1\" object in hierarchy \n   and retarget skin
-    to you make.\n-> save this object as prefab.\n-> now you can test skin by execute
-    application. \n   little efficient but it's the best way we got now. sorry.\n\n3.
-    register character skin to database.\nselect character_skin_database in hierarchy.\n->
-    add skin. \n-> click apply in top bar of \"Inspector\" panel.\n-> activate \"test2\"
-    object in hierarchy.\n-> deactivate \"test1\" object in hierarchy.\n-> test it!"
+    skin \ncopy character_blue_skin and paste.\n-> rename object.\n-> retarget type.\n->
+    retarget all sprites. \n-> position and scale sprites with \"import setting\".\n
+    \  not by component parameter!\n   scale can be set by pixel ratio, and the proper
+    value is 400.\n-> set angles.\n-> activate \"test1\" object in hierarchy \n   and
+    retarget skin to you make.\n-> save this object as prefab.\n-> now you can test
+    skin by execute application. \n   little inefficient but it's the best way we
+    got now. sorry.\n\n3. register character skin to database.\nselect character_skin_database
+    in hierarchy.\n-> add skin. \n-> click apply in top bar of \"Inspector\" panel.\n->
+    activate \"test2\" object in hierarchy.\n-> deactivate \"test1\" object in hierarchy.\n->
+    test it!"
   mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
@@ -2047,7 +2048,7 @@ MonoBehaviour:
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
-  mOverflow: 0
+  mOverflow: 2
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
