@@ -1,9 +1,6 @@
 fileFormatVersion: 2
 guid: 3ca7094ecf67b2a4990671499175e344
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: "\uBC30\uACBD"
-    21300002: Vessel_InnerBG
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,8 +35,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 33
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
