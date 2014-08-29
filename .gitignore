@@ -70,10 +70,8 @@ $RECYCLE.BIN/
 # =============== #
 # Unity generated #
 # =============== #
-Skeleton/Temp/
-SuperCrateBox/Temp/
-Skeleton/Library
-SuperCrateBox/Library
+/Temp/
+/Library
 
 
 # ===================================== #
