@@ -9,17 +9,5 @@ EditorBuildSettings:
     path: Assets/UI/ui_mainmenu.unity
   - enabled: 1
     path: Assets/UI/ui_room.unity
-  - enabled: 0
-    path: Assets/UI/ui_connection.unity
   - enabled: 1
     path: Assets/Maps/test_map_kkh001.unity
-  - enabled: 1
-    path: Assets/Maps/test_map_kdw001.unity
-  - enabled: 0
-    path: Assets/Scenes/Tests/test_tile.unity
-  - enabled: 0
-    path: Assets/GameObject/Character/Test/test_character.unity
-  - enabled: 0
-    path: Assets/Scenes/Tests/test_multiplayer.unity
-  - enabled: 0
-    path: Assets/Scenes/Tests/test_singleplayer.unity

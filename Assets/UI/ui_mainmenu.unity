@@ -5296,7 +5296,7 @@ Prefab:
       objectReference: {fileID: 1717031875}
     - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
-      value: 68
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
@@ -5308,7 +5308,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
-      value: 68
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
