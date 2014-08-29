@@ -6,19 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UI/ui_mainmenu.unity
+    path: Assets/UI/ui_mainmenu.unity
   - enabled: 1
-    path: Assets/Scenes/UI/ui_room.unity
+    path: Assets/UI/ui_room.unity
   - enabled: 0
-    path: Assets/Scenes/UI/ui_connection.unity
+    path: Assets/UI/ui_connection.unity
   - enabled: 1
-    path: Assets/Scenes/Maps/test_map_kkh001.unity
+    path: Assets/Maps/test_map_kkh001.unity
   - enabled: 1
-    path: Assets/Scenes/Maps/test_map_kdw001.unity
+    path: Assets/Maps/test_map_kdw001.unity
   - enabled: 0
     path: Assets/Scenes/Tests/test_tile.unity
   - enabled: 0
-    path: Assets/Scenes/Tests/test_character.unity
+    path: Assets/GameObject/Character/Test/test_character.unity
   - enabled: 0
     path: Assets/Scenes/Tests/test_multiplayer.unity
   - enabled: 0
