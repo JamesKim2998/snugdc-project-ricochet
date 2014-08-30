@@ -316,12 +316,12 @@ MonoBehaviour:
     upForce: 400
     weaponDefault: {fileID: 0}
     characterColors:
-    - {r: 1, g: 0, b: 0, a: 0}
-    - {r: 0, g: 0, b: 1, a: 0}
-    - {r: 0, g: 1, b: 0, a: 0}
-    - {r: 1, g: 0, b: 1, a: 0}
-    - {r: 0, g: 1, b: 1, a: 0}
-    - {r: 1, g: 1, b: 0, a: 0}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 0, g: 0, b: 1, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 0, g: 1, b: 1, a: 1}
+    - {r: 1, g: 1, b: 0, a: 1}
   useWeaponDef: 1
   weapon:
     weaponSet:
@@ -2535,7 +2535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1121076565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,7 +2548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer_: {fileID: 1638080785}
-  skin: {fileID: 736194920}
+  skin: {fileID: 1810551982}
 --- !u!4 &1121076566
 Transform:
   m_ObjectHideFlags: 0
@@ -4249,7 +4249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1905064912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4262,7 +4262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  renderer_: {fileID: 0}
+  renderer_: {fileID: 1638080785}
 --- !u!4 &1905064913
 Transform:
   m_ObjectHideFlags: 0
