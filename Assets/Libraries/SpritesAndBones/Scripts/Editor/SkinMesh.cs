@@ -1,4 +1,28 @@
-﻿using UnityEngine;
+﻿/*
+The MIT License (MIT)
+
+Copyright (c) 2014 Banbury & Play-Em
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +38,7 @@ public class SkinMesh : EditorWindow {
     private Vector2[] polygon = new Vector2[0];
     private float simplify = 1.0f;
 
-    [MenuItem("Window/Sprites/Create Mesh")]
+    [MenuItem("Sprites And Bones/Create Mesh")]
     protected static void ShowSkinMeshEditor() {
         var wnd = GetWindow<SkinMesh>();
         wnd.title = "Create Mesh From Sprite";
@@ -26,8 +50,12 @@ public class SkinMesh : EditorWindow {
 
         EditorGUI.BeginChangeCheck();
         spriteRenderer = (SpriteRenderer)EditorGUILayout.ObjectField(spriteRenderer, typeof(SpriteRenderer), true);
+        if (Selection.activeGameObject != null) {
+            GameObject o = Selection.activeGameObject;
+            spriteRenderer = o.GetComponent<SpriteRenderer>();
+        }
         if (EditorGUI.EndChangeCheck()) {
-            polygon = new Vector2[0]; 
+            polygon = new Vector2[0];
         }
 
         if (spriteRenderer != null) {
@@ -51,6 +79,25 @@ public class SkinMesh : EditorWindow {
 
             if (polygon.Length > 0 && GUILayout.Button("Create Mesh")) {
                 CreateMesh();
+            }
+
+            if (GUILayout.Button("Create Mesh from Sprite")) {
+                SpriteMesh.CreateSpriteMeshAsset(spriteRenderer.transform, spriteRenderer.sprite);
+            }
+
+            EditorGUILayout.Separator();
+
+            if (GUILayout.Button("Create Mesh from Polygon2D Collider")) {
+                PolygonCollider2D polygonCollider = spriteRenderer.GetComponent<PolygonCollider2D>();
+                if (polygonCollider == null) {
+                    polygonCollider = spriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
+                }
+
+                PolygonMesh polygonMesh = new PolygonMesh();
+                polygonMesh.polygonCollider = polygonCollider;
+                polygonMesh.spriteRenderer = spriteRenderer;
+                polygonMesh.CreatePolygonMesh();
+
             }
         }
     }
@@ -140,11 +187,11 @@ public class SkinMesh : EditorWindow {
         return oddNodes;
     }
 
-	public bool IsBadTriangle(DelaunayTriangle triangle) {
-		// Finde die längste Seite
-		// Berechne den Cosinus des Winkels direkt gegenüber (law of cosine)
-		// Das Dreieck ist schlecht, wenn der Wert <= -0.5 ist.
-		return false;
-	}
+    public bool IsBadTriangle(DelaunayTriangle triangle) {
+        // Finde die längste Seite
+        // Berechne den Cosinus des Winkels direkt gegenüber (law of cosine)
+        // Das Dreieck ist schlecht, wenn der Wert <= -0.5 ist.
+        return false;
+    }
 
 }

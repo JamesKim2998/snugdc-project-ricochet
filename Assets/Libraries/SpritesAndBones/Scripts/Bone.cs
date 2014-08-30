@@ -1,7 +1,7 @@
 ﻿/*
 The MIT License (MIT)
 
-Copyright (c) 2013 Banbury
+Copyright (c) 2014 Banbury & Play-Em
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,7 @@ public class Bone : MonoBehaviour {
     public float influenceTail = 0.25f;
     public float influenceHead = 0.25f;
     public float zOrder = 0;
+    public Color color = Color.cyan;
 
     private Bone parent;
 
@@ -52,8 +53,8 @@ public class Bone : MonoBehaviour {
         }
     }
 
-    #if UNITY_EDITOR
-    [MenuItem("GameObject/Create Other/Bone")]
+#if UNITY_EDITOR
+    [MenuItem("Sprites And Bones/Bone")]
     public static Bone Create() {
         GameObject b = new GameObject("Bone");
         Undo.RegisterCreatedObjectUndo(b, "Add child bone");
@@ -76,6 +77,7 @@ public class Bone : MonoBehaviour {
             Bone[] bones = skel.GetComponentsInChildren<Bone>();
             int index = bones.Max(bn => bn.index) + 1;
             b.GetComponent<Bone>().index = index;
+            skel.CalculateWeights(true);
         }
 
         Selection.activeGameObject = b;
@@ -129,16 +131,16 @@ public class Bone : MonoBehaviour {
     public void AddIK() {
         Undo.AddComponent<InverseKinematics>(gameObject);
     }
-    #endif
+#endif
 
     // Use this for initialization
-	void Start () {
+    void Start() {
         if (gameObject.transform.parent != null)
             parent = gameObject.transform.parent.GetComponent<Bone>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update() {
         transform.localRotation = Quaternion.Euler(0, 0, transform.localRotation.eulerAngles.z);
 
 #if UNITY_EDITOR
@@ -146,7 +148,7 @@ public class Bone : MonoBehaviour {
             gameObject.transform.position = parent.Head;
         }
 #endif
-	}
+    }
 
 #if UNITY_EDITOR
     void OnDrawGizmos() {
@@ -154,32 +156,41 @@ public class Bone : MonoBehaviour {
             Gizmos.color = Color.yellow;
         }
         else {
+            Color c = this.color;
+            if (gameObject.name.ToUpper().EndsWith(".R") || gameObject.name.ToUpper().EndsWith("RIGHT")) {
+                c = Utils.ColorFromInt(EditorPrefs.GetInt("BoneRightColor", Color.red.AsInt()));
+            }
+            else if (gameObject.name.ToUpper().EndsWith(".L") || gameObject.name.ToUpper().EndsWith("LEFT")) {
+                c = Utils.ColorFromInt(EditorPrefs.GetInt("BoneLeftColor", Color.green.AsInt()));
+            }
+            c.a = 1;
+
             if (editMode) {
-                Gizmos.color = Color.gray;
+                Gizmos.color = new Color(c.r * 0.75f, c.g * 0.75f, c.b * 0.75f, c.a);
             }
             else {
-                Gizmos.color = Color.blue;
+                Gizmos.color = c;
             }
         }
 
         int div = 5; 
 
-        Vector3 v = Quaternion.AngleAxis(45, Vector3.forward) * (((Vector3)Head - gameObject.transform.position) / div);
-        Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + v);
-        Gizmos.DrawLine(gameObject.transform.position + v, Head);
+		Vector3 v = Quaternion.AngleAxis(45, Vector3.forward) * (((Vector3)Head - gameObject.transform.position) / div);
+		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + v);
+		Gizmos.DrawLine(gameObject.transform.position + v, Head);
 
-        v = Quaternion.AngleAxis(-45, Vector3.forward) * (((Vector3)Head - gameObject.transform.position) / div);
-        Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + v);
-        Gizmos.DrawLine(gameObject.transform.position + v, Head);
+		v = Quaternion.AngleAxis(-45, Vector3.forward) * (((Vector3)Head - gameObject.transform.position) / div);
+		Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + v);
+		Gizmos.DrawLine(gameObject.transform.position + v, Head);
 
-        Gizmos.DrawLine(gameObject.transform.position, Head);
+		Gizmos.DrawLine(gameObject.transform.position, Head);
 
-        Gizmos.color = new Color(Gizmos.color.r, Gizmos.color.g, Gizmos.color.b, 0.5f);
+		Gizmos.color = new Color(Gizmos.color.r, Gizmos.color.g, Gizmos.color.b, 0.5f);
 
-        if (editMode && showInfluence) {
-            Gizmos.DrawWireSphere(transform.position, influenceTail);
-            Gizmos.DrawWireSphere(Head, influenceHead);
-        }
+		if (deform && editMode && showInfluence) {
+			Gizmos.DrawWireSphere(transform.position, influenceTail);
+			Gizmos.DrawWireSphere(Head, influenceHead);
+		}
     }
 #endif
 
@@ -194,8 +205,7 @@ public class Bone : MonoBehaviour {
                 return 0;
             else
                 return influenceTail;
-        }
-        else {
+        } else {
             float t = Vector2.Dot(p - (Vector2)transform.position, wv) / wv.sqrMagnitude;
 
             if (t < 0) {
@@ -204,15 +214,13 @@ public class Bone : MonoBehaviour {
                     return 0;
                 else
                     return (influenceTail - dist) / influenceTail;
-            }
-            else if (t > 1.0f) {
+            } else if (t > 1.0f) {
                 dist = (p - Head).magnitude;
                 if (dist > influenceHead)
                     return 0;
                 else
                     return (influenceHead - dist) / influenceHead;
-            }
-            else {
+            } else {
                 Vector2 proj = (Vector2)transform.position + (wv * t);
                 dist = (proj - p).magnitude;
 

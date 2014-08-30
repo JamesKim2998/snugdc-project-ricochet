@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 4b4eaccf6fb54394380f9f55a5ae06d0
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: ef_muzzle_strong_o
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

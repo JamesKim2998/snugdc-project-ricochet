@@ -26,13 +26,13 @@ public class GameCamera
 
 	public void Bind(int _key, Transform _transform)
 	{
-		// incomplete code
+		if (! followObject) return;
 		followObject.target = _transform.gameObject;
 	}
 
 	public void Unbind(int _key)
 	{
-		// incomplete code
+		if (! followObject) return;
 		followObject.target = null;
 	}
 }

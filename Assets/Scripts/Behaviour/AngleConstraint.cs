@@ -27,7 +27,8 @@ public class AngleConstraint : MonoBehaviour {
 
 	void Update()
 	{
-		ApplyConstraint();
+		return;
+		// ApplyConstraint();
 	}
 
 	void ApplyConstraint()

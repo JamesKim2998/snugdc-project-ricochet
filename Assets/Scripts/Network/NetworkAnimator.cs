@@ -3,7 +3,6 @@ using System.Collections;
 
 public class NetworkAnimator : MonoBehaviour
 {
-	[HideInInspector]
 	public Animator animator;
 
 	bool IsNetworkEnabled()
@@ -13,7 +12,8 @@ public class NetworkAnimator : MonoBehaviour
 
 	void Awake()
 	{
-		animator = GetComponent<Animator>();
+		if (! animator) 
+			animator = GetComponent<Animator>();
 	}
 
 	public void SetTrigger(string _trigger)

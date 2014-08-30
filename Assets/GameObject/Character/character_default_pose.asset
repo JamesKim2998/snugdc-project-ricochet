@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc57e5e95493434e91e7de286002d45, type: 3}
+  m_Name: character_default_pose
+  m_EditorClassIdentifier: 
+  rotations:
+  - name: body
+    rotation: {x: 0, y: 0, z: .0291343536, w: -.999575496}
+  - name: chest
+    rotation: {x: 0, y: 0, z: .0124758957, w: .999922216}
+  - name: arm_upper_l
+    rotation: {x: 0, y: 0, z: .999890268, w: -.0148149515}
+  - name: arm_lower_l
+    rotation: {x: 0, y: 0, z: .222647563, w: .974898994}
+  - name: arm_upper_r
+    rotation: {x: 0, y: 0, z: .971437693, w: .237294868}
+  - name: arm_lower_r
+    rotation: {x: 0, y: 0, z: .285585105, w: .958353341}
+  - name: head
+    rotation: {x: 0, y: 0, z: .0182715338, w: -.999833047}
+  - name: thigh_l
+    rotation: {x: 0, y: 0, z: .974686861, w: -.223574474}
+  - name: shin_l
+    rotation: {x: 0, y: 0, z: .180880457, w: -.98350513}
+  - name: thigh_r
+    rotation: {x: 0, y: 0, z: .999987006, w: -.00510265585}
+  - name: shin_r
+    rotation: {x: 0, y: 0, z: .12573956, w: -.992063284}
+  positions:
+  - name: body
+    position: {x: 0, y: 0, z: 0}
+  - name: chest
+    position: {x: 7.67128938e-08, y: .260000139, z: 0}
+  - name: arm_upper_l
+    position: {x: .0725231171, y: .150000006, z: 6.85077225e-07}
+  - name: arm_lower_l
+    position: {x: 2.8850755e-07, y: .240000218, z: -6.85077225e-07}
+  - name: arm_upper_r
+    position: {x: -.0769004822, y: .150000095, z: 0}
+  - name: arm_lower_r
+    position: {x: -5.9226192e-08, y: .230000287, z: 0}
+  - name: head
+    position: {x: 1.51356772e-07, y: .26000011, z: 0}
+  - name: thigh_l
+    position: {x: .0510292053, y: -.0215730667, z: 0}
+  - name: shin_l
+    position: {x: -3.23304278e-07, y: .379999846, z: 0}
+  - name: thigh_r
+    position: {x: -.0599765778, y: -.0215730667, z: 0}
+  - name: shin_r
+    position: {x: 1.93696906e-07, y: .379999906, z: 0}
+  targets:
+  - name: body
+    position: {x: .0141789541, y: .24302727, z: -3.42726707e-07}
+  - name: chest
+    position: {x: -.0143572884, y: .463424832, z: 0}
+  - name: arm_upper_l
+    position: {x: .0800084397, y: -.10638684, z: 0}
+  - name: arm_lower_l
+    position: {x: .18650806, y: -.295859843, z: 0}
+  - name: arm_upper_r
+    position: {x: -.195602819, y: -.0784742013, z: 0}
+  - name: arm_lower_r
+    position: {x: -.158913612, y: -.293367773, z: 0}
+  - name: head
+    position: {x: -.00451434962, y: .690129161, z: 0}
+  - name: thigh_l
+    position: {x: .201909587, y: -.353453666, z: -3.42726707e-07}
+  - name: shin_l
+    position: {x: .205718622, y: -.742576957, z: 0}
+  - name: thigh_r
+    position: {x: -.07905709, y: -.39052552, z: -3.42726707e-07}
+  - name: shin_r
+    position: {x: -.186158553, y: -.742444873, z: 0}
+  controlPoints: []

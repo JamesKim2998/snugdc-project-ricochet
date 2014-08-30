@@ -3,6 +3,7 @@ guid: b2d8e5806218dca4f99644cb378f87e6
 TextureImporter:
   fileIDToRecycleName:
     21300000: ef_bullet_RS
+    21300002: bullet_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

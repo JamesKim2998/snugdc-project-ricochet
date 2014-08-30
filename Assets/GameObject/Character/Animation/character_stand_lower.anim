@@ -12,124 +12,22 @@ AnimationClip:
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
   m_CompressedRotationCurves: []
-  m_PositionCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: {x: 0, y: .75, z: 0}
-        inSlope: {x: -.0090829432, y: -.0211935639, z: -6.85453415e-07}
-        outSlope: {x: -.0090829432, y: -.0211935639, z: -6.85453415e-07}
-        tangentMode: 236
-      - time: 1
-        value: {x: -.0090829432, y: .728806436, z: -6.85453415e-07}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: -989082031
-      - time: 2
-        value: {x: 0, y: .75, z: 0}
-        inSlope: {x: .0090829432, y: .0211935639, z: 6.85453415e-07}
-        outSlope: {x: .0090829432, y: .0211935639, z: 6.85453415e-07}
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    path: Skeleton
+  m_PositionCurves: []
   m_ScaleCurves: []
-  m_FloatCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_feet_r
-    classID: 114
-    script: {fileID: 11500000, guid: ce43f279066d4444fb1215d0821139bc, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_feet_l
-    classID: 114
-    script: {fileID: 11500000, guid: ce43f279066d4444fb1215d0821139bc, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_shin_l
-    classID: 114
-    script: {fileID: 11500000, guid: 46bec336499588e4aaa2c0cc5e119c4e, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_shin_r
-    classID: 114
-    script: {fileID: 11500000, guid: 46bec336499588e4aaa2c0cc5e119c4e, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/ik_shin_r
-    classID: 114
-    script: {fileID: 11500000, guid: 14f6671d87e1bc5419b86728e0e3377c, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/ik_shin_l
-    classID: 114
-    script: {fileID: 11500000, guid: 14f6671d87e1bc5419b86728e0e3377c, type: 3}
+  m_FloatCurves: []
   m_PPtrCurves: []
-  m_SampleRate: 10
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 2
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -143,162 +41,6 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
-  m_EditorCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: -.0090829432
-        outSlope: -.0090829432
-        tangentMode: 10
-      - time: 1
-        value: -.0090829432
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 2
-        value: 0
-        inSlope: .0090829432
-        outSlope: .0090829432
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalPosition.x
-    path: Skeleton
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .75
-        inSlope: -.0211935639
-        outSlope: -.0211935639
-        tangentMode: 10
-      - time: 1
-        value: .728806436
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 2
-        value: .75
-        inSlope: .0211935639
-        outSlope: .0211935639
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalPosition.y
-    path: Skeleton
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: -6.85453415e-07
-        outSlope: -6.85453415e-07
-        tangentMode: 10
-      - time: 1
-        value: -6.85453415e-07
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 2
-        value: 0
-        inSlope: 6.85453415e-07
-        outSlope: 6.85453415e-07
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalPosition.z
-    path: Skeleton
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_feet_r
-    classID: 114
-    script: {fileID: 11500000, guid: ce43f279066d4444fb1215d0821139bc, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_feet_l
-    classID: 114
-    script: {fileID: 11500000, guid: ce43f279066d4444fb1215d0821139bc, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_shin_l
-    classID: 114
-    script: {fileID: 11500000, guid: 46bec336499588e4aaa2c0cc5e119c4e, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/placer_shin_r
-    classID: 114
-    script: {fileID: 11500000, guid: 46bec336499588e4aaa2c0cc5e119c4e, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/ik_shin_r
-    classID: 114
-    script: {fileID: 11500000, guid: 14f6671d87e1bc5419b86728e0e3377c, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 31
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Enabled
-    path: Skeleton/ik_shin_l
-    classID: 114
-    script: {fileID: 11500000, guid: 14f6671d87e1bc5419b86728e0e3377c, type: 3}
+  m_EditorCurves: []
   m_EulerEditorCurves: []
   m_Events: []

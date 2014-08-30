@@ -57,7 +57,7 @@ public class GameCameraDef
 	{
 		if (camera != null) 
 		{
-			Game.Camera().camera = camera;
+			Game.Camera_.camera = camera;
 		}
 	}
 }

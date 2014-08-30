@@ -7,7 +7,7 @@ public class Game : Singleton<Game>
 	public bool multiplayer = false;
 	
 	public GameCamera camera_ = new GameCamera();
-	public static GameCamera Camera() { return Instance.camera_; }
+	public static GameCamera Camera_ { get { return Instance.camera_; } }
 
 	public GameAudio audio_ = new GameAudio();
 	public static GameAudio Audio() { return Instance.audio_; }
@@ -64,10 +64,7 @@ public class Game : Singleton<Game>
 		DontDestroyOnLoad(transform.gameObject);
 
 		camera_.Start();
-
 		statistic.Start();
-
-		character.game = this;
 		character.Start();
 
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;

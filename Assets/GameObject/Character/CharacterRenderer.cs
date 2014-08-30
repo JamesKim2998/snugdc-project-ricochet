@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(Character))]
 public class CharacterRenderer : MonoBehaviour
 {
 	public Material material;
@@ -44,6 +43,9 @@ public class CharacterRenderer : MonoBehaviour
 
 	public void Update()
 	{
+		if (! m_Character) 
+			return;
+
 		if (m_Character.direction != m_PrevDirection )
 		{
 			m_PrevDirection = m_Character.direction;
@@ -67,7 +69,7 @@ public class CharacterRenderer : MonoBehaviour
 	{
 		SetColorLocal (_color);
 		if (Network.peerType != NetworkPeerType.Disconnected)
-			networkView.RPC ("CharacterRenderer_SetColorRPC", RPCMode.OthersBuffered, ColorHelper.ColorToVector( _color));
+			networkView.RPC ("CharacterRenderer_SetColorRPC", RPCMode.Others, ColorHelper.ColorToVector( _color));
 	}
 
 	void SetColorLocal(Color _color)

@@ -5,9 +5,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameCharacter 
 {
-	public Game game { get { return m_Game; } set { m_Game = value; } }
-	private Game m_Game;
-
 	public float maxUpForce = 2f;
 	public float upForce = 30f;
 	private float m_UpForceLeft = 0;
@@ -27,7 +24,7 @@ public class GameCharacter
 				if (value != null)
 					Debug.Log("trying to set character, but there's already a character!");
 
-				game.camera_.Unbind(GetHashCode());
+				Game.Camera_.Unbind(GetHashCode());
 				character.GetComponent<Destroyable>().postDestroy -= ListenDestroy;
 			}
 
@@ -38,7 +35,7 @@ public class GameCharacter
 				m_Character.owner = Network.player.guid;
 				m_Character.renderers.SetColor(characterColor);
 
-				game.camera_.Bind(GetHashCode(), m_Character.transform);
+				Game.Camera_.Bind(GetHashCode(), m_Character.transform);
 
 				if (weaponDefault != null)
 				{
@@ -57,7 +54,7 @@ public class GameCharacter
 
 	public List<Color> characterColors = new List<Color>();
 	[HideInInspector]
-	public Color characterColor;
+	public Color characterColor = Color.white;
 
 	public void Start()
 	{

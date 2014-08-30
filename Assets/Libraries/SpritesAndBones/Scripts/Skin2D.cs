@@ -1,7 +1,7 @@
 ﻿/*
 The MIT License (MIT)
 
-Copyright (c) 2013 Banbury
+Copyright (c) 2014 Banbury & Play-Em
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +26,17 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(SkinnedMeshRenderer))]
 [ExecuteInEditMode()]
 public class Skin2D : MonoBehaviour {
-    public Skeleton skeleton;
+
+	public Sprite sprite;
+
+	[HideInInspector]
     public Bone2DWeights boneWeights;
 
     private Material lineMaterial;
@@ -41,28 +45,87 @@ public class Skin2D : MonoBehaviour {
     private GameObject lastSelected = null;
 
     #if UNITY_EDITOR
-		[MenuItem("GameObject/Create Other/Skin 2D")]
-		public static void Create ()
-		{
+        [MenuItem("Sprites And Bones/Skin 2D")]
+        public static void Create ()
+        {
+			if (Selection.activeGameObject != null) {
+				GameObject o = Selection.activeGameObject;
+				SkinnedMeshRenderer skin = o.GetComponent<SkinnedMeshRenderer>();
+				SpriteRenderer spriteRenderer = o.GetComponent<SpriteRenderer>();
+				if (skin == null && spriteRenderer != null) {
+					Sprite thisSprite = spriteRenderer.sprite;
+                    SpriteMesh.CreateSpriteMeshAsset(spriteRenderer.transform, thisSprite);
+					Texture2D spriteTexture = UnityEditor.Sprites.DataUtility.GetSpriteTexture(spriteRenderer.sprite, false);
+					Material spriteMaterial = new Material(spriteRenderer.sharedMaterial);
+					spriteMaterial.CopyPropertiesFromMaterial(spriteRenderer.sharedMaterial);
+					spriteMaterial.mainTexture = spriteTexture;
+					DestroyImmediate(spriteRenderer);
+					Skin2D skin2D = o.AddComponent<Skin2D>();
+					skin2D.sprite = thisSprite;
+					skin = o.GetComponent<SkinnedMeshRenderer>();
+					MeshFilter filter = o.GetComponent<MeshFilter>();
+					skin.material = spriteMaterial;
+					filter.mesh = (Mesh)Selection.activeObject;
+					if (filter.sharedMesh != null && skin.sharedMesh == null) {
+						skin.sharedMesh = filter.sharedMesh;
+					}
+					Skeleton skeleton = o.transform.root.GetComponent<Skeleton>();
+					if (skeleton != null)
+					{
+						// Generate the mesh and calculate the weights if the root transform has a skeleton
+						skeleton.CalculateWeights(true);
+						// Debug.Log("Calculated weights for " + o.name);
+
+						// Try to initialize the parent bone to this skin
+						Bone bone = o.transform.parent.GetComponent<Bone>();
+						if (bone != null)
+						{
+							Mesh m = skin.sharedMesh.Clone();
+							List<BoneWeight> weights = m.boneWeights.ToList();
+
+							for (int i = 0; i < m.vertices.Length; i++) {
+								BoneWeight bw = weights[i];
+								bw = bw.SetWeight(bone.index, 1);
+								weights[i] = bw.Clone();
+							}
+
+							skin.sharedMesh.boneWeights = weights.ToArray();
+							EditorUtility.SetDirty(skin.gameObject);
+							if (PrefabUtility.GetPrefabType(skin.gameObject) != PrefabType.None) {
+								AssetDatabase.SaveAssets();
+							}
+						}
+					}
+				}
+				else
+				{
+					o = new GameObject ("Skin2D");
+					Undo.RegisterCreatedObjectUndo (o, "Create Skin2D");
+					o.AddComponent<Skin2D> ();
+				}
+			}
+			else
+			{
 				GameObject o = new GameObject ("Skin2D");
-				Undo.RegisterCreatedObjectUndo (o, "Create Skin2D");
-				o.AddComponent<Skin2D> ();
-		}
+                Undo.RegisterCreatedObjectUndo (o, "Create Skin2D");
+                o.AddComponent<Skin2D> ();
+			}
+        }
     #endif
     
-	// Use this for initialization
-	void Start() {
+    // Use this for initialization
+    void Start() {
 #if UNITY_EDITOR
         CalculateVertexColors();
 #endif
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         if (MeshFilter.sharedMesh != null && GetComponent<SkinnedMeshRenderer>().sharedMesh == null) {
             GetComponent<SkinnedMeshRenderer>().sharedMesh = MeshFilter.sharedMesh;
         }
-	}
+    }
 
     private MeshFilter MeshFilter {
         get {
@@ -90,7 +153,7 @@ public class Skin2D : MonoBehaviour {
             return lineMaterial;
         }
     }
-	
+    
 #if UNITY_EDITOR
     void OnDrawGizmos() {
 
@@ -104,7 +167,12 @@ public class Skin2D : MonoBehaviour {
 
     }
 
-    public void CalculateBoneWeights() {
+    public void CalculateBoneWeights(Bone[] bones, bool weightToParent) {
+		if(MeshFilter.sharedMesh == null)
+		{
+			Debug.Log("No Shared Mesh.");
+			return;
+		}
         Mesh mesh = new Mesh();
         mesh.name = "Generated Mesh";
         mesh.vertices = MeshFilter.sharedMesh.vertices;
@@ -114,25 +182,37 @@ public class Skin2D : MonoBehaviour {
         mesh.uv2 = MeshFilter.sharedMesh.uv2;
         mesh.bounds = MeshFilter.sharedMesh.bounds;
 
-        if (skeleton != null && mesh != null) {
-            boneWeights.weights = new Bone2DWeight[] { };
-
-            Bone[] bones = skeleton.GetComponentsInChildren<Bone>();
-
+		if (bones != null) {
+            boneWeights = new Bone2DWeights();
+			boneWeights.weights = new Bone2DWeight[] { };
+            
+            int index = 0;
             foreach (Bone bone in bones) {
                 int i=0;
 
-                foreach (Vector3 v in mesh.vertices) {
-                    float influence = bone.GetInfluence(v + transform.position);
-                    boneWeights.SetWeight(i, bone.name, bone.index, influence);
+                
+	            foreach (Vector3 v in mesh.vertices) {
+	                float influence;
+					if (!weightToParent || bone.transform != transform.parent)
+					{
+						influence = bone.GetInfluence(v + transform.position);
+					}
+					else
+					{
+						influence = 1.0f;
+					}
+
+					boneWeights.SetWeight(i, bone.name, index, influence);
                     i++;
-                }
+	            }
+                
+                index++;
             }
 
-            var unitweights = boneWeights.GetUnityBoneWeights();
+            BoneWeight[] unitweights = boneWeights.GetUnityBoneWeights();
             mesh.boneWeights = unitweights;
 
-            Transform[] bonesArr = bones.OrderBy(b => b.index).Select(b => b.transform).ToArray();
+			Transform[] bonesArr = bones.Select(b => b.transform).ToArray();
             Matrix4x4[] bindPoses = new Matrix4x4[bonesArr.Length];
 
             for (int i = 0; i < bonesArr.Length; i++) {
@@ -141,11 +221,11 @@ public class Skin2D : MonoBehaviour {
 
             mesh.bindposes = bindPoses;
 
-            var renderer = GetComponent<SkinnedMeshRenderer>();
-            if (renderer.sharedMesh != null && !AssetDatabase.Contains(renderer.sharedMesh.GetInstanceID()))
-                Object.DestroyImmediate(renderer.sharedMesh);
-            renderer.bones = bonesArr;
-            renderer.sharedMesh = mesh;
+            var skinRenderer = GetComponent<SkinnedMeshRenderer>();
+            if (skinRenderer.sharedMesh != null && !AssetDatabase.Contains(skinRenderer.sharedMesh.GetInstanceID()))
+                Object.DestroyImmediate(skinRenderer.sharedMesh);
+            skinRenderer.bones = bonesArr;
+            skinRenderer.sharedMesh = mesh;
         }
     }
 
@@ -201,6 +281,27 @@ public class Skin2D : MonoBehaviour {
         AssetDatabase.AddObjectToAsset(GetComponent<SkinnedMeshRenderer>().sharedMesh, obj);
 
         PrefabUtility.ReplacePrefab(gameObject, obj, ReplacePrefabOptions.ConnectToPrefab);
+    }
+
+	public void RecalculateBoneWeights() {
+		Skeleton skeleton = gameObject.transform.root.GetComponent<Skeleton>();
+		if (skeleton != null)
+		{
+			skeleton.CalculateWeights(true);
+			// Debug.Log("Calculated weights for " + gameObject.name);
+		}
+    }
+
+	public void ResetControlPointPositions() {
+		ControlPoint[] controlPoints = GetComponentsInChildren<ControlPoint>();
+		if (controlPoints != null)
+		{
+			foreach (ControlPoint controlPoint in controlPoints)
+			{
+				controlPoint.ResetPosition();
+				// Debug.Log("Reset Control Point Positions for " + gameObject.name);
+			}
+		}
     }
 #endif
 }

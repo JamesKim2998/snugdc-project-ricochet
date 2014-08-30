@@ -141,7 +141,7 @@ public class Character : MonoBehaviour
 			_weaponAngle.z = m_Aim - 90;
 			weaponPivot.transform.eulerAngles = _weaponAngle;
 
-			m_Animator.SetFloat("aim", m_Aim);
+			animator.SetFloat("aim", m_Aim);
 
 			if (crossHair) 
 			{
@@ -157,10 +157,9 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region components
-	private CharacterRenderer m_Renderers;
-	public CharacterRenderer renderers { get { return m_Renderers; } }
+	public CharacterRenderer renderers;
 
-	private Animator m_Animator;
+	public Animator animator;
 	private NetworkAnimator m_NetworkAnimator;
 
 	private InterpolatePosition m_InterpolatePosition;
@@ -205,8 +204,6 @@ public class Character : MonoBehaviour
 		m_Hp.postDead = Die;
 
 		// components
-		m_Renderers = GetComponent<CharacterRenderer> ();
-		m_Animator = GetComponent<Animator>();
 		m_NetworkAnimator = GetComponent<NetworkAnimator>();
 		m_InterpolatePosition = gameObject.AddComponent<InterpolatePosition>();
 

@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: dfc14349141544caa862fb8eb17e2ed1
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: bullet_laser
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
