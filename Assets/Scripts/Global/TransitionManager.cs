@@ -13,8 +13,8 @@ public class GameTransition
 {
 	public float setupDelay = 1f;
 
-	public string map;
-	public GameTransition Map(string _var) { map = _var; return this; }
+	public Scene map;
+	public GameTransition Map(Scene _var) { map = _var; return this; }
 
 	public GameModeDef mode;
 	public GameTransition Mode(GameModeDef _var) { mode = _var; return this; }
@@ -52,7 +52,7 @@ public class TransitionManager : MonoBehaviour
 	
 	void StartSceneLocal(SceneTransition _transition)
 	{
-		Application.LoadLevel(SceneNames.Get(_transition.scene));
+		Global.Level.Load(_transition.scene);
 		Global.Context ().context = _transition.context;
 	}
 
@@ -66,7 +66,7 @@ public class TransitionManager : MonoBehaviour
 				Debug.LogError("Stoping game failed. Transfer abort.");
 			}
 		}
-		LevelLoader.Instance.LoadLevel(SceneNames.Get(Scene.LOBBY));
+		Global.Level.Load(Scene.LOBBY);
 		Global.Context().context = ContextType.LOBBY;
 	}
 
@@ -91,7 +91,8 @@ public class TransitionManager : MonoBehaviour
 
 	void StartGameLocal(GameTransition _transition)
 	{
-		LevelLoader.Instance.LoadLevel(_transition.map);
+		Global.Level.Load(_transition.map);
+
 		Game.Progress().TryIntroGame();
 		if (_transition.setupDelay < 0) 
 		{

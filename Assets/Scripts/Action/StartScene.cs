@@ -7,7 +7,7 @@ public class StartScene : MonoBehaviour
 
 	public void Execute()
 	{
-		Application.LoadLevel(SceneNames.Get(scene));
+		Application.LoadLevel(SceneInfos.Get(scene).name);
 	}
 }
 

@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: fe2ce39fd51d0cd469cb214363e8dd37, type: 3}
+  audioClip: {fileID: 8300000, guid: 4c19924111d1f7046a831a951192a60b, type: 3}
   trigger: 1
   volume: 1
   pitch: 1
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 8d6c8565206a2694ca4f812972265a73, type: 3}
+  audioClip: {fileID: 8300000, guid: 163c16b01b80dd249bc2f36a635e6575, type: 3}
   trigger: 0
   volume: 1
   pitch: 1

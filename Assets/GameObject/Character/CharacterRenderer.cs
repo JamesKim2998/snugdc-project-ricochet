@@ -69,7 +69,7 @@ public class CharacterRenderer : MonoBehaviour
 	{
 		SetColorLocal (_color);
 		if (Network.peerType != NetworkPeerType.Disconnected)
-			networkView.RPC ("CharacterRenderer_SetColorRPC", RPCMode.Others, ColorHelper.ColorToVector( _color));
+			networkView.RPC ("CharacterRenderer_SetColor", RPCMode.Others, ColorHelper.ColorToVector( _color));
 	}
 
 	void SetColorLocal(Color _color)
@@ -82,7 +82,7 @@ public class CharacterRenderer : MonoBehaviour
 	}
 
 	[RPC]
-	void CharacterRenderer_SetColorRPC(Vector3 _color)
+	void CharacterRenderer_SetColor(Vector3 _color)
 	{
 		SetColorLocal (ColorHelper.VectorToColor(_color));
 	}

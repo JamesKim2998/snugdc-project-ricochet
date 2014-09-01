@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(UIPopupList))]
 public class UIMapSelector : MonoBehaviour
@@ -23,15 +24,19 @@ public class UIMapSelector : MonoBehaviour
 
 		var _setting = Global.GameSetting();
 
-		foreach (var _gameMap in _setting.maps)
-			popupList.items.Add(_gameMap);
+		foreach (var _gameMap in SceneInfos.gameMaps)
+			popupList.items.Add(_gameMap.name);
 
-		popupList.value = _setting.maps[_setting.mapIdx];
+		popupList.value = SceneInfos.GameMap(_setting.mapIdx).name;
 	}
 
 	void OnChange()
 	{
-		Global.GameSetting().map = popupList.value;
+		Scene _scene;
+		if (EnumHelper.TryParse(popupList.value, out _scene))
+			Global.GameSetting().map = SceneInfos.Get(_scene).scene;
+		else 
+			Debug.LogError("Scene " + popupList.value + " does not exist!");
 	}
 }
 

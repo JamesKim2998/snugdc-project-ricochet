@@ -7,6 +7,7 @@ public class UIIPInput : MonoBehaviour {
 
 	void Start()
 	{
+		if (input == null) input = GetComponent<UIInput>();
 		input.label.text = GlobalVariables.JOIN_IP;
 	}
 

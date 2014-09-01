@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
 	public bool floating { get {return m_Floating; }}
 	
 	private float m_JumpCooltime = 0.0f;
-	public float jumpForce = 10.0f;
+	public float jumpVelocity = 10.0f;
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
@@ -284,8 +284,10 @@ public class Character : MonoBehaviour
 	{
 		m_Floating = true;
 		m_JumpCooltime = jumpCooldown;
-		rigidbody2D.velocity += new Vector2(0, jumpForce);
+		rigidbody2D.velocity += new Vector2(0, jumpVelocity);
 		terrainDetector.gameObject.SetActive(true);
+		m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.JUMP_LOWER);
+		m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.JUMP_UPPER);
 	}
 	
 	public void ChangeAim(float _direction)

@@ -19,6 +19,10 @@ public class Global : Singleton<Global>
 	public static System.Random Random() { return Instance.random; }
 
 	[HideInInspector]
+	public LevelManager level = new LevelManager();
+	public static LevelManager Level { get { return Instance.level; } }
+
+	[HideInInspector]
 	public AudioSource bgm;
 	public static AudioSource BGM() { return Instance.bgm; }
 	

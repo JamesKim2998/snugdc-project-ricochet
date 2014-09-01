@@ -17,38 +17,28 @@ public class GameSetting
 
 	public bool valid {
 		get {
-			return map != null
+			return map != Scene.NONE
 				&& modeSelected != null;
 		}
 	}
 
 	public int mapIdx = 0;
-	public string map { 
+	public Scene map { 
 		get { 
-			if (mapIdx < maps.Count) 
-			{
-				return maps[mapIdx]; 
-			}
+			if (mapIdx < SceneInfos.gameMaps.Count)
+				return SceneInfos.GameMap(mapIdx).scene;
 			else
-			{
-				return null; 
-			}
+				return Scene.NONE; 
 		}
 
 		set {
-			var _mapIdx = maps.FindIndex(_map => _map == value);
+			var _mapIdx = SceneInfos.gameMaps.FindIndex(_map => _map.scene == value);
 			if (_mapIdx >= 0) 
-			{
 				mapIdx = _mapIdx;
-			}
 			else
-			{
 				Debug.LogWarning("Map " + value + " is not found.");
-			}
 		}
 	}
-
-	public readonly List<string> maps = new List<string>(SceneNames.GAME_LEVEL);
 
 	[HideInInspector]
 	public GameModeDef modeSelected;
