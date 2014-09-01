@@ -45,6 +45,8 @@ public class Character : MonoBehaviour
 	private bool m_IsStanding = true;
 	public bool isStanding { get { return m_IsStanding; }}
 	public bool isCrouching { get { return ! m_IsStanding; }}
+
+	public LayerMask terrainMask;
 	#endregion
 
 	#region life_state
@@ -235,6 +237,21 @@ public class Character : MonoBehaviour
 		m_JumpCooltime -= Time.deltaTime;
 		animator.SetFloat("speed_x", direction * rigidbody2D.velocity.x);
 		animator.SetFloat("velocity_y", rigidbody2D.velocity.y);
+
+		var _rayResult = Physics2D.Raycast(transform.position, -Vector2.up, 1f, terrainMask);
+
+		if (_rayResult) {
+			float _tilt;
+			if (direction > 0) {
+				_tilt = Mathf.Atan2(_rayResult.normal.y, _rayResult.normal.x);
+			} else {
+				_tilt = Mathf.Atan2(_rayResult.normal.y, -_rayResult.normal.x);
+			}
+			
+			_tilt *= Mathf.Rad2Deg;
+			
+			animator.SetFloat("tilt", _tilt);
+		}
 	}
 
 	public void Stand()

@@ -1140,7 +1140,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
   m_Mass: 10
-  m_LinearDrag: 0
+  m_LinearDrag: .5
   m_AngularDrag: 1
   m_GravityScale: 3
   m_FixedAngle: 1
@@ -1664,6 +1664,9 @@ MonoBehaviour:
   jumpVelocity: 10
   jumpCooldown: .100000001
   moveForce: 2000
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 256
   hpMax: 1
   hitCooldown: .5
   hitForce: {x: 10, y: 5}
@@ -1671,7 +1674,7 @@ MonoBehaviour:
   deadDelay: .5
   weaponPivot: {fileID: 11400014}
   aimSpeed: 10
-  renderers: {fileID: 11400000}
+  renderer_: {fileID: 11400000}
   animator: {fileID: 9500002}
   crossHair: {fileID: 100036}
   crateDetector: {fileID: 11400048}
