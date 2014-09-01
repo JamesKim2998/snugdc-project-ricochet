@@ -49,11 +49,11 @@ public class CharacterSpawner : MonoBehaviour
 		m_CharacterRef = new WeakReference( _character);
 		_character.hitEnabled = false;
 		_character.Invoke("EnableHit", invinsibleTime);
-		_character.SendMessage("SetName", Global.Player().mine.name, SendMessageOptions.RequireReceiver);
+//		_character.SendMessage("SetName", Global.Player().mine.name, SendMessageOptions.RequireReceiver);
 
 		// set skin
 		var _characterSelected = Global.Player().mine.characterSelected;
-		Database.Skin[_characterSelected].Apply(_character.renderers);
+		Database.Skin[_characterSelected].Apply(_character.renderer_);
 
 		if (networkView.enabled && Network.peerType != NetworkPeerType.Disconnected)
 		{
@@ -77,8 +77,8 @@ public class CharacterSpawner : MonoBehaviour
 		_character.networkView.viewID = _viewID;
 
 		var _playerInfo = Global.Player()[_player];
-		_character.SendMessage("SetName", _playerInfo.name, SendMessageOptions.RequireReceiver);
-		Database.Skin[_playerInfo.characterSelected].Apply(_character.GetComponent<Character>().renderers);
+//		_character.SendMessage("SetName", _playerInfo.name, SendMessageOptions.RequireReceiver);
+		Database.Skin[_playerInfo.characterSelected].Apply(_character.GetComponent<Character>().renderer_);
 	}
 
 	void ListenDestroy(Destroyable _destroyable)

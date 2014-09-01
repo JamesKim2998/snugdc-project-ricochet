@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -33,7 +33,7 @@ public class GameCharacter
 			if (m_Character != null) 
 			{
 				m_Character.owner = Network.player.guid;
-				m_Character.renderers.SetColor(characterColor);
+				m_Character.renderer_.SetColor(characterColor);
 
 				Game.Camera_.Bind(GetHashCode(), m_Character.transform);
 

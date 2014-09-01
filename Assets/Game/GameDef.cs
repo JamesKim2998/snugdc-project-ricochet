@@ -7,6 +7,8 @@ public class GameDef : MonoBehaviour
 	public bool applyOnStart = true;
 	public bool deleteAfterApply = true;
 
+	public float timeScale = 1f;
+
 	public GameAudioDef audio_;
 	public GameCameraDef camera_;
 	public GameHUDDef hud;
@@ -25,6 +27,7 @@ public class GameDef : MonoBehaviour
 
 	void Apply()
 	{
+		Time.timeScale = timeScale;
 		if (audio_ != null) audio_.Apply();
 		if (camera_ != null) camera_.Apply();
 		if (hud != null) Game.HUD().Apply(hud);

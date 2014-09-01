@@ -157,7 +157,7 @@ public class Character : MonoBehaviour
 	#endregion
 
 	#region components
-	public CharacterRenderer renderers;
+	public CharacterRenderer renderer_;
 
 	public Animator animator;
 	private NetworkAnimator m_NetworkAnimator;
@@ -233,8 +233,8 @@ public class Character : MonoBehaviour
 	void Update() 
 	{
 		m_JumpCooltime -= Time.deltaTime;
-		m_NetworkAnimator.SetFloat("speed_x", Mathf.Abs(rigidbody2D.velocity.x));
-		m_NetworkAnimator.SetFloat("velocity_y", rigidbody2D.velocity.y);
+		animator.SetFloat("speed_x", direction * rigidbody2D.velocity.x);
+		animator.SetFloat("velocity_y", rigidbody2D.velocity.y);
 	}
 
 	public void Stand()
