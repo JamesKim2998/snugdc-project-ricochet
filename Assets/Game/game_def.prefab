@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyOnStart: 1
   deleteAfterApply: 0
+  timeScale: 1
   audio_:
     pause: 0
     volume: 1
@@ -68,7 +69,7 @@ MonoBehaviour:
   character:
     character: {fileID: 0}
     useMaxUpForce: 1
-    maxUpForce: 80
+    maxUpForce: 100
     useUpForce: 1
     upForce: 400
     weaponDefault: {fileID: 0}

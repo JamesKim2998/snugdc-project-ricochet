@@ -700,7 +700,7 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: velocity_y
-    m_EventTreshold: 0
+    m_EventTreshold: -.100000001
     m_ExitTime: .75
   m_Atomic: 1
   m_Solo: 0
@@ -1003,7 +1003,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: equip_uzi_gun
+    m_ConditionEvent: equip_machine_gun
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -1971,9 +1971,9 @@ Transition:
   m_TransitionOffset: .489707708
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: equip_grenade
+    m_ConditionEvent: shoot
     m_EventTreshold: 0
-    m_ExitTime: .00316778151
+    m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0

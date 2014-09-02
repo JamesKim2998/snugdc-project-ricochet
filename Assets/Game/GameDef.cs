@@ -114,11 +114,12 @@ public class GameCharacterDef
 	
 	public void Apply()
 	{
-		if (character != null) Game.Character().character = character;
 		if (useMaxUpForce) Game.Character().maxUpForce = maxUpForce;
 		if (useUpForce) Game.Character().upForce = upForce;
 		if (characterColors != null && characterColors.Count > 0) 
 			Game.Character().characterColors = new List<Color>(characterColors);
+		if (weaponDefault) Game.Character().weaponDefault = weaponDefault;
+		if (character) Game.Character().character = character;
 	}
 }
 

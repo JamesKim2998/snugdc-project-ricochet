@@ -131,14 +131,10 @@ public class Projectile : MonoBehaviour {
 
 	void DestroySelf() 
 	{
-		if (networkView.enabled)
-		{
+		if (networkView.enabled && networkView.viewID != NetworkViewID.unassigned)
 			Network.Destroy(networkView.viewID);
-		}
 		else 
-		{
 			GameObject.Destroy(gameObject);
-		}
 	}
 	
 	void StartDecay() 

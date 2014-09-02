@@ -96,7 +96,7 @@ public class Character : MonoBehaviour
 				m_Weapon.transform.localPosition = Vector3.zero;
 				m_Weapon.transform.localEulerAngles = Vector3.zero;
 				m_Weapon.postOutOfAmmo += ListenOutOfAmmo;
-//				Debug.Log("Set weapon " + m_Weapon.type);
+				m_Weapon.postCooldown += ListenWeaponCooldown;
 				m_NetworkAnimator.SetTrigger("equip_" + m_Weapon.animationGroup);
 
 				if (IsMine() && IsNetworkEnabled())
@@ -414,6 +414,11 @@ public class Character : MonoBehaviour
 	{
 		// note: Unequip 은 animator 에서 호출합니다
 		m_NetworkAnimator.SetTrigger ("throw_away");
+	}
+	
+	private void ListenWeaponCooldown(Weapon _weapon)
+	{
+		m_NetworkAnimator.SetTrigger ("rest");
 	}
 
 	public void Unequip()
