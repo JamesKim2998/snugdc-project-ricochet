@@ -68,6 +68,8 @@ MonoBehaviour:
   useCharacterDef: 1
   character:
     character: {fileID: 0}
+    useDownForce: 1
+    downForce: 200
     useMaxUpForce: 1
     maxUpForce: 100
     useUpForce: 1

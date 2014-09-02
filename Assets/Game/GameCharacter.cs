@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameCharacter 
 {
+	public float downForce = 30f;
 	public float maxUpForce = 2f;
 	public float upForce = 30f;
 	private float m_UpForceLeft = 0;
@@ -76,8 +77,8 @@ public class GameCharacter
 		if (character == null) return;
 
 		var _vertical = Input.GetAxis("Vertical");
-		if (Mathf.Abs(_vertical) > 0.05f)
-			character.ChangeAim(_vertical);
+		if (_vertical < -0.05f)
+			character.rigidbody2D.AddForce(_vertical * downForce * Vector2.up);
 
 		if (Input.GetButtonDown("Jump")) 
 		{
@@ -91,13 +92,9 @@ public class GameCharacter
 		if (Input.GetButtonDown("Crouch"))
 		{
 			if (character.isCrouching) 
-			{
 				character.Stand();
-			}
 			else 
-			{
 				character.Crouch();
-			}
 		}
 
 		if (Input.GetButtonDown("Fire1")) 

@@ -19,14 +19,10 @@ public class BouncingRay : MonoBehaviour {
 	{
 		m_Rays = new List<GameObject>();
 		m_RayWidth = rayPrf.GetComponent<SpriteRenderer>().sprite.rect.width / 100;
-//		Debug.Log(m_RayWidth);
 	}
 
 	void Update () 
 	{
-//		if (! transform.hasChanged)
-//			return;
-
 		var _i = 0;
 		var _lengthLeft = length;
 

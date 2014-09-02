@@ -102,6 +102,9 @@ public class GameCharacterDef
 {
 	public Character character;
 
+	public bool useDownForce = false;
+	public float downForce = 30f;
+
 	public bool useMaxUpForce = false;
 	public float maxUpForce = 2f;
 
@@ -114,6 +117,7 @@ public class GameCharacterDef
 	
 	public void Apply()
 	{
+		if (useDownForce) Game.Character().downForce = downForce;
 		if (useMaxUpForce) Game.Character().maxUpForce = maxUpForce;
 		if (useUpForce) Game.Character().upForce = upForce;
 		if (characterColors != null && characterColors.Count > 0) 

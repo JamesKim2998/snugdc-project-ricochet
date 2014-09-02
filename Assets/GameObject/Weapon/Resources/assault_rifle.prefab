@@ -90,8 +90,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .498324782, y: .217769653, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalPosition: {x: .498324782, y: .217769653, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
   m_RootOrder: 1
@@ -234,8 +234,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   rayPrf: {fileID: 100000, guid: 59126a1e1a03caf4aa0c2ed25e0c1866, type: 2}
-  rayScale: .300000012
-  rayColor: {r: .529411793, g: .291955024, b: .291955024, a: 1}
+  rayScale: 2
+  rayColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

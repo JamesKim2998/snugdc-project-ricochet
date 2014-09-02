@@ -1165,7 +1165,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: equip_grenade
     m_EventTreshold: 0
-    m_ExitTime: .0199999996
+    m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1363,13 +1363,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110296862}
   m_DstState: {fileID: 110269417}
-  m_TransitionDuration: .100000001
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: rest
     m_EventTreshold: 0
-    m_ExitTime: .899999976
+    m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1443,8 +1443,8 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110230235}
   m_DstState: {fileID: 110296862}
-  m_TransitionDuration: 1.5
-  m_TransitionOffset: 0
+  m_TransitionDuration: .506112099
+  m_TransitionOffset: .95699662
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: rest
@@ -1727,10 +1727,6 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: equip_simple_gun
-    m_EventTreshold: 0
-    m_ExitTime: .899999976
-  - m_ConditionMode: 1
     m_ConditionEvent: equip_machine_gun
     m_EventTreshold: 0
     m_ExitTime: .899999976
@@ -1918,6 +1914,26 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 1
+--- !u!1101 &110187028
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 0}
+  m_DstState: {fileID: 110221341}
+  m_TransitionDuration: .100000001
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: equip_simple_gun
+    m_EventTreshold: 0
+    m_ExitTime: .899999976
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110189859
 Transition:
   serializedVersion: 2
@@ -2588,6 +2604,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110291560
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: machine_gun_shoot
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: f8c400f2d0fbc814daeb3d3df3d1f3fb, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 200, y: 0, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110292768
 State:
   m_ObjectHideFlags: 3
@@ -2640,8 +2671,9 @@ StateMachine:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 0}
-  m_States: []
+  m_DefaultState: {fileID: 110291560}
+  m_States:
+  - {fileID: 110291560}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
@@ -2803,6 +2835,7 @@ StateMachine:
       - {fileID: 110167160}
       - {fileID: 110170064}
       - {fileID: 110137117}
+      - {fileID: 110187028}
     data:
       first: {fileID: 110285511}
       second: []
