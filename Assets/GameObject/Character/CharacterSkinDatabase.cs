@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class CharacterSkinDatabase : MonoBehaviour
 {
+	public List<GameObject> editorSkinPrfs;
+
 	private Dictionary<CharacterType, CharacterSkin> m_Skins = new Dictionary<CharacterType, CharacterSkin>();
 	public Dictionary<CharacterType, CharacterSkin> skins { get { return m_Skins; } }
 
@@ -20,8 +22,6 @@ public class CharacterSkinDatabase : MonoBehaviour
 			return null;
 		}
 	}
-
-	public List<GameObject> editorSkinPrfs;
 
 	public CharacterSkin this[CharacterType type] { get { return skins[type]; } }
 
