@@ -99,8 +99,10 @@ public class Character : MonoBehaviour
 				m_Weapon.transform.localEulerAngles = Vector3.zero;
 				m_Weapon.postOutOfAmmo += ListenOutOfAmmo;
 				m_Weapon.postCooldown += ListenWeaponCooldown;
-				animator.SetTrigger("equip_" + WeaponHelper.GetTrigger(m_Weapon.animationGroup));
-				Debug.Log("equip_" + WeaponHelper.GetTrigger(m_Weapon.animationGroup));
+
+				var _animationGroup = WeaponHelper.GetTrigger(m_Weapon.animationGroup);
+				animator.SetTrigger(CharacterAnimationTrigger.ArmWeaponEquip(_animationGroup));
+				animator.SetTrigger(CharacterAnimationTrigger.UpperWeaponEquip(_animationGroup));
 
 				var _weaponEquipPrf = Database.Weapon[m_Weapon.type].weaponEquipPrf;
 				m_WeaponEquip = Instantiate(_weaponEquipPrf) as GameObject;
