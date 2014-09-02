@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class GameDef : MonoBehaviour
 {
 	public bool applyOnStart = true;
+	public bool applyAfterDelay = false;
+	public float applyDelay = -1f;
 	public bool deleteAfterApply = true;
 
 	public float timeScale = 1f;
@@ -22,7 +24,14 @@ public class GameDef : MonoBehaviour
 
 	void Start ()
 	{
-		if (applyOnStart) Apply();
+		if (applyOnStart) 
+		{
+			Apply();
+		}
+		else if (applyAfterDelay)
+		{
+			Invoke("Apply", applyDelay);
+		}
 	}
 
 	void Apply()

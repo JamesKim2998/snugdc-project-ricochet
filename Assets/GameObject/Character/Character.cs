@@ -73,11 +73,13 @@ public class Character : MonoBehaviour
 
 	#region weapon
 	private Weapon m_Weapon;
+	private GameObject m_WeaponEquip;
 
 	public Weapon weapon {
 		get { return m_Weapon; }
 		set {
 			var _old = m_Weapon;
+			var _oldEquip = m_WeaponEquip;
 
 			m_Weapon = value;
 
@@ -87,7 +89,7 @@ public class Character : MonoBehaviour
 
 			if (m_Weapon == null) 
 			{
-				m_NetworkAnimator.SetTrigger("unequip");
+				m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.UNEQUIP);
 			}
 			else 
 			{
@@ -97,8 +99,15 @@ public class Character : MonoBehaviour
 				m_Weapon.transform.localEulerAngles = Vector3.zero;
 				m_Weapon.postOutOfAmmo += ListenOutOfAmmo;
 				m_Weapon.postCooldown += ListenWeaponCooldown;
-				m_NetworkAnimator.SetTrigger("equip_" + m_Weapon.animationGroup);
+				animator.SetTrigger("equip_" + WeaponHelper.GetTrigger(m_Weapon.animationGroup));
+				Debug.Log("equip_" + WeaponHelper.GetTrigger(m_Weapon.animationGroup));
 
+				var _weaponEquipPrf = Database.Weapon[m_Weapon.type].weaponEquipPrf;
+				m_WeaponEquip = Instantiate(_weaponEquipPrf) as GameObject;
+				m_WeaponEquip.transform.parent = weaponEquipPivot.transform;
+				m_WeaponEquip.transform.localPosition = Vector3.zero;
+				m_WeaponEquip.transform.localEulerAngles = Vector3.zero;
+				
 				if (IsMine() && IsNetworkEnabled())
 				{
 					m_Weapon.networkView.viewID = Network.AllocateViewID();
@@ -106,7 +115,7 @@ public class Character : MonoBehaviour
 					networkView.RPC("Character_SetWeapon", 
 					                RPCMode.Others, 
 					                m_Weapon.networkView.viewID, 
-					                m_Weapon.type);
+					                (int) m_Weapon.type);
 				}
 			}
 
@@ -114,17 +123,25 @@ public class Character : MonoBehaviour
 				postWeaponChanged(this, _old);
 
 			if (_old != null) 
+			{
+				Destroy(m_WeaponEquip.gameObject);
 				Destroy(_old.gameObject);
-
+			}
 		}
 	}
 
-	public WeaponPivot weaponPivot;
+	public GameObject weaponPivot;
+	public GameObject weaponEquipPivot;
 
 	[RPC]
-	private void Character_SetWeapon(NetworkViewID _viewID, string _weapon)
+	private void Character_SetWeapon(NetworkViewID _viewID, int _weapon)
 	{
-		var _weaponObj = GameObject.Instantiate(Resources.Load(_weapon)) as GameObject;
+		var _weaponType = WeaponHelper.Convert(_weapon);
+		if (_weaponType == WeaponType.NONE) 
+			return;
+
+		var _weaponData = Database.Weapon[_weaponType];
+		var _weaponObj = GameObject.Instantiate(_weaponData) as GameObject;
 		weapon = _weaponObj.GetComponent<Weapon>();
 		weapon.networkView.enabled = true;
 		weapon.networkView.viewID = _viewID;
@@ -142,7 +159,8 @@ public class Character : MonoBehaviour
 			var _weaponAngle = weaponPivot.transform.eulerAngles;
 			_weaponAngle.z = m_Aim - 90;
 			weaponPivot.transform.eulerAngles = _weaponAngle;
-
+			weaponEquipPivot.transform.eulerAngles = _weaponAngle;
+			
 			animator.SetFloat("aim", m_Aim);
 
 			if (crossHair) 

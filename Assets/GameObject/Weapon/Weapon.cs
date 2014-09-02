@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour 
 {
-	public string type;
-	public string animationGroup;
+	public WeaponType type;
+	public WeaponAnimationGroup animationGroup;
 
 	private GameObject m_Owner;
 	public GameObject owner { get { return m_Owner; } set { m_Owner = value; }}
@@ -62,7 +62,6 @@ public class Weapon : MonoBehaviour
 	} 
 
 	// state
-	// todo: incomplete
 	public bool IsState(State _state) { return _state == m_State; }
 
 	// trigger

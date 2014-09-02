@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,9 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400d2bd0f87f0944caddd59d02e9ec61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyOnStart: 1
-  destroyAfterApply: 1
   skinPrf: {fileID: 11400000, guid: 2bf7c4b8ca1f09e478ab1c5fd4f74be8, type: 2}
+  weaponPrf: {fileID: 11400000, guid: e13cd39897d55244f82dd49d2522966e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
