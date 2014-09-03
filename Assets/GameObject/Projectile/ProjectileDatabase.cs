@@ -2,15 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class WeaponDatabase : MonoBehaviour
+public class ProjectileDatabase : MonoBehaviour
 {
 	public List<GameObject> editorDataPrfs;
-
-	public Dictionary<WeaponType, WeaponData> m_Datas = new Dictionary<WeaponType, WeaponData>();
-
-	public WeaponData this[WeaponType _type] {
+	
+	public Dictionary<ProjectileType, ProjectileData> m_Datas = new Dictionary<ProjectileType, ProjectileData>();
+	
+	public ProjectileData this[ProjectileType _type] {
 		get {
-			WeaponData data;
+			ProjectileData data;
 			if (m_Datas.TryGetValue(_type, out data))
 			{
 				return data;
@@ -22,25 +22,25 @@ public class WeaponDatabase : MonoBehaviour
 			}
 		}
 	}
-
+	
 	void Start()
 	{
 		foreach (var _dataPrf in editorDataPrfs)
 		{
-			var _type = _dataPrf.GetComponent<WeaponTypeComponent>();
+			var _type = _dataPrf.GetComponent<ProjectileTypeComponent>();
 			if (! _type) 
 			{
 				Debug.LogError("Type is not found!");
 				continue;
 			}
 			
-			var _dataCmp = _dataPrf.GetComponent<WeaponData>();
+			var _dataCmp = _dataPrf.GetComponent<ProjectileData>();
 			if (! _dataCmp)
 			{
-				Debug.LogError("WeaponData is not found!");
+				Debug.LogError("Data is not found!");
 				continue;
 			}
-
+			
 			m_Datas.Add(_type.type, _dataCmp);
 		}
 	}

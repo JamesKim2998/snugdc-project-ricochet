@@ -277,7 +277,7 @@ MonoBehaviour:
   damageExpose: 1
   autoload: 0
   shootAtOnce: 3
-  ammoMax: 30
+  ammoMax: 1
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: .0500000007, z: 0}
   prepareTime: 0

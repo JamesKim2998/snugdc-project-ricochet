@@ -14,19 +14,18 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
+	[HideInInspector]
 	public int ownerID = 0;
+
+	[HideInInspector]
 	public int ownerDetecterID = 0;
 	
 	public Collider2D ownerDeadZoneCollider {
 		set { 
 			if ( value != null)
-			{
 				m_OwnerDeadZoneColliderID = value.GetInstanceID();
-			}
 			else
-			{
 				m_OwnerDeadZoneColliderID = 0;
-			}
 		}
 	}
 

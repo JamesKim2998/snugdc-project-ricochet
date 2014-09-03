@@ -44,7 +44,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: equip_machine_gun
+  - m_Name: arm_equip_machine_gun
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -113,6 +113,12 @@ AnimatorController:
   - m_Name: tilt
     m_Type: 1
     m_DefaultFloat: 90
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: upper_equip_machine_gun
+    m_Type: 9
+    m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
@@ -1023,7 +1029,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: equip_machine_gun
+    m_ConditionEvent: upper_equip_machine_gun
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -1747,7 +1753,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: equip_machine_gun
+    m_ConditionEvent: arm_equip_machine_gun
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -2699,6 +2705,9 @@ StateMachine:
   m_OrderedTransitions:
     data:
       first: {fileID: 0}
+      second: []
+    data:
+      first: {fileID: 110291560}
       second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 48, y: -108, z: 0}

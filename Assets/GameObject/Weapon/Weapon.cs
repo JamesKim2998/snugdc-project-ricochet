@@ -92,8 +92,7 @@ public class Weapon : MonoBehaviour
 
 	}
 
-	public delegate void PostOutOfAmmo(Weapon _weapon);
-	public PostOutOfAmmo postOutOfAmmo;
+	public Action<Weapon> postOutOfAmmo;
 
 	// flag
 	public bool relativeVelocityEnabled = true;

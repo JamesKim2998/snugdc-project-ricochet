@@ -9,12 +9,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &100002
 GameObject:
@@ -25,7 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: assault_rifle_equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,13 +41,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 61: {fileID: 6100000}
-  m_Layer: 0
-  m_Name: hitbox
+  m_Layer: 9
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -81,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.13747409, y: -.143722892, z: 0}
+  m_LocalPosition: {x: .218013197, y: .111908406, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -92,11 +92,11 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Enabled: 0
+  m_Material: {fileID: 6200000, guid: a2c5565744e192b4286e839d6786b739, type: 2}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: .300000012}
-  m_Center: {x: .300000012, y: .200000003}
+  m_Size: {x: 1, y: .400000006}
+  m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31638c73a0b147c44979ba35aae6f880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 6100000}
+  body: {fileID: 6100000}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

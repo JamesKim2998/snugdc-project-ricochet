@@ -8,13 +8,19 @@ public class Database : Singleton<Database>
 
 	public WeaponDatabase weapon;
 	public static WeaponDatabase Weapon { get { return Instance.weapon; }}
+	
+	public ProjectileDatabase projectile;
+	public static ProjectileDatabase Projectile { get { return Instance.projectile; } }
 
 	public void Apply(DatabaseDef _def)
 	{
-		skin = (Instantiate(_def.skinPrf.gameObject) as GameObject).GetComponent<CharacterSkinDatabase>();
+		skin = ((GameObject) Instantiate(_def.skinPrf.gameObject)).GetComponent<CharacterSkinDatabase>();
 		skin.transform.parent = gameObject.transform;
 
-		weapon = (Instantiate(_def.weaponPrf.gameObject) as GameObject).GetComponent<WeaponDatabase>();
+		weapon = ((GameObject) Instantiate(_def.weaponPrf.gameObject)).GetComponent<WeaponDatabase>();
 		weapon.transform.parent = gameObject.transform;
+
+		projectile = ((GameObject) Instantiate(_def.projectilePrf.gameObject)).GetComponent<ProjectileDatabase>();
+		projectile.transform.parent = gameObject.transform;
 	}
 }

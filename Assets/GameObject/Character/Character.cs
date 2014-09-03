@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class Character : MonoBehaviour 
+public partial class Character : MonoBehaviour 
 {
 	public CharacterType type = CharacterType.NONE;
 
@@ -73,13 +73,13 @@ public class Character : MonoBehaviour
 
 	#region weapon
 	private Weapon m_Weapon;
-	private GameObject m_WeaponEquip;
+	public WeaponEquip weaponEquip { get; private set; }
 
 	public Weapon weapon {
 		get { return m_Weapon; }
 		set {
 			var _old = m_Weapon;
-			var _oldEquip = m_WeaponEquip;
+			var _oldEquip = weaponEquip;
 
 			m_Weapon = value;
 
@@ -105,10 +105,10 @@ public class Character : MonoBehaviour
 				animator.SetTrigger(CharacterAnimationTrigger.UpperWeaponEquip(_animationGroup));
 
 				var _weaponEquipPrf = Database.Weapon[m_Weapon.type].weaponEquipPrf;
-				m_WeaponEquip = Instantiate(_weaponEquipPrf) as GameObject;
-				m_WeaponEquip.transform.parent = weaponEquipPivot.transform;
-				m_WeaponEquip.transform.localPosition = Vector3.zero;
-				m_WeaponEquip.transform.localEulerAngles = Vector3.zero;
+				weaponEquip = ((GameObject) Instantiate(_weaponEquipPrf)).GetComponent<WeaponEquip>();
+				weaponEquip.transform.parent = weaponEquipPivot.transform;
+				weaponEquip.transform.localPosition = Vector3.zero;
+				weaponEquip.transform.localEulerAngles = Vector3.zero;
 				
 				if (IsMine() && IsNetworkEnabled())
 				{
@@ -124,11 +124,11 @@ public class Character : MonoBehaviour
 			if (postWeaponChanged != null)
 				postWeaponChanged(this, _old);
 
-			if (_old != null) 
-			{
-				Destroy(m_WeaponEquip.gameObject);
+			if (_old) 
 				Destroy(_old.gameObject);
-			}
+
+			//if (_oldEquip)
+			//	Destroy(_oldEquip.gameObject, 2f);
 		}
 	}
 
@@ -183,6 +183,7 @@ public class Character : MonoBehaviour
 
 	public Animator animator;
 	private NetworkAnimator m_NetworkAnimator;
+	public CharacterAnimationEventer m_AnimationEventor;
 
 	private InterpolatePosition m_InterpolatePosition;
 
@@ -228,6 +229,8 @@ public class Character : MonoBehaviour
 		// components
 		m_NetworkAnimator = GetComponent<NetworkAnimator>();
 		m_InterpolatePosition = gameObject.AddComponent<InterpolatePosition>();
+
+		m_AnimationEventor.postThrowAway += ListenAnimationEventThrowAway;
 
 		// detector
 		crateDetector.doObtain = Obtain;
@@ -444,6 +447,7 @@ public class Character : MonoBehaviour
 	public void Unequip()
 	{
 		weapon = null;
+		weaponEquip = null;
 	}
 
 	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
