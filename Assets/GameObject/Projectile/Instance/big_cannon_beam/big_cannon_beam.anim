@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BlackLaserAnim
+  m_Name: big_cannon_beam
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -21,22 +21,22 @@ AnimationClip:
         value: {x: 1, y: 1, z: 1}
         inSlope: {x: 0, y: 3.35293984, z: 0}
         outSlope: {x: 0, y: 3.35293984, z: 0}
-        tangentMode: 2
+        tangentMode: 130303608
       - time: .0166666675
         value: {x: 1, y: 1.05588233, z: 1}
         inSlope: {x: 0, y: 3.00000048, z: 0}
         outSlope: {x: 0, y: 3.00000048, z: 0}
-        tangentMode: 0
+        tangentMode: 600772052
       - time: .0333333351
         value: {x: 1, y: 1.10000002, z: 1}
         inSlope: {x: 0, y: 1.89263368, z: 0}
         outSlope: {x: 0, y: 1.89263368, z: 0}
-        tangentMode: 0
+        tangentMode: 139
       - time: .100000001
         value: {x: 1, y: 1.17588043, z: 1}
         inSlope: {x: 0, y: .582502902, z: 0}
         outSlope: {x: 0, y: .582502902, z: 0}
-        tangentMode: 0
+        tangentMode: 2053729385
       - time: 1
         value: {x: 1, y: 1.20000005, z: 1}
         inSlope: {x: 0, y: .0133997863, z: 0}
@@ -46,7 +46,7 @@ AnimationClip:
         value: {x: 1, y: 1.20000005, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 0
+        tangentMode: 2
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: blacklaser
@@ -57,12 +57,12 @@ AnimationClip:
         value: {x: 1, y: 1, z: 1}
         inSlope: {x: 0, y: -11.999999, z: 0}
         outSlope: {x: 0, y: -11.999999, z: 0}
-        tangentMode: 1105199104
+        tangentMode: 2
       - time: .0166666675
         value: {x: 1, y: .800000012, z: 1}
         inSlope: {x: 0, y: -5.29548359, z: 0}
         outSlope: {x: 0, y: -5.29548359, z: 0}
-        tangentMode: 0
+        tangentMode: 598700236
       - time: .0333333351
         value: {x: 1, y: .823483884, z: 1}
         inSlope: {x: 0, y: -.283842206, z: 0}

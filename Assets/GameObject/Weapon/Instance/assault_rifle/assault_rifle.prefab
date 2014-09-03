@@ -256,10 +256,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4b0b7666494d24fbcac7bf7af53477, type: 3}
+  m_Script: {fileID: 11500000, guid: 3be9bef3b65ae7042985b1eab2ae46e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: Bullet_Rifle
+  projectile: 4
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
   damageExpose: 1
   autoload: 0
   shootAtOnce: 3
-  ammoMax: 1
+  ammoMax: 100
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: .0500000007, z: 0}
   prepareTime: 0
