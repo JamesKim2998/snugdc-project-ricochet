@@ -22,22 +22,25 @@ public class GameProgress : MonoBehaviour
 
 	public bool m_IntroOnce = false;
 
-	private float m_TimeElapsed = 0f;
-	public float timeElapsed { get { return m_TimeElapsed; } private set {m_TimeElapsed = value; } }
-	
-	private float m_StateTime = 0f;
-	public float stateTime { get { return m_StateTime; } private set { m_StateTime = value; } }
+    public float timeElapsed { get; private set; }
 
-	private int m_GameID;
-	public int gameID { get { return m_GameID; } private set { m_GameID = value; } }
+    public float stateTime { get; private set; }
 
-	public Action postIntro;
+    public int gameID { get; private set; }
+
+    public Action postIntro;
 	public Action postStart;
 	public Action postRun;
 	public Action postOver;
 	public Action postStop;
 
-	bool IsStateChangable()
+    public GameProgress()
+    {
+        stateTime = 0f;
+        timeElapsed = 0f;
+    }
+
+    static bool IsStateChangable()
 	{
 		if (! Network.isServer)
 		{

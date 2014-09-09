@@ -413,7 +413,7 @@ public partial class Character : MonoBehaviour
 		m_NetworkAnimator.SetTrigger("dead_lower");
 		m_NetworkAnimator.SetTrigger("dead_upper");
 		
-		var _effectDead = GameObject.Instantiate (effectDeadPrf, transform.position, transform.rotation) as GameObject;
+		var _effectDead = (GameObject) Instantiate (effectDeadPrf, transform.position, transform.rotation);
 		_effectDead.transform.Translate (effectDeadOffset);
 
 		if (postDead != null) postDead(this);
@@ -429,13 +429,13 @@ public partial class Character : MonoBehaviour
 		if (_crate.empty) 
 			return;
 		
-		var _weapon = GameObject.Instantiate(Resources.Load(_crate.weapon)) as GameObject;
+		var _weapon = (GameObject) Instantiate(Resources.Load(_crate.weapon)) ;
 		weapon = _weapon.GetComponent<Weapon>();
 	}
 
 	private void ListenOutOfAmmo(Weapon _weapon)
 	{
-		// note: Unequip 은 animator 에서 호출합니다
+		// note: Unequip is called by animator.
 		m_NetworkAnimator.SetTrigger ("throw_away");
 	}
 	

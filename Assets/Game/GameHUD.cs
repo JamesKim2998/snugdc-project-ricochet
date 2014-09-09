@@ -8,14 +8,10 @@ public class GameHUD : MonoBehaviour
 
 	public GameObject chatscreen;
 	public HUDScoreBoard scoreBoard;
-	
-	private HUDResultBoard m_ResultBoard;
-	public HUDResultBoard resultBoard { 
-		get { return m_ResultBoard; } 
-		private set { m_ResultBoard = value; } 
-	}
 
-	private GameObject m_ModeHUD;
+    public HUDResultBoard resultBoard { get; private set; }
+
+    private GameObject m_ModeHUD;
 
 	void Start()
 	{
@@ -42,19 +38,19 @@ public class GameHUD : MonoBehaviour
 	{
 		if (chatscreen != null) 
 		{
-			GameObject.Destroy(chatscreen);
+			Destroy(chatscreen);
 			chatscreen = null;
 		}
 		
 		if (scoreBoard != null)
 		{
-			GameObject.Destroy(scoreBoard);
+            Destroy(scoreBoard);
 			scoreBoard = null;
 		}
 		
 		if (resultBoard != null)
 		{
-			GameObject.Destroy(resultBoard);
+			Destroy(resultBoard);
 			resultBoard = null;
 		}
 	}
@@ -123,13 +119,13 @@ public class GameHUD : MonoBehaviour
 	{
 		if (resultBoard != null)
 		{
-			Debug.LogWarning("Result board is existing alreay. Why?");
-			GameObject.Destroy(resultBoard);
+			Debug.LogWarning("Result board is existing already. Why?");
+			Destroy(resultBoard);
 		}
 
 		if (m_Def.resultBoardPrf != null)
 		{
-			var _obj = GameObject.Instantiate(m_Def.resultBoardPrf, m_Def.resultBoardPosition, Quaternion.identity) as GameObject;
+			var _obj = (GameObject) Instantiate(m_Def.resultBoardPrf, m_Def.resultBoardPosition, Quaternion.identity);
 			resultBoard = _obj.GetComponent<HUDResultBoard>();
 			TransformHelper.SetParentLocal(resultBoard.gameObject, m_Def.hudRoot.gameObject);
 		}
@@ -138,9 +134,7 @@ public class GameHUD : MonoBehaviour
 	void ListenGameStop()
 	{
 		if (resultBoard != null)
-		{
-			GameObject.Destroy(resultBoard.gameObject);
-		}
+			Destroy(resultBoard.gameObject);
 	}
 
 }
