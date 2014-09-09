@@ -4,17 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Projectile : MonoBehaviour {
+    public bool activated { get; set; }
 
-	private bool m_Activated = false;
-	public bool activated {
-		get { return m_Activated; }
-		set { 
-			if (m_Activated == value) return;
-			m_Activated = value; 
-		}
-	}
-
-	[HideInInspector]
+    [HideInInspector]
 	public int ownerID = 0;
 
 	[HideInInspector]
@@ -55,9 +47,8 @@ public class Projectile : MonoBehaviour {
 	private float m_PrepareTime;
 
 	// decay
-	private bool m_Decaying = false;
-	public bool decaying { get { return m_Decaying; } }
-	public bool stopOnDecay = true;
+    public bool decaying { get; private set; }
+    public bool stopOnDecay = true;
 	public float decayDuration = 0;
 	private float m_DecayTime;
 
@@ -84,8 +75,14 @@ public class Projectile : MonoBehaviour {
 	// Dead-zone related variables.
 	// 총알은 최초에 데드존 내에서 발사되어서, 데드존을 벗어나야만 플레이어에 대한 충돌판정이 활성화된다.
 	private bool m_OutOfDeadZone;
-	
-	void Start () 
+
+    public Projectile()
+    {
+        activated = false;
+        decaying = false;
+    }
+
+    void Start () 
 	{
 		if (initialVelocity != Vector2.zero)
 			rigidbody2D.velocity = initialVelocity;
@@ -104,19 +101,12 @@ public class Projectile : MonoBehaviour {
 		
 		if (m_OwnerDeadZoneColliderID == 0)
 		{
-			Debug.Log ("Character doesn't have an detector");
+			// Debug.Log ("Character doesn't have an detector");
 			m_OutOfDeadZone = true;
 		} 
 		else 
 		{
-			if(IsProjectileInsideOfInitialDeadzone())
-			{
-				m_OutOfDeadZone = false;
-			} 
-			else 
-			{
-				m_OutOfDeadZone = true;
-			}
+			m_OutOfDeadZone = ! IsProjectileInsideOfInitialDeadzone();
 		}
 	}
 	
@@ -133,14 +123,14 @@ public class Projectile : MonoBehaviour {
 		if (networkView.enabled && networkView.viewID != NetworkViewID.unassigned)
 			Network.Destroy(networkView.viewID);
 		else 
-			GameObject.Destroy(gameObject);
+			Destroy(gameObject);
 	}
 	
 	void StartDecay() 
 	{
 		if (decaying) return;
 		
-		m_Decaying = true;
+		decaying = true;
 		
 		if (decayDuration.Equals(0)) 
 		{
@@ -188,7 +178,7 @@ public class Projectile : MonoBehaviour {
 			}
 		} 
 
-		if (m_Decaying) 
+		if (decaying) 
 		{
 			m_DecayTime += dt;
 			if (m_DecayTime > decayDuration) 
@@ -198,7 +188,7 @@ public class Projectile : MonoBehaviour {
 
 	void FixedUpdate() 
 	{
-		if (! m_Decaying) 
+		if (! decaying) 
 		{
 			if (! rigidbody2D.isKinematic)
 			{
@@ -236,7 +226,7 @@ public class Projectile : MonoBehaviour {
 		{
 			if ( other.GetInstanceID() == m_OwnerDeadZoneColliderID)
 			{
-				Debug.Log ("Projectile just leaved owner's deadzone");
+				// Debug.Log ("Projectile just leaved owner's deadzone");
 				m_OutOfDeadZone = true;
 			}
 		}
@@ -279,7 +269,7 @@ public class Projectile : MonoBehaviour {
 				return;
 			}
 				
-			if (_damageDetector != null && _damageDetector.enabled) 
+			if (_damageDetector && _damageDetector.enabled) 
 			{
 				attackData.velocity = rigidbody2D.velocity;
 				_damageDetector.Damage(attackData);
@@ -291,7 +281,7 @@ public class Projectile : MonoBehaviour {
 			// todo: server를 통해서 이루어져야합니다.
 			if (effectHitPrf)
 			{
-				var _effectHit = GameObject.Instantiate (effectHitPrf, transform.position, transform.rotation) as GameObject;
+				var _effectHit = (GameObject) Instantiate (effectHitPrf, transform.position, transform.rotation);
 				_effectHit.transform.Translate(effectHitOffset);
 			}
 		}

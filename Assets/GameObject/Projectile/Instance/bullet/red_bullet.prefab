@@ -30,7 +30,6 @@ GameObject:
   - 114: {fileID: 11400006}
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400004}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 12
   m_Name: red_bullet
@@ -231,29 +230,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 0}
   mirrorX: 1
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0ab0f7f82007541af95feebfb0ad09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  penetration: 0
-  penetrationForced:
-    serializedVersion: 2
-    m_Bits: 0
-  reflectionCount: 0
-  reflectionMask:
-    serializedVersion: 2
-    m_Bits: 256
-  effectReflectPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
-  effectReflectOffset: {x: 0, y: 0, z: 0}
-  effectPenetratePrf: {fileID: 0}
-  effectPenetrateOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,14 +6,14 @@ public class ProjectileDatabase : MonoBehaviour
 {
 	public List<GameObject> editorDataPrfs;
 	
-	public Dictionary<ProjectileType, ProjectileData> m_Datas = new Dictionary<ProjectileType, ProjectileData>();
+	private readonly Dictionary<ProjectileType, ProjectileData> m_Datas = new Dictionary<ProjectileType, ProjectileData>();
 	
 	public ProjectileData this[ProjectileType _type] {
 		get {
-			ProjectileData data;
-			if (m_Datas.TryGetValue(_type, out data))
+			ProjectileData _data;
+			if (m_Datas.TryGetValue(_type, out _data))
 			{
-				return data;
+				return _data;
 			}
 			else 
 			{
