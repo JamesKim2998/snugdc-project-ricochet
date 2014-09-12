@@ -49,7 +49,7 @@ public class GameResult : MonoBehaviour
 		foreach (var _player in Global.Player().players)
 		{
 			var _result = new PlayerResult();
-			var _statistic = Game.Statistic().Get(_player.Key);
+			var _statistic = Game.Statistic.Get(_player.Key);
 //			_result.kill = ;
 			_result.death = _statistic.death;
 			_result.score = _statistic.score;

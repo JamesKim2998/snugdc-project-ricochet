@@ -20,7 +20,7 @@ public class GameModeDeathMatch : GameMode
 	public int respawnLimit = 10;
 	public int timeLimit = 300;
 
-	public int respawnLeft { get { return respawnLimit - Game.Statistic().total.death; } }
+	public int respawnLeft { get { return respawnLimit - Game.Statistic.total.death; } }
 	public int timeLeft { 
 		get { 
 			if (Game.Progress().IsState(GameProgress.State.RUNNING))
@@ -57,7 +57,7 @@ public class GameModeDeathMatch : GameMode
 		Game.Progress().postStart += ListenGameStart;
 		Game.Progress().postRun += ListenGameRun;
 		Game.Progress().postOver += ListenGameOver;
-		Game.Statistic ().total.death.postChanged += ListenTotalDeathChanged;
+		Game.Statistic.total.death.postChanged += ListenTotalDeathChanged;
 
 		TryToRunGame();
 	}
@@ -65,7 +65,7 @@ public class GameModeDeathMatch : GameMode
 	public override void Init(GameModeDef _def)
 	{
 		base.Init(_def);
-		var _deathMatchDef = _def as GameModeDeathMatchDef;
+        var _deathMatchDef = (GameModeDeathMatchDef) _def;
 		respawnLimit = _deathMatchDef.respawnCount;
 		timeLimit = _deathMatchDef.timeLimit;
 	}
@@ -90,7 +90,7 @@ public class GameModeDeathMatch : GameMode
 		Game.Progress().postStart -= ListenGameStart;
 		Game.Progress().postRun -= ListenGameRun;
 		Game.Progress().postOver -= ListenGameOver;
-		Game.Statistic ().total.death.postChanged -= ListenTotalDeathChanged;
+		Game.Statistic.total.death.postChanged -= ListenTotalDeathChanged;
 	}
 	
 	void TryToRunGame()
@@ -98,13 +98,9 @@ public class GameModeDeathMatch : GameMode
 		if (Network.isServer )
 		{
 			if ( Game.Progress().IsState(GameProgress.State.STOP))
-			{
 				Game.Progress().StartGame();
-			}
 			else if (Game.Progress().IsState(GameProgress.State.START))
-			{
 				Game.Progress().RunGame();
-			}
 		}
 	}
 	

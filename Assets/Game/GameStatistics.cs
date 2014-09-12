@@ -15,7 +15,7 @@ public class PlayerStatistics
 		death = new Statistic<int>();
 
 		death.postChanged += (Statistic<int> statistic) => {
-			++Game.Statistic ().total.death.val;
+			++Game.Statistic.total.death.val;
 		};
 
 		Reset ();

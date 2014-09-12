@@ -19,7 +19,9 @@ public class Game : Singleton<Game>
 	public static GameProgress Progress() { return Instance.progress; }
 	
 	public GameStatistics statistic = new GameStatistics();
-	public static GameStatistics Statistic() { return Instance.statistic; }
+	public static GameStatistics Statistic {
+	    get { return Instance.statistic; }
+	}
 	
 	public GameLevel level;
 	public static GameLevel Level() { return Instance.level; }

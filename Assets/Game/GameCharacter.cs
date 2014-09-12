@@ -60,9 +60,7 @@ public class GameCharacter
 	public void Start()
 	{
 		if (characterColors.Count == 0) 
-		{
 			characterColors.Add(Color.white);
-		}
 
 		characterColor = GenericHelper.SelectRandom (characterColors);
 	}
@@ -162,11 +160,11 @@ public class GameCharacter
 			return;
 		}
 
-		Game.Statistic().mine.death.val += 1;
+		Game.Statistic.mine.death.val += 1;
 		
 		if (_character != null && _character.lastAttackData.owner != null) 
 		{
-			var _statistic = Game.Statistic().Get(_character.lastAttackData.owner);
+			var _statistic = Game.Statistic.Get(_character.lastAttackData.owner);
 			if (_statistic != null) _statistic.score.val += 1;
 		}
 	}

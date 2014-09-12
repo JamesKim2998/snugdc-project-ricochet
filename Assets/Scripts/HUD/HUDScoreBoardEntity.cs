@@ -13,7 +13,7 @@ using System.Collections;
 
 			if (m_Player != null)
 			{
-				statistic = Game.Statistic().Get(m_Player);
+				statistic = Game.Statistic.Get(m_Player);
 			}
 			else
 			{
@@ -78,7 +78,7 @@ using System.Collections;
 	
 	void Start()
 	{
-//		statistic = Game.Statistic().mine;
+//		statistic = Game.Statistic.mine;
 	}
 
 	void Destroy()
