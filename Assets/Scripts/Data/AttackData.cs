@@ -1,3 +1,4 @@
+using Assets.Scripts.Serialize;
 using UnityEngine;
 using System.Collections;
 using System.Runtime.Serialization;
@@ -14,10 +15,13 @@ public class AttackData
 
 	public string owner;
 
+    public WeaponType weapon = WeaponType.NONE;
+    public ProjectileType projectile = ProjectileType.NONE;
+
 	[System.NonSerialized]
 	public Vector2 velocity = Vector2.zero;
 	public int damage = 0;
-
+    
 	public static implicit operator int(AttackData _attackData) 
 	{
 		return _attackData.damage;
@@ -25,28 +29,19 @@ public class AttackData
 	
 	public string Serialize() 
 	{
-		var _serial = NetworkSerializer.Serialize(this);
-		_serial += ',';
-		_serial += velocity.x;
-		_serial += ',';
-		_serial += velocity.y;
-		return _serial;
+		return NetworkSerializer.Serialize(this)
+	        + Serializer.serialize(velocity);
 	}
 
 	public static AttackData Deserialize(string _serial)
 	{
-		AttackData _attackData;
-		var _velocityYIdx = _serial.LastIndexOf(',');
-		var _velocityY = float.Parse(_serial.Substring(_velocityYIdx + 1));
-		_serial = _serial.Substring(0, _velocityYIdx);
+	    Vector2 _velocity;
+        _serial = _serial.Substring(0, Serializer.deserialize(_serial, out _velocity));
 
-		var _velocityXIdx = _serial.LastIndexOf(',');
-		var _velocityX = float.Parse(_serial.Substring(_velocityXIdx + 1));
-		_serial = _serial.Substring(0, _velocityXIdx);
-
+        AttackData _attackData;
 		NetworkSerializer.Deserialize(_serial, out _attackData);
-		_attackData.velocity = new Vector2(_velocityX, _velocityY);
 
+		_attackData.velocity = _velocity;
 		return _attackData;
 	}
 }
