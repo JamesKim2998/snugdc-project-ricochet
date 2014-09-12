@@ -143,7 +143,7 @@ public partial class Character : MonoBehaviour
 			return;
 
 		var _weaponData = Database.Weapon[_weaponType];
-		var _weaponObj = GameObject.Instantiate(_weaponData) as GameObject;
+		var _weaponObj = (GameObject) Instantiate(_weaponData);
 		weapon = _weaponObj.GetComponent<Weapon>();
 		weapon.networkView.enabled = true;
 		weapon.networkView.viewID = _viewID;
@@ -154,7 +154,7 @@ public partial class Character : MonoBehaviour
 		get { return m_Aim; }
 		set { 
 			if (isDead) return;
-			if (m_Aim == value) return;
+			if (Math.Abs(m_Aim - value) < 0.01) return;
 
 			m_Aim = value;
 			
@@ -264,15 +264,8 @@ public partial class Character : MonoBehaviour
 		var _rayResult = Physics2D.Raycast(transform.position, -Vector2.up, 1f, terrainMask);
 
 		if (_rayResult) {
-			float _tilt;
-			if (direction > 0) {
-				_tilt = Mathf.Atan2(_rayResult.normal.y, _rayResult.normal.x);
-			} else {
-				_tilt = Mathf.Atan2(_rayResult.normal.y, -_rayResult.normal.x);
-			}
-			
+			var _tilt = Mathf.Atan2(_rayResult.normal.y, direction * _rayResult.normal.x);
 			_tilt *= Mathf.Rad2Deg;
-			
 			animator.SetFloat("tilt", _tilt);
 		}
 	}
@@ -455,7 +448,7 @@ public partial class Character : MonoBehaviour
 		m_InterpolatePosition.OnSerializeNetworkView(_stream, _info);
 		
 		float _aim = 0;
-		int _direction = 0;
+		var _direction = 0;
 
 		if (_stream.isWriting) 
 		{
