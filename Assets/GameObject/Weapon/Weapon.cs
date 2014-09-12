@@ -8,10 +8,9 @@ public class Weapon : MonoBehaviour
 	public WeaponType type;
 	public WeaponAnimationGroup animationGroup;
 
-	private GameObject m_Owner;
-	public GameObject owner { get { return m_Owner; } set { m_Owner = value; }}
+    public GameObject owner { get; set; }
 
-	public bool useDamage = true;
+    public bool useDamage = true;
 	public int damageExpose;
 	public int? m_Damage;
 	public int? damage { get { return m_Damage; } set { m_Damage = value; } }
@@ -43,18 +42,18 @@ public class Weapon : MonoBehaviour
 			}
 			*/
 
-			m_StateTime = 0;
+			stateTime = 0;
 			m_State = value; 
 
 			switch (m_State) 
 			{
 			case State.SHOOTING:
-				++m_ShootCount;
-				++m_ShootIdx;
+				++shootCount;
+				++shootIdx;
 				ShootProc();
 				break;
 			case State.COOLING:
-				m_ShootIdx = 0;
+				shootIdx = 0;
 				Cool();
 				break;
 			}
@@ -68,23 +67,22 @@ public class Weapon : MonoBehaviour
 	public bool autoload = false;
 	public int shootAtOnce = 1;
 	public int ammoMax = 1000;
-	private int m_Ammo = 0;
-	public int ammo { get { return m_Ammo; } }
-	
-	public bool IsNetworkEnabled() {
+    public int ammo { get; private set; }
+
+    public bool IsNetworkEnabled() {
 		return networkView.isMine && networkView.enabled && (Network.peerType != NetworkPeerType.Disconnected);
 	}
 
 	public void consumeAmmo() {
-		if (m_Ammo <= 0) 
+		if (ammo <= 0) 
 		{
 			Debug.Log("Trying to consume not existing ammo! Ignore.");
 			return;
 		}
 
-		m_Ammo -= 1;
+		ammo -= 1;
 
-		if (m_Ammo == 0)
+		if (ammo == 0)
 		{
 			if (postOutOfAmmo != null)
 				postOutOfAmmo(this);
@@ -100,26 +98,21 @@ public class Weapon : MonoBehaviour
 	public Vector3 projectileOffset;
 
 	// time
-	private float m_StateTime;
-	public float stateTime { get { return m_StateTime; } }
+    public float stateTime { get; private set; }
 
-	public float prepareTime;
+    public float prepareTime;
 	public float chargeTime;
 	public float shootTime;
 	public float cooldown;
 
 	// shoot/projectile idx
-	private int m_ShootCount = 0;
-	public int shootCount { get { return m_ShootCount; } private set { m_ShootCount = value; } }
-	private int m_ShootIdx = 0;
-	public int shootIdx { get { return m_ShootIdx; } private set { m_ShootIdx = value; } }
+    public int shootCount { get; private set; }
+    public int shootIdx { get; private set; }
 
-	private int m_ProjectileCount = 0;
-	public int projectileCount { get { return m_ProjectileCount; } }
-	private int m_ProjectileIdx;
-	public int projectileIdx { get { return m_ProjectileIdx; }}
+    public int projectileCount { get; private set; }
+    public int projectileIdx { get; private set; }
 
-	// projectile construct
+    // projectile construct
 	public delegate bool DoIsShootable(Weapon self);
 	public DoIsShootable doIsShootable;
 	
@@ -146,9 +139,17 @@ public class Weapon : MonoBehaviour
 	public GameObject effectMuzzleFirePrf;
 	public Vector3 effectMuzzleFireOffset;
 
-	public void Start()
+    public Weapon()
+    {
+        ammo = 0;
+        shootIdx = 0;
+        shootCount = 0;
+        projectileCount = 0;
+    }
+
+    public void Start()
 	{
-		m_Ammo = ammoMax;
+		ammo = ammoMax;
 		if (useDamage) damage = damageExpose;
 	}
 
@@ -157,45 +158,40 @@ public class Weapon : MonoBehaviour
 		if (networkView.enabled && ! networkView.isMine)
 			return;
 
-		m_StateTime += Time.deltaTime;
+		stateTime += Time.deltaTime;
 
 		switch (m_State) 
 		{
 		case State.IDLE: break;
 		case State.SHOOTING: {
-			if (m_StateTime > shootTime)
+			if (stateTime > shootTime)
 			{
 				if (autoload || (shootIdx < shootAtOnce) )
-				{
 					state = State.CHARGING;
-				}
 				else 
-				{
 					state = State.COOLING;
-				}
 			}
 			break;
 		}
 
 		case State.CHARGING: {
-			if (m_StateTime > chargeTime)
-			{
+			if (stateTime > chargeTime)
 				state = State.SHOOTING;
-			}
 			break;
 		}
 
 		case State.COOLING: {
-			if (m_StateTime > cooldown) {
+			if (stateTime > cooldown)
 				state = State.IDLE;
-			}
 			break;
 		}
 		}
 	}
 
 	public bool IsShootable() {
-		return m_Ammo > 0 && (doIsShootable == null || ! doIsShootable(this));
+		return ammo > 0 
+            && IsState(State.IDLE)
+            && (doIsShootable == null || ! doIsShootable(this));
 	}
 
 	public void Shoot() {
@@ -214,11 +210,11 @@ public class Weapon : MonoBehaviour
 		 	_bundle = doGetBundle(this);
 		}
 
-		for (m_ProjectileIdx = 0; m_ProjectileIdx < _bundle && ammo > 0; ++m_ProjectileIdx) {
+		for (projectileIdx = 0; projectileIdx < _bundle && ammo > 0; ++projectileIdx) {
 
 			var _projectileGO = doCreateProjectile(this);
 
-			++m_ProjectileCount;
+			++projectileCount;
 
 			consumeAmmo();
 
@@ -316,7 +312,7 @@ public class Weapon : MonoBehaviour
 	{
 		if(effectMuzzleFirePrf != null)
 		{
-			var _effect = GameObject.Instantiate (effectMuzzleFirePrf, transform.position, transform.rotation) as GameObject;
+			var _effect = (GameObject) Instantiate (effectMuzzleFirePrf, transform.position, transform.rotation);
 			_effect.transform.Translate (effectMuzzleFireOffset);
 		}
 	}
