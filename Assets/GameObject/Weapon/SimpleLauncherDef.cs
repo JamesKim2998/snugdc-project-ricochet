@@ -20,7 +20,7 @@ public class SimpleLauncherDef : MonoBehaviour
 		
 		var _projectilePrf = Database.Projectile[projectile].projectilePrf;
 
-		_weapon.doCreateProjectile = _ => (GameObject) Instantiate(_projectilePrf);;
+		_weapon.doCreateProjectile = _ => (GameObject) Instantiate(_projectilePrf);
 
 	    _weapon.doCreateProjectileServer = (int _count, int _idx) => (GameObject) Instantiate(_projectilePrf);
 	}

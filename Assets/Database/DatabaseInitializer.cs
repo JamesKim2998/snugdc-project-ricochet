@@ -7,13 +7,9 @@ public class DatabaseInitializer : MonoBehaviour
 	public bool destroyAfterInitialize = true;
 	public bool overrideDef = false;
 
-	private static bool m_Initialized = false;
+	private static bool s_Initialized = false;
 
 	public DatabaseDef databaseDef;
-
-	static DatabaseInitializer() {
-		m_Initialized = false;
-	}
 
 	void Start ()
 	{
@@ -23,10 +19,12 @@ public class DatabaseInitializer : MonoBehaviour
 
 	void Initialize() 
 	{
-		if (m_Initialized && ! overrideDef)
+		if (s_Initialized && ! overrideDef)
 			return;
 
-		Database.Instance.Apply(databaseDef);
+        s_Initialized = true;
+
+        Database.Instance.Apply(databaseDef);
 
 		if (destroyAfterInitialize)
 			Destroy( gameObject);

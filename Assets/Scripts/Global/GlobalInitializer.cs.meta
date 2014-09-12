@@ -6,6 +6,6 @@ MonoImporter:
   - bgm: {instanceID: 0}
   - transitionGameCutScenePrf: {fileID: 100002, guid: a288f482eed8313409e2fbb60f494850,
       type: 2}
-  executionOrder: 0
+  executionOrder: -300
   icon: {instanceID: 0}
   userData: 

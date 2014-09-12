@@ -601,7 +601,7 @@ Prefab:
     - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
       propertyPath: character.weaponDefault
       value: 
-      objectReference: {fileID: 1315940947}
+      objectReference: {fileID: 100004, guid: 5c0bd4543f2e31a4bba5802a22bad247, type: 2}
     - target: {fileID: 11400002, guid: 807915b79f3d7c9488af49757ce1d5e2, type: 2}
       propertyPath: applyAfterDelay
       value: 1
@@ -643,7 +643,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400016, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
   m_PrefabInternal: {fileID: 1134360853}
   m_GameObject: {fileID: 492898075}
-  m_LocalRotation: {x: 0, y: 0, z: .00695524178, w: -.999975801}
+  m_LocalRotation: {x: 0, y: 0, z: .00696048699, w: -.999975801}
   m_LocalPosition: {x: 2.90049496e-09, y: .257734001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1658,7 +1658,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400016, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .00695524178
+      value: .00696048699
       objectReference: {fileID: 0}
     - target: {fileID: 400038, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1670,7 +1670,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .00774273183
+      value: .00774500798
       objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
       propertyPath: m_LocalRotation.w
@@ -1867,8 +1867,8 @@ NetworkView:
   m_PrefabInternal: {fileID: 23617261}
   m_GameObject: {fileID: 1315940947}
   m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 1315940948}
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 0}
   m_ViewID:
     m_ID: 2
     m_Type: 1
@@ -1922,7 +1922,7 @@ MonoBehaviour:
   prepareTime: 0
   chargeTime: .150000006
   shootTime: 0
-  cooldown: 1
+  cooldown: .5
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
   effectMuzzleFireOffset: {x: .699999988, y: .100000001, z: 0}
 --- !u!1 &1346323684
@@ -1949,7 +1949,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400048, guid: 63542ec599b69a44c97e6843c3068aa1, type: 2}
   m_PrefabInternal: {fileID: 1134360853}
   m_GameObject: {fileID: 1346323684}
-  m_LocalRotation: {x: 0, y: 0, z: .00774273183, w: .999970019}
+  m_LocalRotation: {x: 0, y: 0, z: .00774500798, w: .999970019}
   m_LocalPosition: {x: 1.79834903e-09, y: .0999999717, z: 0}
   m_LocalScale: {x: 1.00000012, y: 1.00000012, z: 1}
   m_Children:
@@ -2042,7 +2042,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!212 &1382997135
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2149,7 +2149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!114 &1398765269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2456,7 +2456,7 @@ MonoBehaviour:
     maxUpForce: 100
     useUpForce: 1
     upForce: 400
-    weaponDefault: {fileID: 1315940947}
+    weaponDefault: {fileID: 100004, guid: 5c0bd4543f2e31a4bba5802a22bad247, type: 2}
     characterColors:
     - {r: 1, g: 0, b: 0, a: 1}
     - {r: 0, g: 0, b: 1, a: 1}
@@ -2484,7 +2484,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1552147914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3473,7 @@ Transform:
   - {fileID: 1794137258}
   - {fileID: 1899452612}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!114 &2093049374
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -111,3 +111,5 @@ ScriptAssemblies
 
 *.sln
 *.dwlt
+/Assets/UnityVS.meta
+/Assets/UnityVS
