@@ -200,31 +200,31 @@ public class Weapon : MonoBehaviour
 
 	private void ShootProc() 
 	{
-		if (! IsShootable()) {
+		if (! IsShootable()) 
 			Debug.LogError("trying to shoot not shootable weapon!");
-		}
 
-		int _bundle = 1;
+		var _bundle = 1;
 
-		if (doGetBundle != null) {
+		if (doGetBundle != null) 
 		 	_bundle = doGetBundle(this);
-		}
 
-		for (projectileIdx = 0; projectileIdx < _bundle && ammo > 0; ++projectileIdx) {
-
+		for (projectileIdx = 0; projectileIdx < _bundle && ammo > 0; ++projectileIdx) 
+        {
 			var _projectileGO = doCreateProjectile(this);
 
 			++projectileCount;
 
 			consumeAmmo();
 
-			if (owner) {
+			if (owner) 
+            {
 				_projectileGO.transform.rotation *= transform.rotation;
 
 				_projectileGO.transform.position += transform.position;
 				_projectileGO.transform.Translate( projectileOffset);
 
-				if (relativeVelocityEnabled) {
+				if (relativeVelocityEnabled) 
+                {
 					_projectileGO.rigidbody2D.velocity 
 						+= owner.rigidbody2D.velocity;
 				}
@@ -271,18 +271,12 @@ public class Weapon : MonoBehaviour
 		}
 
 		if (IsNetworkEnabled())
-		{
 			networkView.RPC("PlayMuzzleFireEffect", RPCMode.All);
-		}
 		else
-		{
 			PlayMuzzleFireEffect();
-		}
 		
 		if (ammo <= 0)
-		{
 			Rest();
-		}
 	}
 
 	[RPC]
@@ -317,8 +311,8 @@ public class Weapon : MonoBehaviour
 		}
 	}
 
-	public void Stop() {
-		
+	public void Stop() 
+    {
 		if (IsState(State.SHOOTING)) {
 			Cool();
 		}
