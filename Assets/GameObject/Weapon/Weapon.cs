@@ -200,10 +200,7 @@ public class Weapon : MonoBehaviour
 
 	private void ShootProc() 
 	{
-		if (! IsShootable()) 
-			Debug.LogError("trying to shoot not shootable weapon!");
-
-		var _bundle = 1;
+	    var _bundle = 1;
 
 		if (doGetBundle != null) 
 		 	_bundle = doGetBundle(this);
