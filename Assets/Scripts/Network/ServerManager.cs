@@ -44,9 +44,8 @@ public class ServerManager : MonoBehaviour
 	}
 
 	void OnServerInitialized()
-	{
+    {
 		if (postServerInitialized != null) postServerInitialized();
-		// if (postConnectionSetuped != null) postConnectionSetuped();
 	}
 	
 	void OnConnectedToServer()

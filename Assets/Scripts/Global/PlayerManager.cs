@@ -166,15 +166,13 @@ public class PlayerManager : MonoBehaviour
 	void ListenDisconnectedFromServer()
 	{
 		m_Server = null;
-
+        
 		foreach (var _playerKV in players)
-		{
             Disconnect(_playerKV.Value);
-		}
 	}
 
 	void ListenServerInitialized()
-	{
+    {
 		networkView.RPC("PlayerManager_OnPlayerConnected", RPCMode.All, Network.player.guid);
 	}
 
@@ -188,6 +186,7 @@ public class PlayerManager : MonoBehaviour
 	void PlayerManager_OnPlayerConnected(string _player)
 	{
 		Add(_player);
+        Connect(Get(_player));
 
 		if (Network.player.guid == _player)
 			RefreshPlayerInfo();

@@ -24,7 +24,7 @@ public class GameCharacter : MonoBehaviour
 
 				Game.Camera_.Unbind(GetHashCode());
 				character.GetComponent<Destroyable>().postDestroy -= ListenDestroy;
-			    characters.Remove(character.id);
+			    Remove(character.id);
 			}
 
 			m_Character = value;
@@ -44,8 +44,7 @@ public class GameCharacter : MonoBehaviour
 
 				m_Character.postDead += ListenDead;
 				m_Character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
-
-			    characters.Add(m_Character.id, m_Character);
+			    Add(m_Character);
 			}
 
 			if (postCharacterChanged != null) 
@@ -60,7 +59,36 @@ public class GameCharacter : MonoBehaviour
     public Action<Character> postCharacterChanged;
     public Action<Character> postCharacterDead;
 
-    public Dictionary<int, Character> characters = new Dictionary<int, Character>();
+    private readonly Dictionary<int, Character> m_Characters = new Dictionary<int, Character>();
+ 
+    public void Add(Character _character)
+    {
+        if (! m_Characters.ContainsKey(_character.id))
+        {
+            m_Characters.Add(_character.id, _character);
+            _character.GetComponent<Destroyable>().postDestroy += Remove;
+        }
+        else
+        {
+            Debug.LogWarning("Character already exist! Ignore.");
+        }
+    }
+
+    void Remove(Destroyable _destroyable)
+    {
+        Remove(_destroyable.GetComponent<Character>().id);
+    }
+
+    public void Remove(int _characterID)
+    {
+        if (m_Characters.ContainsKey(_characterID))
+        {
+            m_Characters[_characterID].GetComponent<Destroyable>().postDestroy -= Remove;
+            m_Characters.Remove(_characterID);
+        }
+        else 
+            Debug.LogWarning("Character does not exist! Ignore.");
+    }
 
 	public void Start()
 	{
@@ -198,7 +226,7 @@ public class GameCharacter : MonoBehaviour
         if (postCharacterDead != null)
         {
             Character _character;
-            if (characters.TryGetValue(_characerID, out _character))
+            if (m_Characters.TryGetValue(_characerID, out _character))
                 postCharacterDead(_character);
             else
                 Debug.LogWarning("Dead character " + _characerID + " does not exist! Cannot post.");

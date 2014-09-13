@@ -23,7 +23,7 @@ class CharacterGameTest : MonoBehaviour
                     _theCharacter.lastAttackData.Serialize());
             };
 
-            Game.Character().characters.Add(_character.id, _character);
+            Game.Character().Add(_character);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -6,41 +7,38 @@ using System.Collections.Generic;
 [RequireComponent(typeof(NetworkView))]
 public class ReadyManager : MonoBehaviour 
 {
-	public bool IsReady() { return m_ReadyInfo.Contains(Network.player.guid); }
+	public bool IsReady() { return readyInfo.Contains(Network.player.guid); }
 	public bool IsReady(string _player) { 
 		if (Global.Server ().server == _player)
 		{
-			if (! m_ReadyInfo.Contains(_player))
+			if (! readyInfo.Contains(_player))
 			{
 				Debug.LogWarning("Ready info doesn't contain server. Add.");
-				m_ReadyInfo.Add(_player);
+				readyInfo.Add(_player);
 			}
 			return true;
 		}
-		return m_ReadyInfo.Contains(_player); 
+		return readyInfo.Contains(_player); 
 	}
 
-	public bool IsReadyAll() 
-	{ 
-		foreach (var _playerKV in Global.Player().players)
-			if (! IsReady(_playerKV.Key)) return false;
-		return true;
+	public bool IsReadyAll()
+	{
+	    return Global.Player().players.All(_playerKV => IsReady(_playerKV.Key));
 	}
 
-	private HashSet<string> m_ReadyInfo;
-	public HashSet<string> readyInfo { get { return m_ReadyInfo; } }
-	public Action<string, bool> postReady;
-	
-	private bool m_IsPolling = false;
-	public bool isPolling { get { return m_IsPolling; }}
-	public Action postPoll;
+    public HashSet<string> readyInfo { get; private set; }
+    public Action<string, bool> postReady;
+
+    public bool isPolling { get; private set; }
+    public Action postPoll;
 
 	public ReadyManager()
 	{
-		m_ReadyInfo = new HashSet<string>();
+	    isPolling = false;
+	    readyInfo = new HashSet<string>();
 	}
-	
-	public void Start()
+
+    public void Start()
 	{
 		Global.Context ().postChanged += ListenContextChanged;
 	}
@@ -52,33 +50,29 @@ public class ReadyManager : MonoBehaviour
 
 	public void PollReadyInfo()
 	{
-		if (m_IsPolling) return;
+		if (isPolling) return;
 
-		m_IsPolling = true;
+		isPolling = true;
 
 		if (Network.isServer) 
-		{
 			Debug.LogWarning("Please use readyInfo instead if your instance is server.");
-		}
 		else 
-		{
 			networkView.RPC( "ReadyManager_PollReadyInfoRequest", RPCMode.Server,
 			                Network.player);
-		}
 
 		Invoke("AbortPoll", 2f);
 	}
 	
 	void AbortPoll()
 	{
-		m_IsPolling = false;
+		isPolling = false;
 		Debug.Log("Abort poll.");
 	}
 
 	[RPC]
 	private void ReadyManager_PollReadyInfoRequest(NetworkPlayer _player) 
 	{
-		var _readyInfo = new List<string>(m_ReadyInfo);
+		var _readyInfo = new List<string>(readyInfo);
 		networkView.RPC ("ReadyManager_PollReadyInfoResponse", _player, 
 		                 NetworkSerializer.Serialize(_readyInfo));
 	}
@@ -88,21 +82,21 @@ public class ReadyManager : MonoBehaviour
 	{
 		CancelInvoke("AbortPoll");
 
-		m_IsPolling = false;
+		isPolling = false;
 
-		var _oldReadyInfo = m_ReadyInfo;
-		var _newReadyInfo = new List<string>();
+		var _oldReadyInfo = readyInfo;
+		List<string> _newReadyInfo;
 		NetworkSerializer.Deserialize(_readyInfoStr, out _newReadyInfo);
-		m_ReadyInfo = new HashSet<string>(_newReadyInfo);
+		readyInfo = new HashSet<string>(_newReadyInfo);
 
 		if (postPoll != null) postPoll();
 		
 		if (postReady != null)
 		{
 			var _oldExclusiveReadyInfo = new HashSet<string>(_oldReadyInfo);
-			_oldExclusiveReadyInfo.ExceptWith(m_ReadyInfo);
+			_oldExclusiveReadyInfo.ExceptWith(readyInfo);
 
-			var _newExclusiveReadyInfo = new HashSet<string>(m_ReadyInfo);
+			var _newExclusiveReadyInfo = new HashSet<string>(readyInfo);
 			_newExclusiveReadyInfo.ExceptWith(_oldReadyInfo);
 
 			foreach (var _readyInfo in _oldExclusiveReadyInfo)
@@ -116,7 +110,7 @@ public class ReadyManager : MonoBehaviour
 	
 	void ReadyLocal(string _player, bool _ready)
 	{
-		var _oldReady = m_ReadyInfo.Contains(_player);
+		var _oldReady = readyInfo.Contains(_player);
 
 		if (_ready == _oldReady)
 		{
@@ -126,11 +120,11 @@ public class ReadyManager : MonoBehaviour
 
 		if (_ready)
 		{
-			m_ReadyInfo.Add(_player);
+			readyInfo.Add(_player);
 		}
 		else
 		{
-			m_ReadyInfo.Remove(_player);
+			readyInfo.Remove(_player);
 		}
 		
 		if (postReady != null)
@@ -175,10 +169,8 @@ public class ReadyManager : MonoBehaviour
 	{
 		// note: game에 진입시 ready 정보를 제거합니다.
 		if (_context == ContextType.GAME)
-		{
-			m_ReadyInfo.Clear();
-		}
+			readyInfo.Clear();
 
-		m_ReadyInfo.Add(Global.Server().server);
+		readyInfo.Add(Global.Server().server);
 	}
 }

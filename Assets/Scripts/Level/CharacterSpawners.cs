@@ -11,52 +11,63 @@ public class CharacterSpawners
 		set 
 		{
 			if (m_IsEnabled == value) return;
-			
-			foreach(CharacterSpawner _spawner in m_Spawners)
-			{
-				_spawner.enabled = false;
-				_spawner.networkView.enabled = true;
-//				_spawner.postDestroy += ListenCharacterDestroyed;
-			}
+		    m_IsEnabled = value;
+
+			foreach(var _spawner in spawners)
+                _spawner.networkView.enabled = m_IsEnabled;
 		}
 	}
-	
-	private List<CharacterSpawner> m_Spawners;
-	public List<CharacterSpawner> spawners { get { return m_Spawners; } }
+    public List<CharacterSpawner> spawners { get; private set; }
 
-	public Action<CharacterSpawner, Character> postDestroy;
+    public Action<CharacterSpawner, Character> postSpawn;
+    public Action<CharacterSpawner, Character> postDestroy;
 	
 	public CharacterSpawners(CharacterSpawnersDef _def) {
-		m_Spawners = new List<CharacterSpawner>(_def.spawners);
+		spawners = new List<CharacterSpawner>(_def.spawners);
 
-		foreach(CharacterSpawner _spawner in m_Spawners)
+		foreach(var _spawner in spawners)
 		{
-			_spawner.enabled = false;
-			_spawner.networkView.enabled = true;
-			_spawner.postDestroy += ListenCharacterDestroyed;
+		    _spawner.postSpawn += ListenSpawn;
+            _spawner.postDestroy += ListenDestroy;
 		}
 	}
+
+    void Destroy()
+    {
+        foreach (var _spawner in spawners)
+        {
+            _spawner.postSpawn -= ListenSpawn;
+            _spawner.postDestroy -= ListenDestroy;
+        }
+    }
 
 	public Character Spawn()
 	{
 		if (Game.Character().character != null)
 			Debug.LogWarning("Trying to spawn a character, but already exist. ");
 
-		if (m_Spawners.Count == 0)
+		if (spawners.Count == 0)
 		{
 			Debug.LogError("No spawner is registered.");
 			return null;
 		}
 			
-		var _spawnerIdx = UnityEngine.Random.Range (0, m_Spawners.Count);
-		var _spawnerTarget = m_Spawners[_spawnerIdx];
+		var _spawnerIdx = UnityEngine.Random.Range (0, spawners.Count);
+		var _spawnerTarget = spawners[_spawnerIdx];
 		var _character = _spawnerTarget.Spawn();	
 		return _character;
 	}
 
-	void ListenCharacterDestroyed(CharacterSpawner _spawner, Character _character)
-	{
-		if (postDestroy != null) postDestroy(_spawner, _character);
-	}
+    void ListenSpawn(CharacterSpawner _spawner, Character _character)
+    {
+        if (postSpawn != null) postSpawn(_spawner, _character);
+    }
+
+    void ListenDestroy(CharacterSpawner _spawner, Character _character)
+    {
+        if (postDestroy != null) postDestroy(_spawner, _character);
+    }
+
+
 }
 
