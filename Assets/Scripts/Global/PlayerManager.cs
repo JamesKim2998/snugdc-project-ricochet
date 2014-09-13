@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 
 [System.Serializable]
@@ -8,7 +10,9 @@ public class PlayerInfo
 {
 	public string guid = "";
 
-	private string m_Name = "undefined";
+    public bool connected = false;
+
+    private string m_Name = "undefined";
 	public string name { 
 		get { return m_Name; } 
 		set { 
@@ -34,28 +38,20 @@ public class PlayerInfo
 
 public class PlayerManager : MonoBehaviour
 {
-	private Dictionary<string, PlayerInfo> m_Players;
-	public Dictionary<string, PlayerInfo> players { get { return m_Players; }}
+    public Dictionary<string, PlayerInfo> players { get; private set; }
 
-	public Action<bool, string> postConnected;
+    public Action<bool, string> postConnected;
 	public Action<PlayerInfo> postSetuped;
 	public Action<PlayerInfo> postInfoChanged;
 
-	private PlayerInfo m_Mine;
-	[HideInInspector]
-	public PlayerInfo mine { get { return m_Mine;}}
+    public PlayerInfo mine { get; private set; }
 
-	private PlayerInfo m_Server;
-	[HideInInspector]
+    private PlayerInfo m_Server;
 	public PlayerInfo server { 
-		get { 
-			if (m_Server == null)
-				m_Server = Get(Global.Server().server);
-			return m_Server; 
-		}
+		get { return m_Server ?? (m_Server = Get(Global.Server().server)); }
 	}
 
-	public bool IsMine(PlayerInfo _player) { return _player.guid == m_Mine.guid; }
+	public bool IsMine(PlayerInfo _player) { return _player.guid == mine.guid; }
 	public bool IsServer(PlayerInfo _player ) { if (server != null) return _player.guid == server.guid; return false;}
 	public bool IsClient(PlayerInfo _player ) { if (server != null) return _player.guid != server.guid; return false;}
 
@@ -63,12 +59,8 @@ public class PlayerManager : MonoBehaviour
 
 	void Awake() 
 	{
-		m_Mine = new PlayerInfo();
-		m_Mine.guid = Network.player.guid;
-		m_Mine.name = Network.player.guid;
-
-		m_Players = new Dictionary<string, PlayerInfo>();
-		m_Players.Add(Network.player.guid, m_Mine);	
+		mine = new PlayerInfo {guid = Network.player.guid, name = Network.player.guid};
+	    players = new Dictionary<string, PlayerInfo> { {Network.player.guid, mine} };
 	}
 
 	void Start()
@@ -88,56 +80,85 @@ public class PlayerManager : MonoBehaviour
 
 	public PlayerInfo Get(string _player)
 	{
-		if (! players.ContainsKey(_player))
-			return null;
-		return players[_player];
+	    PlayerInfo _playerInfo;
+	    return players.TryGetValue(_player, out _playerInfo)
+	        ? _playerInfo
+	        : null;
 	}
 
 	void Add(string _player)
 	{
-		if (! m_Players.ContainsKey(_player))
-		{
-			PlayerInfo _playerInfo;
-			
-			if (_player == Network.player.guid) 
-			{
-				_playerInfo = mine;
-			}
-			else 
-			{
-				_playerInfo = new PlayerInfo();
-			}
-			
-			_playerInfo.guid = _player;
-			_playerInfo.name = "player-" + _player;
-			
-			m_Players[_player] = _playerInfo;
-			if (postConnected != null) postConnected(true, _playerInfo.guid);
-		}
+	    var _playerInfo = _player == Network.player.guid ? mine : new PlayerInfo();
+	    _playerInfo.guid = _player;
+	    _playerInfo.name = "player-" + _player;
+        Add(_playerInfo);
 	}
+
+    void Add(PlayerInfo _playerInfo)
+    {
+        if (players.ContainsKey(_playerInfo.guid))
+        {
+            Debug.LogWarning("Player already exists! Ignore.");
+            return;
+        }
+
+        players[_playerInfo.guid] = _playerInfo;
+    }
 
 	void Remove(string _player)
 	{
-		PlayerInfo _playerInfo = m_Players[_player];
+		var _playerInfo = players[_player];
 		
 		if (_playerInfo == null) 
 		{
-			Debug.LogError("Disconnected player does not exist!");
+			Debug.LogError("Removing player does not exist!");
 			return;
 		}
-		
-		if (postConnected != null) postConnected(false, _playerInfo.guid);
 
-		m_Players.Remove(_player);
+	    if (_playerInfo.connected)
+	        Debug.LogWarning("Trying to remove connected player. Sure?");
+
+		players.Remove(_player);
 	}
+
+    void Connect(PlayerInfo _playerInfo)
+    {
+        if (_playerInfo.connected)
+        {
+            Debug.LogWarning("Player already connected! Ignore.");
+            return;
+        }
+
+        _playerInfo.connected = true;
+        if (postConnected != null) postConnected(true, _playerInfo.guid);
+    }
+
+    void Disconnect(PlayerInfo _playerInfo)
+    {
+        if (! _playerInfo.connected)
+        {
+            Debug.LogWarning("Player already disconnected! Ignore.");
+            return;
+        }
+
+        _playerInfo.connected = false;
+        if (postConnected != null) postConnected(false, _playerInfo.guid);   
+    }
+
+    static void Copy(PlayerInfo _dst, PlayerInfo _org)
+    {
+        _dst.name = _org.name;
+        _dst.characterSelected = _org.characterSelected;
+    }
 
 	void ListenConnectionSetuped() 
 	{
-		if (! m_Players.ContainsKey(Network.player.guid)) 
-			m_Players.Add(Network.player.guid, m_Mine);
+	    if (! players.ContainsKey(mine.guid))
+            Add(mine);
 
-		if (postConnected != null) postConnected(true, m_Mine.guid);
-		if (postSetuped != null) postSetuped(m_Mine);
+	    Connect(mine);
+	    
+		if (postSetuped != null) postSetuped(mine);
 
 		UpdateInfo();
 	}
@@ -146,12 +167,9 @@ public class PlayerManager : MonoBehaviour
 	{
 		m_Server = null;
 
-		List<string> _players = new List<string>(m_Players.Keys);
-
-		foreach (var _player in _players)
+		foreach (var _playerKV in players)
 		{
-			if (_player == Network.player.guid) continue;
-			Remove(_player);
+            Disconnect(_playerKV.Value);
 		}
 	}
 
@@ -183,7 +201,15 @@ public class PlayerManager : MonoBehaviour
 	[RPC]
 	void PlayerManager_OnPlayerDisconnected(string _player)
 	{
-		Remove(_player);
+	    var _playerInfo = Get(_player);
+
+	    if (_playerInfo == null)
+	    {
+	        Debug.Log("Disconnected player does not exist! Ignore.");
+	        return;
+	    }
+
+        Disconnect(_playerInfo);
 	}
 	
 	void RefreshPlayerInfo()
@@ -202,18 +228,15 @@ public class PlayerManager : MonoBehaviour
 	[RPC]
 	void PlayerManager_ResponseRefreshPlayerInfo(string _playerInfosStr)
 	{
-		var _newPlayerInfos = new Dictionary<string, PlayerInfo>();
+		Dictionary<string, PlayerInfo> _newPlayerInfos;
 		NetworkSerializer.Deserialize(_playerInfosStr, out _newPlayerInfos);
 
-		foreach (var _playerKV in players )
+		foreach (var _playerKV in players
+            .Where(_playerKV => Network.player.guid != _playerKV.Key)
+            .Where(_playerKV => ! _newPlayerInfos.ContainsKey(_playerKV.Key)))
 		{
-			if (Network.player.guid == _playerKV.Key) continue;
-
-			if (! _newPlayerInfos.ContainsKey(_playerKV.Key))
-		    {
-				if (postConnected != null) postConnected(false, _playerKV.Value.guid);
-				players.Remove(_playerKV.Key);
-			}
+            Disconnect(_playerKV.Value);
+            Remove(_playerKV.Key);
 		}
 
 		foreach (var _newPlayerKV in _newPlayerInfos)
@@ -228,11 +251,24 @@ public class PlayerManager : MonoBehaviour
 			{
 				_player = _newPlayerKV.Value;
 				players.Add(_player.guid, _player);
-				if (postConnected != null) postConnected(true, _player.guid);
+
+			    if (_player.connected)
+			    {
+			        _player.connected = false;
+                    Connect(_player);
+                }
 			}
 			else
 			{
-				_player.name = _newPlayerKV.Value.name;
+                Copy(_player, _newPlayerKV.Value);
+
+			    if (_player.connected != _newPlayerKV.Value.connected)
+			    {
+			        if (_newPlayerKV.Value.connected)
+                        Connect(_player);
+			        else
+                        Disconnect(_player);
+			    }
 			}
 
 			if (postSetuped != null) postSetuped(_player);
@@ -243,11 +279,11 @@ public class PlayerManager : MonoBehaviour
 	{
 		if (Network.peerType == NetworkPeerType.Disconnected)
 		{
-			UpdateInfoLocal(m_Mine);
+			UpdateInfoLocal(mine);
 		}
 		else
 		{
-			var _playerInfoSerial = NetworkSerializer.Serialize(m_Mine);
+			var _playerInfoSerial = NetworkSerializer.Serialize(mine);
 			networkView.RPC("PlayerManager_UpdateInfo", RPCMode.All, _playerInfoSerial);
 		}
 	}
@@ -261,13 +297,20 @@ public class PlayerManager : MonoBehaviour
 
 		if (_playerLocal == null)
 		{
-			Debug.LogWarning("Trying to update not existing player.");
+			Debug.LogWarning("Trying to update not existing player. Ignore.");
 			return;
 		}
 
-		_playerLocal.name = _player.name;
-		_playerLocal.characterSelected = _player.characterSelected;
-		
+        Copy(_playerLocal, _player);
+
+	    if (_playerLocal.connected != _player.connected)
+	    {
+            if (_player.connected)
+                Connect(_playerLocal);
+            else
+                Disconnect(_playerLocal);
+	    }
+
 		if (postInfoChanged != null) postInfoChanged(_player);
 	}
 

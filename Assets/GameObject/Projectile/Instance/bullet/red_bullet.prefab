@@ -264,12 +264,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be99692242414b4da55b37d0def197d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editorType: 4
   ownerID: 0
   ownerDetecterID: 0
   life: 4
   isHitOwner: 1
   attackData:
-    owner: 
+    ownerPlayer: 
+    weapon: 0
+    projectile: 0
     damage: 1
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}

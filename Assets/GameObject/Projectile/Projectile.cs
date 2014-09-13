@@ -1,27 +1,46 @@
+using UnityEditor;
 using UnityEngine;	
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Projectile : MonoBehaviour {
-    public bool activated { get; set; }
+public class Projectile : MonoBehaviour
+{
+    public ProjectileType editorType = ProjectileType.NONE;
 
+    public ProjectileType type
+    {
+        get { return attackData.projectile; }
+        set { attackData.projectile = value; }
+    }
+
+    public string ownerPlayer
+    {
+        get { return attackData.ownerPlayer; }
+        set { attackData.ownerPlayer = value; }
+    }
+
+    public WeaponType ownerWeapon
+    {
+        get { return attackData.weapon;  }
+        set { attackData.weapon = value; }
+    }
+    
     [HideInInspector]
 	public int ownerID = 0;
 
 	[HideInInspector]
 	public int ownerDetecterID = 0;
-	
-	public Collider2D ownerDeadZoneCollider {
-		set { 
-			if ( value != null)
-				m_OwnerDeadZoneColliderID = value.GetInstanceID();
-			else
-				m_OwnerDeadZoneColliderID = 0;
-		}
-	}
 
-	private int m_OwnerDeadZoneColliderID = 0;
+    public bool activated { get; set; }
+
+    private int m_OwnerDeadZoneColliderID = 0;
+    public Collider2D ownerDeadZoneCollider
+    {
+		set {
+		    m_OwnerDeadZoneColliderID = value != null ? value.GetInstanceID() : 0;
+		}
+    }
 
 	// life
 	public float life = 10;
@@ -82,8 +101,10 @@ public class Projectile : MonoBehaviour {
         decaying = false;
     }
 
-    void Start () 
-	{
+    void Start ()
+    {
+        type = editorType;
+
 		if (initialVelocity != Vector2.zero)
 			rigidbody2D.velocity = initialVelocity;
 

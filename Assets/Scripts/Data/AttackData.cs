@@ -1,4 +1,3 @@
-using Assets.Scripts.Serialize;
 using UnityEngine;
 using System.Collections;
 using System.Runtime.Serialization;
@@ -13,7 +12,7 @@ public class AttackData
 		damage = _damage;
 	}
 
-	public string owner;
+	public string ownerPlayer;
 
     public WeaponType weapon = WeaponType.NONE;
     public ProjectileType projectile = ProjectileType.NONE;

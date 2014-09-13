@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 0daf04e5c96c4924ca83374a95a575af
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - grid: {instanceID: 0}
+  - entityPrf: {fileID: 100014, guid: 815261a0882cb52448bb9e3622f4e025, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

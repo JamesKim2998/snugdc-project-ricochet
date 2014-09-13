@@ -6,16 +6,15 @@ using System.Collections.Generic;
 public class PlayerStatistics 
 {
 	public readonly string player;
-	public readonly Statistic<int> score;
-	public readonly Statistic<int> death;
+    public readonly Statistic<int> score = new Statistic<int>();
+    public readonly SetCounter<int> kill = new SetCounter<int>();
+    public readonly SetCounter<int> death = new SetCounter<int>();
 
 	public PlayerStatistics(string _player) {
 		player = _player;
-		score = new Statistic<int>();
-		death = new Statistic<int>();
-
-		death.postChanged += (Statistic<int> statistic) => {
-			++Game.Statistic.total.death.val;
+        
+		death.postChanged += (SetCounter<int> statistic) => {
+			Game.Statistic.total.death.val += statistic.delta;
 		};
 
 		Reset ();
@@ -23,7 +22,7 @@ public class PlayerStatistics
 
 	public void Reset() {
 		score.val = 0;
-		death.val = 0;
+		death.Clear();
 	}
 }
 
@@ -44,17 +43,16 @@ public class TotalStatistics
 }
 
 public class GameStatistics {
-	private PlayerStatistics m_Mine;
-	public PlayerStatistics mine { get { return m_Mine; }}
-	private Dictionary<string, PlayerStatistics> m_Statistics;
+    public PlayerStatistics mine { get; private set; }
+    private readonly Dictionary<string, PlayerStatistics> m_Statistics = new Dictionary<string, PlayerStatistics>();
 
-	private TotalStatistics m_Total;
-	public TotalStatistics total { get { return m_Total; } }
+    private readonly TotalStatistics m_Total = new TotalStatistics();
+    public TotalStatistics total { get { return m_Total; } }
 
-	public void Start() {
-		m_Mine = new PlayerStatistics(Network.player.guid);
-		m_Total = new TotalStatistics ();
-		m_Statistics = new Dictionary<string, PlayerStatistics> ();
+    public PlayerStatistics this[string _player] { get { return Get(_player); } }
+
+    public void Start() {
+		mine = new PlayerStatistics(Network.player.guid);
 		Global.Player().postConnected += ListenPlayerConnected;
 	}
 
@@ -65,7 +63,7 @@ public class GameStatistics {
 
 	public PlayerStatistics Get(string _player) 
 	{
-		if (_player == Network.player.guid) return m_Mine;
+		if (_player == Network.player.guid) return mine;
 		if (m_Statistics.ContainsKey(_player))
 		{
 			return m_Statistics[_player];
@@ -90,7 +88,7 @@ public class GameStatistics {
 
 	public void Purge() 
 	{
-		m_Mine.Reset();
+		mine.Reset();
 		m_Statistics.Clear();
 	}
 

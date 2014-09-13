@@ -39,17 +39,21 @@ public class Crate : MonoBehaviour
 		{
 			// note: 자신이 생성한 캐릭터만 crate를 획득할 수 있습니다.
 			var _character = _collider.gameObject.GetComponent<Character>();
-			if (_character.owner != Network.player.guid)
+			if (_character.ownerPlayer != Network.player.guid)
 				return;
 
-			var detector = _collider.gameObject.GetComponent<CrateDetector>();
+			var _detector = _collider.gameObject.GetComponent<CrateDetector>();
 
-			if (detector) 
+			if (_detector) 
 			{
-				if (! detector.enabled) return;
-				detector.Obtain(this);
+				if (! _detector.enabled) return;
+				_detector.Obtain(this);
 //				networkView.RPC("Crate_RequestObtain", RPCMode.All);
-				Network.Destroy(networkView.viewID);
+
+			    if (Network.peerType == NetworkPeerType.Disconnected)
+                    Destroy(gameObject);
+			    else
+                    Network.Destroy(networkView.viewID);
 			} 
 			else 
 			{

@@ -1,12 +1,17 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using Random = System.Random;
 
-public partial class Character : MonoBehaviour 
+public partial class Character : MonoBehaviour
 {
+    private static readonly Random s_Random = new Random();
+
+    public int id = 0;
+
 	public CharacterType type = CharacterType.NONE;
 
-	public string owner;
+	public string ownerPlayer;
 
 	#region movement
 	private bool m_Floating = false;
@@ -91,9 +96,10 @@ public partial class Character : MonoBehaviour
 			{
 				m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.UNEQUIP);
 			}
-			else 
+			else
 			{
-				m_Weapon.owner = gameObject;
+			    m_Weapon.ownerPlayer = ownerPlayer;
+				m_Weapon.ownerGameObj = gameObject;
 				m_Weapon.transform.parent = weaponPivot.transform;
 				m_Weapon.transform.localPosition = Vector3.zero;
 				m_Weapon.transform.localEulerAngles = Vector3.zero;
@@ -206,7 +212,7 @@ public partial class Character : MonoBehaviour
 	#region network
 	public bool IsMine()
 	{
-		return owner == Network.player.guid;
+		return ownerPlayer == Network.player.guid;
 	}
 
 	public bool IsNetworkEnabled() 
@@ -222,6 +228,8 @@ public partial class Character : MonoBehaviour
 	#endregion
 
 	void Awake () {
+        id = s_Random.Next();
+
 		m_Hp = GetComponent<HasHP>();
 		m_Hp.hp = hpMax;
 		m_Hp.postDead = Die;

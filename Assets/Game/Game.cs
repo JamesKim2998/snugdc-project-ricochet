@@ -30,7 +30,7 @@ public class Game : Singleton<Game>
 	public static GameModeManager ModeManager() { return Instance.modeManager; }
 	public static GameMode Mode() { return ModeManager().mode; }
 
-	public GameCharacter character = new GameCharacter();
+	public GameCharacter character;
 	public static GameCharacter Character() { return Instance.character; } 
 
 	public GameWeapon weapon = new GameWeapon();
@@ -47,18 +47,13 @@ public class Game : Singleton<Game>
 
 	void Awake() 
 	{
-		if (networkView == null)
-			gameObject.AddComponent<NetworkView>();
-		
-		networkView.stateSynchronization = NetworkStateSynchronization.Off;
-		networkView.observed = null;
-
-		ComponentHelper.AssignComponentIfNotExists(gameObject, ref hud);
+        ComponentHelper.AssignComponentIfNotExists(gameObject, ref hud);
 		ComponentHelper.AssignComponentIfNotExists(gameObject, ref progress);
 		ComponentHelper.AssignComponentIfNotExists(gameObject, ref modeManager);
 		ComponentHelper.AssignComponentIfNotExists(gameObject, ref result);
-		ComponentHelper.AssignComponentIfNotExists(gameObject, ref cheat);
-	}
+        ComponentHelper.AssignComponentIfNotExists(gameObject, ref character);
+        ComponentHelper.AssignComponentIfNotExists(gameObject, ref cheat);
+    }
 
 	void Start () 
 	{
@@ -67,7 +62,6 @@ public class Game : Singleton<Game>
 
 		camera_.Start();
 		statistic.Start();
-		character.Start();
 
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
@@ -84,12 +78,10 @@ public class Game : Singleton<Game>
 
 	void Update () 
 	{
-		character.Update();
 	}
 
 	void FixedUpdate() 
 	{
-		character.FixedUpdate();
 	}
 
 	public static void InitLevel(LevelDef _def) 

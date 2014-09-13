@@ -1,9 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class GameCharacter 
+public class GameCharacter : MonoBehaviour
 {
 	public float downForce = 30f;
 	public float maxUpForce = 2f;
@@ -11,9 +11,6 @@ public class GameCharacter
 	private float m_UpForceLeft = 0;
 
 	public GameObject weaponDefault;
-
-	public delegate void PostCharacterChanged(Character _character);
-	public event PostCharacterChanged postCharacterChanged;
 
 	private Character m_Character;
 
@@ -27,25 +24,28 @@ public class GameCharacter
 
 				Game.Camera_.Unbind(GetHashCode());
 				character.GetComponent<Destroyable>().postDestroy -= ListenDestroy;
+			    characters.Remove(character.id);
 			}
 
 			m_Character = value;
 
 			if (m_Character != null) 
 			{
-				m_Character.owner = Network.player.guid;
+				m_Character.ownerPlayer = Network.player.guid;
 				m_Character.renderer_.SetColor(characterColor);
 
 				Game.Camera_.Bind(GetHashCode(), m_Character.transform);
 
 				if (weaponDefault != null)
 				{
-					var _weapon = GameObject.Instantiate(weaponDefault) as GameObject;	
+					var _weapon = (GameObject) Instantiate(weaponDefault);
 					m_Character.weapon = _weapon.GetComponent<Weapon>();
 				}
 
 				m_Character.postDead += ListenDead;
 				m_Character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
+
+			    characters.Add(m_Character.id, m_Character);
 			}
 
 			if (postCharacterChanged != null) 
@@ -56,6 +56,11 @@ public class GameCharacter
 	public List<Color> characterColors = new List<Color>();
 	[HideInInspector]
 	public Color characterColor = Color.white;
+
+    public Action<Character> postCharacterChanged;
+    public Action<Character> postCharacterDead;
+
+    public Dictionary<int, Character> characters = new Dictionary<int, Character>();
 
 	public void Start()
 	{
@@ -70,7 +75,7 @@ public class GameCharacter
 		character = null;
 	}
 
-	public void Update () 
+	void Update () 
 	{
 		if (character == null) return;
 
@@ -126,7 +131,7 @@ public class GameCharacter
 		}
 	}
 
-	public void FixedUpdate() 
+	void FixedUpdate() 
 	{
 		if (character == null) return;
 
@@ -155,17 +160,48 @@ public class GameCharacter
 
 	public void ListenDead(Character _character)
 	{
-		if (_character != character) {
-			Debug.LogWarning("GameCharacter dead character not match! Ignore.");
+		if (_character != character) 
+        {
+			Debug.LogWarning("Dead character is not mine! Ignore.");
 			return;
 		}
 
-		Game.Statistic.mine.death.val += 1;
-		
-		if (_character != null && _character.lastAttackData.owner != null) 
-		{
-			var _statistic = Game.Statistic.Get(_character.lastAttackData.owner);
-			if (_statistic != null) _statistic.score.val += 1;
-		}
+	    if (Network.peerType == NetworkPeerType.Disconnected)
+	    {
+            GameCharacter_OnDead(
+                Network.player.guid,
+                _character.id,
+                _character.lastAttackData.Serialize());
+	    }
+	    else
+	    {
+            networkView.RPC("GameCharacter_OnDead", RPCMode.All,
+                Network.player.guid,
+                _character.id,
+                _character.lastAttackData.Serialize());
+	    }
 	}
+
+    [RPC]
+    public void GameCharacter_OnDead(string _player, int _characerID, string _attackDataSerial)
+    {
+        var _attackData = AttackData.Deserialize(_attackDataSerial);
+
+        if (! String.IsNullOrEmpty(_attackData.ownerPlayer))
+        {
+            var _statistic = Game.Statistic[_attackData.ownerPlayer];
+            _statistic.kill.Add(_characerID);
+        }
+
+        Game.Statistic[_player].death.Add(_characerID);
+
+        if (postCharacterDead != null)
+        {
+            Character _character;
+            if (characters.TryGetValue(_characerID, out _character))
+                postCharacterDead(_character);
+            else
+                Debug.LogWarning("Dead character " + _characerID + " does not exist! Cannot post.");
+        }
+    }
 }

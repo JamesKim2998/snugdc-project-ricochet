@@ -8,7 +8,8 @@ public class Weapon : MonoBehaviour
 	public WeaponType type;
 	public WeaponAnimationGroup animationGroup;
 
-    public GameObject owner { get; set; }
+    public string ownerPlayer { get; set; }
+    public GameObject ownerGameObj { get; set; }
 
     public bool useDamage = true;
 	public int damageExpose;
@@ -213,7 +214,7 @@ public class Weapon : MonoBehaviour
 
 			consumeAmmo();
 
-			if (owner) 
+			if (ownerGameObj) 
             {
 				_projectileGO.transform.rotation *= transform.rotation;
 
@@ -223,17 +224,19 @@ public class Weapon : MonoBehaviour
 				if (relativeVelocityEnabled) 
                 {
 					_projectileGO.rigidbody2D.velocity 
-						+= owner.rigidbody2D.velocity;
+						+= ownerGameObj.rigidbody2D.velocity;
 				}
 			}
 
 			var _projectile = _projectileGO.GetComponent<Projectile>();
-			
-			if (owner != null)
+            _projectile.ownerPlayer = ownerPlayer;
+            _projectile.ownerWeapon = type;
+            
+			if (ownerGameObj != null)
 			{
-				_projectile.ownerID = owner.GetInstanceID();
-				_projectile.ownerDeadZoneCollider = owner.GetComponent<Character>().deadZoneCollider;
-				var _detector = owner.GetComponentInChildren<DamageDetector>();
+				_projectile.ownerID = ownerGameObj.GetInstanceID();
+				_projectile.ownerDeadZoneCollider = ownerGameObj.GetComponent<Character>().deadZoneCollider;
+				var _detector = ownerGameObj.GetComponentInChildren<DamageDetector>();
 				if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 			}
 
@@ -246,11 +249,10 @@ public class Weapon : MonoBehaviour
 			if (doShoot != null) 
 				doShoot(this, _projectileGO);
 
-			if (IsNetworkEnabled())
+            if (IsNetworkEnabled())
 			{
 				_projectileGO.networkView.viewID = Network.AllocateViewID();
 				_projectileGO.networkView.enabled = true;
-				_projectile.attackData.owner = Network.player.guid;
 
 				networkView.RPC("Weapon_RequestCreateProjectileServer", 
 				                RPCMode.Others, 
@@ -285,12 +287,12 @@ public class Weapon : MonoBehaviour
 		_projectileGO.transform.rotation = _rotation;
 		_projectileGO.rigidbody2D.velocity = _velocity;
 
-		if (owner != null)
+		if (ownerGameObj != null)
 		{
 			var _projectile = _projectileGO.GetComponent<Projectile>();
-			_projectile.ownerID = owner.GetInstanceID();
-			_projectile.attackData.owner = _owner;
-			var _detector = owner.GetComponentInChildren<DamageDetector>();
+			_projectile.ownerID = ownerGameObj.GetInstanceID();
+			_projectile.ownerPlayer = _owner;
+			var _detector = ownerGameObj.GetComponentInChildren<DamageDetector>();
 			if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 		}
 
