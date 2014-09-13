@@ -39,7 +39,7 @@ public class CharacterSpawner : MonoBehaviour
 	{
 		Vector3 _characterPosition = Locate();
 
-		var _gameObj = GameObject.Instantiate(characterPrf, _characterPosition, Quaternion.identity) as GameObject;
+		var _gameObj = (GameObject) Instantiate(characterPrf, _characterPosition, Quaternion.identity);
 
 		var _destroyable = _gameObj.GetComponent<Destroyable>();
 		_destroyable.postDestroy += ListenDestroy;
