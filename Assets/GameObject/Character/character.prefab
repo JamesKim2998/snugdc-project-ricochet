@@ -333,6 +333,7 @@ GameObject:
   - 114: {fileID: 11400132}
   - 114: {fileID: 11400134}
   - 114: {fileID: 11400136}
+  - 114: {fileID: 11400104}
   m_Layer: 10
   m_Name: character
   m_TagString: Character
@@ -1210,6 +1211,7 @@ MonoBehaviour:
   subArm: {fileID: 21200016}
   mainLeg: {fileID: 21200002}
   subLeg: {fileID: 21200004}
+  networkBrigde: {fileID: 11400104}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1619,8 +1621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13296b6e6f8c28d408ea1e96dba91559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   type: 0
-  owner: 
+  ownerPlayer: 
   jumpVelocity: 10
   jumpCooldown: .100000001
   moveForce: 2000
@@ -2051,6 +2054,18 @@ MonoBehaviour:
   basePose: {fileID: 11400000, guid: ee97f9d7d3e113c40a8dfef7377d7477, type: 2}
   _flip: 0
   _useShadows: 0
+--- !u!114 &11400104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b953083658070dc4dac40617ea64b831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer_: {fileID: 11400000}
 --- !u!114 &11400132
 MonoBehaviour:
   m_ObjectHideFlags: 1

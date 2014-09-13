@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using System.Collections.Generic;
 public class CharacterRenderer : MonoBehaviour
 {
 	public Material material;
-
+    
 	[HideInInspector]
 	public List<SpriteRenderer> renderers;
 
@@ -16,18 +17,14 @@ public class CharacterRenderer : MonoBehaviour
 	public SpriteRenderer mainLeg;
 	public SpriteRenderer subLeg;
 
+    public CharacterRendererNetworkBrigde networkBrigde;
+
 	private Character m_Character;
 	private int m_PrevDirection;
 
 	public void Awake()
 	{
-		renderers = new List<SpriteRenderer> ();
-		renderers.Add (head);
-		renderers.Add (body);
-		renderers.Add (mainArm);
-		renderers.Add (subArm);
-		renderers.Add (mainLeg);
-		renderers.Add (subLeg);
+		renderers = new List<SpriteRenderer> {head, body, mainArm, subArm, mainLeg, subLeg};
 	}
 
 	public void Start()
@@ -68,23 +65,17 @@ public class CharacterRenderer : MonoBehaviour
 	public void SetColor(Color _color)
 	{
 		SetColorLocal (_color);
-		if (Network.peerType != NetworkPeerType.Disconnected)
-			networkView.RPC ("CharacterRenderer_SetColor", RPCMode.Others, ColorHelper.ColorToVector( _color));
+        if (networkBrigde)
+            networkBrigde.RequestSetColor(_color);
 	}
 
-	void SetColorLocal(Color _color)
+	public void SetColorLocal(Color _color)
 	{
-		foreach (var _renderer in renderers )
-		{
-			if (_renderer == null) continue;
-			_renderer.color = _color;
-		}
-	}
-
-	[RPC]
-	void CharacterRenderer_SetColor(Vector3 _color)
-	{
-		SetColorLocal (ColorHelper.VectorToColor(_color));
+	    foreach (var _renderer in renderers
+            .Where(_renderer => _renderer != null))
+	    {
+	        _renderer.color = _color;
+	    }
 	}
 }
 
