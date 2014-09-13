@@ -15,6 +15,6 @@ public class CrateEditor : Editor
 	public void OnSceneGUI()
 	{
 		if (! m_This.enabled) return;
-		Handles.Label(m_This.transform.position, m_This.weapon);
+		Handles.Label(m_This.transform.position, m_This.weapon.ToString());
 	}
 }

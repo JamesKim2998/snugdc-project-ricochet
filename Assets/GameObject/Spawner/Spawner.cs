@@ -100,7 +100,7 @@ public class Spawner : MonoBehaviour {
 			_gameObj.networkView.enabled = true;
 
 			string _data = "";
-			var _serializable = _gameObj.GetComponent<ConstSerializable>();
+			var _serializable = _gameObj.GetComponent<StaticSerializable>();
 			if (_serializable) _data = _serializable.Serialize();
 
 			networkView.RPC("InstantiateNetwork", RPCMode.OthersBuffered, _gameObj.networkView.viewID, _data);
@@ -148,7 +148,7 @@ public class Spawner : MonoBehaviour {
 		_gameObj.networkView.viewID = _viewID;
 		_gameObj.networkView.enabled = true;
 		
-		var _serializable = _gameObj.GetComponent<ConstSerializable>();
+		var _serializable = _gameObj.GetComponent<StaticSerializable>();
 		if (_serializable) _serializable.Deserialize(_data);
 	}
 

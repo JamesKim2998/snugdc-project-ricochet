@@ -5,16 +5,16 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameWeapon 
 {
-	public List<string> weaponSet = new List<string>();
+    public List<WeaponType> weaponSet = new List<WeaponType>();
 
 	public int count { get { return weaponSet.Count; }}
 	
 	public void Purge()
 	{
-		weaponSet = new List<string> ();
+        weaponSet.Clear();
 	}
 
-	public string Random() 
+	public WeaponType Random() 
 	{
 		return weaponSet[UnityEngine.Random.Range(0, count)];
 	}

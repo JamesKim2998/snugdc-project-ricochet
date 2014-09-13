@@ -40,6 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applyOnStart: 1
+  applyAfterDelay: 0
+  applyDelay: -1
   deleteAfterApply: 0
   timeScale: 1
   audio_:
@@ -84,13 +86,7 @@ MonoBehaviour:
     - {r: 1, g: 1, b: 0, a: 1}
   useWeaponDef: 1
   weapon:
-    weaponSet:
-    - assault_rifle
-    - machine_gun
-    - Revolver
-    - BugLaserGun
-    - weapon_laser
-    - BlackLaserGun
+    weaponSet: 02000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

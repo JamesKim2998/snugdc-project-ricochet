@@ -1,36 +1,16 @@
 using UnityEngine;
 using System.Collections;
 
-public class Crate : MonoBehaviour 
+public class Crate : MonoBehaviour
 {
-	private string m_Weapon;
-	public string weapon {
-		get { return m_Weapon; }
-		set { m_Weapon = value; }
-	}
-
-	public bool empty { get { return weapon == null; } }
+    public WeaponType weapon;
+    public bool empty { get { return weapon == WeaponType.NONE; } }
 
 	public int score = 1;
 
 	void Start() 
 	{
 
-	}
-
-	void DestroySelf() 
-	{
-		if (networkView.enabled)
-		{
-			if (networkView.isMine)
-			{
-				Network.Destroy(gameObject);
-			}
-		}
-		else 
-		{
-			Destroy(gameObject);
-		}
 	}
 
 	void OnCollisionEnter2D(Collision2D _collider)
@@ -48,7 +28,6 @@ public class Crate : MonoBehaviour
 			{
 				if (! _detector.enabled) return;
 				_detector.Obtain(this);
-//				networkView.RPC("Crate_RequestObtain", RPCMode.All);
 
 			    if (Network.peerType == NetworkPeerType.Disconnected)
                     Destroy(gameObject);
@@ -62,9 +41,4 @@ public class Crate : MonoBehaviour
 		}
 	}
 
-//	[RPC]
-//	void Crate_RequestObtain()
-//	{
-//		DestroySelf();
-//	}
 }

@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -43,29 +44,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timescale: 1
   multiplayer: 0
-  camera_:
-    cameraExpose: {fileID: 0}
-  audio_:
-    editorPause: 0
-    editorVolume: 1
+  hud: {fileID: 0}
   progress: {fileID: 11400002}
-  mode: {fileID: 11400004}
-  character:
-    maxUpForce: 2
-    upForce: 30
-    weaponDefault: {fileID: 0}
-    characterExpose: {fileID: 0}
-    characterColorPresets:
-    - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 1, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 0, g: 1, b: 1, a: 1}
-    - {r: 0, g: 0, b: 1, a: 1}
-    characterColor: {r: 0, g: 0, b: 0, a: 0}
+  modeManager: {fileID: 0}
+  character: {fileID: 0}
   weapon:
-    weapons:
-    - assault_rifle
-    - machine_gun
+    weaponSet: 02000000
+  result: {fileID: 0}
+  cheat: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -77,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42838f16854c5944aa21d6b728044e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IntroOnce: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  testLevel: 
+  overrideMode: 0
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

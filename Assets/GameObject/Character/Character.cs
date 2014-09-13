@@ -14,18 +14,17 @@ public partial class Character : MonoBehaviour
 	public string ownerPlayer;
 
 	#region movement
-	private bool m_Floating = false;
-	public bool floating { get {return m_Floating; }}
-	
-	private float m_JumpCooltime = 0.0f;
+
+    public bool floating { get; private set; }
+
+    private float m_JumpCooltime = 0.0f;
 	public float jumpVelocity = 10.0f;
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
-	private AttackData m_LastAttackData;
-	public AttackData lastAttackData { get { return m_LastAttackData; }}
+    public AttackData lastAttackData { get; private set; }
 
-	public int direction {
+    public int direction {
 		get { return transform.rotation.y > 0.5f ? -1 : 1; }
 		set {
 			if (direction == value) return;
@@ -33,13 +32,9 @@ public partial class Character : MonoBehaviour
 			var _rotation = transform.localRotation;
 			
 			if (value == 1) 
-			{
 				_rotation.y = 0;
-			}
 			else if (value == -1)
-			{
 				_rotation.y = 180;
-			}
 			
 			transform.localRotation = _rotation;
 		}
@@ -79,12 +74,19 @@ public partial class Character : MonoBehaviour
 	#region weapon
 	private Weapon m_Weapon;
 	public WeaponEquip weaponEquip { get; private set; }
+    private bool m_ShouldAimWeapon = false;
 
 	public Weapon weapon {
 		get { return m_Weapon; }
 		set {
 			var _old = m_Weapon;
 			var _oldEquip = weaponEquip;
+
+		    if (m_Weapon)
+		    {
+                if (m_Weapon.IsState(Weapon.State.SHOOTING))
+                    animator.SetBool("rest", true);
+		    }
 
 			m_Weapon = value;
 
@@ -98,6 +100,7 @@ public partial class Character : MonoBehaviour
 			}
 			else
 			{
+			    m_ShouldAimWeapon = true;
 			    m_Weapon.ownerPlayer = ownerPlayer;
 				m_Weapon.ownerGameObj = gameObject;
 				m_Weapon.transform.parent = weaponPivot.transform;
@@ -130,10 +133,10 @@ public partial class Character : MonoBehaviour
 			if (postWeaponChanged != null)
 				postWeaponChanged(this, _old);
 
-			if (_old) 
-				Destroy(_old.gameObject);
+		    if (_old)
+		        Destroy(_old.gameObject);
 
-			//if (_oldEquip)
+		    //if (_oldEquip)
 			//	Destroy(_oldEquip.gameObject, 2f);
 		}
 	}
@@ -163,15 +166,17 @@ public partial class Character : MonoBehaviour
 			if (Math.Abs(m_Aim - value) < 0.01) return;
 
 			m_Aim = value;
-			
-			var _weaponAngle = weaponPivot.transform.eulerAngles;
-			_weaponAngle.z = m_Aim - 90;
-			weaponPivot.transform.eulerAngles = _weaponAngle;
-			weaponEquipPivot.transform.eulerAngles = _weaponAngle;
-			
-			animator.SetFloat("aim", m_Aim);
 
-			if (crossHair) 
+		    if (m_ShouldAimWeapon)
+		    {
+                var _weaponAngle = weaponPivot.transform.eulerAngles;
+                _weaponAngle.z = m_Aim - 90;
+                weaponPivot.transform.eulerAngles = _weaponAngle;
+                weaponEquipPivot.transform.eulerAngles = _weaponAngle;
+                animator.SetFloat("aim", m_Aim);
+		    }
+
+            if (crossHair) 
 			{
 				var _angle = crossHair.transform.localEulerAngles;
 				_angle.z = m_Aim - 90;
@@ -225,7 +230,13 @@ public partial class Character : MonoBehaviour
 	#region effects
 	public GameObject effectDeadPrf;
 	public Vector3 effectDeadOffset;
-	#endregion
+
+    public Character()
+    {
+        floating = false;
+    }
+
+    #endregion
 
 	void Awake () {
         id = s_Random.Next();
@@ -246,7 +257,7 @@ public partial class Character : MonoBehaviour
 		
 		terrainDetector.postDetect = (Collision) =>
 		{
-			m_Floating = false;
+			floating = false;
 			terrainDetector.gameObject.SetActive(false);
 		};
 	}
@@ -254,13 +265,9 @@ public partial class Character : MonoBehaviour
 	void DestroySelf()
 	{
 		if (networkView.enabled)
-		{
 			Network.Destroy(networkView.viewID);
-		}
 		else
-		{
-			GameObject.Destroy(gameObject);
-		}
+			Destroy(gameObject);
 	}
 
 	void Update() 
@@ -318,12 +325,12 @@ public partial class Character : MonoBehaviour
 	}
 	
 	public bool jumpable {
-		get { return ! m_Floating && m_JumpCooltime <= 0 && ! isDead; }
+		get { return ! floating && m_JumpCooltime <= 0 && ! isDead; }
 	}
 	
 	public void Jump()
 	{
-		m_Floating = true;
+		floating = true;
 		m_JumpCooltime = jumpCooldown;
 		rigidbody2D.velocity += new Vector2(0, jumpVelocity);
 		terrainDetector.gameObject.SetActive(true);
@@ -331,11 +338,6 @@ public partial class Character : MonoBehaviour
 		m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.JUMP_UPPER);
 	}
 	
-	public void ChangeAim(float _direction)
-	{
-		aim += _direction * aimSpeed;
-	}
-
 	public bool shootable {
 		get {
 			return weapon != null && weapon.IsShootable()
@@ -375,7 +377,7 @@ public partial class Character : MonoBehaviour
 		CancelInvoke("EnableHit");
 		Invoke("EnableHit", hitCooldown);
 		
-		m_LastAttackData = _attackData;
+		lastAttackData = _attackData;
 		
 		var _direction = Mathf.Sign(_attackData.velocity.x);
 		
@@ -429,15 +431,17 @@ public partial class Character : MonoBehaviour
 		
 		if (_crate.empty) 
 			return;
-		
-		var _weapon = (GameObject) Instantiate(Resources.Load(_crate.weapon)) ;
+
+	    var _weaponPrf = Database.Weapon[_crate.weapon].weaponPrf;
+		var _weapon = (GameObject) Instantiate(_weaponPrf);
 		weapon = _weapon.GetComponent<Weapon>();
 	}
 
 	private void ListenOutOfAmmo(Weapon _weapon)
 	{
-		// note: Unequip is called by animator.
-		m_NetworkAnimator.SetTrigger ("throw_away");
+        m_ShouldAimWeapon = false;
+        // note: Unequip is called by animator.
+        m_NetworkAnimator.SetTrigger("throw_away");
 	}
 	
 	private void ListenWeaponCooldown(Weapon _weapon)

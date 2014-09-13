@@ -139,11 +139,12 @@ public class GameCharacterDef
 [System.Serializable]
 public class GameWeaponDef
 {
-	public List<string> weaponSet;
+	public List<WeaponType> weaponSet;
 
 	public void Apply()
 	{
-		if (weaponSet != null && weaponSet.Count > 0) Game.Weapon().weaponSet = new List<string>(weaponSet);
+		if (weaponSet != null && weaponSet.Count > 0) 
+            Game.Weapon().weaponSet = new List<WeaponType>(weaponSet);
 	}
 }
 
