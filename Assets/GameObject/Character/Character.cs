@@ -22,7 +22,7 @@ public partial class Character : MonoBehaviour
 	public float jumpCooldown = 1.0f;
 	public float moveForce = 10.0f;
 
-    public AttackData lastAttackData { get; private set; }
+    public AttackData lastAttackData { get; set; }
 
     public int direction {
 		get { return transform.rotation.y > 0.5f ? -1 : 1; }

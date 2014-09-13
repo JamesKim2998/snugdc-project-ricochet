@@ -279,7 +279,7 @@ public class Weapon : MonoBehaviour
 	}
 
 	[RPC]
-	void Weapon_RequestCreateProjectileServer(NetworkViewID _viewID, string _owner, Vector3 _position, Quaternion _rotation, Vector3 _velocity, int _count, int _idx)
+	void Weapon_RequestCreateProjectileServer(NetworkViewID _viewID, string _ownerPlayer, Vector3 _position, Quaternion _rotation, Vector3 _velocity, int _count, int _idx)
 	{
 		var _projectileGO = doCreateProjectileServer(_count, _idx);
 
@@ -287,17 +287,19 @@ public class Weapon : MonoBehaviour
 		_projectileGO.transform.rotation = _rotation;
 		_projectileGO.rigidbody2D.velocity = _velocity;
 
+        var _projectile = _projectileGO.GetComponent<Projectile>();
+        _projectile.ownerPlayer = _ownerPlayer;
+        _projectile.ownerWeapon = type;
+
 		if (ownerGameObj != null)
 		{
-			var _projectile = _projectileGO.GetComponent<Projectile>();
 			_projectile.ownerID = ownerGameObj.GetInstanceID();
-			_projectile.ownerPlayer = _owner;
 			var _detector = ownerGameObj.GetComponentInChildren<DamageDetector>();
 			if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 		}
 
-		_projectileGO.networkView.viewID = _viewID;
-		_projectileGO.networkView.enabled = true;
+        _projectileGO.networkView.viewID = _viewID;
+        _projectileGO.networkView.enabled = true;
 	}
 
 	[RPC]

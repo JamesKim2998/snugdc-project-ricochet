@@ -227,9 +227,14 @@ public class GameCharacter : MonoBehaviour
         {
             Character _character;
             if (m_Characters.TryGetValue(_characerID, out _character))
+            {
+                _character.lastAttackData = _attackData;
                 postCharacterDead(_character);
+            }
             else
+            {
                 Debug.LogWarning("Dead character " + _characerID + " does not exist! Cannot post.");
+            }
         }
     }
 }
