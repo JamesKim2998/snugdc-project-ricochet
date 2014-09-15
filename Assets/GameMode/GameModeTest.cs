@@ -21,18 +21,18 @@ public class GameModeTest : GameMode
 		base.Setup();
 
 		// catch up game progress...
-		if (Game.Progress().IsState(GameProgress.State.START))
+		if (Game.Progress.IsState(GameProgress.State.START))
 		{
 			ListenGameStart();
 		}
-		else if (Game.Progress().IsState(GameProgress.State.RUNNING))
+		else if (Game.Progress.IsState(GameProgress.State.RUNNING))
 		{
 			ListenGameStart();
 			ListenGameRun();
 		}
 
-		Game.Progress().postStart += ListenGameStart;
-		Game.Progress().postRun += ListenGameRun;
+		Game.Progress.postStart += ListenGameStart;
+		Game.Progress.postRun += ListenGameRun;
 
 		TryToRunGame();
 	}
@@ -44,21 +44,21 @@ public class GameModeTest : GameMode
 
 	void OnDestroy()
 	{
-		Game.Progress().postStart -= ListenGameStart;
-		Game.Progress().postRun -= ListenGameRun;
+		Game.Progress.postStart -= ListenGameStart;
+		Game.Progress.postRun -= ListenGameRun;
 	}
 
 	void TryToRunGame()
 	{
 		if (Network.isServer)
 		{
-			if ( Game.Progress().IsState(GameProgress.State.STOP))
+			if ( Game.Progress.IsState(GameProgress.State.STOP))
 			{
-				Game.Progress().StartGame();
+				Game.Progress.StartGame();
 			}
-			else if (Game.Progress().IsState(GameProgress.State.START))
+			else if (Game.Progress.IsState(GameProgress.State.START))
 			{
-				Game.Progress().RunGame();
+				Game.Progress.RunGame();
 			}
 		}
 	}
@@ -90,7 +90,7 @@ public class GameModeTest : GameMode
 
 	void SpawnCharacter()
 	{
-		var _character = Game.Level().characterSpawners.Spawn();
+		var _character = Game.Level.characterSpawners.Spawn();
 
 		if (_character != null) 
 		{

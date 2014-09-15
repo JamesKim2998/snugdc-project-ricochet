@@ -21,7 +21,7 @@ public class GameTransition
 
 	public void Setup()
 	{
-		Game.ModeManager().Setup(mode);
+		Game.ModeManager.Setup(mode);
 	}
 }
 
@@ -59,9 +59,9 @@ public class TransitionManager : MonoBehaviour
 	// working locally
 	public void StartLobby()
 	{
-		if (! Game.Progress().IsState(GameProgress.State.STOP))
+		if (! Game.Progress.IsState(GameProgress.State.STOP))
 		{
-			if (! Game.Progress().TryStopGame())
+			if (! Game.Progress.TryStopGame())
 			{
 				Debug.LogError("Stoping game failed. Transfer abort.");
 			}
@@ -93,7 +93,7 @@ public class TransitionManager : MonoBehaviour
 	{
 		Global.Level.Load(_transition.map);
 
-		Game.Progress().TryIntroGame();
+		Game.Progress.TryIntroGame();
 		if (_transition.setupDelay < 0) 
 		{
 			Debug.Log("Trying to setup GameMode without delay. Sure?");

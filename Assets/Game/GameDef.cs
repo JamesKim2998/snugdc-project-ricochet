@@ -39,8 +39,8 @@ public class GameDef : MonoBehaviour
 		Time.timeScale = timeScale;
 		if (audio_ != null) audio_.Apply();
 		if (camera_ != null) camera_.Apply();
-		if (hud != null) Game.HUD().Apply(hud);
-		if (modeManager != null) Game.ModeManager().Apply(modeManager);
+		if (hud != null) Game.HUD.Apply(hud);
+		if (modeManager != null) Game.ModeManager.Apply(modeManager);
 		if (useCharacterDef && character != null) character.Apply();
 		if (useWeaponDef && weapon != null) weapon.Apply();
 		if (deleteAfterApply) Destroy(gameObject);
@@ -144,7 +144,7 @@ public class GameWeaponDef
 	public void Apply()
 	{
 		if (weaponSet != null && weaponSet.Count > 0) 
-            Game.Weapon().weaponSet = new List<WeaponType>(weaponSet);
+            Game.Weapon.weaponSet = new List<WeaponType>(weaponSet);
 	}
 }
 

@@ -4,43 +4,40 @@ using System.Collections;
 public class Game : Singleton<Game> 
 {
 	public float timescale = 1f;
-	public bool multiplayer = false;
 	
 	public GameCamera camera_ = new GameCamera();
 	public static GameCamera Camera_ { get { return Instance.camera_; } }
 
 	public GameAudio audio_ = new GameAudio();
-	public static GameAudio Audio() { return Instance.audio_; }
+	public static GameAudio Audio { get { return Instance.audio_; } }
 
 	public GameHUD hud;
-	public static GameHUD HUD() { return Instance.hud; }
+	public static GameHUD HUD { get { return Instance.hud; } }
 
 	public GameProgress progress;
-	public static GameProgress Progress() { return Instance.progress; }
+	public static GameProgress Progress { get { return Instance.progress; } }
 	
 	public GameStatistics statistic = new GameStatistics();
-	public static GameStatistics Statistic {
-	    get { return Instance.statistic; }
-	}
+	public static GameStatistics Statistic { get { return Instance.statistic; } }
 	
 	public GameLevel level;
-	public static GameLevel Level() { return Instance.level; }
+	public static GameLevel Level { get { return Instance.level; } }
 
 	public GameModeManager modeManager;
-	public static GameModeManager ModeManager() { return Instance.modeManager; }
-	public static GameMode Mode() { return ModeManager().mode; }
+	public static GameModeManager ModeManager { get { return Instance.modeManager; } }
+	public static GameMode Mode { get { return ModeManager.mode; } }
 
 	public GameCharacter character;
 	public static GameCharacter Character { get { return Instance.character; } } 
 
 	public GameWeapon weapon = new GameWeapon();
-	public static GameWeapon Weapon() { return Instance.weapon; }
+	public static GameWeapon Weapon { get { return Instance.weapon; } }
 
 	public GameResult result;
-	public static GameResult Result() { return Instance.result; }
+	public static GameResult Result { get { return Instance.result; } }
 
 	public GameCheat cheat;
-	public static GameCheat Cheat() { return Instance.cheat; }
+	public static GameCheat Cheat { get { return Instance.cheat; } }
 
 	private Game() {
 	}

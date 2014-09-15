@@ -10,7 +10,7 @@ public class CrateSpawner : MonoBehaviour
 
 		_spawner.doInitialize = (Spawner _theSpawner, GameObject _gameObj) => {
 			var _crate = _gameObj.GetComponent<Crate>();
-			_crate.weapon = Game.Weapon().Random();
+			_crate.weapon = Game.Weapon.Random();
 		};
 	}
 }

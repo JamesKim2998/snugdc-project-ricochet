@@ -10,6 +10,6 @@ public class GameCheat : MonoBehaviour
 
 	public void OverGame()
 	{
-		Game.Progress().TryOverGame();
+		Game.Progress.TryOverGame();
 	}
 }

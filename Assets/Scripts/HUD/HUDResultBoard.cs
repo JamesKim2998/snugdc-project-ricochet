@@ -11,18 +11,18 @@ public class HUDResultBoard : MonoBehaviour
 	void Start()
 	{
 		m_Entities = new Dictionary<string, HUDResultBoardEntity> ();
-		if (Game.Progress().IsState(GameProgress.State.OVER)) Refresh();
-		Game.Result ().postPropagated +=  ListenResultPropagated;
+		if (Game.Progress.IsState(GameProgress.State.OVER)) Refresh();
+		Game.Result.postPropagated +=  ListenResultPropagated;
 	}
 
 	void OnDestroy()
 	{
-		Game.Result ().postPropagated -=  ListenResultPropagated;
+		Game.Result.postPropagated -=  ListenResultPropagated;
 	}
 
 	void Refresh()
 	{
-		foreach ( var _result in Game.Result().results )
+		foreach ( var _result in Game.Result.results )
 			Add(_result.Key, _result.Value);
 		grid.Reposition();
 	}

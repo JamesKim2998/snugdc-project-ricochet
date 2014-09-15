@@ -13,7 +13,7 @@ public class HUDTimeLimit : MonoBehaviour
 
 	void Update ()
 	{
-		var _mode = Game.Mode() as GameModeDeathMatch;
+		var _mode = Game.Mode as GameModeDeathMatch;
 
 		if (_mode == null) 
 		{

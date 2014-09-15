@@ -15,18 +15,18 @@ public class GameHUD : MonoBehaviour
 
 	void Start()
 	{
-		Game.Progress ().postIntro += ListenGameIntro;
-		Game.Progress ().postOver += ListenGameOver;
-		Game.Progress ().postStop += ListenGameStop;
-		Game.ModeManager().postChanged += ListenModeChanged;
+		Game.Progress.postIntro += ListenGameIntro;
+		Game.Progress.postOver += ListenGameOver;
+		Game.Progress.postStop += ListenGameStop;
+		Game.ModeManager.postChanged += ListenModeChanged;
 	}
 
 	~GameHUD()
 	{
-		Game.Progress ().postIntro -= ListenGameIntro;
-		Game.Progress ().postOver -= ListenGameOver;
-		Game.Progress ().postStop -= ListenGameStop;
-		Game.ModeManager().postChanged -= ListenModeChanged;
+		Game.Progress.postIntro -= ListenGameIntro;
+		Game.Progress.postOver -= ListenGameOver;
+		Game.Progress.postStop -= ListenGameStop;
+		Game.ModeManager.postChanged -= ListenModeChanged;
 	}
 	
 	public void Apply(GameHUDDef _def)

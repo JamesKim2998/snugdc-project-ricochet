@@ -17,21 +17,21 @@ public class GameResult : MonoBehaviour
 {
 	private int m_GameID = 0;
 	private bool m_IsLatest = false;
-	public bool isLatest { get { return (m_GameID == Game.Progress().gameID) && m_IsLatest; } }
+	public bool isLatest { get { return (m_GameID == Game.Progress.gameID) && m_IsLatest; } }
 
 	public Dictionary<string, PlayerResult> results = new Dictionary<string, PlayerResult>();
 	public Action postPropagated;
 
 	void Start()
 	{
-		Game.Progress().postStart += ListenGameStart;
-		Game.Progress ().postOver += ListenGameOver;
+		Game.Progress.postStart += ListenGameStart;
+		Game.Progress.postOver += ListenGameOver;
 	}
 
 	void OnDestroy()
 	{
-		Game.Progress().postStart -= ListenGameStart;
-		Game.Progress ().postOver -= ListenGameOver;
+		Game.Progress.postStart -= ListenGameStart;
+		Game.Progress.postOver -= ListenGameOver;
 	}
 
 	public void FillIn()
@@ -89,7 +89,7 @@ public class GameResult : MonoBehaviour
 	
 	private void ListenGameStart()
 	{
-		m_GameID = Game.Progress().gameID;
+		m_GameID = Game.Progress.gameID;
 		m_IsLatest = false;
 	}
 

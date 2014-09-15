@@ -23,9 +23,9 @@ public class GameModeDeathMatch : GameMode
 	public int respawnLeft { get { return respawnLimit - Game.Statistic.total.death; } }
 	public int timeLeft { 
 		get { 
-			if (Game.Progress().IsState(GameProgress.State.RUNNING))
+			if (Game.Progress.IsState(GameProgress.State.RUNNING))
 			{
-				return Mathf.Max(0, timeLimit - (int) Game.Progress().stateTime); 
+				return Mathf.Max(0, timeLimit - (int) Game.Progress.stateTime); 
 			}
 			else
 			{
@@ -44,19 +44,19 @@ public class GameModeDeathMatch : GameMode
 		base.Setup();
 		
 		// catch up game progress...
-		if (Game.Progress().IsState(GameProgress.State.START))
+		if (Game.Progress.IsState(GameProgress.State.START))
 		{
 			ListenGameStart();
 		}
-		else if (Game.Progress().IsState(GameProgress.State.RUNNING))
+		else if (Game.Progress.IsState(GameProgress.State.RUNNING))
 		{
 			ListenGameStart();
 			ListenGameRun();
 		}
 		
-		Game.Progress().postStart += ListenGameStart;
-		Game.Progress().postRun += ListenGameRun;
-		Game.Progress().postOver += ListenGameOver;
+		Game.Progress.postStart += ListenGameStart;
+		Game.Progress.postRun += ListenGameRun;
+		Game.Progress.postOver += ListenGameOver;
 		Game.Statistic.total.death.postChanged += ListenTotalDeathChanged;
 
 		TryToRunGame();
@@ -72,14 +72,14 @@ public class GameModeDeathMatch : GameMode
 
 	void Update()
 	{
-		if (Game.Progress().IsState(GameProgress.State.RUNNING) 
+		if (Game.Progress.IsState(GameProgress.State.RUNNING) 
 		    && timeLeft <= 0)
 		{
 			Debug.Log("timeLimit exceeded.");
 
 			if (Network.isServer)
 			{
-				if (! Game.Progress().TryOverGame()) 
+				if (! Game.Progress.TryOverGame()) 
 					Debug.LogError("Over game failed.");
 			}
 		}
@@ -87,9 +87,9 @@ public class GameModeDeathMatch : GameMode
 
 	void OnDestroy()
 	{
-		Game.Progress().postStart -= ListenGameStart;
-		Game.Progress().postRun -= ListenGameRun;
-		Game.Progress().postOver -= ListenGameOver;
+		Game.Progress.postStart -= ListenGameStart;
+		Game.Progress.postRun -= ListenGameRun;
+		Game.Progress.postOver -= ListenGameOver;
 		Game.Statistic.total.death.postChanged -= ListenTotalDeathChanged;
 	}
 
@@ -97,10 +97,10 @@ public class GameModeDeathMatch : GameMode
 	{
 		if (Network.isServer )
 		{
-			if ( Game.Progress().IsState(GameProgress.State.STOP))
-				Game.Progress().StartGame();
-			else if (Game.Progress().IsState(GameProgress.State.START))
-				Game.Progress().RunGame();
+			if ( Game.Progress.IsState(GameProgress.State.STOP))
+				Game.Progress.StartGame();
+			else if (Game.Progress.IsState(GameProgress.State.START))
+				Game.Progress.RunGame();
 		}
 	}
 	
@@ -138,7 +138,7 @@ public class GameModeDeathMatch : GameMode
 	void SpawnCharacter()
 	{
 //		Debug.Log("SpawnCharacter");
-		var _character = Game.Level().characterSpawners.Spawn();
+		var _character = Game.Level.characterSpawners.Spawn();
 		
 		if (_character != null) 
 		{
@@ -150,7 +150,7 @@ public class GameModeDeathMatch : GameMode
 	void ListenCharacterDead(Character _character)
 	{
 //		Debug.Log("Character Dead");
-		if (Game.Progress().IsState(GameProgress.State.RUNNING))
+		if (Game.Progress.IsState(GameProgress.State.RUNNING))
 			Invoke("SpawnCharacter", 0.5f);
 	}
 
@@ -160,7 +160,7 @@ public class GameModeDeathMatch : GameMode
 		{
 			Debug.Log("respawnLimit over.");
 			if (Network.isServer)
-				Game.Progress().TryOverGame();
+				Game.Progress.TryOverGame();
 		}
 	}
 }
