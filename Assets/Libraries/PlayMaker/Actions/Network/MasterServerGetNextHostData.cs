@@ -69,9 +69,6 @@ namespace HutongGames.PlayMaker.Actions
 		// increment a child index as we loop through children
 		private int nextItemIndex;
 
-		// are we there yet?
-		private bool noMoreItems;
-		
 		public override void Reset()
 		{
 			finishedEvent = null;

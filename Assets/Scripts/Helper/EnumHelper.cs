@@ -6,7 +6,7 @@ using System.Linq;
 
 public static class EnumHelper 
 {
-	public static bool TryParse<T>(string _value, out T _enum) 
+	public static bool TryParse<T>(string _value, out T _enum)
 	{
 		_enum = (T) Enum.Parse(typeof(T), _value);
 		return _enum != null;

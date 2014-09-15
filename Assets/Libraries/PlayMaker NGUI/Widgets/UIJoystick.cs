@@ -81,11 +81,8 @@ public class UIJoystick : MonoBehaviour
 	bool mPressed = false;
 	
 	Vector3 totalOffset;
-	Vector3 startOffset;
-	Vector3 totalWorldOffset;
 	
 	bool mDragStarted;
-	Vector2 mDragStartOffset;
 	
 	bool started;
 

@@ -5,9 +5,8 @@ public class UILogo : MonoBehaviour {
 
 	public AudioClip hoverSound;
 
-	private bool m_PlayAnimation = false;
-	private float m_OriginalVolume;
-	private float m_FadeTime = 0.5f;
+    private bool m_PlayAnimation = false;
+    private float m_FadeTime = 0.5f;
 	private float m_FadeElapsed = 0;
 
 	void Start () 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 class CharacterGameTest : MonoBehaviour
 {
-    public List<Character> characters;
+    public List<Character> characters = new List<Character>();
 
     void Start()
     {

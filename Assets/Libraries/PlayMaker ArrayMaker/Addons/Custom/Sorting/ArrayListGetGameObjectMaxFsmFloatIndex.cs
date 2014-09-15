@@ -51,7 +51,7 @@ namespace HutongGames.PlayMaker.Actions
 			[UIHint(UIHint.Variable)]
 			public FsmInt maxIndex;
 		
-			GameObject goLastFrame;
+			// GameObject goLastFrame;
 			PlayMakerFSM fsm;
 			
 			

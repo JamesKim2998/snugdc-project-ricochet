@@ -33,7 +33,7 @@ public class iTweenMoveToActionEditor : CustomActionEditor
 #if UNITY_4_3
             Undo.RecordObject(target.Owner, Strings.Command_Adjust_iTween_Path);
 #else
-            Undo.SetSnapshotTarget(target.Owner, Strings.Command_Adjust_iTween_Path);
+            Undo.RecordObject(target.Owner, Strings.Command_Adjust_iTween_Path);
 #endif
             var tempVct3 = new Vector3[iTween.transforms.Length];
             for (var i = 0; i < iTween.transforms.Length; i++)
