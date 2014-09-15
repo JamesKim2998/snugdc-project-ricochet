@@ -154,7 +154,7 @@ public class GameModeDeathMatch : GameMode
 			Invoke("SpawnCharacter", 0.5f);
 	}
 
-	void ListenTotalDeathChanged(Statistic<int> _statistic)
+	void ListenTotalDeathChanged(SetCounter<int> _statistic)
 	{
 		if (_statistic >= respawnLimit)
 		{

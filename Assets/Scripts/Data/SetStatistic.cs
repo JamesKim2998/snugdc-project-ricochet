@@ -22,11 +22,10 @@ public class SetCounter<T> where T : System.IEquatable<T>
             Debug.Log(_value + " does already exist! Ignore.");
             return false;
         }
-        else
-        {
-            old = val - 1;
-        }
 
+        old = val - 1;
+
+        if (postAdd != null) postAdd(this, _value);
         if (postChanged != null) postChanged(this);
         return true;
     }
@@ -38,11 +37,10 @@ public class SetCounter<T> where T : System.IEquatable<T>
             Debug.Log(_value + " does not exist! Ignore.");
             return false;
         }
-        else
-        {
-            old = val + 1;
-        }
 
+        old = val + 1;
+
+        if (postRemove != null) postRemove(this, _value);
         if (postChanged != null) postChanged(this);
         return true;
     }
@@ -54,6 +52,8 @@ public class SetCounter<T> where T : System.IEquatable<T>
         if (postChanged != null) postChanged(this);
     }
 
+    public Action<SetCounter<T>, T> postAdd;
+    public Action<SetCounter<T>, T> postRemove;
     public Action<SetCounter<T>> postChanged;
 
     public SetCounter()

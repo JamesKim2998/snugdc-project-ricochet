@@ -13,9 +13,8 @@ public class PlayerStatistics
 	public PlayerStatistics(string _player) {
 		player = _player;
         
-		death.postChanged += (SetCounter<int> statistic) => {
-			Game.Statistic.total.death.val += statistic.delta;
-		};
+		death.postAdd += (_, _characterID) => Game.Statistic.total.death.Add(_characterID);
+		death.postRemove += (_, _characterID) => Game.Statistic.total.death.Remove(_characterID);
 
 		Reset ();
 	}
@@ -29,16 +28,15 @@ public class PlayerStatistics
 // todo: incomplete code
 public class TotalStatistics 
 {
-	public readonly Statistic<int> death;
+	public readonly SetCounter<int> death = new SetCounter<int>();
 
-	public TotalStatistics() 
-	{
-		death = new Statistic<int>();
-	}
+	public TotalStatistics()
+    {
+    }
 
 	public void Reset()
 	{
-		death.val = 0;
+		death.Clear();
 	}
 }
 
