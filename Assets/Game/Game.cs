@@ -31,7 +31,7 @@ public class Game : Singleton<Game>
 	public static GameMode Mode() { return ModeManager().mode; }
 
 	public GameCharacter character;
-	public static GameCharacter Character() { return Instance.character; } 
+	public static GameCharacter Character { get { return Instance.character; } } 
 
 	public GameWeapon weapon = new GameWeapon();
 	public static GameWeapon Weapon() { return Instance.weapon; }

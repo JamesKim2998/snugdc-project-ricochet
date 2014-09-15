@@ -10,12 +10,12 @@ public class HUDBang : MonoBehaviour
 
 	void Start ()
 	{
-	    Game.Character().postCharacterDead += ListenCharacterDead;
+	    Game.Character.postCharacterDead += ListenCharacterDead;
 	}
 
     void Destroy()
     {
-	    Game.Character().postCharacterDead -= ListenCharacterDead;
+	    Game.Character.postCharacterDead -= ListenCharacterDead;
     }
 
     void ListenCharacterDead(Character _character)

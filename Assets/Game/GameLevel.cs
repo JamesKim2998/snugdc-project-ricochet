@@ -36,12 +36,12 @@ public class GameLevel
 
     static void ListenCharacterSpawned(CharacterSpawner _spawner, Character _character)
     {
-        Game.Character().Add(_character);
+        Game.Character.Add(_character);
     }
 
     static void ListenCharacterDestroyed(CharacterSpawner _spawner, Character _character)
     {
-        // Game.Character().characters.Remove(_character.id);
+        // Game.Character.characters.Remove(_character.id);
     }
 }
 

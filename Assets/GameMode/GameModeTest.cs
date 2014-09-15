@@ -95,7 +95,7 @@ public class GameModeTest : GameMode
 		if (_character != null) 
 		{
 			_character.postDead += ListenCharacterDead;
-			Game.Character().character = _character;
+			Game.Character.character = _character;
 		}
 	}
 	

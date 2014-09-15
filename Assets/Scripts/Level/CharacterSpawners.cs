@@ -43,7 +43,7 @@ public class CharacterSpawners
 
 	public Character Spawn()
 	{
-		if (Game.Character().character != null)
+		if (Game.Character.character != null)
 			Debug.LogWarning("Trying to spawn a character, but already exist. ");
 
 		if (spawners.Count == 0)

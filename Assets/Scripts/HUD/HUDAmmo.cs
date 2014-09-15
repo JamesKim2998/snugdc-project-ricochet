@@ -70,13 +70,13 @@ public class HUDAmmo : MonoBehaviour
 	void Start()
 	{
 		m_Ammos = new List<GameObject> ();
-		Game.Character().postCharacterChanged += ListenCharacterChanged;
+		Game.Character.postCharacterChanged += ListenCharacterChanged;
 	}
 
 	void OnDestroy()
 	{
 		if (targetWeapon) targetWeapon = null;
-		Game.Character().postCharacterChanged -= ListenCharacterChanged;
+		Game.Character.postCharacterChanged -= ListenCharacterChanged;
 	}
 
 	void ListenCharacterChanged(Character _character)

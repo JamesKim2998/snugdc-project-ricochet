@@ -17,13 +17,13 @@ class CharacterGameTest : MonoBehaviour
             _character.postDead += (Character _theCharacter) =>
             {
                 characters.Remove(_theCharacter);
-                Game.Character().GameCharacter_OnDead(
+                Game.Character.GameCharacter_OnDead(
                     Network.player.guid,
                     _theCharacter.id,
                     _theCharacter.lastAttackData.Serialize());
             };
 
-            Game.Character().Add(_character);
+            Game.Character.Add(_character);
         }
     }
 

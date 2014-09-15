@@ -92,8 +92,8 @@ public class GameModeDeathMatch : GameMode
 		Game.Progress().postOver -= ListenGameOver;
 		Game.Statistic.total.death.postChanged -= ListenTotalDeathChanged;
 	}
-	
-	void TryToRunGame()
+
+    static void TryToRunGame()
 	{
 		if (Network.isServer )
 		{
@@ -132,7 +132,7 @@ public class GameModeDeathMatch : GameMode
 	void ListenGameOver()
 	{
 		CancelInvoke("SpawnCharacter");
-		Game.Character ().character = null;
+		Game.Character.character = null;
 	}
 
 	void SpawnCharacter()
@@ -143,7 +143,7 @@ public class GameModeDeathMatch : GameMode
 		if (_character != null) 
 		{
 			_character.postDead += ListenCharacterDead;
-			Game.Character().character = _character;
+			Game.Character.character = _character;
 		}
 	}
 	
