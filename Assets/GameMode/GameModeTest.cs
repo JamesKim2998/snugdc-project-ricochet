@@ -48,7 +48,7 @@ public class GameModeTest : GameMode
 		Game.Progress.postRun -= ListenGameRun;
 	}
 
-	void TryToRunGame()
+    static void TryToRunGame()
 	{
 		if (Network.isServer)
 		{

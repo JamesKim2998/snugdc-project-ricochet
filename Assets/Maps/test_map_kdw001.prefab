@@ -8,13 +8,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: global_initializer
+  m_Name: test_map_kdw001
   m_TagString: Untagged
-  m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -36,16 +37,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eca565e955acfdc41b83e5ea4e413676, type: 3}
+  m_Script: {fileID: 11500000, guid: 964cc3e458d480a4687a4e694cbf3aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeOnStart: 1
-  destroyAfterInitialize: 1
-  bgmEnabled: 1
-  bgm: {fileID: 0}
-  overrideTransitionGameCutScene: 0
-  transitionGameCutScenePrf: {fileID: 100002, guid: a288f482eed8313409e2fbb60f494850,
-    type: 2}
+  scene: test_map_kdw001
+  name_: spaceship1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368153987f214cc49beaa50cd4c155c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

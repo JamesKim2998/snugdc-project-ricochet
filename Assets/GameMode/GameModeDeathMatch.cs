@@ -4,13 +4,31 @@ using System.Collections;
 [System.Serializable]
 public class GameModeDeathMatchDef : GameModeDef
 {
-	public GameModeDeathMatchDef() { mode = GameModeType.DEATH_MATCH; } 
+    public GameModeDeathMatchDef()
+    {
+        mode = GameModeType.DEATH_MATCH;
+    }
 
-	public int respawnCount = 10;
+    private int? m_ResponseCount;
+
+    public int respawnCount
+    {
+        get { return m_ResponseCount.HasValue ? m_ResponseCount.Value : defaultRespawnCount;  }
+        set { m_ResponseCount = value; }
+    }
+
 	public GameModeDeathMatchDef RespawnCount(int _var) { respawnCount = _var; return this; }
 
-	public int timeLimit = 300;
-	public GameModeDeathMatchDef TimeLimit(int _var) { timeLimit = _var; return this; }
+    private int? m_TimeLimit;
+    public int timeLimit
+    {
+        get { return m_TimeLimit.HasValue ? m_TimeLimit.Value : defaultTimeLimit;  }
+        set { m_TimeLimit = value; }
+    }
+    public GameModeDeathMatchDef TimeLimit(int _var) { timeLimit = _var; return this; }
+
+    public static int defaultRespawnCount = 10;
+    public static int defaultTimeLimit = 300;
 }
 
 public class GameModeDeathMatch : GameMode
@@ -22,16 +40,9 @@ public class GameModeDeathMatch : GameMode
 
 	public int respawnLeft { get { return respawnLimit - Game.Statistic.total.death; } }
 	public int timeLeft { 
-		get { 
-			if (Game.Progress.IsState(GameProgress.State.RUNNING))
-			{
-				return Mathf.Max(0, timeLimit - (int) Game.Progress.stateTime); 
-			}
-			else
-			{
-				return 0;
-			}
-		} 
+		get {
+		    return Game.Progress.IsState(GameProgress.State.RUNNING) ? Mathf.Max(0, timeLimit - (int) Game.Progress.stateTime) : 0;
+		}
 	}
 
 	public GameModeDeathMatch()

@@ -1449,13 +1449,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 68
+  mWidth: 72
   mHeight: 24
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.83333325
+  aspectRatio: 3
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
@@ -4503,6 +4503,30 @@ Prefab:
       propertyPath: aspectRatio
       value: 2.6500001
       objectReference: {fileID: 0}
+    - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: mWidth
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: aspectRatio
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: mWidth
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: aspectRatio
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400072, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: mWidth
+      value: 162
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400072, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: aspectRatio
+      value: 6.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
   m_RootGameObject: {fileID: 92259513}
@@ -5235,13 +5259,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 68
+  mWidth: 72
   mHeight: 24
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.83333325
+  aspectRatio: 3
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
@@ -10884,13 +10908,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: .835294127, b: .486274511, a: 1}
   mPivot: 4
-  mWidth: 154
+  mWidth: 162
   mHeight: 24
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.41666651
+  aspectRatio: 6.75
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}

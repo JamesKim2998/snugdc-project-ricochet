@@ -10,15 +10,15 @@ public class Global : Singleton<Global>
 {
 	public static new Global Instance { get { return Singleton<Global>.Instance; } }
 
-	[HideInInspector]
-	public ContextManager context;
+	public ContextManager context = new ContextManager ();
 	public static ContextManager Context() { return Instance.context; }
 
-	[HideInInspector]
-	public System.Random random;
+    public System.Random random = new System.Random();
 	public static System.Random Random() { return Instance.random; }
 
-	[HideInInspector]
+    public ConfigurationManager config = new ConfigurationManager();
+    public static ConfigurationManager Config { get { return Instance.config;  } }
+
 	public LevelManager level = new LevelManager();
 	public static LevelManager Level { get { return Instance.level; } }
 
@@ -65,9 +65,8 @@ public class Global : Singleton<Global>
 	public static GameSetting GameSetting() { return Instance.gameSetting; }
 
 	void Awake () {
-		context = new ContextManager ();
-		random = new System.Random ();
-
+        config.Load();
+	    
 		if (networkView == null) gameObject.AddComponent<NetworkView>();
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
@@ -78,6 +77,7 @@ public class Global : Singleton<Global>
 		player = ComponentHelper.AddComponentIfNotExists<PlayerManager>(gameObject);
 		ready = ComponentHelper.AddComponentIfNotExists<ReadyManager>(gameObject);
 		transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
+        
 	}
 
 	void Start () 
@@ -87,13 +87,13 @@ public class Global : Singleton<Global>
 
 	bool m_IsLoaded = false;
 
-	void load()
+	void Load()
 	{
 		m_IsLoaded = true;
 
 	}
 
-	void save()
+	void Save()
 	{
 		if (! m_IsLoaded)
 		{
@@ -104,6 +104,6 @@ public class Global : Singleton<Global>
 
 	void OnApplicationQuit()
 	{
-		save ();
+		Save ();
 	}
 }
