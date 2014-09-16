@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400d2bd0f87f0944caddd59d02e9ec61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMapPrf: {fileID: 11400000, guid: 0a9cd80659c790d4abba59c9d37d2821, type: 2}
   skinPrf: {fileID: 11400000, guid: 2bf7c4b8ca1f09e478ab1c5fd4f74be8, type: 2}
   weaponPrf: {fileID: 11400000, guid: e13cd39897d55244f82dd49d2522966e, type: 2}
   projectilePrf: {fileID: 11400000, guid: 90b995692fc6dbd4a9096f9b4e616cfd, type: 2}

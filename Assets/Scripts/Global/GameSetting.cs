@@ -22,23 +22,7 @@ public class GameSetting
 		}
 	}
 
-	public int mapIdx = 0;
-	public Scene map { 
-		get { 
-			if (mapIdx < SceneInfos.gameMaps.Count)
-				return SceneInfos.GameMap(mapIdx).scene;
-			else
-				return Scene.NONE; 
-		}
-
-		set {
-			var _mapIdx = SceneInfos.gameMaps.FindIndex(_map => _map.scene == value);
-			if (_mapIdx >= 0) 
-				mapIdx = _mapIdx;
-			else
-				Debug.LogWarning("Map " + value + " is not found.");
-		}
-	}
+    public Scene map = Scene.GAME_LEVEL_KKH_001;
 
 	[HideInInspector]
 	public GameModeDef modeSelected;

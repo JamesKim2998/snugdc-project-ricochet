@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: test_map_kdw001
-  name_: spaceship1
+  name_: spaceship2
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

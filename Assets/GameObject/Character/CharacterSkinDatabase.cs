@@ -6,7 +6,7 @@ public class CharacterSkinDatabase : MonoBehaviour
 {
 	public List<GameObject> editorSkinPrfs;
 
-	private Dictionary<CharacterType, CharacterSkin> m_Skins = new Dictionary<CharacterType, CharacterSkin>();
+	private readonly Dictionary<CharacterType, CharacterSkin> m_Skins = new Dictionary<CharacterType, CharacterSkin>();
 	public Dictionary<CharacterType, CharacterSkin> skins { get { return m_Skins; } }
 
 	public Sprite GetIcon(CharacterType _type) 

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Database;
 using UnityEngine;
 using System.Collections;
 
-public class DatabaseBase<Type, TypeComponent, Data> : MonoBehaviour 
+public class DatabaseBase<Type, TypeComponent, Data> : MonoBehaviour, IEnumerable<KeyValuePair<Type, Data>>
     where TypeComponent: UnityEngine.Component, IDatabaseTypeComponent<Type>
     where Data: UnityEngine.Component
 {
@@ -48,5 +49,15 @@ public class DatabaseBase<Type, TypeComponent, Data> : MonoBehaviour
 
             m_Datas.Add(_type.Type(), _dataCmp);
         }
+    }
+
+    public IEnumerator<KeyValuePair<Type, Data>> GetEnumerator()
+    {
+        return m_Datas.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return m_Datas.GetEnumerator();
     }
 }

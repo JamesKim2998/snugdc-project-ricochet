@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 using System;
@@ -24,17 +26,18 @@ public class UIMapSelector : MonoBehaviour
 
 		var _setting = Global.GameSetting();
 
-		foreach (var _gameMap in SceneInfos.gameMaps)
-			popupList.items.Add(_gameMap.name);
+		foreach (var _gameMap in Database.GameMap)
+			popupList.items.Add(_gameMap.Value.name_);
 
-		popupList.value = SceneInfos.GameMap(_setting.mapIdx).name;
+	    popupList.value = Database.GameMap[_setting.map].name_;
 	}
 
 	void OnChange()
 	{
-		Scene _scene;
-		if (EnumHelper.TryParse(popupList.value, out _scene))
-			Global.GameSetting().map = SceneInfos.Get(_scene).scene;
+	    var _theMapData = Database.GameMap.FirstOrDefault(_mapData => popupList.value == _mapData.Value.name_);
+        
+        if (_theMapData.Value != null)
+			Global.GameSetting().map = _theMapData.Key;
 		else 
 			Debug.LogError("Scene " + popupList.value + " does not exist!");
 	}

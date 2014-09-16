@@ -8,15 +8,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400000}
-  - 65: {fileID: 6500000}
+  - 114: {fileID: 11400006}
   m_Layer: 5
   m_Name: ui_gamemode_test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &100002
 GameObject:
@@ -32,7 +31,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &100004
 GameObject:
@@ -48,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -57,12 +56,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -52, y: -60, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
   - {fileID: 400004}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -74,6 +74,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 0
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -85,18 +86,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
---- !u!65 &6500000
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 230, y: 40, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_RootOrder: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7bcf7842d74de640bbb6f7bcc488682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSelector: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,18 +127,18 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 254
-  mHeight: 38
-  mDepth: 4
+  mWidth: 100
+  mHeight: 16
+  mDepth: 6
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.6842103
+  aspectRatio: 6.25
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
-  mText: map_list
-  mFontSize: 20
+  mText: mode test
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -158,7 +147,7 @@ MonoBehaviour:
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
-  mOverflow: 0
+  mOverflow: 2
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
@@ -201,7 +190,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 252
   mHeight: 40
-  mDepth: 3
+  mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -227,34 +216,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e428c9b6087304da439ec665b56a2d, type: 3}
+  m_Script: {fileID: 11500000, guid: bc1bf488fc3345a41bad73504e63dce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atlas: {fileID: 11400000, guid: 7ca37d54a98e9a441bc0d4af2d85246c, type: 2}
-  bitmapFont: {fileID: 0}
-  trueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
-  fontSize: 24
-  fontStyle: 0
-  backgroundSprite: smallBack
-  highlightSprite: smallBack_over
-  position: 0
-  items: []
-  padding: {x: 4, y: 4}
-  textColor: {r: 1, g: 1, b: 1, a: 1}
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  highlightColor: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  isAnimated: 1
-  isLocalized: 0
-  onChange:
-  - mTarget: {fileID: 11400002}
-    mMethodName: SetCurrentSelection
-    oneShot: 0
-  mSelectedItem: 
-  eventReceiver: {fileID: 0}
-  functionName: 
-  textScale: 0
-  font: {fileID: 0}
-  textLabel: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

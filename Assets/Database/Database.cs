@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Database : Singleton<Database> 
 {
+    public GameMapDatabase gameMap;
+    public static GameMapDatabase GameMap { get { return Instance.gameMap; } }
+
 	public CharacterSkinDatabase skin;
 	public static CharacterSkinDatabase Skin { get { return Instance.skin; } }
 
@@ -14,6 +17,9 @@ public class Database : Singleton<Database>
 
 	public void Apply(DatabaseDef _def)
 	{
+        gameMap = ((GameObject)Instantiate(_def.gameMapPrf.gameObject)).GetComponent<GameMapDatabase>();
+        gameMap.transform.parent = gameObject.transform;
+
 		skin = ((GameObject) Instantiate(_def.skinPrf.gameObject)).GetComponent<CharacterSkinDatabase>();
 		skin.transform.parent = gameObject.transform;
 
