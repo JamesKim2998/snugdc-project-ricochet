@@ -107,6 +107,7 @@ output_log.txt
 [Bb]inary
 FailedAssetImports.txt
 ScriptAssemblies
+*.*~
 *.csproj
 
 *.sln
