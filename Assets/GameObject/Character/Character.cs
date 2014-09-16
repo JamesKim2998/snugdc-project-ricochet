@@ -209,9 +209,9 @@ public partial class Character : MonoBehaviour
 	#endregion
 
 	#region events
-	public delegate void PostWeaponChanged(Character _character, Weapon _old);
-	public event PostWeaponChanged postWeaponChanged;
-	public event Action<Character> postDead;	
+    public Action<Character> postDead;
+    public Action<Character, Weapon> postWeaponChanged;
+    public Action<Character, Crate> postObtainCrate;
 	#endregion
 
 	#region network
@@ -435,6 +435,8 @@ public partial class Character : MonoBehaviour
 	    var _weaponPrf = Database.Weapon[_crate.weapon].weaponPrf;
 		var _weapon = (GameObject) Instantiate(_weaponPrf);
 		weapon = _weapon.GetComponent<Weapon>();
+
+	    if (postObtainCrate != null) postObtainCrate(this, _crate);
 	}
 
 	private void ListenOutOfAmmo(Weapon _weapon)

@@ -14,9 +14,9 @@ public class GameDef : MonoBehaviour
 	public GameAudioDef audio_;
 	public GameCameraDef camera_;
 	public GameHUDDef hud;
-	public GameModeManagerDef modeManager;
+    public GameModeManagerDef modeManager;
 
-	public bool useCharacterDef = false;
+    public bool useCharacterDef = false;
 	public GameCharacterDef character;
 
 	public bool useWeaponDef = false;

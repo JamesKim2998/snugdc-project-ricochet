@@ -7,10 +7,9 @@ public class Spawner : MonoBehaviour {
 	public GameObject target;
 
 	public int maxUnits = 10;
-	private int m_CurUnits = 0;
-	public int curUnits { get {return m_CurUnits; }}
+    public int curUnits { get; private set; }
 
-	public float periodMin;
+    public float periodMin;
 	public float periodMax;
 	public float periodOffset;
 
@@ -19,11 +18,9 @@ public class Spawner : MonoBehaviour {
 	public Rect range;
 	public string[] filters;
 
-	private bool m_CoroutineEnabled = false;
-	public bool coroutineEnabled { get { return m_CoroutineEnabled; }}
+    public bool coroutineEnabled { get; private set; }
 
-	public bool networkEnabled = false;
-	public bool networkServerOnly = true;
+    public bool networkEnabled = false;
 
 	public delegate void DoInitialize(Spawner _spawner, GameObject _gameObj);
 	public DoInitialize doInitialize;
@@ -31,32 +28,21 @@ public class Spawner : MonoBehaviour {
 	public delegate void PostSpawn(Spawner _spawner, GameObject _gameObj);
 	public event PostSpawn postSpawn;
 
-	private bool m_RespawnEnabled = true;
+    public Spawner()
+    {
+        curUnits = 0;
+        coroutineEnabled = false;
+    }
 
-	void Start () {
-		if (! networkEnabled 
-		    || (! networkServerOnly || Network.isServer))
-		{
+    void Start () {
+		if (! networkEnabled)
 			StartSpawn();
-		}
 
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
 	
-	void Update () {
-		if(! networkEnabled 
-		   || (! networkServerOnly || Network.isServer))
-		{
-			var _colliders = Physics2D.OverlapCircleAll (transform.position, 0.1f);
-			
-			m_RespawnEnabled= ! System.Array.Exists(_colliders, collider => {
-				return collider.gameObject.name == target.tag;
-			});
-		}
-	}
-
-	IEnumerator SpawnRoutine() {
-
+	IEnumerator SpawnRoutine() 
+    {
 		yield return new WaitForSeconds(periodOffset);
 		Spawn();
 		
@@ -65,8 +51,12 @@ public class Spawner : MonoBehaviour {
 			if (curUnits >= maxUnits) 
 			{
 				yield return new WaitForSeconds(0.5f);
-			} else if(m_RespawnEnabled)
-			{
+			} 
+            else
+            {
+                if (TestOverlap())
+                    yield return new WaitForSeconds(0.2f);
+
 				yield return new WaitForSeconds(Random.Range(periodMin, periodMax));
 				Spawn();
 			}
@@ -74,15 +64,21 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
+    bool TestOverlap()
+    {
+        var _colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+        return ! System.Array.Exists(_colliders, _collider => _collider.gameObject.name == target.tag);
+    }
+
 	public void StartSpawn() {
-		if (m_CoroutineEnabled) return;
-		m_CoroutineEnabled = true;
+		if (coroutineEnabled) return;
+		coroutineEnabled = true;
 		StartCoroutine("SpawnRoutine");
 	}
 
 	public void StopSpawn() {
-		if (! m_CoroutineEnabled) return;
-		m_CoroutineEnabled = false;
+		if (! coroutineEnabled) return;
+		coroutineEnabled = false;
 		StopCoroutine("SpawnRoutine");
 	}
 
@@ -111,32 +107,20 @@ public class Spawner : MonoBehaviour {
 
 	GameObject InstantiateLocal()
 	{
-		
-		GameObject _gameObj;
-		
-		_gameObj = GameObject.Instantiate(
+		var _gameObj = (GameObject) Instantiate(
 			target, 
 			gameObject.transform.position, 
-			gameObject.transform.rotation) 
-			as GameObject;
+			gameObject.transform.rotation);
 
 		var _destroyable = _gameObj.GetComponent<Destroyable>();
 		
 		if (_destroyable) 
-		{
-			_destroyable.postDestroy += _ => {
-				--m_CurUnits;
-			};
-		} 
+			_destroyable.postDestroy += _ => --curUnits;
 		else 
-		{
 			Debug.Log("spawn non-destroyable object!");
-		}
 
 		if (doInitialize != null) 
-		{
 			doInitialize(this, _gameObj);
-		}
 
 		return _gameObj;
 	}
@@ -144,7 +128,7 @@ public class Spawner : MonoBehaviour {
 	[RPC]
 	void InstantiateNetwork(NetworkViewID _viewID, string _data) 
 	{
-		GameObject _gameObj = InstantiateLocal();
+		var _gameObj = InstantiateLocal();
 		_gameObj.networkView.viewID = _viewID;
 		_gameObj.networkView.enabled = true;
 		
@@ -159,9 +143,9 @@ public class Spawner : MonoBehaviour {
 			return;
 		}
 
-		GameObject _gameObj = Instantiate();
+		var _gameObj = Instantiate();
 
-		++m_CurUnits;
+		++curUnits;
 
 		if ( postSpawn != null) 
 			postSpawn(this, _gameObj);
@@ -169,7 +153,7 @@ public class Spawner : MonoBehaviour {
 
 	public Vector2 Locate() {
 
-		int _hop = 5;
+		var _hop = 5;
 
 		while (_hop > 0) 
 		{
@@ -179,15 +163,8 @@ public class Spawner : MonoBehaviour {
 			
 			_position += new Vector2(transform.position.x, transform.position.y);
 
-			var _colliders = Physics2D.OverlapCircleAll(_position, 0.1f);
-
-			var _available = ! System.Array.Exists(_colliders, collider => {
-				return System.Array.Exists(filters, filter => filter == collider.tag);
-			});
-
-			if (_available) {
+			if (TestOverlap()) 
 				return _position;
-			}
 
 			--_hop;
 		}
@@ -197,10 +174,8 @@ public class Spawner : MonoBehaviour {
 
 	void OnServerInitialized()
 	{
-		if (networkEnabled && networkServerOnly)
-		{
+		if (networkEnabled)
 			StartSpawn();
-		}
 	}
 
 	void ListenBeforeDisconnected() 

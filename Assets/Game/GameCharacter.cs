@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameCharacter : MonoBehaviour
+public partial class GameCharacter : MonoBehaviour
 {
 	public float downForce = 30f;
 	public float maxUpForce = 2f;
@@ -43,7 +43,8 @@ public class GameCharacter : MonoBehaviour
 				}
 
 				m_Character.postDead += ListenDead;
-				m_Character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
+                m_Character.postObtainCrate += ListenObtainCrate;
+                m_Character.GetComponent<Destroyable>().postDestroy += ListenDestroy;
 			    Add(m_Character);
 			}
 
@@ -165,7 +166,7 @@ public class GameCharacter : MonoBehaviour
 
 		if (character.movable) 
 		{
-			float _horizontal = Input.GetAxis("Horizontal");
+			var _horizontal = Input.GetAxis("Horizontal");
 			if (! _horizontal.Equals(0)) 
 				character.Move(_horizontal);
 			

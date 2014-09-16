@@ -6,22 +6,37 @@ using System.Collections.Generic;
 public class PlayerStatistics 
 {
 	public readonly string player;
+
     public readonly Statistic<int> score = new Statistic<int>();
+
+    public int CalculateScore()
+    {
+        var _balance = Game.Balance;
+        score.val = _balance.score.kill * kill.val 
+            + _balance.score.weaponPickUp * weaponPickUp.val;
+        return score;
+    }
+
     public readonly SetCounter<int> kill = new SetCounter<int>();
     public readonly SetCounter<int> death = new SetCounter<int>();
 
+    public readonly SetCounter<int> weaponPickUp = new SetCounter<int>();
+
 	public PlayerStatistics(string _player) {
 		player = _player;
-        
+
+	    kill.postAdd += (_, _characterID) => CalculateScore();
 		death.postAdd += (_, _characterID) => Game.Statistic.total.death.Add(_characterID);
-		death.postRemove += (_, _characterID) => Game.Statistic.total.death.Remove(_characterID);
+	    weaponPickUp.postAdd += (_, _crateID) => CalculateScore();
 
 		Reset ();
 	}
 
 	public void Reset() {
 		score.val = 0;
+        kill.Clear();
 		death.Clear();
+        weaponPickUp.Clear();
 	}
 }
 

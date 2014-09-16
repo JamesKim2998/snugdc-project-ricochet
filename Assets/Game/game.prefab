@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 266726316, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timescale: 1
-  multiplayer: 0
   hud: {fileID: 0}
+  balance: {fileID: 11400002, guid: 3356cd87b80b6f44fba374623f03380f, type: 2}
   progress: {fileID: 11400002}
   modeManager: {fileID: 0}
   character: {fileID: 0}

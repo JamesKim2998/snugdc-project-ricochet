@@ -3,10 +3,25 @@ using System.Collections;
 
 public class Crate : MonoBehaviour
 {
+    private readonly System.Random s_Random = new System.Random();
+
+    public int id { get; private set; }
+
+    public int AllocateID()
+    {
+        if (id != default(int)) return id;
+        id = s_Random.Next();
+        return id;
+    }
+
+    public void AssignID(int _id) { id = _id; }
+
     public WeaponType weapon;
     public bool empty { get { return weapon == WeaponType.NONE; } }
 
 	public int score = 1;
+    void Awake()
+    {}
 
 	void Start() 
 	{
