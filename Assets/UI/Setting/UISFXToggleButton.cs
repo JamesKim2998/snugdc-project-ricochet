@@ -9,18 +9,14 @@ public class UISFXToggleButton : MonoBehaviour
 
     void Start()
     {
-        toggle.value = Global.SFX().enabled;
+        toggle.value = Global.Option.isSFXEnabled;
         m_Inited = true;
     }
 
     public void OnValueChanged()
     {
         if (!m_Inited) return;
-
-        if (toggle.value)
-            Global.Sound.UnmuteSFX();
-        else
-            Global.Sound.MuteSFX();
+        Global.Option.isSFXEnabled = toggle.value;
     }
 }
 

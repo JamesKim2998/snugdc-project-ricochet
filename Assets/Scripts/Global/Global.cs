@@ -16,14 +16,17 @@ public class Global : Singleton<Global>
     public System.Random random = new System.Random();
 	public static System.Random Random() { return Instance.random; }
 
+    public OptionManager option;
+    public static OptionManager Option { get { return Instance.option; } }
+
     public ConfigurationManager config = new ConfigurationManager();
     public static ConfigurationManager Config { get { return Instance.config;  } }
 
 	public LevelManager level = new LevelManager();
 	public static LevelManager Level { get { return Instance.level; } }
 
-	public static AudioSource BGM() { return Sound.bgm; }
-	public static AudioSource SFX() { return Sound.sfx; }
+	public static AudioSource BGM { get { return Sound.bgm; } }
+	public static AudioSource SFX { get { return Sound.sfx; } }
 
     public SoundManager sound = new SoundManager();
     public static SoundManager Sound { get { return Instance.sound; } }
@@ -69,12 +72,12 @@ public class Global : Singleton<Global>
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
 
+        option = ComponentHelper.AddComponentIfNotExists<OptionManager>(gameObject);
         sound = ComponentHelper.AddComponentIfNotExists<SoundManager>(gameObject);
         server = ComponentHelper.AddComponentIfNotExists<ServerManager>(gameObject);
         player = ComponentHelper.AddComponentIfNotExists<PlayerManager>(gameObject);
         ready = ComponentHelper.AddComponentIfNotExists<ReadyManager>(gameObject);
         transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
-        
 	}
 
 	void Start () 

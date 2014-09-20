@@ -16,7 +16,11 @@ public partial class GameCharacter : MonoBehaviour
 
 	public Character character {
 		get { return m_Character; }
-		set { 
+		set
+		{
+		    if (character == value)
+		        return;
+
 			if (character != null) 
 			{
 				if (value != null)

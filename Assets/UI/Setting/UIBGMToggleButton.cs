@@ -9,18 +9,14 @@ public class UIBGMToggleButton : MonoBehaviour
 
 	void Start ()
 	{
-		toggle.value = Global.BGM().enabled;
+        toggle.value = Global.Option.isBGMEnabled;
 	    m_Inited = true;
 	}
 
 	public void OnValueChanged()
 	{
         if (!m_Inited) return;
-
-        if (toggle.value)
-	        Global.Sound.UnmuteBGM();
-	    else
-	        Global.Sound.MuteBGM();
+	    Global.Option.isBGMEnabled = toggle.value;
 	}
 }
 

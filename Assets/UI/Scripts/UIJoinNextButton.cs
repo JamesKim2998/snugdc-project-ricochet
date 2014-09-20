@@ -30,7 +30,7 @@ public class UIJoinNextButton : MonoBehaviour {
 		CancelInvoke ("Fail");
 
 		if (successSound != null)
-			Global.SFX().PlayOneShot(successSound);
+			Global.SFX.PlayOneShot(successSound);
 
 		fsm.SendEvent (successEvent);
 			
@@ -43,7 +43,7 @@ public class UIJoinNextButton : MonoBehaviour {
 		fsm.SendEvent (failEvent);
 
 		if (failSound != null)
-			Global.SFX().PlayOneShot(failSound);
+			Global.SFX.PlayOneShot(failSound);
 	}
 
 	public void OnConnectedToServer()

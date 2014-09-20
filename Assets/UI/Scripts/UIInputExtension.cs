@@ -20,13 +20,13 @@ public class UIInputExtension : MonoBehaviour {
 	void OnChange() 
 	{
 		if (typingSound != null)
-            Global.SFX().PlayOneShot(typingSound);
+            Global.Sound.PlaySFX(typingSound);
 	}
 
 	void OnSubmit() 
 	{
 		if (submitSound != null)
-            Global.SFX().PlayOneShot(submitSound);
+            Global.Sound.PlaySFX(submitSound);
 
 		if (deselectOnSubmit)
 			target.isSelected = false;

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GlobalSFXAction : MonoBehaviour
+public class SFXAction : MonoBehaviour
 {
     public AudioSource sfx;
 
     public void Play()
     {
-        if (! Global.SFX().mute)
+        if (Global.Sound.isSFXEnabled)
             sfx.Play();
     }
 }

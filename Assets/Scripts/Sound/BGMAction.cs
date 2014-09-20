@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GlobalBGMAction : MonoBehaviour 
+public class BGMAction : MonoBehaviour 
 {
 	public void ExecuteEnable()
 	{
-		Global.BGM().enabled = true;
+		Global.Sound.isBGMEnabled = true;
 	}
 
 	public void ExecuteDisable()
 	{
-		Global.BGM().enabled = false;
+		Global.Sound.isBGMEnabled = false;
 	}
 
 	public void ExecuteToggle()
 	{
-		Global.BGM().enabled = ! Global.BGM().enabled;
+		Global.Sound.isBGMEnabled = !Global.Sound.isBGMEnabled;
 	}
 
 	public AudioClip paramBGM;
+
 	public void ExecuteChangeBGM()
 	{
-		Global.BGM().clip = paramBGM;
-		Global.BGM().Play();
+        Global.Sound.PlayBGM(paramBGM);
 	}
 }

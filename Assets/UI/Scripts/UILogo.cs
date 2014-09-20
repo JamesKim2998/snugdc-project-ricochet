@@ -53,7 +53,7 @@ public class UILogo : MonoBehaviour {
 		{
 			float _volume = Mathf.Clamp01( m_FadeElapsed / m_FadeTime);
 			audio.volume = _volume;
-			Global.BGM().audio.volume = 1 - _volume;
+			Global.BGM.audio.volume = 1 - _volume;
 		}
 	}
 
