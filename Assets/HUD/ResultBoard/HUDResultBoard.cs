@@ -45,7 +45,8 @@ public class HUDResultBoard : MonoBehaviour
 		_entity.player = _player;
 
 		_entity.player = _player;
-		_entity.weaponPickUp = _result.weaponPickUp;
+        _entity.character = Global.Player()[_player].characterSelected;
+        _entity.weaponPickUp = _result.weaponPickUp;
 		_entity.kill = _result.kill;
 		_entity.death = _result.death;
 		_entity.score = _result.score;
