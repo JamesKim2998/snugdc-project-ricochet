@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: assault_rifle_data
+  m_Name: test_weapon_data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,10 +40,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrf: {fileID: 100004, guid: 5c0bd4543f2e31a4bba5802a22bad247, type: 2}
-  weaponEquipPrf: {fileID: 100002, guid: b3125d6885ed6ef4fa24bdd8913d0a2f, type: 2}
-  hudBangIcon: {fileID: 21300000, guid: 874e914ce0194aa439f33eb7704e3699, type: 3}
-  hudAmmoEquipPrf: {fileID: 100000, guid: aefa7cc0422eb784298bf77ac8929d90, type: 2}
+  weaponPrf: {fileID: 100004, guid: 1e21dc3867355d44bb8f5e37ace182f2, type: 2}
+  weaponEquipPrf: {fileID: 100002, guid: 28397b30b77c2a04c919c332e85b769f, type: 2}
+  hudBangIcon: {fileID: 21300002, guid: 03a053947652bd2498c92309b5e9567d, type: 3}
+  hudAmmoEquipPrf: {fileID: 100000, guid: b0d8ccba76b3da24c8b5032e8de60ae7, type: 2}
   hudAmmoDatas:
   - {fileID: 11400002, guid: a95bc4e4d3907554595775aa43366508, type: 2}
   - {fileID: 11400002, guid: e712ad5582a82914295982e8f1c0ef64, type: 2}
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 85739
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

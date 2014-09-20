@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorDataPrfs:
   - {fileID: 100000, guid: 271aa65bfed49ec48be2ad8ed1750806, type: 2}
+  - {fileID: 100000, guid: ff728165b24a99c46ac7f2662faed697, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

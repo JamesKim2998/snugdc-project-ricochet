@@ -45,7 +45,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 148: {fileID: 14800000}
   m_Layer: 0
-  m_Name: assault_rifle
+  m_Name: test_weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,21 +271,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb246201d04eb754bba3ce58dbd215b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 85739
   animationGroup: 2
   useDamage: 1
   damageExpose: 1
   autoload: 0
   shootAtOnce: 3
-  ammoMax: 100
+  ammoMax: 1000
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: .0500000007, z: 0}
   prepareTime: 0
-  chargeTime: .150000006
+  chargeTime: .0500000007
   shootTime: 0
   cooldown: .5
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
   effectMuzzleFireOffset: {x: .699999988, y: .100000001, z: 0}
+  recoil: 10
+  recoilModifier: {x: 1, y: .100000001}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

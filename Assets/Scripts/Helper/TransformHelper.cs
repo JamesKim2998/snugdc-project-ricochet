@@ -23,11 +23,13 @@ public static class TransformHelper
 	public static void SetParentLocal(GameObject _child, GameObject _parent )
 	{
 		var _position = _child.transform.localPosition;
-		var _scale = _child.transform.localScale;
+        var _rotation = _child.transform.localRotation;
+        var _scale = _child.transform.localScale;
 		_child.transform.parent = _parent.transform;
 		_child.transform.localPosition = _position;
-		_child.transform.localScale = _scale;
-	}
+        _child.transform.localRotation = _rotation;
+        _child.transform.localScale = _scale;
+    }
 
 	public static void SetParentWithoutScale(GameObject _child, GameObject _parent )
 	{

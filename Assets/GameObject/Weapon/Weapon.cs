@@ -327,8 +327,9 @@ public class Weapon : MonoBehaviour
 	{
 		if(effectMuzzleFirePrf != null)
 		{
-			var _effect = (GameObject) Instantiate (effectMuzzleFirePrf, transform.position, transform.rotation);
-			_effect.transform.Translate (effectMuzzleFireOffset);
+			var _effect = (GameObject) Instantiate (effectMuzzleFirePrf);
+            TransformHelper.SetParentLocal(_effect, gameObject);
+			_effect.transform.localPosition = effectMuzzleFireOffset;
 		}
 	}
 
