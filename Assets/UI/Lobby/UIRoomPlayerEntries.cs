@@ -46,7 +46,7 @@ public class UIRoomPlayerEntries : MonoBehaviour
 			return;
 		}
 
-		var _obj = GameObject.Instantiate(entryPrf, Vector3.zero, Quaternion.identity) as GameObject;
+		var _obj = (GameObject) Instantiate(entryPrf, Vector3.zero, Quaternion.identity);
 		var _scale = _obj.transform.localScale;
 		_obj.transform.parent = transform;
 		_obj.transform.localScale = _scale;
@@ -68,7 +68,7 @@ public class UIRoomPlayerEntries : MonoBehaviour
 			return;
 		}
 
-		GameObject.Destroy(_entry);
+		Destroy(_entry);
 
 		m_Entries.Remove(_player);
 
@@ -78,13 +78,9 @@ public class UIRoomPlayerEntries : MonoBehaviour
 	void ListenPlayerConnected(bool _connected, string _player) 
 	{
 		if (_connected) 
-		{
 			Add(_player);
-		}
 		else 
-		{
 			Remove(_player);
-		}
 	}
 
 	void ListenPollReadyInfo()

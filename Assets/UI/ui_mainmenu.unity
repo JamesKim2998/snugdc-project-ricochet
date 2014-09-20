@@ -2969,7 +2969,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 98
+  mWidth: 106
   mHeight: 40
   mDepth: 2
   autoResizeBoxCollider: 0

@@ -68,12 +68,12 @@ public class Global : Singleton<Global>
 		if (networkView == null) gameObject.AddComponent<NetworkView>();
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
-		
-        sound = gameObject.AddComponent<SoundManager>();
-		server = gameObject.AddComponent<ServerManager>();
-		player = gameObject.AddComponent<PlayerManager>();
-		ready = gameObject.AddComponent<ReadyManager>();
-		transition = gameObject.AddComponent<TransitionManager>();
+
+        sound = ComponentHelper.AddComponentIfNotExists<SoundManager>(gameObject);
+        server = ComponentHelper.AddComponentIfNotExists<ServerManager>(gameObject);
+        player = ComponentHelper.AddComponentIfNotExists<PlayerManager>(gameObject);
+        ready = ComponentHelper.AddComponentIfNotExists<ReadyManager>(gameObject);
+        transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
         
 	}
 

@@ -11,11 +11,15 @@ public class UIRoomPlayerEntry : MonoBehaviour
 			if (m_Player != null) m_Player.postChanged -= ListenPlayerInfoChanged;
 
 			m_Player = value;
-			characterSelector.player = m_Player.guid;
-			Refresh();
 
-			if (m_Player != null) m_Player.postChanged += ListenPlayerInfoChanged;
-		}
+			if (m_Player != null) 
+		    {
+                characterSelector.player = m_Player.guid;
+                m_Player.postChanged += ListenPlayerInfoChanged;
+		    }
+
+            Refresh();
+        }
 	}
 
 	public UILabel nameLabel;
@@ -39,12 +43,10 @@ public class UIRoomPlayerEntry : MonoBehaviour
 	void Refresh()
 	{
 		if (player != null)
-		{
 			SetReady(Global.Ready().IsReady(player.guid));
-		}
 
-		if (nameLabel != null) 
-			nameLabel.text = m_Player == null ? "undefined" : m_Player.name;
+		if (nameLabel != null)
+            nameLabel.text = player == null ? "undefined" : player.name;
 	}
 
 	void SetReady(bool _ready)

@@ -97,11 +97,17 @@ public class PlayerManager : MonoBehaviour
 
 	PlayerInfo Add(string _player)
 	{
-	    var _playerInfo = _player == Network.player.guid ? mine : new PlayerInfo();
-	    _playerInfo.guid = _player;
-	    _playerInfo.name = "player-" + _player;
-        Add(_playerInfo);
-	    return _playerInfo;
+	    PlayerInfo _playerInfo;
+	    if (players.TryGetValue(_player, out _playerInfo))
+	    {
+            return _playerInfo;
+	    }
+	    else
+	    {
+            _playerInfo = new PlayerInfo {guid = _player, name = _player.ToString() };
+	        Add(_playerInfo);
+            return _playerInfo;
+        }
 	}
 
     void Add(PlayerInfo _playerInfo)
@@ -195,8 +201,9 @@ public class PlayerManager : MonoBehaviour
 	[RPC]
 	void PlayerManager_OnPlayerConnected(string _player)
 	{
-		Add(_player);
-        Connect(Get(_player));
+	    var _playerInfo = Get(_player) ?? Add(_player);
+
+	    Connect(_playerInfo);
 
 		if (Network.player.guid == _player)
 			RefreshPlayerInfo();
