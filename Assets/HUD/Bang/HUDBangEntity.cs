@@ -33,7 +33,7 @@ public class HUDBangEntity : MonoBehaviour
 
         if (_attackData.weapon != WeaponType.NONE)
         {
-            weapon.sprite2D = Database.Weapon[_attackData.weapon].bangIcon;
+            weapon.sprite2D = Database.Weapon[_attackData.weapon].hudBangIcon;
         }
         else
         {

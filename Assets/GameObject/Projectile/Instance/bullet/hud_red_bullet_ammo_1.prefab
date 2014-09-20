@@ -8,14 +8,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: assault_rifle_data
+  - 114: {fileID: 11400002}
+  m_Layer: 5
+  m_Name: hud_red_bullet_ammo_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -23,9 +23,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -37,17 +37,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
+  m_Script: {fileID: 11500000, guid: e96b31ce75e592f45a1cff563a4869db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrf: {fileID: 100004, guid: 5c0bd4543f2e31a4bba5802a22bad247, type: 2}
-  weaponEquipPrf: {fileID: 100002, guid: b3125d6885ed6ef4fa24bdd8913d0a2f, type: 2}
-  hudBangIcon: {fileID: 21300000, guid: 874e914ce0194aa439f33eb7704e3699, type: 3}
-  hudAmmoEquipPrf: {fileID: 100000, guid: aefa7cc0422eb784298bf77ac8929d90, type: 2}
-  hudAmmoDatas:
-  - {fileID: 11400002, guid: a95bc4e4d3907554595775aa43366508, type: 2}
-  - {fileID: 11400002, guid: e712ad5582a82914295982e8f1c0ef64, type: 2}
-  - {fileID: 11400002, guid: 7bc6559c6bd7b8843a6865b6eedd05fd, type: 2}
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 0
+  mWidth: 40
+  mHeight: 24
+  mDepth: 0
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1.66666663
+  mSprite: {fileID: 21300004, guid: 2be8e3fd3b01bd54cae8bc37dfcfe0a9, type: 3}
+  mMat: {fileID: 0}
+  mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
+  nextSprite: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -56,10 +77,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
+  m_Script: {fileID: 11500000, guid: 235bdcbf151f6bb4b993eae65f19226c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  bucket: 1
+  size: {x: 12, y: 8}
+  padding: {x: 5, y: 5}
+  line: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
