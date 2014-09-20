@@ -22,10 +22,10 @@ public class GlobalInitializer : MonoBehaviour
 
 		if (bgm != null)
 		{
-			_global.bgm.Stop();
-			_global.bgm.clip = bgm;
-			_global.bgm.loop = true;
-			_global.bgm.Play();
+			Global.BGM().Stop();
+            Global.BGM().clip = bgm;
+            Global.BGM().loop = true;
+            Global.BGM().Play();
 		}
 
         _global.transition.gameCutScene = gameCutScenePrf;

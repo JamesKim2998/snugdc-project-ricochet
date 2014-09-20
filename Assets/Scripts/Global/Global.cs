@@ -22,13 +22,11 @@ public class Global : Singleton<Global>
 	public LevelManager level = new LevelManager();
 	public static LevelManager Level { get { return Instance.level; } }
 
-	[HideInInspector]
-	public AudioSource bgm;
-	public static AudioSource BGM() { return Instance.bgm; }
-	
-	[HideInInspector]
-	public AudioSource sfx;
-	public static AudioSource SFX() { return Instance.sfx; }
+	public static AudioSource BGM() { return Sound.bgm; }
+	public static AudioSource SFX() { return Sound.sfx; }
+
+    public SoundManager sound = new SoundManager();
+    public static SoundManager Sound { get { return Instance.sound; } }
 
 	[HideInInspector]
 	public ServerManager server;
@@ -71,12 +69,11 @@ public class Global : Singleton<Global>
 		networkView.stateSynchronization = NetworkStateSynchronization.Off;
 		networkView.observed = null;
 		
-		bgm = gameObject.AddComponent<AudioSource>();
-		sfx = gameObject.AddComponent<AudioSource>();
-		server = ComponentHelper.AddComponentIfNotExists<ServerManager>(gameObject);
-		player = ComponentHelper.AddComponentIfNotExists<PlayerManager>(gameObject);
-		ready = ComponentHelper.AddComponentIfNotExists<ReadyManager>(gameObject);
-		transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
+        sound = gameObject.AddComponent<SoundManager>();
+		server = gameObject.AddComponent<ServerManager>();
+		player = gameObject.AddComponent<PlayerManager>();
+		ready = gameObject.AddComponent<ReadyManager>();
+		transition = gameObject.AddComponent<TransitionManager>();
         
 	}
 

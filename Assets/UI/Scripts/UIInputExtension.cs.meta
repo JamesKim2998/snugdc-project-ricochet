@@ -4,8 +4,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - target: {instanceID: 0}
-  - typingSound: {fileID: 8300000, guid: fe2ce39fd51d0cd469cb214363e8dd37, type: 3}
-  - submitSound: {fileID: 8300000, guid: 2256ffbe44b973340a9a690d70e82660, type: 3}
+  - typingSound: {fileID: 8300000, guid: c4a03dabd68d1054d8aa391bafda885a, type: 3}
+  - submitSound: {fileID: 8300000, guid: c4a03dabd68d1054d8aa391bafda885a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

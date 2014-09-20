@@ -5,27 +5,14 @@ using System.Collections;
 public class UIInputExtension : MonoBehaviour {
 
 	public UIInput target;
-	private AudioSource m_AudioSource;
 
 	public bool deselectOnSubmit = true;
 	public AudioClip typingSound;
 	public AudioClip submitSound;
 
-	void Start () 
+	void Start ()
 	{
-		if (target == null)
-			target = GetComponent<UIInput>();
-
-		if (target == null)
-		{
-			Debug.LogError("Target is not found!");
-			return;
-		}
-
-		m_AudioSource = target.GetComponent<AudioSource>();
-		if (m_AudioSource == null)
-			m_AudioSource = target.gameObject.AddComponent<AudioSource>();
-
+	    if (!target) target = GetComponent<UIInput>();
 		target.onChange.Add(new EventDelegate(this, "OnChange"));
 		target.onSubmit.Add(new EventDelegate(this, "OnSubmit"));
 	}
@@ -33,13 +20,13 @@ public class UIInputExtension : MonoBehaviour {
 	void OnChange() 
 	{
 		if (typingSound != null)
-			m_AudioSource.PlayOneShot(typingSound);
+            Global.SFX().PlayOneShot(typingSound);
 	}
 
 	void OnSubmit() 
 	{
 		if (submitSound != null)
-			m_AudioSource.PlayOneShot( submitSound);
+            Global.SFX().PlayOneShot(submitSound);
 
 		if (deselectOnSubmit)
 			target.isSelected = false;
