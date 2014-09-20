@@ -20,6 +20,12 @@ public class HUDBang : MonoBehaviour
 
     void ListenCharacterDead(Character _character)
     {
+        if (! HUDBangEntity.IsValidForRefresh(_character))
+        {
+            Debug.Log("Data is not valid for refresh. Ignore.");
+            return;
+        }
+
         var _entity = (GameObject) Instantiate(entityPrf);
         TransformHelper.SetParentWithoutScale(_entity, grid.gameObject);
         Destroy(_entity, destroyDelay);

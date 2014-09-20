@@ -55,9 +55,18 @@ public class PlayerManager : MonoBehaviour
 	public bool IsServer(PlayerInfo _player ) { if (server != null) return _player.guid == server.guid; return false;}
 	public bool IsClient(PlayerInfo _player ) { if (server != null) return _player.guid != server.guid; return false;}
 
-	public PlayerInfo this[string _player] { get { return players[_player]; } }
+    public PlayerInfo this[string _player]
+    {
+        get
+        {
+            PlayerInfo _playerInfo;
+            return players.TryGetValue(_player, out _playerInfo)
+                ? _playerInfo
+                : null;
+        }
+    }
 
-	void Awake() 
+    void Awake() 
 	{
 		mine = new PlayerInfo {guid = Network.player.guid, name = Network.player.guid};
 	    players = new Dictionary<string, PlayerInfo> { {Network.player.guid, mine} };

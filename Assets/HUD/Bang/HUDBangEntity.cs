@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class HUDBangEntity : MonoBehaviour
@@ -10,6 +11,13 @@ public class HUDBangEntity : MonoBehaviour
     public UILabel victimName;
 
     public UI2DSprite weapon;
+
+    public static bool IsValidForRefresh(Character _victim)
+    {
+        var _attackData = _victim.lastAttackData;
+        return (! String.IsNullOrEmpty(_attackData.ownerPlayer))
+               && (! String.IsNullOrEmpty(_victim.ownerPlayer));
+    }
 
     public void Refresh(Character _victim)
     {
