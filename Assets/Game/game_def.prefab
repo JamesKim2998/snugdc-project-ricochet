@@ -90,7 +90,7 @@ MonoBehaviour:
     - {r: 1, g: 1, b: 0, a: 1}
   useWeaponDef: 1
   weapon:
-    weaponSet: eb4e010002000000
+    weaponSet: 0800000002000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be9bef3b65ae7042985b1eab2ae46e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: 2835
+  projectile: 7
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb246201d04eb754bba3ce58dbd215b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 85739
+  type: 8
   animationGroup: 2
   useDamage: 1
   damageExpose: 1

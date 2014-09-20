@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be99692242414b4da55b37d0def197d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editorType: 2835
+  editorType: 7
   ownerID: 0
   ownerDetecterID: 0
   life: 4

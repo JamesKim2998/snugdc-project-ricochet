@@ -2,12 +2,12 @@ public enum WeaponType
 {
 	NONE,
 	BEGIN,
-    TEST = 85739,
+    TEST = 8,
 	ASSAULT_RIFLE = 2,
 	REVOLVER,
 	TREE_SHAGGER_CANNON,
 	DOG_LASER_GUN,
 	BUG_LASER_GUN,
 	SHARK_MACHINE_GUN,
-	END,
+	END = 9,
 }
