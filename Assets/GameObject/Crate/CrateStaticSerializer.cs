@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.Collections;
 
+[Serializable]
 struct CrateStaticData
 {
     public int id;

@@ -16,7 +16,6 @@ public class Spawner : MonoBehaviour {
 	public Vector2 velocity;
 
 	public Rect range;
-	public string[] filters;
 
     public bool coroutineEnabled { get; private set; }
 
@@ -35,7 +34,7 @@ public class Spawner : MonoBehaviour {
     }
 
     void Start () {
-		if (! networkEnabled)
+		if (! networkEnabled || (networkEnabled && Network.isServer))
 			StartSpawn();
 
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
@@ -55,9 +54,12 @@ public class Spawner : MonoBehaviour {
             else
             {
                 if (TestOverlap())
+                {
                     yield return new WaitForSeconds(0.2f);
+                    continue;
+                }
 
-				yield return new WaitForSeconds(Random.Range(periodMin, periodMax));
+                yield return new WaitForSeconds(Random.Range(periodMin, periodMax));
 				Spawn();
 			}
 

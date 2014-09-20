@@ -4,9 +4,8 @@ using System;
 
 public class GameModeManager : MonoBehaviour
 {
-	private GameMode m_Mode;
-	public GameMode mode { get { return m_Mode; } } 
-	private GameMode m_ModeToSet;
+    public GameMode mode { get; private set; }
+    private GameMode m_ModeToSet;
 	
 	public float setupDelay = 1f;
 	public Action<GameMode> postChanged;
@@ -17,7 +16,7 @@ public class GameModeManager : MonoBehaviour
 		{
 			if ( ! _def.mode.overrideMode)
 			{
-				if (m_Mode != null || m_ModeToSet != null)
+				if (mode != null || m_ModeToSet != null)
 				{
 					Debug.Log("Mode is already exist. ");
 				}
@@ -42,22 +41,22 @@ public class GameModeManager : MonoBehaviour
 	public void Purge()
 	{
 		Destroy(mode);
-		m_Mode = null;
+		mode = null;
 	}
 
 	void SetMode(GameMode _mode)
 	{
-		if (m_Mode != null)
-			Destroy(m_Mode);
+		if (mode != null)
+			Destroy(mode);
 
-		m_Mode = _mode;
+		mode = _mode;
 		m_ModeToSet = null;
 
-		if (m_Mode) 
-			m_Mode.Setup();
+		if (mode) 
+			mode.Setup();
 		
 		if (postChanged != null)
-			postChanged(m_Mode);
+			postChanged(mode);
 	}
 
 	public void Setup(GameModeDef _def)

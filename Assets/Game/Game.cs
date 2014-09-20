@@ -14,7 +14,7 @@ public class Game : Singleton<Game>
 	public GameHUD hud;
 	public static GameHUD HUD { get { return Instance.hud; } }
     
-    public GameBalance balance;
+    public GameBalance balance = new GameBalance();
     public static GameBalance Balance { get { return Instance.balance;  } }
 
 	public GameProgress progress;

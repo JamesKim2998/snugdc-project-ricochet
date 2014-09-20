@@ -13,12 +13,12 @@ public class GameDef : MonoBehaviour
 
 	public GameAudioDef audio_;
 	public GameCameraDef camera_;
+    public GameBalanceDef balance;
 	public GameHUDDef hud;
     public GameModeManagerDef modeManager;
 
     public bool useCharacterDef = false;
 	public GameCharacterDef character;
-
 	public bool useWeaponDef = false;
 	public GameWeaponDef weapon;
 
@@ -39,6 +39,7 @@ public class GameDef : MonoBehaviour
 		Time.timeScale = timeScale;
 		if (audio_ != null) audio_.Apply();
 		if (camera_ != null) camera_.Apply();
+	    if (balance != null) Game.Balance.Apply(balance);
 		if (hud != null) Game.HUD.Apply(hud);
 		if (modeManager != null) Game.ModeManager.Apply(modeManager);
 		if (useCharacterDef && character != null) character.Apply();
@@ -72,6 +73,19 @@ public class GameCameraDef
 			Game.Camera_.camera = camera;
 		}
 	}
+}
+
+[System.Serializable]
+public class GameBalanceDef
+{
+    [System.Serializable]
+    public class Score
+    {
+        public int kill;
+        public int weaponPickup;
+    }
+
+    public Score score = new Score();
 }
 
 [System.Serializable]

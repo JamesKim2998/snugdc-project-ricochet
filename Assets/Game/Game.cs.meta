@@ -2,7 +2,14 @@ fileFormatVersion: 2
 guid: 45c7b295196dbc8448bef9cb0fa414f0
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hud: {instanceID: 0}
+  - balance: {fileID: 11400002, guid: 3356cd87b80b6f44fba374623f03380f, type: 2}
+  - progress: {instanceID: 0}
+  - modeManager: {instanceID: 0}
+  - character: {instanceID: 0}
+  - result: {instanceID: 0}
+  - cheat: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

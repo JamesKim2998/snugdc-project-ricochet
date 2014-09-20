@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameBalance : MonoBehaviour
+public class GameBalance 
 {
-    public GameBalanceScore score;
+    public GameBalanceScore score = new GameBalanceScore();
+
+    public void Apply(GameBalanceDef _def)
+    {
+        score.kill = _def.score.kill;
+        score.weaponPickUp = _def.score.weaponPickup;
+    }
 }

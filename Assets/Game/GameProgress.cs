@@ -20,7 +20,7 @@ public class GameProgress : MonoBehaviour
 
 	private State m_NextState = State.NULL;
 
-	public bool m_IntroOnce = false;
+	private bool m_IntroOnce = false;
 
     public float timeElapsed { get; private set; }
 
@@ -34,7 +34,7 @@ public class GameProgress : MonoBehaviour
 	public Action postOver;
 	public Action postStop;
 
-    public GameProgress()
+    void Awake()
     {
         stateTime = 0f;
         timeElapsed = 0f;

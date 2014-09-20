@@ -4,8 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(NetworkView))]
 public class NetworkBridge : MonoBehaviour
 {
-	public NetworkViewAllocator allocator;
-
 	public NetworkView global;
 	public NetworkView game;
 
@@ -19,8 +17,6 @@ public class NetworkBridge : MonoBehaviour
 			return;
 		}
 		
-		allocator = gameObject.AddComponent<NetworkViewAllocator>();
-
 		Global.Instance.networkBridge = this;
 		Global.Instance.networkView.viewID = global.viewID;
 		global.viewID = NetworkViewID.unassigned;

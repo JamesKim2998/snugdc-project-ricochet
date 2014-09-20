@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameBalanceScore : MonoBehaviour
+public class GameBalanceScore 
 {
     public int kill;
     public int weaponPickUp;

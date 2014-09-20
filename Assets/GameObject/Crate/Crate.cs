@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Crate : MonoBehaviour
 {
-    private readonly System.Random s_Random = new System.Random();
+    private static readonly System.Random s_Random = new System.Random();
 
     public int id { get; private set; }
 
@@ -19,7 +19,6 @@ public class Crate : MonoBehaviour
     public WeaponType weapon;
     public bool empty { get { return weapon == WeaponType.NONE; } }
 
-	public int score = 1;
     void Awake()
     {}
 
