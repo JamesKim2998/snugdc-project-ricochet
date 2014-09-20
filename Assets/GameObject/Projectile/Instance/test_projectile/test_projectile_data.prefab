@@ -11,11 +11,11 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: test_weapon_data
+  m_Name: test_projectile_data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -37,17 +37,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
+  m_Script: {fileID: 11500000, guid: e3a21fe8b881b4e4384d39f3177c3cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrf: {fileID: 100004, guid: 1e21dc3867355d44bb8f5e37ace182f2, type: 2}
-  weaponEquipPrf: {fileID: 100002, guid: 28397b30b77c2a04c919c332e85b769f, type: 2}
-  hudBangIcon: {fileID: 21300002, guid: 03a053947652bd2498c92309b5e9567d, type: 3}
-  hudAmmoEquipPrf: {fileID: 100000, guid: b0d8ccba76b3da24c8b5032e8de60ae7, type: 2}
-  hudAmmoDatas:
-  - {fileID: 11400002, guid: 96a63361d821b5a4ca83688659865097, type: 2}
-  - {fileID: 11400002, guid: 0b88e289daaacbb4fa8bf69fb489e997, type: 2}
-  - {fileID: 11400002, guid: 03c0863fc9fa8f24da77abb5a95b4e19, type: 2}
+  projectilePrf: {fileID: 100002, guid: c346d632d46d0ac4bb4943bb3b95117d, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -56,10 +49,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7605855afd14311468cdb826d4234c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 85739
+  type: 2835
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -2,7 +2,8 @@ public enum ProjectileType
 {
 	NONE,
 	BEGIN,
-	BIG_CANNON_BEAM,
+    TEST = 2835,
+	BIG_CANNON_BEAM = 2,
 	BLASTER_BEAM,
 	RED_BULLET,
 	GRAVITY_RIFLE_BULLET,

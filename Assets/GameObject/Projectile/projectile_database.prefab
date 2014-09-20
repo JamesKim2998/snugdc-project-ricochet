@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorDataPrfs:
+  - {fileID: 100000, guid: dbda4d6e0151e55458b80cc5c5886758, type: 2}
   - {fileID: 100000, guid: ff31a06f4ffadb2419202e9dc987ea75, type: 2}
 --- !u!1001 &100100000
 Prefab:
