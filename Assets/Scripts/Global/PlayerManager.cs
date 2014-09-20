@@ -47,8 +47,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerInfo mine { get; private set; }
 
     private PlayerInfo m_Server;
-	public PlayerInfo server { 
-		get { return m_Server ?? (m_Server = Get(Global.Server().server)); }
+	public PlayerInfo server {
+        get { return m_Server ?? (m_Server = Get(Global.Server().server)); }
 	}
 
 	public bool IsMine(PlayerInfo _player) { return _player.guid == mine.guid; }
@@ -95,12 +95,13 @@ public class PlayerManager : MonoBehaviour
 	        : null;
 	}
 
-	void Add(string _player)
+	PlayerInfo Add(string _player)
 	{
 	    var _playerInfo = _player == Network.player.guid ? mine : new PlayerInfo();
 	    _playerInfo.guid = _player;
 	    _playerInfo.name = "player-" + _player;
         Add(_playerInfo);
+	    return _playerInfo;
 	}
 
     void Add(PlayerInfo _playerInfo)

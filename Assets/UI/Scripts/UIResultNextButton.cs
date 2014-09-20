@@ -8,9 +8,6 @@ public class UIResultNextButton : MonoBehaviour
 
 	void Start()
 	{
-		if (button == null) 
-			button = GetComponent<UIButton>();
-
 		button.onClick.Add(new EventDelegate(this, "Transfer"));
 	}
 

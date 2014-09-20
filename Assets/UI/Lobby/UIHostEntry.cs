@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIHostEntry : MonoBehaviour {
+public class UIHostEntry : MonoBehaviour
+{
+    private string m_Player;
 
 	public UILabel ipLabel;
 	public UILabel portLabel;
@@ -27,17 +29,17 @@ public class UIHostEntry : MonoBehaviour {
 
 	void Refresh()
 	{
-		if (Network.peerType != NetworkPeerType.Disconnected)
-		{
-			ip = Global.Server().ip;
-			port = Global.Server().port;
-			
-			if (Global.Player().server != null)
-			{
-				name_ = Global.Player().server.name;
-			}
-		}
-	}
+	    if (Network.peerType == NetworkPeerType.Disconnected)
+	        return;
+
+        if (m_Player == null)
+            m_Player = Global.Server().server;
+
+        ip = Global.Server().ip;
+		port = Global.Server().port;
+		name_ = Global.Player().server.name;
+        characterSelector.player = m_Player;
+    }
 
 	void Clear()
 	{
@@ -48,14 +50,14 @@ public class UIHostEntry : MonoBehaviour {
 
 	void OnServerInitialized()
 	{
-		characterSelector.player = Network.player.guid;
-		Refresh();
+		m_Player = Network.player.guid;
+        Invoke("Refresh", 0.05f);
 	}
 
 	void ListenPlayerSetuped(PlayerInfo _player)
 	{
-		characterSelector.player = Global.Server().server;
-		Refresh();
+        m_Player = null;
+        Invoke("Refresh", 0.05f);
 	}
 
 	void OnDisconnectedFromServer()

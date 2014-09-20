@@ -83,7 +83,7 @@ public class MultiplayerGUI : MonoBehaviour {
 		GUILayout.Label("DirectPort");
 		m_DirectHostPort = int.Parse(GUILayout.TextField (m_DirectHostPort.ToString()));
 		if (GUILayout.Button("Host"))
-			Network.InitializeServer(4, m_DirectHostPort, false);
+			Global.Server().Initiate(4, m_DirectHostPort, false);
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
@@ -91,7 +91,7 @@ public class MultiplayerGUI : MonoBehaviour {
 		m_DirectJoinIP = GUILayout.TextField (m_DirectJoinIP);
 		m_DirectJoinPort = int.Parse(GUILayout.TextField (m_DirectJoinPort.ToString()));
 		if (GUILayout.Button("Join"))
-			Network.Connect(m_DirectJoinIP, m_DirectJoinPort);
+			Global.Server().Connect(m_DirectJoinIP, m_DirectJoinPort);
 		GUILayout.EndHorizontal ();
 
 		m_HostButton.Display();
