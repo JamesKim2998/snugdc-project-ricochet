@@ -22,15 +22,5 @@ public class HUDResultBoardEntity : MonoBehaviour
 	public UILabel killLabel;
 	public UILabel deathLabel;
 	public UILabel scoreLabel;
-
-	void Start ()
-	{
-
-	}
-
-	void Update ()
-	{
-
-	}
 }
 

@@ -35,7 +35,7 @@ public class HUDResultBoard : MonoBehaviour
 			return;
 		}
 
-		var _obj = Object.Instantiate(entityPrf) as GameObject;
+        var _obj = (GameObject) Instantiate(entityPrf);
 		_obj.transform.parent = grid.transform;
 		_obj.transform.localPosition = Vector3.zero;
 		_obj.transform.localScale = Vector3.one;

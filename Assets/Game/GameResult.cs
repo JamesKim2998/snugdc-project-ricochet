@@ -53,7 +53,8 @@ public class GameResult : MonoBehaviour
 			var _statistic = Game.Statistic[_player.Key];
 			_result.kill = _statistic.kill;
 			_result.death = _statistic.death;
-		    _statistic.CalculateScore();
+            _result.weaponPickUp = _statistic.weaponPickUp;
+            _statistic.CalculateScore();
 			_result.score = _statistic.score;
 			results.Add(_player.Key, _result);
 		}
