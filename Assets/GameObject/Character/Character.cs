@@ -333,11 +333,16 @@ public partial class Character : MonoBehaviour
 		floating = true;
 		m_JumpCooltime = jumpCooldown;
 		rigidbody2D.velocity += new Vector2(0, jumpVelocity);
-		terrainDetector.gameObject.SetActive(true);
+        Invoke("EnableDetectTerrain", jumpCooldown);
 		m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.JUMP_LOWER);
 		m_NetworkAnimator.SetTrigger(CharacterAnimationTrigger.JUMP_UPPER);
 	}
-	
+
+    void EnableDetectTerrain()
+    {
+        terrainDetector.gameObject.SetActive(true);
+    }
+
 	public bool shootable {
 		get {
 			return weapon != null && weapon.IsShootable()
