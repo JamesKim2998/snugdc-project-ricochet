@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using System.Collections;
 
 public class Ricochet : MonoBehaviour 
@@ -69,7 +70,7 @@ public class Ricochet : MonoBehaviour
 			// todo: server
 			if (effectPenetratePrf)
 			{
-				var _effect = GameObject.Instantiate(effectPenetratePrf, transform.position, transform.rotation) as GameObject;
+				var _effect = (GameObject) Instantiate(effectPenetratePrf, transform.position, transform.rotation);
 				_effect.transform.Translate(effectPenetrateOffset);
 			}
 		}
@@ -85,7 +86,7 @@ public class Ricochet : MonoBehaviour
 			// todo: server
 			if (effectReflectPrf)
 			{
-				var _effect = GameObject.Instantiate(effectReflectPrf, transform.position, transform.rotation) as GameObject;
+				var _effect = (GameObject) Instantiate(effectReflectPrf, transform.position, transform.rotation);
 				_effect.transform.Translate(effectReflectOffset);
 			}
 		}
@@ -93,36 +94,33 @@ public class Ricochet : MonoBehaviour
 		return _shouldDecay;
 	}
 
-	void Reflect(Collider2D _collider) 
+	void Reflect(Collider2D _collider)
 	{
+	    if (m_IsReflected)
+	        return;
+
 		m_IsReflected = true;
 
-		var _direction = transform.TransformDirection(Vector3.right);
+        var _direction = transform.TransformDirection(Vector3.right);
 
-		// hard
-		// todo: rough solution.
-		var _rayResults = Physics2D.RaycastAll(
-			transform.TransformPoint(0.5f * Vector3.left), 
-			_direction, 
+        var _rayResult = Physics2D.Raycast(
+            transform.TransformPoint(0.5f * Vector3.left),
+            _direction, 
 			1f, 
 			reflectionMask);
 
-		foreach (var _rayResult in _rayResults)
+        if (_rayResult.collider)
 		{
-			if (_rayResult.collider != _collider)
-				continue;
-	
-			_direction = Vector3.Reflect(_direction, _rayResult.normal);
-			var _angle = transform.eulerAngles;
-			_angle.z = TransformHelper.VectorToDeg(_direction);
-			transform.eulerAngles = _angle;
+		    _direction = Vector3.Reflect(transform.right, _rayResult.normal);
+            transform.LookAt(transform.position + _direction);
 
-			var _velocity = transform.rigidbody2D.velocity;
-			transform.rigidbody2D.velocity = Vector3.Reflect(_velocity, _rayResult.normal);
-
-			return;
+		    var _velocity = transform.rigidbody2D.velocity;
+		    transform.rigidbody2D.velocity = Vector3.Reflect(_velocity, _rayResult.normal);
 		}
+        else
+        {
+            Debug.Log("RayCast failed!");
+        }
 
-		Debug.Log("RayCast failed!");
 	}
 }
