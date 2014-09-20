@@ -69,7 +69,7 @@ public class Spawner : MonoBehaviour {
     bool TestOverlap()
     {
         var _colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f);
-        return ! System.Array.Exists(_colliders, _collider => _collider.gameObject.name == target.tag);
+        return System.Array.Exists(_colliders, _collider => _collider.gameObject.name == target.tag);
     }
 
 	public void StartSpawn() {
@@ -165,7 +165,7 @@ public class Spawner : MonoBehaviour {
 			
 			_position += new Vector2(transform.position.x, transform.position.y);
 
-			if (TestOverlap()) 
+			if (! TestOverlap()) 
 				return _position;
 
 			--_hop;

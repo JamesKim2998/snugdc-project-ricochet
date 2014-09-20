@@ -71,12 +71,12 @@ MonoBehaviour:
   useDamage: 1
   damageExpose: 1
   autoload: 0
-  shootAtOnce: 3
-  ammoMax: 1000
+  shootAtOnce: 10
+  ammoMax: 10
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: .0500000007, z: 0}
   prepareTime: 0
-  chargeTime: .0500000007
+  chargeTime: .00999999978
   shootTime: 0
   cooldown: .5
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
