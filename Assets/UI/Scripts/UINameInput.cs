@@ -18,7 +18,6 @@ public class UINameInput : MonoBehaviour {
 
 	public void OnSubmit()
 	{
-		// Debug.Log ("Name input " + label.text);
 		Global.Player().mine.name = label.text;
 	}
 
