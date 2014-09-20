@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bucket: 10
-  size: {x: 28, y: 17}
-  padding: {x: 5, y: 5}
+  size: {x: 17, y: 28}
+  padding: {x: 2, y: 2}
   line: 2
 --- !u!1001 &100100000
 Prefab:
