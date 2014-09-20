@@ -256,7 +256,6 @@ public class Projectile : MonoBehaviour
 	{
 		// todo: trigger라고 맞지 않는다는 보장이 없음. 위험함. 
 		if (_collider.isTrigger) return;
-		if (! activated) return;
 		if (decaying) return;
 
 		if (LayerHelper.Exist(collisionIgnores, _collider)) return;
@@ -274,9 +273,12 @@ public class Projectile : MonoBehaviour
 			StartDecay();
 		}
 
-		if (LayerHelper.Exist(collisionTargets, _collider)) 
+		if (LayerHelper.Exist(collisionTargets, _collider))
 		{
-			var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
+		    if (! activated) 
+                goto finalize;
+
+            var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
 			var _isOwner = _damageDetector.GetInstanceID() == ownerDetecterID;
 
 			if (! isHitOwner && _isOwner)
@@ -311,6 +313,8 @@ public class Projectile : MonoBehaviour
 				postBumped(this, _collider);
 		}
 		
+	    finalize:
+
 		if (postCollide != null) 
 			postCollide(this, _collider);
 
