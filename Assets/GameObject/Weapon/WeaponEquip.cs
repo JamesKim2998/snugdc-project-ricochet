@@ -12,10 +12,17 @@ public class WeaponEquip : MonoBehaviour
 			if (m_PhysicsEnabled == value)
 				return;
 
-			if (value) 
-				gameObject.AddComponent<Rigidbody2D>();
-			else
+		    m_PhysicsEnabled = value;
+
+		    if (value)
+		    {
+		        gameObject.AddComponent<Rigidbody2D>();
+		        rigidbody2D.angularDrag = 0.3f;
+		    }
+		    else
+		    {
 				Destroy(gameObject.rigidbody2D);
+		    }
 
 			body.SetActive(value);
 		}
