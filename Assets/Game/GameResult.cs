@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 
 [System.Serializable]
 public class PlayerResult
 {
-	public CharacterType characterType = CharacterType.NONE;
 	public int weaponPickUp = 0;
 	public int kill = 0;
 	public int death = 0;
@@ -49,9 +50,10 @@ public class GameResult : MonoBehaviour
 		foreach (var _player in Global.Player().players)
 		{
 			var _result = new PlayerResult();
-			var _statistic = Game.Statistic.Get(_player.Key);
-//			_result.kill = ;
+			var _statistic = Game.Statistic[_player.Key];
+			_result.kill = _statistic.kill;
 			_result.death = _statistic.death;
+		    _statistic.CalculateScore();
 			_result.score = _statistic.score;
 			results.Add(_player.Key, _result);
 		}
@@ -84,9 +86,46 @@ public class GameResult : MonoBehaviour
 
 		NetworkSerializer.Deserialize (_resultsSerial, out results);
 
+        foreach (var _result in results.Where(_result => ! CheckResult(_result.Key, _result.Value)))
+            Debug.LogError("Result of player " + _result.Key + " is not valid. Continue anyway.");
+
 		if (postPropagated != null) postPropagated();
 	}
-	
+
+    public bool CheckResult(string _player, PlayerResult _result)
+    {
+        var _valid = true;
+        var _playerInfo = Global.Player()[_player];
+        var _statistic = Game.Statistic[_player];
+
+        if (_statistic.weaponPickUp != _result.weaponPickUp)
+        {
+            Debug.LogError(_playerInfo.name + ": WeaponPickup does not match.");
+            _valid = false;
+        }
+
+        if (_statistic.kill != _result.kill)
+        {
+            Debug.LogError(_playerInfo.name + ": Kill does not match.");
+            _valid = false;
+        }
+
+        if (_statistic.death != _result.death)
+        {
+            Debug.LogError(_playerInfo.name + ": Death does not match.");
+            _valid = false;
+        }
+
+        _statistic.CalculateScore();
+        if (_statistic.score != _result.score)
+        {
+            Debug.LogError(_playerInfo.name + ": Score does not match.");
+            _valid = false;
+        }
+
+        return _valid;
+    }
+
 	private void ListenGameStart()
 	{
 		m_GameID = Game.Progress.gameID;
