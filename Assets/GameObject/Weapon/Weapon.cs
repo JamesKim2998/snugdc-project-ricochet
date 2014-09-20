@@ -148,11 +148,11 @@ public class Weapon : MonoBehaviour
         projectileCount = 0;
     }
 
-    public void Start()
-	{
-		ammo = ammoMax;
-		if (useDamage) damage = damageExpose;
-	}
+    public void Awake()
+    {
+        ammo = ammoMax;
+        if (useDamage) damage = damageExpose;
+    }
 
 	public void Update () 
 	{

@@ -65,8 +65,6 @@ public class HUDAmmo : MonoBehaviour
             TransformHelper.SetParentWithoutScale(m_WeaponIcon, gameObject);
             m_WeaponIcon.transform.localPosition = weaponIconPosition;
             
-            ammo = m_Weapon.ammo;
-
             Clear();
 
 		    foreach (var _data in _weaponData.hudAmmoDatas)
@@ -77,6 +75,8 @@ public class HUDAmmo : MonoBehaviour
 		        _theBundle.ammoData = _data;
                 m_Bundles.Add(_data.bucket, _theBundle);
 		    }
+
+            ammo = m_Weapon.ammo;
 
             m_Weapon.postShoot += ListenShoot;
         }
@@ -126,7 +126,7 @@ public class HUDAmmo : MonoBehaviour
     void Clear()
     {
         foreach (var _bundle in m_Bundles)
-            Destroy(_bundle.Value);
+            Destroy(_bundle.Value.gameObject);
         m_Bundles.Clear();
     }
 
