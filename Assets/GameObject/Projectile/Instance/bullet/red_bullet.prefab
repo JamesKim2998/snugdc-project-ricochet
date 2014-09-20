@@ -271,8 +271,8 @@ MonoBehaviour:
   isHitOwner: 1
   attackData:
     ownerPlayer: 
-    weapon: 0
-    projectile: 0
+    weapon: 2
+    projectile: 4
     damage: 1
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
@@ -286,7 +286,7 @@ MonoBehaviour:
   collisionTerrains:
     serializedVersion: 2
     m_Bits: 256
-  prepareDuration: .100000001
+  prepareDuration: .0500000007
   stopOnDecay: 1
   decayDuration: 0
   effectHitPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}

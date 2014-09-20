@@ -42,6 +42,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 114: {fileID: 11400000}
   - 148: {fileID: 14800004}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: network_bridge
   m_TagString: Untagged
@@ -60,6 +61,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
+  m_RootOrder: 1
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -71,6 +73,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
+  m_RootOrder: 0
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -84,6 +87,7 @@ Transform:
   - {fileID: 400002}
   - {fileID: 400000}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,9 +99,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f35153ce67a2c4dbb4a9530da99a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allocator: {fileID: 0}
   global: {fileID: 14800000}
   game: {fileID: 14800002}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2428b5d2540a20c428d34c71b5054033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

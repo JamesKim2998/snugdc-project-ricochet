@@ -49,6 +49,10 @@ MonoBehaviour:
     volume: 1
   camera_:
     camera: {fileID: 0}
+  balance:
+    score:
+      kill: 100
+      weaponPickup: 50
   hud:
     hudRoot: {fileID: 0}
     chatscreenPrf: {fileID: 100006, guid: 0dd137f5917ac5b40bcf0d7a0bed27e4, type: 2}
