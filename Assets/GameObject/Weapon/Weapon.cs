@@ -64,7 +64,7 @@ public class Weapon : MonoBehaviour
 	// state
 	public bool IsState(State _state) { return _state == m_State; }
 
-	// trigger
+	// ammo, shoot option
 	public bool autoload = false;
 	public int shootAtOnce = 1;
 	public int ammoMax = 1000;
@@ -81,7 +81,7 @@ public class Weapon : MonoBehaviour
 			return;
 		}
 
-		ammo -= 1;
+		--ammo;
 
 		if (ammo == 0)
 		{
@@ -139,6 +139,13 @@ public class Weapon : MonoBehaviour
 	// effects
 	public GameObject effectMuzzleFirePrf;
 	public Vector3 effectMuzzleFireOffset;
+
+    #region misc properties
+
+    public float recoil = 0;
+    public Vector2 recoilModifier = Vector2.one;
+
+    #endregion
 
     public Weapon()
     {
@@ -206,7 +213,16 @@ public class Weapon : MonoBehaviour
 		if (doGetBundle != null) 
 		 	_bundle = doGetBundle(this);
 
-		for (projectileIdx = 0; projectileIdx < _bundle && ammo > 0; ++projectileIdx) 
+	    Vector2? _recoil = null;
+	    if (! recoil.Equals(0) && ownerGameObj && ownerGameObj.rigidbody2D)
+	    {
+	        var _tmp = recoil*-transform.right;
+	        _tmp.x *= recoilModifier.x;
+            _tmp.y *= recoilModifier.y;
+	        _recoil = _tmp;
+	    }
+
+	    for (projectileIdx = 0; projectileIdx < _bundle && ammo > 0; ++projectileIdx) 
         {
 			var _projectileGO = doCreateProjectile(this);
 
@@ -236,6 +252,10 @@ public class Weapon : MonoBehaviour
 			{
 				_projectile.ownerID = ownerGameObj.GetInstanceID();
 				_projectile.ownerDeadZoneCollider = ownerGameObj.GetComponent<Character>().deadZoneCollider;
+
+                if (_recoil.HasValue)
+                    ownerGameObj.rigidbody2D.velocity += _recoil.Value;
+
 				var _detector = ownerGameObj.GetComponentInChildren<DamageDetector>();
 				if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
 			}
