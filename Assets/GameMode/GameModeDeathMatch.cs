@@ -6,18 +6,24 @@ public class GameModeDeathMatchDef : GameModeDef
 {
     public GameModeDeathMatchDef()
     {
-        mode = GameModeType.DEATH_MATCH;
+        type = GameModeType.DEATH_MATCH;
     }
 
     private int? m_ResponseCount;
-
     public int respawnCount
     {
         get { return m_ResponseCount.HasValue ? m_ResponseCount.Value : defaultRespawnCount;  }
         set { m_ResponseCount = value; }
     }
 
-	public GameModeDeathMatchDef RespawnCount(int _var) { respawnCount = _var; return this; }
+    private int? m_ResponseDelay;
+    public int respawnDelay
+    {
+        get { return m_ResponseDelay.HasValue ? m_ResponseDelay.Value : defaultRespawnDelay;  }
+        set { m_ResponseDelay = value; }
+    }
+
+    public GameModeDeathMatchDef RespawnCount(int _var) { respawnCount = _var; return this; }
 
     private int? m_TimeLimit;
     public int timeLimit
@@ -28,26 +34,41 @@ public class GameModeDeathMatchDef : GameModeDef
     public GameModeDeathMatchDef TimeLimit(int _var) { timeLimit = _var; return this; }
 
     public static int defaultRespawnCount = 10;
+    public static int defaultRespawnDelay = 5;
     public static int defaultTimeLimit = 300;
 }
 
-public class GameModeDeathMatch : GameMode
+public class GameModeDeathMatch 
+    : GameMode
+    , GameModePropertyTimeLimit
+    , GameModePropertyRespawn
 {
 	private bool m_IsLevelInited = false;
 
-	public int respawnLimit = 10;
-	public int timeLimit = 300;
+    #region timelimit
+    public int timeLimit { get; private set; }
+    public int timeLeft
+    {
+        get
+        {
+            return Game.Progress.IsState(GameProgress.State.RUNNING)
+                ? Mathf.Max(0, timeLimit - (int)Game.Progress.stateTime) : 0;
+        }
+    }
+    #endregion
 
-	public int respawnLeft { get { return respawnLimit - Game.Statistic.total.death; } }
-	public int timeLeft { 
-		get {
-		    return Game.Progress.IsState(GameProgress.State.RUNNING) ? Mathf.Max(0, timeLimit - (int) Game.Progress.stateTime) : 0;
-		}
-	}
+    #region respawn
+    public int respawnLeft { get { return respawnLimit - Game.Statistic.total.death; } }
+    public int respawnLimit { get; private set; }
+    public int respawnDelay { get; private set; }
+    #endregion
 
-	public GameModeDeathMatch()
+    public GameModeDeathMatch()
 	{
-		mode = GameModeType.DEATH_MATCH;
+		type = GameModeType.DEATH_MATCH;
+	    timeLimit = 300;
+	    respawnLimit = 10;
+	    respawnDelay = 5;
 	}
 	
 	public override void Setup ()
@@ -78,6 +99,7 @@ public class GameModeDeathMatch : GameMode
 		base.Init(_def);
         var _deathMatchDef = (GameModeDeathMatchDef) _def;
 		respawnLimit = _deathMatchDef.respawnCount;
+	    respawnDelay = _deathMatchDef.respawnDelay;
 		timeLimit = _deathMatchDef.timeLimit;
 	}
 
@@ -174,4 +196,5 @@ public class GameModeDeathMatch : GameMode
 				Game.Progress.TryOverGame();
 		}
 	}
+
 }

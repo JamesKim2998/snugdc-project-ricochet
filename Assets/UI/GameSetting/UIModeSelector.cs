@@ -43,7 +43,7 @@ public class UIModeSelector : MonoBehaviour
 		foreach (var _modePrf in modePrfs)
 			popupList.items.Add(_modePrf.mode.ToString());
 
-		popupList.value = Global.GameSetting().modeSelected.mode.ToString();
+		popupList.value = Global.GameSetting().modeSelected.type.ToString();
 	}
 	
 	void OnChange()

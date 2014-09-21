@@ -61,7 +61,7 @@ public class GameModeManager : MonoBehaviour
 
 	public void Setup(GameModeDef _def)
 	{
-		if (_def.mode == GameModeType.NULL)
+		if (_def.type == GameModeType.NULL)
 		{
 			Debug.LogError("Trying to setup NULL mode. Ignore.");
 			return;
@@ -78,7 +78,7 @@ public class GameModeManager : MonoBehaviour
 
 		var _gameGO = Game.Instance.gameObject;
 		
-		switch (_def.mode)
+		switch (_def.type)
 		{
 		case GameModeType.TEST: m_ModeToSet = _gameGO.AddComponent<GameModeTest>(); break;
 		case GameModeType.DEATH_MATCH: m_ModeToSet = _gameGO.AddComponent<GameModeDeathMatch>(); break;

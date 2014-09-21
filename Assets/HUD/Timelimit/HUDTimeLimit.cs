@@ -13,12 +13,11 @@ public class HUDTimeLimit : MonoBehaviour
 
 	void Update ()
 	{
-		var _mode = Game.Mode as GameModeDeathMatch;
+		var _mode = Game.Mode as GameModePropertyTimeLimit;
 
 		if (_mode == null) 
 		{
-//			Debug.LogWarning("Only support death match.");
-//			enabled = false;
+			Debug.LogWarning("Mode should support time limit. Ignore.");
 			return;
 		}
 			

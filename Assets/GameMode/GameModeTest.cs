@@ -4,17 +4,41 @@ using System.Collections;
 [System.Serializable]
 public class GameModeTestDef : GameModeDef
 {
-	public GameModeTestDef() { mode = GameModeType.TEST; } 
+	public GameModeTestDef() { type = GameModeType.TEST; } 
 }
 
-public class GameModeTest : GameMode
+public class GameModeTest 
+    : GameMode
+    , GameModePropertyRespawn
+    , GameModePropertyTimeLimit
 {
 	bool m_IsLevelInited = false;
 
-	public GameModeTest()
+    #region timelimit
+    public int timeLimit { get; private set; }
+    public int timeLeft
+    {
+        get
+        {
+            return Game.Progress.IsState(GameProgress.State.RUNNING)
+                ? Mathf.Max(0, timeLimit - (int)Game.Progress.stateTime) : 0;
+        }
+    }
+    #endregion timelimit
+
+    #region respawn
+    public int respawnLeft { get { return respawnLimit - Game.Statistic.total.death; } }
+    public int respawnLimit { get; private set; }
+    public int respawnDelay { get; private set; }
+    #endregion respawn
+    
+    public GameModeTest()
 	{
-		mode = GameModeType.TEST;
-	}
+		type = GameModeType.TEST;
+	    timeLimit = 300;
+        respawnLimit = 10;
+        respawnDelay = 5;
+    }
 
 	public override void Setup ()
 	{
@@ -35,11 +59,6 @@ public class GameModeTest : GameMode
 		Game.Progress.postRun += ListenGameRun;
 
 		TryToRunGame();
-	}
-
-	public override void Init(GameModeDef _def)
-	{
-		base.Init(_def);
 	}
 
 	void OnDestroy()
@@ -103,6 +122,5 @@ public class GameModeTest : GameMode
 	{
 		Invoke("SpawnCharacter", 0.5f);
 	}
-
 }
 

@@ -13,20 +13,20 @@ public enum GameModeType
 public class GameModeDef 
 {
 	[HideInInspector]
-	public GameModeType mode = GameModeType.NULL;
+	public GameModeType type = GameModeType.NULL;
 	public bool overrideMode = false;
 }
 
 public class GameMode : MonoBehaviour 
 {
-	public GameModeType mode = GameModeType.NULL;
+	public GameModeType type = GameModeType.NULL;
 	public bool overrideMode = false;
 
 	public virtual void Setup() {}
 
 	public virtual void Init(GameModeDef _def) 
 	{ 
-		mode = _def.mode;
+		type = _def.type;
 		overrideMode = _def.overrideMode;
 		return; 
 	}

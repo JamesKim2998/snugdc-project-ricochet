@@ -73,20 +73,22 @@ public partial class Character : MonoBehaviour
 
 	#region weapon
 	private Weapon m_Weapon;
-	public WeaponEquip weaponEquip { get; private set; }
+	private WeaponEquip m_WeaponEquip { get; set; }
     private bool m_ShouldAimWeapon = false;
 
 	public Weapon weapon {
 		get { return m_Weapon; }
 		set {
 			var _old = m_Weapon;
-			var _oldEquip = weaponEquip;
 
 		    if (m_Weapon)
 		    {
                 if (m_Weapon.IsState(Weapon.State.SHOOTING))
                     animator.SetBool("rest", true);
 		    }
+
+		    if (m_WeaponEquip)
+                ThrowAway();
 
 			m_Weapon = value;
 
@@ -113,11 +115,11 @@ public partial class Character : MonoBehaviour
 				animator.SetTrigger(CharacterAnimationTrigger.ArmWeaponEquip(_animationGroup));
 				animator.SetTrigger(CharacterAnimationTrigger.UpperWeaponEquip(_animationGroup));
 
-				var _weaponEquipPrf = Database.Weapon[m_Weapon.type].weaponEquipPrf;
-				weaponEquip = ((GameObject) Instantiate(_weaponEquipPrf)).GetComponent<WeaponEquip>();
-				weaponEquip.transform.parent = weaponEquipPivot.transform;
-				weaponEquip.transform.localPosition = Vector3.zero;
-				weaponEquip.transform.localEulerAngles = Vector3.zero;
+				var _m_WeaponEquipPrf = Database.Weapon[m_Weapon.type].weaponEquipPrf;
+				m_WeaponEquip = ((GameObject) Instantiate(_m_WeaponEquipPrf)).GetComponent<WeaponEquip>();
+				m_WeaponEquip.transform.parent = weaponEquipPivot.transform;
+				m_WeaponEquip.transform.localPosition = Vector3.zero;
+				m_WeaponEquip.transform.localEulerAngles = Vector3.zero;
 				
 				if (IsMine() && IsNetworkEnabled())
 				{
@@ -135,9 +137,6 @@ public partial class Character : MonoBehaviour
 
 		    if (_old)
 		        Destroy(_old.gameObject);
-
-		    //if (_oldEquip)
-			//	Destroy(_oldEquip.gameObject, 2f);
 		}
 	}
 
@@ -459,8 +458,31 @@ public partial class Character : MonoBehaviour
 	public void Unequip()
 	{
 		weapon = null;
-		weaponEquip = null;
+        if (m_WeaponEquip) ThrowAway();
 	}
+
+    public void ThrowAway()
+    {
+        if (!m_WeaponEquip)
+        {
+            Debug.LogWarning("Trying to throw away but weapon does not exist. Ignore.");
+            return;
+        }
+
+        m_WeaponEquip.physicsEnabled = true;
+        m_WeaponEquip.transform.parent = null;
+        m_WeaponEquip.transform.localScale = Vector3.one;
+
+        var _position = m_WeaponEquip.transform.localPosition;
+        _position.x += -0.5f;
+        m_WeaponEquip.transform.localPosition = _position;
+
+        m_WeaponEquip.rigidbody2D.velocity += -3 * new Vector2 { x = transform.right.x, y = transform.right.y, };
+        m_WeaponEquip.rigidbody2D.angularVelocity += transform.right.x > 0 ? 100 : -100;
+
+        Destroy(m_WeaponEquip.gameObject, 2);
+        m_WeaponEquip = null;
+    }
 
 	void OnSerializeNetworkView(BitStream _stream, NetworkMessageInfo _info) 
 	{

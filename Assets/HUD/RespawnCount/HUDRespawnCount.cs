@@ -7,21 +7,21 @@ public class HUDRespawnCount : MonoBehaviour
 	public UILabel respawnCount;
 	
 	void Start ()
-	{
-		if (! (respawnLimit && respawnCount)) {
-			LogCommon.MissingComponent();
-			enabled = false;
-		}
+    {
+        if (!(respawnLimit && respawnCount))
+        {
+            LogCommon.MissingComponent();
+            enabled = false;
+        }
 	}
 	
 	void Update ()
 	{
-		var _mode = Game.Mode as GameModeDeathMatch;
+		var _mode = Game.Mode as GameModePropertyRespawn;
 		
 		if (_mode == null) 
 		{
-//			Debug.LogWarning("Only support death match.");
-//			enabled = false;
+            Debug.LogWarning("Mode should support respawn. Ignore.");
 			return;
 		}
 		

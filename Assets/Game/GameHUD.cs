@@ -131,7 +131,7 @@ public class GameHUD : MonoBehaviour
 
 	void ListenModeChanged(GameMode _mode )
 	{
-		SetMode(_mode.mode);
+		SetMode(_mode.type);
 	}
 
 	void ListenGameIntro()

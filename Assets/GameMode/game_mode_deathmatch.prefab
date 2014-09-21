@@ -39,10 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6408809ed7d102f46a0c80eb1dd2658e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 2
+  type: 2
   overrideMode: 1
-  respawnLimit: 10
-  timeLimit: 300
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
