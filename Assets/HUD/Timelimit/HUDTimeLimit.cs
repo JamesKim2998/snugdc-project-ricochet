@@ -13,6 +13,8 @@ public class HUDTimeLimit : MonoBehaviour
 
 	void Update ()
 	{
+	    if (!Game.Mode) return;
+
 		var _mode = Game.Mode as GameModePropertyTimeLimit;
 
 		if (_mode == null) 

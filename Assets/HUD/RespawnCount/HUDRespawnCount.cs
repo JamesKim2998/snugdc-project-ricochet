@@ -17,7 +17,9 @@ public class HUDRespawnCount : MonoBehaviour
 	
 	void Update ()
 	{
-		var _mode = Game.Mode as GameModePropertyRespawn;
+        if (!Game.Mode) return;
+
+        var _mode = Game.Mode as GameModePropertyRespawn;
 		
 		if (_mode == null) 
 		{

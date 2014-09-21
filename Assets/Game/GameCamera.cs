@@ -12,10 +12,8 @@ public class GameCamera
 
 			if (m_Camera == null) return;
 
-			followObject = m_Camera.GetComponent<CameraFollowObject> ();
-			
-			if (followObject == null) 
-				followObject = m_Camera.gameObject.AddComponent<CameraFollowObject>();
+			followObject = m_Camera.GetComponent<CameraFollowObject> () 
+                ?? m_Camera.gameObject.AddComponent<CameraFollowObject>();
 		}
 	}
 

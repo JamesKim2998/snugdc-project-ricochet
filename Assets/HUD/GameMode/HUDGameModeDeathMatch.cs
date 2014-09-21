@@ -5,7 +5,10 @@ using System.Collections;
 
 public class HUDGameModeDeathMatch : MonoBehaviour
 {
+    public List<GameObject> hudNonAnchoredPrfs; 
     public List<HUDAnchor> hudPrfs;
+
+    private readonly List<GameObject> m_HUDNonAnchoreds = new List<GameObject>();
     private readonly List<GameObject> m_HUDs = new List<GameObject>();
 
     void Start()
@@ -15,6 +18,15 @@ public class HUDGameModeDeathMatch : MonoBehaviour
         {
             Debug.LogWarning("Mode should be " + GameModeType.DEATH_MATCH 
                 + ", but is now " + Game.Mode.type + " not match. Continue anyway.");
+        }
+
+        foreach (var _hudPrf in hudNonAnchoredPrfs)
+        {
+            var _hud = (GameObject)Instantiate(_hudPrf.gameObject);
+            _hud.transform.parent = transform;
+            _hud.transform.localPosition = Vector3.zero;
+            _hud.transform.localScale = Vector3.one;
+            m_HUDNonAnchoreds.Add(_hud);
         }
 
 	    foreach (var _hudPrf in hudPrfs)
@@ -29,7 +41,7 @@ public class HUDGameModeDeathMatch : MonoBehaviour
 	    Game.Character.postCharacterDead += ListenCharacterDead;
 	}
 
-    void Destroy()
+    void OnDestroy()
     {
         Game.Character.postCharacterDead -= ListenCharacterDead;
     }
