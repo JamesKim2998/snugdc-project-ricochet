@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using HutongGames.PlayMaker.Actions;
-using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 public class HUDMinimap : MonoBehaviour
 {
@@ -14,7 +10,8 @@ public class HUDMinimap : MonoBehaviour
 
     public readonly List<GameObject> gizmos = new List<GameObject>();
 
-    private HUDMinimapCharacter m_Character;
+    public HUDMinimapCharacter characters;
+    public HUDMinimapTile tiles;
 
     void Awake()
     {
@@ -22,15 +19,11 @@ public class HUDMinimap : MonoBehaviour
 
         var _scale = new Vector2(containerSize.x / mapRect.size.x, containerSize.y / mapRect.size.y);
         var _scaleMin = Mathf.Min(_scale.x, _scale.y);
-
         transform.localScale = new Vector3(_scaleMin, _scaleMin, 1);
 
         var _origin = -mapRect.min - mapRect.size / 2;
-
-        var _characters = new GameObject("characters");
-        TransformHelper.SetParentWithoutScale(_characters, gameObject);
-        _characters.transform.localPosition = _origin;
-        m_Character = _characters.AddComponent<HUDMinimapCharacter>();
+        characters.transform.localPosition = _origin;
+        tiles.transform.localPosition = _origin;
     }
 
     public GameObject Add(GameObject _gizmoPrf)

@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using System.Collections;
 
-[System.Serializable]
-public class TileData
+[Serializable]
+public class TileDataKey
 {
     public TileMaterialType material = TileMaterialType.NONE;
 
@@ -10,32 +12,46 @@ public class TileData
     public int height;
     public bool sloped = false;
 
-    public TileColorType color = TileColorType.WHITE;
+    public Vector2 sizeWorld { get { return new Vector2(width / 2f, height / 2f); } }
 
-    public Sprite[] sprite;
-    public GameObject prefab;
-
-    public GameObject minimapGizmo;
+    public TileDataKey(TileMaterialType _material, int _width, int _height, bool _sloped)
+    {
+        material = _material;
+        width = _width;
+        height = _height;
+        sloped = _sloped;
+    }
 
     public override string ToString()
     {
-        return ToString(material, width, height, sloped);
-    }
-
-    public static string ToString(TileMaterialType _material, int _width, int _height, bool _sloped)
-    {
-        return "( " + _material + ", " + _width + ", " + _height + ", " + _sloped + " )";
+        return "( " + material + ", " + width + ", " + height + ", " + sloped + " )";
     }
 
     public override int GetHashCode()
     {
-        return GetHashCode(material, width, height, sloped);
+        return 13*(int)material + 17*width + 31*height + (sloped ? 37 : 0);
+    }
+}
+
+[Serializable]
+public class TileData
+{
+    public TileDataKey key;
+
+    public TileColorType color = TileColorType.WHITE;
+
+    public List<Sprite> sprite;
+    public GameObject prefab;
+
+    public HUDMinimapTileGizmo minimapGizmo;
+
+    public override string ToString()
+    {
+        return key.ToString();
     }
 
-    public static int GetHashCode(TileMaterialType _material, int _width, int _height, bool _sloped)
+    public override int GetHashCode()
     {
-        return (int)_material * 11
-            + _width * 23 + _height * 37
-            + (_sloped ? 53 : 0);
+        return key.GetHashCode();
     }
 }

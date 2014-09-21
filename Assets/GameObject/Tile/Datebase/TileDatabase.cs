@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using System.Collections;
 
@@ -9,12 +10,37 @@ public class TileDatabase : MonoBehaviour
     public List<TileData> editorSteelDatas;
     public List<TileData> editorPaperDatas;
     public List<TileData> editorWoodenDatas;
-    public List<TileData> editorLightOreDatas;
 
     private readonly Hashtable m_TileDatas = new Hashtable();
 
     void Awake()
     {
+        Rebuild();
+    }
+
+    public TileData this[TileDataKey _key]
+    {
+        get
+        {
+            if (m_TileDatas.Count == 0)
+                Rebuild();
+
+            var _hashkey = _key.GetHashCode();
+
+            if (!m_TileDatas.ContainsKey(_hashkey))
+            {
+                Debug.LogWarning("TileDatabase does not have " + _key + ". Return null.");
+                return null;
+            }
+
+            return (TileData)m_TileDatas[_hashkey];
+        }
+    }
+
+    public void Rebuild()
+    {
+        m_TileDatas.Clear();
+
         List<TileData>[] _materialDatas = 
         {
             editorTileDatas,
@@ -22,7 +48,6 @@ public class TileDatabase : MonoBehaviour
             editorSteelDatas,
             editorPaperDatas,
             editorWoodenDatas,
-            editorLightOreDatas,
         };
 
         foreach (var _editorDatas in _materialDatas)
@@ -30,29 +55,34 @@ public class TileDatabase : MonoBehaviour
             foreach (var _tileData in _editorDatas)
             {
 #if DEBUG
-                if (m_TileDatas.ContainsKey(_editorDatas.GetHashCode()))
+                if (m_TileDatas.ContainsKey(_tileData.GetHashCode()))
                 {
-                    Debug.LogError("TileDatabase already have " + _editorDatas + ". Ignore.");
+                    Debug.LogError("TileDatabase already have " + _tileData + ". Ignore.");
                     continue;
                 }
 #endif
 
-                m_TileDatas.Add(_editorDatas.GetHashCode(), _editorDatas);
+                m_TileDatas.Add(_tileData.GetHashCode(), _tileData);
             }
         }
     }
 
-    public TileData Search(TileMaterialType _material, int _width, int _height, bool _sloped = false)
+    public static Color Convert(TileColorType _color)
     {
-        var _hashkey = TileData.GetHashCode(_material, _width, _height, _sloped);
-
-        if (!m_TileDatas.ContainsKey(_hashkey))
+        switch (_color)
         {
-            Debug.LogWarning("TileDatabase does not have (" 
-                + _material + ", "+ _width + ", " + _height + ", " + _sloped + "). Return null.");
-            return null;
+        case TileColorType.WHITE:   return Color.white;
+        case TileColorType.GRAY:    return Color.gray;
+        case TileColorType.BLACK:   return Color.black;
+        case TileColorType.RED:     return Color.red;
+        case TileColorType.YELLOW:  return Color.yellow;
+        case TileColorType.GREEN:   return Color.green;
+        case TileColorType.CYAN:    return Color.cyan;
+        case TileColorType.BLUE:    return Color.blue;
+        case TileColorType.MAGENTA: return Color.magenta;
+        default:
+                Debug.LogWarning("Unknown TileColorType" + _color + ". Return black.");
+                return Color.black;
         }
-
-        return (TileData) m_TileDatas[_hashkey];
     }
 }

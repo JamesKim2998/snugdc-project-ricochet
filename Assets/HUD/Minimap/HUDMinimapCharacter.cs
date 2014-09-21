@@ -13,11 +13,6 @@ public class HUDMinimapCharacter : MonoBehaviour
         Game.Character.postCharacterAdded -= ListenAdd;
     }
 
-    void Update()
-    {
-	
-	}
-
     void ListenAdd(Character _character)
     {
         var _characterData = Database.Character[_character.type];
