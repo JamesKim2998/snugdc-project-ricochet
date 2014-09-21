@@ -14,7 +14,7 @@ public class PlaySFX : MonoBehaviour
 
     public void Play()
     {
-        if (!Global.Sound.isSFXEnabled)
+        if (Global.Sound.isSFXEnabled)
             audio.Play();
 
         if (deleteAfterPlay)
