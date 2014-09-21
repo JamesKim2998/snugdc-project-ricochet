@@ -71,6 +71,9 @@ public class HUDRespawnDelay : MonoBehaviour
 
     void ListenCharacterDead(Character _character)
     {
+        if (!_character.IsMine())
+            return;
+
         if (!Game.Progress.IsState(GameProgress.State.OVER))
         {
             m_TimeLeft = delay;
