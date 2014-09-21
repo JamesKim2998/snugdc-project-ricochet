@@ -10,14 +10,20 @@ public class HUDMinimap : MonoBehaviour
     public Rect mapRect;
     public Vector2 containerSize;
 
+    public UISprite back;
+
     public readonly List<GameObject> gizmos = new List<GameObject>();
 
     private HUDMinimapCharacter m_Character;
 
     void Awake()
     {
-        var _scale = Mathf.Min(containerSize.x/mapRect.size.x, containerSize.y/mapRect.size.y);
-        transform.localScale = new Vector3(_scale, _scale, 1);
+        back.SetDimensions((int) mapRect.width, (int) mapRect.height);
+
+        var _scale = new Vector2(containerSize.x / mapRect.size.x, containerSize.y / mapRect.size.y);
+        var _scaleMin = Mathf.Min(_scale.x, _scale.y);
+
+        transform.localScale = new Vector3(_scaleMin, _scaleMin, 1);
 
         var _origin = -mapRect.min - mapRect.size / 2;
 

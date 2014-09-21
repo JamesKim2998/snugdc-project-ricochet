@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapGizmo: {fileID: 11400000, guid: 83e4a132721338543b7b85a45af94b64, type: 2}
-  minimapGizmoIcon: {fileID: 21300000, guid: dcfcb5b38e3f07445be8bb32f33c09e5, type: 3}
+  minimapGizmoIcon: hud_minimap_gizmo_character_blue
   colorTheme: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11400002
 MonoBehaviour:
