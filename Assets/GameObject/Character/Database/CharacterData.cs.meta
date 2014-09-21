@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 897db62c10b14444196575d25675aff2
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - minimapGizmo: {fileID: 11400000, guid: 83e4a132721338543b7b85a45af94b64, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

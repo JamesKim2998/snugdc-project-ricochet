@@ -32,7 +32,7 @@ public class CharacterSkin : MonoBehaviour
 			subLeg,
 		};
 
-		Dictionary<CharacterSkinPart, SpriteRenderer> _rendererDictionary = new Dictionary<CharacterSkinPart, SpriteRenderer> {
+		var _rendererDictionary = new Dictionary<CharacterSkinPart, SpriteRenderer> {
 			{ head, _renderer.head }, 
 			{ body, _renderer.body }, 
 			{ mainArm, _renderer.mainArm }, 
@@ -52,7 +52,7 @@ public class CharacterSkin : MonoBehaviour
 		_angle.z = _skin.angle;
 		_renderer.transform.localEulerAngles = _angle;
 
-		Vector3 _scale = new Vector3(_skin.scale.x, _skin.scale.y, 1);
+		var _scale = new Vector3(_skin.scale.x, _skin.scale.y, 1);
 		_renderer.transform.localScale = _scale;
 	}
 

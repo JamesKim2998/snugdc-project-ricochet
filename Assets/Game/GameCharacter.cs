@@ -65,13 +65,16 @@ public partial class GameCharacter : MonoBehaviour
     public Action<Character> postCharacterDead;
 
     private readonly Dictionary<int, Character> m_Characters = new Dictionary<int, Character>();
- 
+    public Action<Character> postCharacterAdded;
+    public Action<Character> postCharacterRemoved;
+
     public void Add(Character _character)
     {
         if (! m_Characters.ContainsKey(_character.id))
         {
             m_Characters.Add(_character.id, _character);
             _character.GetComponent<Destroyable>().postDestroy += Remove;
+            if (postCharacterAdded != null) postCharacterAdded(_character);
         }
         else
         {
@@ -88,8 +91,10 @@ public partial class GameCharacter : MonoBehaviour
     {
         if (m_Characters.ContainsKey(_characterID))
         {
-            m_Characters[_characterID].GetComponent<Destroyable>().postDestroy -= Remove;
+            var _character = m_Characters[_characterID];
+            _character.GetComponent<Destroyable>().postDestroy -= Remove;
             m_Characters.Remove(_characterID);
+            if (postCharacterRemoved != null) postCharacterRemoved(_character);
         }
         else 
             Debug.LogWarning("Character does not exist! Ignore.");

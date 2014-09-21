@@ -70,11 +70,12 @@ public class CharacterSpawner : MonoBehaviour
 
         _character.id = _characterID;
         _character.ownerPlayer = _playerInfo.guid;
+        _character.type = _playerInfo.characterSelected;
 
         _character.hitEnabled = false;
         _character.Invoke("EnableHit", invinsibleTime);
 
-        Database.Skin[_playerInfo.characterSelected].Apply(_character.renderer_);
+        Database.Skin[_character.type].Apply(_character.renderer_);
 
         if (postSpawn != null) postSpawn(this, _character);
 

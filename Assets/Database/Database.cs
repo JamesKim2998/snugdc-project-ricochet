@@ -6,6 +6,9 @@ public class Database : Singleton<Database>
     public GameMapDatabase gameMap;
     public static GameMapDatabase GameMap { get { return Instance.gameMap; } }
 
+    public CharacterDatabase character;
+    public static CharacterDatabase Character { get { return Instance.character; } }
+
 	public CharacterSkinDatabase skin;
 	public static CharacterSkinDatabase Skin { get { return Instance.skin; } }
 
@@ -19,6 +22,9 @@ public class Database : Singleton<Database>
 	{
         gameMap = ((GameObject)Instantiate(_def.gameMapPrf.gameObject)).GetComponent<GameMapDatabase>();
         gameMap.transform.parent = gameObject.transform;
+
+        character = ((GameObject)Instantiate(_def.characterPrf.gameObject)).GetComponent<CharacterDatabase>();
+        character.transform.parent = gameObject.transform;
 
 		skin = ((GameObject) Instantiate(_def.skinPrf.gameObject)).GetComponent<CharacterSkinDatabase>();
 		skin.transform.parent = gameObject.transform;

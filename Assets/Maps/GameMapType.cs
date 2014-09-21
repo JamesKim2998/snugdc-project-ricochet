@@ -1,5 +1,4 @@
-﻿using Assets.Database;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class GameMapType : MonoBehaviour, IDatabaseTypeComponent<Scene>
