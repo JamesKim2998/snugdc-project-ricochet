@@ -6,5 +6,5 @@ PhysicsMaterial2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: character_upper
-  friction: .0199999996
+  friction: 0
   bounciness: .200000003

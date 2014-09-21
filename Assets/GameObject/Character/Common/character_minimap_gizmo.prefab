@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75f2a9587056284d95be45b636808a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 11400002}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,7 +105,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mSprite: {fileID: 21300000, guid: c301035c9c1b1044d82b36ac2c2651d5, type: 3}
+  mSprite: {fileID: 21300000, guid: 3c4552ff6f688d3408a788cfacffd740, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   nextSprite: {fileID: 0}

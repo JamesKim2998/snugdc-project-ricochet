@@ -18,7 +18,7 @@ public class DestroyableObserver<T> : MonoBehaviour where T: Component
                 m_Target.postDestroy -= ListenDestroy;
 
             var _old = target;
-            m_Target = value.GetComponent<Destroyable>();
+            m_Target = value ? value.GetComponent<Destroyable>() : null;
 
             if (m_Target)
             {

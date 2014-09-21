@@ -111,9 +111,6 @@ public class Ricochet : MonoBehaviour
 
         if (_rayResult.collider)
 		{
-		    _direction = Vector3.Reflect(transform.right, _rayResult.normal);
-            transform.LookAt(transform.position + _direction);
-
 		    var _velocity = transform.rigidbody2D.velocity;
 		    transform.rigidbody2D.velocity = Vector3.Reflect(_velocity, _rayResult.normal);
 		}
