@@ -6,12 +6,35 @@ public class GameHUD : MonoBehaviour
 {
 	private GameHUDDef m_Def;
 
+    private static HUDLayer s_MainLayer;
+    public static HUDLayer mainLayer
+    {
+        get { return s_MainLayer; }
+        set
+        {
+            if (mainLayer == value)
+                return;
+
+            if (s_MainLayer != null)
+            {
+                Debug.LogWarning("HUD main layer does already exist! Ignore.");
+                return;
+            }
+
+            s_MainLayer = value;
+        }
+    }
+
 	public GameObject chatscreen;
 	public HUDScoreBoard scoreBoard;
 
     public HUDResultBoard resultBoard { get; private set; }
 
     private GameObject m_ModeHUD;
+
+    void Awake()
+    {
+    }
 
 	void Start()
 	{

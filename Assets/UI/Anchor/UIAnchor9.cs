@@ -8,6 +8,7 @@ public class UIAnchor9 : MonoBehaviour {
     public GameObject AddPrf(GameObject _prf, Anchor9 _anchor)
     {
         var _go = (GameObject) Instantiate(_prf);
-        return null;
+        TransformHelper.SetParentWithoutScale(_go, anchors[(int) _anchor].gameObject);
+        return _go;
     }
 }

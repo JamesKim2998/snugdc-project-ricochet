@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: game_mode_test
+  m_Name: hud_ammo_anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,11 +36,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d63aacb6db51f4ab416ae4b3f4c49f, type: 3}
+  m_Script: {fileID: 11500000, guid: afafedddafb68b54597f905763c0f36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 1
-  overrideMode: 0
+  anchor9: {fileID: 0}
+  prefab: {fileID: 100002, guid: bdb39733d693a724cbdcedd0f0f79c82, type: 2}
+  anchor: 6
+  offset: {x: 31, y: 27}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
