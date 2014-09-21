@@ -34,7 +34,7 @@ public class GameModeDeathMatchDef : GameModeDef
     public GameModeDeathMatchDef TimeLimit(int _var) { timeLimit = _var; return this; }
 
     public static int defaultRespawnCount = 10;
-    public static int defaultRespawnDelay = 5;
+    public static int defaultRespawnDelay = 3;
     public static int defaultTimeLimit = 300;
 }
 
@@ -68,7 +68,7 @@ public class GameModeDeathMatch
 		type = GameModeType.DEATH_MATCH;
 	    timeLimit = 300;
 	    respawnLimit = 10;
-	    respawnDelay = 5;
+	    respawnDelay = 3;
 	}
 	
 	public override void Setup ()
@@ -170,7 +170,6 @@ public class GameModeDeathMatch
 
 	void SpawnCharacter()
 	{
-//		Debug.Log("SpawnCharacter");
 		var _character = Game.Level.characterSpawners.Spawn();
 		
 		if (_character != null) 
@@ -182,9 +181,8 @@ public class GameModeDeathMatch
 	
 	void ListenCharacterDead(Character _character)
 	{
-//		Debug.Log("Character Dead");
 		if (Game.Progress.IsState(GameProgress.State.RUNNING))
-			Invoke("SpawnCharacter", 0.5f);
+			Invoke("SpawnCharacter", respawnDelay);
 	}
 
 	void ListenTotalDeathChanged(SetCounter<int> _statistic)

@@ -53,8 +53,9 @@ public class HUDPlayerName : MonoBehaviour
 	void Update ()
 	{
 	    if (!character) return;
-        var _characterPosition = Game.Camera_.camera.WorldToScreenPoint(m_Character.transform.position);
-        nameLabel.transform.localPosition = new Vector3(_characterPosition.x + offset.x, _characterPosition.y + offset.y);
+        var _viewportPosition = Game.Camera_.camera.WorldToViewportPoint(m_Character.transform.position);
+        nameLabel.transform.position = GameHUD.mainLayer.camera_.ViewportToWorldPoint(_viewportPosition);
+        nameLabel.transform.localPosition += new Vector3(offset.x , offset.y);
 	}
 
     void ListenCharacterChanged(Character _character)

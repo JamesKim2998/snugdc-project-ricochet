@@ -11,10 +11,34 @@ public class HUDGameModeDeathMatch : MonoBehaviour
     private readonly List<GameObject> m_HUDNonAnchoreds = new List<GameObject>();
     private readonly List<GameObject> m_HUDs = new List<GameObject>();
 
+    private bool m_IsSetuped = false;
+
     void Start()
     {
+        TrySetup();
+    }
+
+    bool TrySetup()
+    {
+        if (m_IsSetuped) 
+            return true;
+
+        if (Game.Mode)
+        {
+            Setup();
+            return true;
+        }
+        else
+        {
+            Invoke("TrySetup", 0.5f);
+            return false;
+        }
+    }
+
+    void Setup()
+    {
         var _mode = Game.Mode as GameModeDeathMatch;
-        if (_mode)
+        if (_mode.type != GameModeType.DEATH_MATCH)
         {
             Debug.LogWarning("Mode should be " + GameModeType.DEATH_MATCH 
                 + ", but is now " + Game.Mode.type + " not match. Continue anyway.");
@@ -37,28 +61,6 @@ public class HUDGameModeDeathMatch : MonoBehaviour
             _hud.transform.localScale = Vector3.one;
             m_HUDs.Add(_hud);
 	    }
-
-	    Game.Character.postCharacterDead += ListenCharacterDead;
 	}
 
-    void OnDestroy()
-    {
-        Game.Character.postCharacterDead -= ListenCharacterDead;
-    }
-
-    void ListenCharacterDead(Character _character)
-    {
-        if (!Game.Progress.IsState(GameProgress.State.OVER))
-        {
-            var _mode = Game.Mode as GameModeDeathMatch;
-            if (_mode)
-            {
-
-            }
-            else
-            {
-                
-            }
-        }
-    }
 }

@@ -37,7 +37,7 @@ public class GameModeTest
 		type = GameModeType.TEST;
 	    timeLimit = 300;
         respawnLimit = 10;
-        respawnDelay = 5;
+        respawnDelay = 1;
     }
 
 	public override void Setup ()
@@ -120,7 +120,7 @@ public class GameModeTest
 	
 	void ListenCharacterDead(Character _character)
 	{
-		Invoke("SpawnCharacter", 0.5f);
+		Invoke("SpawnCharacter", respawnDelay);
 	}
 }
 

@@ -12,7 +12,7 @@ public class CharacterSpawner : MonoBehaviour
     public Action<CharacterSpawner, Character> postSpawn;
 	public Action<CharacterSpawner, Character> postDestroy;
 
-	public float invinsibleTime = 1.5f;
+	public float invinsibleTime = 1.0f;
 
 	private WeakReference m_CharacterRef;
 

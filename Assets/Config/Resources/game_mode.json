@@ -2,8 +2,9 @@
 	"TEST": {},
 	
 	"DEATH_MATCH": {
-		"respawn_count": 110,
-		"time_limit": 3010
+		"respawn_delay": 3,
+		"respawn_count": 10,
+		"time_limit": 300
 	}
 	
 }
