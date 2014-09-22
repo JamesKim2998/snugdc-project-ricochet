@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(UIGrid))]
@@ -23,13 +22,11 @@ public class UIRoomPlayerEntries : MonoBehaviour
 		}
 
 		Global.Player().postConnected += ListenPlayerConnected;
-		Global.Ready().postPoll += ListenPollReadyInfo;
 	}
 
 	void OnDestroy()
 	{
 		Global.Player().postConnected -= ListenPlayerConnected;
-		Global.Ready().postPoll -= ListenPollReadyInfo;
 	}
 		
 	void Add(string _player)
@@ -83,8 +80,4 @@ public class UIRoomPlayerEntries : MonoBehaviour
 			Remove(_player);
 	}
 
-	void ListenPollReadyInfo()
-	{
-		// var _newPlayers = new Dictionary<>;
-	}
 }

@@ -81,9 +81,7 @@ public class Global : Singleton<Global>
 	}
 
 	void Start () 
-	{
-		ready.Start ();
-	}
+	{}
 
 	bool m_IsLoaded = false;
 

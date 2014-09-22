@@ -24,14 +24,14 @@ public class UIStartButton : MonoBehaviour
 
 		Global.Server().postServerInitialized += ListenServerInitialized;
 		Global.Player().postConnected += ListenPlayerConnected;
-		Global.Ready().postReady += ListenReady;
+        Global.Player().postReady += ListenReady;
 	}
 
 	void OnDestroy()
 	{
 		Global.Server().postServerInitialized -= ListenServerInitialized;
 		Global.Player().postConnected -= ListenPlayerConnected;
-		Global.Ready().postReady -= ListenReady;
+        Global.Player().postReady -= ListenReady;
 	}
 
 	void StartGame()
@@ -80,12 +80,8 @@ public class UIStartButton : MonoBehaviour
 	void ListenReady(string _player, bool _ready)
 	{
 		if (_ready) 
-		{
 			Refresh();
-		}
 		else
-		{
 			isStartable = false;
-		}
 	}
 }

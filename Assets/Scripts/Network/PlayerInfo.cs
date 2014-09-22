@@ -24,8 +24,11 @@ public class PlayerInfo
         }
     }
 
-    public readonly ObservableValue<CharacterType> characterSelected 
-        = new ObservableValue<CharacterType>();
+    public readonly ObservableValue<bool> isReady
+        = new ObservableValue<bool>(false);
+
+    public readonly ObservableValue<CharacterType> characterSelected
+        = new ObservableValue<CharacterType>(CharacterType.BLUE);
 
     [NonSerialized]
     public Action<PlayerInfo> postNameChanged;
@@ -36,12 +39,17 @@ public class PlayerInfo
     public PlayerInfo(string _guid)
     {
         guid = _guid;
-        characterSelected.val = CharacterType.BLUE;
 
         if (isMine)
             m_Name = PlayerPrefs.GetString("player_name", "team_ricochet");
 
         postNameChanged += delegate { if (postChanged != null) postChanged(this); };
+        isReady.postChanged += delegate { if (postChanged != null) postChanged(this); };
         characterSelected.postChanged += delegate { if (postChanged != null) postChanged(this); };
+    }
+
+    public static implicit operator string(PlayerInfo _playerInfo)
+    {
+        return _playerInfo == null ? null : _playerInfo.guid;
     }
 }

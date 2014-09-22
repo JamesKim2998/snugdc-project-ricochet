@@ -31,12 +31,12 @@ public class UIRoomPlayerEntry : MonoBehaviour
 	void Start()
 	{
 		if (readyTweens == null) readyTweens = new List<UITweener>();
-		Global.Ready().postReady += ListenReady;
+		Global.Player().postReady += ListenReady;
 	}
 
 	void OnDestroy()
 	{
-		Global.Ready().postReady -= ListenReady;
+        Global.Player().postReady -= ListenReady;
 		player = null;
 	}
 

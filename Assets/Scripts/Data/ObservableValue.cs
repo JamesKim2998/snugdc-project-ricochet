@@ -11,18 +11,30 @@ public class ObservableValue<T> {
 		
 		set {
 			if (m_Value.Equals( value) ) return;
+
 			old = m_Value;
 			m_Value = value;
-			if (postChanged != null) 
-				postChanged(this);
+
+		    if (postChanged != null)
+		    {
+                isDirty = true;
+		        postChanged(this);
+                isDirty = false;
+            }
 		}
 	}
 
     public T old { get; private set; }
 
+    public bool isDirty { get; private set; }
+
     [NonSerialized]
     public Action<ObservableValue<T>> postChanged;
-	
+
+    public ObservableValue() { } 
+
+    public ObservableValue(T _init) { m_Value = _init; }
+
 	public static implicit operator T(ObservableValue<T> _value) {
 		return _value.val;
 	}

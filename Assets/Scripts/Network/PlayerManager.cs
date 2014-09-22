@@ -1,28 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<string, PlayerInfo>>
 {
+    #region player infos
     public Dictionary<string, PlayerInfo> players { get; private set; }
-
-    public Action<bool, string> postConnected;
-	public Action<PlayerInfo> postSetuped;
-	public Action<PlayerInfo> postInfoChanged;
-
-    public PlayerInfo mine { get; private set; }
-
-    private PlayerInfo m_Server;
-	public PlayerInfo server {
-        get { return m_Server ?? (m_Server = Get(Global.Server().server)); }
-	}
-
-	public bool IsMine(PlayerInfo _player) { return _player.guid == mine.guid; }
-	public bool IsServer(PlayerInfo _player ) { if (server != null) return _player.guid == server.guid; return false;}
-	public bool IsClient(PlayerInfo _player ) { if (server != null) return _player.guid != server.guid; return false;}
 
     public PlayerInfo this[string _player]
     {
@@ -34,6 +18,29 @@ public class PlayerManager : MonoBehaviour
                 : null;
         }
     }
+    #endregion
+
+    #region predefined players
+    public PlayerInfo mine { get; private set; }
+
+    private PlayerInfo m_Server;
+	public PlayerInfo server {
+        get { return m_Server ?? (m_Server = Get(Global.Server().server)); }
+	}
+
+	public bool IsMine(PlayerInfo _player) { return _player.guid == mine.guid; }
+	public bool IsServer(PlayerInfo _player ) { if (server != null) return _player.guid == server.guid; return false;}
+	public bool IsClient(PlayerInfo _player ) { if (server != null) return _player.guid != server.guid; return false;}
+
+    #endregion
+
+    #region events
+    public Action<bool, string> postConnected;
+    public Action<PlayerInfo> postSetuped;
+
+    public Action<PlayerInfo> postInfoChanged;
+    public Action<string, bool> postReady;
+    #endregion
 
     void Awake()
     {
@@ -64,6 +71,7 @@ public class PlayerManager : MonoBehaviour
 	        : null;
 	}
 
+	#region add, remove
 	PlayerInfo Add(string _player)
 	{
 	    PlayerInfo _playerInfo;
@@ -81,13 +89,19 @@ public class PlayerManager : MonoBehaviour
 
     void Add(PlayerInfo _playerInfo)
     {
-        if (players.ContainsKey(_playerInfo.guid))
-        {
-            Debug.LogWarning("Player already exists! Ignore.");
-            return;
-        }
+        PlayerInfo _playerInfoOld = null;
 
-        players[_playerInfo.guid] = _playerInfo;
+        if (players.TryGetValue(_playerInfo.guid, out _playerInfo))
+        {
+            Debug.LogWarning("Player already exists! Sync.");
+            Copy(_playerInfoOld, _playerInfo);
+        }
+        else
+        {
+            players.Add(_playerInfo.guid, _playerInfo);
+            m_ListenReadyChanged[_playerInfo.guid] = _value => postReady(_playerInfo.guid, _value.val);
+            _playerInfo.isReady.postChanged += m_ListenReadyChanged[_playerInfo.guid];
+        }
     }
 
 	void Remove(string _player)
@@ -103,9 +117,16 @@ public class PlayerManager : MonoBehaviour
 	    if (_playerInfo.connected)
 	        Debug.LogWarning("Trying to remove connected player. Sure?");
 
-		players.Remove(_player);
+        players.Remove(_player);
+        _playerInfo.isReady.postChanged -= m_ListenReadyChanged[_playerInfo.guid];
+	    m_ListenReadyChanged.Remove(_playerInfo.guid);
 	}
 
+    private readonly Dictionary<string, Action<ObservableValue<bool>>> m_ListenReadyChanged
+        = new Dictionary<string, Action<ObservableValue<bool>>>();
+	#endregion
+
+    #region connect, disconnect
     void Connect(PlayerInfo _playerInfo)
     {
         if (_playerInfo.connected)
@@ -129,23 +150,31 @@ public class PlayerManager : MonoBehaviour
         _playerInfo.connected = false;
         if (postConnected != null) postConnected(false, _playerInfo.guid);   
     }
+    #endregion
 
     static void Copy(PlayerInfo _dst, PlayerInfo _org)
     {
+        if (_dst == _org)
+        {
+            Debug.LogWarning("Trying to copy into same value. Ignore.");
+            return;
+        }
+
         _dst.name = _org.name;
+        _dst.isReady.val = _org.isReady.val;
         _dst.characterSelected.val = _org.characterSelected.val;
     }
 
+
+	#region handshake
 	void ListenConnectionSetuped() 
 	{
 	    if (! players.ContainsKey(mine.guid))
             Add(mine);
 
 	    Connect(mine);
-	    
-		if (postSetuped != null) postSetuped(mine);
 
-		UpdateInfo();
+        networkView.RPC("PlayerManager_RequestPlayerConnected", RPCMode.Others, Network.player);
 	}
 
 	void ListenDisconnectedFromServer()
@@ -157,26 +186,26 @@ public class PlayerManager : MonoBehaviour
 	}
 
 	void ListenServerInitialized()
-    {
-		networkView.RPC("PlayerManager_OnPlayerConnected", RPCMode.All, Network.player.guid);
-	}
-
-	void OnPlayerConnected(NetworkPlayer _player) 
 	{
-		if (Network.isServer)
-			networkView.RPC("PlayerManager_OnPlayerConnected", RPCMode.All, _player.guid);
+	    ListenConnectionSetuped();
 	}
 
 	[RPC]
-	void PlayerManager_OnPlayerConnected(string _player)
+	void PlayerManager_RequestPlayerConnected(NetworkPlayer _player)
 	{
-	    var _playerInfo = Get(_player) ?? Add(_player);
-
+        var _playerInfo = Get(_player.guid) ?? Add(_player.guid);
 	    Connect(_playerInfo);
-
-		if (Network.player.guid == _player)
-			RefreshPlayerInfo();
+	    if (server == _player.guid)
+            networkView.RPC("PlayerMangaer_ResponseOnPlayerConnected", _player);
 	}
+
+    [RPC]
+    void PlayerMangaer_ResponseOnPlayerConnected()
+    {
+        if (postSetuped != null) postSetuped(mine);
+        UpdateInfo();
+        RefreshPlayerInfo();
+    }
 
 	void OnPlayerDisconnected(NetworkPlayer _player)
 	{
@@ -196,8 +225,9 @@ public class PlayerManager : MonoBehaviour
 
         Disconnect(_playerInfo);
 	}
-	
-	void RefreshPlayerInfo()
+    #endregion
+
+    void RefreshPlayerInfo()
 	{
 		if (Network.isServer) return;
 		networkView.RPC("PlayerManager_RequestRefreshPlayerInfo", RPCMode.Server, Network.player);
@@ -224,39 +254,35 @@ public class PlayerManager : MonoBehaviour
             Remove(_playerKV.Key);
 		}
 
-		foreach (var _newPlayerKV in _newPlayerInfos)
+		foreach (var _newPlayerKV in _newPlayerInfos
+            .Where(_newPlayerKV => Network.player.guid != _newPlayerKV.Value.guid))
 		{
-			if (Network.player.guid == _newPlayerKV.Value.guid) continue;
+		    PlayerInfo _player;
+		    if (!players.TryGetValue(_newPlayerKV.Key, out _player)) 
+		    {
+		        _player = _newPlayerKV.Value;
+		        players.Add(_player.guid, _player);
 
-			var _player = players.ContainsKey(_newPlayerKV.Key) 
-				? players[_newPlayerKV.Key]
-				: null;
+		        if (_player.connected)
+		        {
+		            _player.connected = false;
+		            Connect(_player);
+		        }
+		    }
+		    else
+		    {
+		        Copy(_player, _newPlayerKV.Value);
 
-			if (_player == null) 
-			{
-				_player = _newPlayerKV.Value;
-				players.Add(_player.guid, _player);
+		        if (_player.connected != _newPlayerKV.Value.connected)
+		        {
+		            if (_newPlayerKV.Value.connected)
+		                Connect(_player);
+		            else
+		                Disconnect(_player);
+		        }
+		    }
 
-			    if (_player.connected)
-			    {
-			        _player.connected = false;
-                    Connect(_player);
-                }
-			}
-			else
-			{
-                Copy(_player, _newPlayerKV.Value);
-
-			    if (_player.connected != _newPlayerKV.Value.connected)
-			    {
-			        if (_newPlayerKV.Value.connected)
-                        Connect(_player);
-			        else
-                        Disconnect(_player);
-			    }
-			}
-
-			if (postSetuped != null) postSetuped(_player);
+		    if (postSetuped != null) postSetuped(_player);
 		}
 	}
 
@@ -306,5 +332,6 @@ public class PlayerManager : MonoBehaviour
 		NetworkSerializer.Deserialize(_playerInfoSerial, out _playerInfo);
 		UpdateInfoLocal (_playerInfo);
 	}
+
 }
 
