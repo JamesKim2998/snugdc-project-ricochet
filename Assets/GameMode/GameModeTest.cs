@@ -40,6 +40,11 @@ public class GameModeTest
         respawnDelay = 1;
     }
 
+    void Start()
+    {
+        Global.Server().postServerInitialized += ListenServerInitialized;
+    }
+
 	public override void Setup ()
 	{
 		base.Setup();
@@ -55,7 +60,7 @@ public class GameModeTest
 			ListenGameRun();
 		}
 
-		Game.Progress.postStart += ListenGameStart;
+        Game.Progress.postStart += ListenGameStart;
 		Game.Progress.postRun += ListenGameRun;
 
 		TryToRunGame();
@@ -63,7 +68,8 @@ public class GameModeTest
 
 	void OnDestroy()
 	{
-		Game.Progress.postStart -= ListenGameStart;
+        Global.Server().postServerInitialized -= ListenServerInitialized;
+        Game.Progress.postStart -= ListenGameStart;
 		Game.Progress.postRun -= ListenGameRun;
 	}
 
@@ -88,7 +94,7 @@ public class GameModeTest
 		m_IsLevelInited = true;
 	}
 
-	void OnServerInitialized() 
+	void ListenServerInitialized() 
 	{
 		TryToRunGame();
 	}

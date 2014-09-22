@@ -70,7 +70,12 @@ public class GameModeDeathMatch
 	    respawnLimit = 10;
 	    respawnDelay = 3;
 	}
-	
+
+    void Start()
+    {
+        Global.Server().postServerInitialized += ListenServerInitialized;
+    }
+
 	public override void Setup ()
 	{
 		base.Setup();
@@ -85,15 +90,24 @@ public class GameModeDeathMatch
 			ListenGameStart();
 			ListenGameRun();
 		}
-		
-		Game.Progress.postStart += ListenGameStart;
+
+        Game.Progress.postStart += ListenGameStart;
 		Game.Progress.postRun += ListenGameRun;
 		Game.Progress.postOver += ListenGameOver;
 		Game.Statistic.total.death.postChanged += ListenTotalDeathChanged;
 
 		TryToRunGame();
 	}
-	
+
+    void OnDestroy()
+    {
+        Global.Server().postServerInitialized -= ListenServerInitialized;
+        Game.Progress.postStart -= ListenGameStart;
+        Game.Progress.postRun -= ListenGameRun;
+        Game.Progress.postOver -= ListenGameOver;
+        Game.Statistic.total.death.postChanged -= ListenTotalDeathChanged;
+    }
+
 	public override void Init(GameModeDef _def)
 	{
 		base.Init(_def);
@@ -118,14 +132,6 @@ public class GameModeDeathMatch
 		}
 	}
 
-	void OnDestroy()
-	{
-		Game.Progress.postStart -= ListenGameStart;
-		Game.Progress.postRun -= ListenGameRun;
-		Game.Progress.postOver -= ListenGameOver;
-		Game.Statistic.total.death.postChanged -= ListenTotalDeathChanged;
-	}
-
     static void TryToRunGame()
 	{
 		if (Network.isServer )
@@ -143,7 +149,7 @@ public class GameModeDeathMatch
 		m_IsLevelInited = true;
 	}
 	
-	void OnServerInitialized() 
+	void ListenServerInitialized() 
 	{
 		TryToRunGame();
 	}
