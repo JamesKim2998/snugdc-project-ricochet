@@ -91,7 +91,7 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
     {
         PlayerInfo _playerInfoOld = null;
 
-        if (players.TryGetValue(_playerInfo.guid, out _playerInfo))
+        if (players.TryGetValue(_playerInfo.guid, out _playerInfoOld))
         {
             Debug.LogWarning("Player already exists! Sync.");
             Copy(_playerInfoOld, _playerInfo);
@@ -171,10 +171,18 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 	{
 	    if (! players.ContainsKey(mine.guid))
             Add(mine);
-
 	    Connect(mine);
 
-        networkView.RPC("PlayerManager_RequestPlayerConnected", RPCMode.Others, Network.player);
+	    RequestPlayerConnected(() =>
+	    {
+	        UpdateInfo(() =>
+	        {
+	            RefreshPlayerInfo(() =>
+	            {
+	                if (postSetuped != null) postSetuped(mine);
+	            });
+	        });
+	    });
 	}
 
 	void ListenDisconnectedFromServer()
@@ -190,21 +198,32 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 	    ListenConnectionSetuped();
 	}
 
+    public bool m_IsPlayerConnecting = false;
+    private Action m_PlayerConnectedCallbacks;
+
+    void RequestPlayerConnected(Action _callback)
+    {
+        m_PlayerConnectedCallbacks += _callback;
+        if (m_IsPlayerConnecting) return;
+        m_IsPlayerConnecting = true;
+        networkView.RPC("PlayerManager_RequestPlayerConnected", RPCMode.Others, Network.player);
+    }
+
 	[RPC]
 	void PlayerManager_RequestPlayerConnected(NetworkPlayer _player)
 	{
         var _playerInfo = Get(_player.guid) ?? Add(_player.guid);
 	    Connect(_playerInfo);
-	    if (server == _player.guid)
+	    if (server == Network.player.guid)
             networkView.RPC("PlayerMangaer_ResponseOnPlayerConnected", _player);
 	}
 
     [RPC]
     void PlayerMangaer_ResponseOnPlayerConnected()
     {
-        if (postSetuped != null) postSetuped(mine);
-        UpdateInfo();
-        RefreshPlayerInfo();
+        m_IsPlayerConnecting = false;
+        if (m_PlayerConnectedCallbacks != null) m_PlayerConnectedCallbacks();
+        m_PlayerConnectedCallbacks = null;
     }
 
 	void OnPlayerDisconnected(NetworkPlayer _player)
@@ -227,111 +246,155 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 	}
     #endregion
 
-    void RefreshPlayerInfo()
+    private bool m_IsRefreshingPlayerInfo = false;
+    private Action m_RefreshPlayerInfoCallback;
+
+    void RefreshPlayerInfo(Action _callback)
 	{
-		if (Network.isServer) return;
-		networkView.RPC("PlayerManager_RequestRefreshPlayerInfo", RPCMode.Server, Network.player);
+        if (Network.isServer)
+        {
+            if (_callback != null) _callback();
+            return;
+        }
+
+        m_RefreshPlayerInfoCallback += _callback;
+        if (m_IsRefreshingPlayerInfo) return;
+        m_IsRefreshingPlayerInfo = true;
+        networkView.RPC("PlayerManager_RequestRefreshPlayerInfo", RPCMode.Server, Network.player);
 	}
 	
 	[RPC]
 	void PlayerManager_RequestRefreshPlayerInfo(NetworkPlayer _player)
 	{
-		var _playerInfosStr = NetworkSerializer.Serialize(players);
-		networkView.RPC("PlayerManager_ResponseRefreshPlayerInfo", _player, _playerInfosStr);
+        var _idx = -1;
+        var _cnt = players.Count;
+	    foreach (var _playerInfo in players)
+	    {
+	        ++_idx;
+            if (_playerInfo.Value.guid == Network.player.guid) return;
+            var _playerInfoStr = NetworkSerializer.Serialize(_playerInfo.Value);
+            networkView.RPC("PlayerManager_ResponseRefreshPlayerInfo", _player, _playerInfoStr, _idx, _cnt);
+	    }
 	}
 
 	[RPC]
-	void PlayerManager_ResponseRefreshPlayerInfo(string _playerInfosStr)
+    void PlayerManager_ResponseRefreshPlayerInfo(string _playerInfoStr, int _idx, int _cnt)
 	{
-		Dictionary<string, PlayerInfo> _newPlayerInfos;
-		NetworkSerializer.Deserialize(_playerInfosStr, out _newPlayerInfos);
+		PlayerInfo _newPlayerInfo;
+		NetworkSerializer.Deserialize(_playerInfoStr, out _newPlayerInfo);
 
-		foreach (var _playerKV in players
-            .Where(_playerKV => Network.player.guid != _playerKV.Key)
-            .Where(_playerKV => ! _newPlayerInfos.ContainsKey(_playerKV.Key)))
-		{
-            Disconnect(_playerKV.Value);
-            Remove(_playerKV.Key);
-		}
+// 		foreach (var _playerKV in players
+//             .Where(_playerKV => Network.player.guid != _playerKV.Key)
+//             .Where(_playerKV => ! _newPlayerInfos.ContainsKey(_playerKV.Key)))
+// 		{
+//             Disconnect(_playerKV.Value);
+//             Remove(_playerKV.Key);
+// 		}
 
-		foreach (var _newPlayerKV in _newPlayerInfos
-            .Where(_newPlayerKV => Network.player.guid != _newPlayerKV.Value.guid))
+// 		foreach (var _newPlayerKV in _newPlayerInfos
+//             .Where(_newPlayerKV => Network.player.guid != _newPlayerKV.Value.guid))
+// 		{
+
+	    if (_newPlayerInfo.guid == Network.player.guid)
+	    {
+            Debug.LogWarning("Trying to refresh self. Ignore.");
+	        return;
+	    }
+
+	    PlayerInfo _player;
+        if (!players.TryGetValue(_newPlayerInfo.guid, out _player)) 
 		{
-		    PlayerInfo _player;
-		    if (!players.TryGetValue(_newPlayerKV.Key, out _player)) 
+            _player = _newPlayerInfo;
+            players.Add(_player.guid, _player);
+
+            if (_player.connected)
 		    {
-		        _player = _newPlayerKV.Value;
-		        players.Add(_player.guid, _player);
-
-		        if (_player.connected)
-		        {
-		            _player.connected = false;
-		            Connect(_player);
-		        }
+                _player.connected = false;
+		        Connect(_player);
 		    }
-		    else
-		    {
-		        Copy(_player, _newPlayerKV.Value);
-
-		        if (_player.connected != _newPlayerKV.Value.connected)
-		        {
-		            if (_newPlayerKV.Value.connected)
-		                Connect(_player);
-		            else
-		                Disconnect(_player);
-		        }
-		    }
-
-		    if (postSetuped != null) postSetuped(_player);
-		}
-	}
-
-	public void UpdateInfo()
-	{
-		if (Network.peerType == NetworkPeerType.Disconnected)
-		{
-			UpdateInfoLocal(mine);
 		}
 		else
 		{
+            Copy(_player, _newPlayerInfo);
+
+            if (_player.connected != _newPlayerInfo.connected)
+		    {
+                if (_newPlayerInfo.connected)
+		            Connect(_player);
+		        else
+		            Disconnect(_player);
+		    }
+		}
+
+        if (postSetuped != null) postSetuped(_player);
+
+	    if (_idx == _cnt - 1)
+	    {
+            m_IsRefreshingPlayerInfo = false;
+	        if (m_RefreshPlayerInfoCallback != null) m_RefreshPlayerInfoCallback();
+            m_RefreshPlayerInfoCallback = null;
+        }
+	}
+
+    private bool m_IsUpdatingInfo = false;
+    private Action m_UpdateInfoCallbacks;
+
+	public void UpdateInfo(Action _callback)
+	{
+		if (Network.isServer 
+            || Network.peerType == NetworkPeerType.Disconnected)
+		{
+            if (_callback != null) _callback();
+		}
+		else
+		{
+            m_UpdateInfoCallbacks += _callback;
+		    if (m_IsUpdatingInfo) return;
+            m_IsUpdatingInfo = true;
 			var _playerInfoSerial = NetworkSerializer.Serialize(mine);
-			networkView.RPC("PlayerManager_UpdateInfo", RPCMode.All, _playerInfoSerial);
+            networkView.RPC("PlayerManager_RequestUpdateInfo", RPCMode.All, Network.player, _playerInfoSerial);
 		}
 	}
 
-	void UpdateInfoLocal(PlayerInfo _player)
+	[RPC]
+	void PlayerManager_RequestUpdateInfo(NetworkPlayer _requestor, string _playerInfoSerial)
 	{
-		var _playerLocal = Get(_player.guid);
+		PlayerInfo _player;
+        NetworkSerializer.Deserialize(_playerInfoSerial, out _player);
 
-		if (_playerLocal == _player)
-			return;
+        var _playerLocal = Get(_player.guid);
 
-		if (_playerLocal == null)
-		{
-			Debug.LogWarning("Trying to update not existing player. Ignore.");
-			return;
-		}
-
-        Copy(_playerLocal, _player);
-
-	    if (_playerLocal.connected != _player.connected)
+	    if (_playerLocal == null)
 	    {
+	        Debug.LogWarning("Trying to update not existing player. Add.");
+            _playerLocal = _player;
+            Add(_playerLocal);
+	    }
+	    else
+	    {
+            Copy(_playerLocal, _player);
+        }
+
+        if (_playerLocal.connected != _player.connected)
+        {
             if (_player.connected)
                 Connect(_playerLocal);
             else
                 Disconnect(_playerLocal);
-	    }
+        }
 
-		if (postInfoChanged != null) postInfoChanged(_player);
+        if (postInfoChanged != null) postInfoChanged(_player);
+
+	    if (Global.Server() == Network.player.guid)
+            networkView.RPC("PlayerManager_ResponseUpdateInfo", _requestor);
 	}
 
-	[RPC]
-	void PlayerManager_UpdateInfo(string _playerInfoSerial)
-	{
-		PlayerInfo _playerInfo;
-		NetworkSerializer.Deserialize(_playerInfoSerial, out _playerInfo);
-		UpdateInfoLocal (_playerInfo);
-	}
-
+    [RPC]
+    void PlayerManager_ResponseUpdateInfo()
+    {
+        m_IsUpdatingInfo = false;
+        if (m_UpdateInfoCallbacks != null) m_UpdateInfoCallbacks();
+        m_UpdateInfoCallbacks = null;
+    }
 }
 

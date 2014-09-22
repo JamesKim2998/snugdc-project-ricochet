@@ -89,12 +89,6 @@ public class Game : Singleton<Game>
 		Instance.level = new GameLevel(_def);
 	}
 
-	void OnPlayerDisconnected(NetworkPlayer player) {
-		Debug.Log("Clean up after player " + player);
-		Network.RemoveRPCs(player);
-		Network.DestroyPlayerObjects(player);
-	}
-
 	void ListenBeforeDisconnected()
 	{
 		Debug.Log ("Server disconnected.");

@@ -30,7 +30,7 @@ public class UICharacterSelector : MonoBehaviour
 			}
 
 			Global.Player()[player].characterSelected.val = m_Type;
-			Global.Player().UpdateInfo();
+			Global.Player().UpdateInfo(null);
 		}
 	}
 	

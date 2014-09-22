@@ -60,7 +60,14 @@ public class ServerManager : MonoBehaviour
 		// Network.RemoveRPCs(Network.player);
 	}
 
-	[RPC]
+    void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        Debug.Log("Clean up after player " + player);
+        Network.RemoveRPCs(player);
+        Network.DestroyPlayerObjects(player);
+    }
+
+    [RPC]
 	void ServerManager_RequestServerGUID(NetworkPlayer _requestor)
 	{
 		networkView.RPC("ServerManager_ResponseServerGUID", _requestor, Network.player.guid);
@@ -73,5 +80,10 @@ public class ServerManager : MonoBehaviour
 		if (postConnectionSetuped != null)
 			postConnectionSetuped();
 	}
+
+    public static implicit operator string(ServerManager _server)
+    {
+        return _server.server;
+    }
 }
 
