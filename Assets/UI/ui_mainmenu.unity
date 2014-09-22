@@ -2962,7 +2962,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.6500001
+  aspectRatio: 2.45000005
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
@@ -4302,7 +4302,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
-      value: 2.6500001
+      value: 2.45000005
       objectReference: {fileID: 0}
     - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth

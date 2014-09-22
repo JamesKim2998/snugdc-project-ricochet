@@ -7,7 +7,7 @@ public class PlayerStatistics
 {
 	public readonly string player;
 
-    public readonly Statistic<int> score = new Statistic<int>();
+    public readonly ObservableValue<int> score = new ObservableValue<int>();
 
     public int CalculateScore()
     {

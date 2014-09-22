@@ -1,16 +1,27 @@
-﻿using System;
+using UnityEngine;
+using System;
+using System.Collections;
 
-public class ObserverableValue<T>
-{
+public class ObservableValue<T> where T : System.IEquatable<T> {
 	private T m_Value;
-	public T Get() { return m_Value; } 
-	public void Set(T _value) { 
-		var _old = m_Value; 
-		m_Value = _value; 
-		if (postChanged != null) 
-			postChanged(m_Value, _old); 
+
+    public T val { 
+		get { return m_Value; } 
+		
+		set {
+			if (m_Value.Equals( value) ) return;
+			old = m_Value;
+			m_Value = value;
+			if (postChanged != null) 
+				postChanged(this);
+		}
 	}
 
-	public Action<T, T> postChanged;
-}
+    public T old { get; private set; }
 
+    public event Action<ObservableValue<T>> postChanged;
+	
+	public static implicit operator T(ObservableValue<T> _statistic) {
+		return _statistic.val;
+	}
+}

@@ -132,7 +132,7 @@ using System.Collections;
 		death = _statistic;
 	}
 
-	void ListenScoreChanged(Statistic<int> _statistic)
+	void ListenScoreChanged(ObservableValue<int> _statistic)
 	{
 		score = _statistic;
 	}
