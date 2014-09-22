@@ -20,29 +20,28 @@ public class PlayerInfo
             if (m_Name == value) return;
             m_Name = value;
             if (isMine) PlayerPrefs.SetString("player_name", m_Name);
-            if (postChanged != null) postChanged(this);
+            if (postNameChanged != null) postNameChanged(this);
         }
     }
 
-    private CharacterType m_CharacterSelected = CharacterType.BLUE;
-    public CharacterType characterSelected
-    {
-        get { return m_CharacterSelected; }
-        set
-        {
-            if (m_CharacterSelected == value) return;
-            m_CharacterSelected = value;
-            if (postChanged != null) postChanged(this);
-        }
-    }
+    public readonly ObservableValue<CharacterType> characterSelected 
+        = new ObservableValue<CharacterType>();
 
-    [System.NonSerialized]
+    [NonSerialized]
+    public Action<PlayerInfo> postNameChanged;
+
+    [NonSerialized]
     public Action<PlayerInfo> postChanged;
 
     public PlayerInfo(string _guid)
     {
         guid = _guid;
+        characterSelected.val = CharacterType.BLUE;
+
         if (isMine)
             m_Name = PlayerPrefs.GetString("player_name", "team_ricochet");
+
+        postNameChanged += delegate { if (postChanged != null) postChanged(this); };
+        characterSelected.postChanged += delegate { if (postChanged != null) postChanged(this); };
     }
 }

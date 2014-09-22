@@ -133,7 +133,7 @@ public class PlayerManager : MonoBehaviour
     static void Copy(PlayerInfo _dst, PlayerInfo _org)
     {
         _dst.name = _org.name;
-        _dst.characterSelected = _org.characterSelected;
+        _dst.characterSelected.val = _org.characterSelected.val;
     }
 
 	void ListenConnectionSetuped() 

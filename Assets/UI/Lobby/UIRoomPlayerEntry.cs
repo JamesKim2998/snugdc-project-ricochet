@@ -37,7 +37,7 @@ public class UIRoomPlayerEntry : MonoBehaviour
 	void OnDestroy()
 	{
 		Global.Ready().postReady -= ListenReady;
-		if (player != null) player = null;
+		player = null;
 	}
 
 	void Refresh()

@@ -29,7 +29,7 @@ public class UICharacterSelector : MonoBehaviour
 				return;
 			}
 
-			Global.Player()[player].characterSelected = m_Type;
+			Global.Player()[player].characterSelected.val = m_Type;
 			Global.Player().UpdateInfo();
 		}
 	}
@@ -39,7 +39,10 @@ public class UICharacterSelector : MonoBehaviour
 		get { return m_Player; }
 		set {
 			if (m_Player == value) return;
-			if (m_Player != null) Global.Player()[m_Player].postChanged -= ListenPlayerInfoChanged;
+
+			if (m_Player != null) 
+                Global.Player()[m_Player].characterSelected.postChanged -= ListenCharacterSelectedChanged;
+
 			m_Player = value;
 
 			if (m_Player != null) 
@@ -49,7 +52,7 @@ public class UICharacterSelector : MonoBehaviour
 				rightButton.SetActive(_canSelect);
 
 				type = Global.Player()[m_Player].characterSelected;
-				Global.Player()[m_Player].postChanged += ListenPlayerInfoChanged;
+				Global.Player()[m_Player].characterSelected.postChanged += ListenCharacterSelectedChanged;
 			}
 		}
 	}
@@ -89,8 +92,8 @@ public class UICharacterSelector : MonoBehaviour
 		}
 	}
 
-	public void ListenPlayerInfoChanged(PlayerInfo _player) 
+	public void ListenCharacterSelectedChanged(ObservableValue<CharacterType> _value) 
 	{
-		type = _player.characterSelected;
+        type = _value;
 	}
 }

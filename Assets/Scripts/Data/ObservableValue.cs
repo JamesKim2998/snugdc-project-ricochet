@@ -2,7 +2,8 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class ObservableValue<T> where T : System.IEquatable<T> {
+[Serializable]
+public class ObservableValue<T> {
 	private T m_Value;
 
     public T val { 
@@ -19,9 +20,10 @@ public class ObservableValue<T> where T : System.IEquatable<T> {
 
     public T old { get; private set; }
 
-    public event Action<ObservableValue<T>> postChanged;
+    [NonSerialized]
+    public Action<ObservableValue<T>> postChanged;
 	
-	public static implicit operator T(ObservableValue<T> _statistic) {
-		return _statistic.val;
+	public static implicit operator T(ObservableValue<T> _value) {
+		return _value.val;
 	}
 }
