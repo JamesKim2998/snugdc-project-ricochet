@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Reflection;
 using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 using System.Collections;
@@ -34,7 +35,6 @@ public class HUDAmmo : MonoBehaviour
             m_Character.postWeaponChanged += ListenWeaponChanged;
         }
     }
-
 
     private Weapon m_Weapon;
     public Weapon weapon
@@ -100,6 +100,10 @@ public class HUDAmmo : MonoBehaviour
         }
     }
 
+    #region cooltime bar
+    public UISprite cooltimeBar;
+    #endregion
+
     void Start()
     {
         Game.Character.postCharacterChanged += ListenCharacterChanged;
@@ -109,6 +113,23 @@ public class HUDAmmo : MonoBehaviour
     {
         if (weapon) weapon = null;
         Game.Character.postCharacterChanged -= ListenCharacterChanged;
+    }
+
+    void Update()
+    {
+        if (weapon)
+        {
+            var _progress = 1f;
+            if (!weapon.IsState(Weapon.State.CHARGING))
+                _progress = weapon.stateTime / weapon.chargeTime;
+            else if (!weapon.IsState(Weapon.State.COOLING))
+                _progress = weapon.stateTime / weapon.cooldown;
+            _progress = Mathf.Min(_progress, 1f);
+
+            var _scale = cooltimeBar.transform.localScale;
+            _scale.x = _progress;
+            cooltimeBar.transform.localScale = _scale;
+        }
     }
 
     void Reposition()
