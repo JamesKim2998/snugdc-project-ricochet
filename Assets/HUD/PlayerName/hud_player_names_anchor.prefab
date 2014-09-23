@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: hud_player_name_anchor
+  m_Name: hud_player_names_anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor9: {fileID: 0}
-  prefab: {fileID: 100000, guid: 11181449d1d0ec343b8dece28f400750, type: 2}
+  prefab: {fileID: 100000, guid: 7f5e223fbc55a1747b7104c2c792c000, type: 2}
   anchor: 6
   offset: {x: 0, y: 0}
   destroyAfterCreate: 1

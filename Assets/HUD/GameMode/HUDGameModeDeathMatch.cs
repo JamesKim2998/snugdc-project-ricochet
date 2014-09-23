@@ -39,7 +39,15 @@ public class HUDGameModeDeathMatch : MonoBehaviour
     {
         m_IsSetuped = true;
 
-        var _mode = Game.Mode as GameModeDeathMatch;
+        var _mode = Game.Mode;
+
+        if (! _mode)
+        {
+            Debug.LogError("Mode does not exist. Ignore.");
+            return;
+        }
+
+        var _modeDeathMatch = _mode as GameModeDeathMatch;
         if (_mode.type != GameModeType.DEATH_MATCH)
         {
             Debug.LogWarning("Mode should be " + GameModeType.DEATH_MATCH 

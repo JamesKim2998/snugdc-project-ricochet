@@ -39,9 +39,7 @@ public class HUDPlayerName : MonoBehaviour
 
     void Start()
     {
-        enabled = false;
         if (!nameLabel) nameLabel = GetComponent<UILabel>();
-        nameLabel.text = "";
     }
 
     void OnDestroy()
@@ -51,8 +49,13 @@ public class HUDPlayerName : MonoBehaviour
 
 	void Update ()
 	{
-	    if (!character) return;
-        var _viewportPosition = Game.Camera_.camera.WorldToViewportPoint(character.transform.position);
+	    if (!character)
+	    {
+	        enabled = false;
+	        return;
+	    }
+
+	    var _viewportPosition = Game.Camera_.camera.WorldToViewportPoint(character.transform.position);
         nameLabel.transform.position = GameHUD.mainLayer.camera_.ViewportToWorldPoint(_viewportPosition);
         nameLabel.transform.localPosition += new Vector3(offset.x , offset.y);
 	}
