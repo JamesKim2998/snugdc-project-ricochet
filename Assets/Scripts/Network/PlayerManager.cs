@@ -173,16 +173,10 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
             Add(mine);
 	    Connect(mine);
 
-	    RequestPlayerConnected(() =>
-	    {
-	        UpdateInfo(() =>
-	        {
-	            RefreshPlayerInfo(() =>
-	            {
-	                if (postSetuped != null) postSetuped(mine);
-	            });
-	        });
-	    });
+        UpdateInfo(() => RefreshPlayerInfo(() =>
+        {
+            if (postSetuped != null) postSetuped(mine);
+        }));
 	}
 
 	void ListenDisconnectedFromServer()
@@ -197,34 +191,6 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 	{
 	    ListenConnectionSetuped();
 	}
-
-    public bool m_IsPlayerConnecting = false;
-    private Action m_PlayerConnectedCallbacks;
-
-    void RequestPlayerConnected(Action _callback)
-    {
-        m_PlayerConnectedCallbacks += _callback;
-        if (m_IsPlayerConnecting) return;
-        m_IsPlayerConnecting = true;
-        networkView.RPC("PlayerManager_RequestPlayerConnected", RPCMode.Others, Network.player);
-    }
-
-	[RPC]
-	void PlayerManager_RequestPlayerConnected(NetworkPlayer _player)
-	{
-        var _playerInfo = Get(_player.guid) ?? Add(_player.guid);
-	    Connect(_playerInfo);
-	    if (server == Network.player.guid)
-            networkView.RPC("PlayerMangaer_ResponseOnPlayerConnected", _player);
-	}
-
-    [RPC]
-    void PlayerMangaer_ResponseOnPlayerConnected()
-    {
-        m_IsPlayerConnecting = false;
-        if (m_PlayerConnectedCallbacks != null) m_PlayerConnectedCallbacks();
-        m_PlayerConnectedCallbacks = null;
-    }
 
 	void OnPlayerDisconnected(NetworkPlayer _player)
 	{
@@ -266,34 +232,20 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 	[RPC]
 	void PlayerManager_RequestRefreshPlayerInfo(NetworkPlayer _player)
 	{
-        var _idx = -1;
-        var _cnt = players.Count;
 	    foreach (var _playerInfo in players)
 	    {
-	        ++_idx;
-            if (_playerInfo.Value.guid == Network.player.guid) return;
+	        if (_playerInfo.Key == _player.guid) continue;
             var _playerInfoStr = NetworkSerializer.Serialize(_playerInfo.Value);
-            networkView.RPC("PlayerManager_ResponseRefreshPlayerInfo", _player, _playerInfoStr, _idx, _cnt);
+            networkView.RPC("PlayerManager_ResponseRefreshPlayerInfo", _player, _playerInfoStr);
 	    }
-	}
+        networkView.RPC("PlayerManager_ResponseRefreshPlayerInfoDone", _player);
+    }
 
 	[RPC]
-    void PlayerManager_ResponseRefreshPlayerInfo(string _playerInfoStr, int _idx, int _cnt)
+    void PlayerManager_ResponseRefreshPlayerInfo(string _playerInfoStr)
 	{
 		PlayerInfo _newPlayerInfo;
 		NetworkSerializer.Deserialize(_playerInfoStr, out _newPlayerInfo);
-
-// 		foreach (var _playerKV in players
-//             .Where(_playerKV => Network.player.guid != _playerKV.Key)
-//             .Where(_playerKV => ! _newPlayerInfos.ContainsKey(_playerKV.Key)))
-// 		{
-//             Disconnect(_playerKV.Value);
-//             Remove(_playerKV.Key);
-// 		}
-
-// 		foreach (var _newPlayerKV in _newPlayerInfos
-//             .Where(_newPlayerKV => Network.player.guid != _newPlayerKV.Value.guid))
-// 		{
 
 	    if (_newPlayerInfo.guid == Network.player.guid)
 	    {
@@ -327,15 +279,16 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 		}
 
         if (postSetuped != null) postSetuped(_player);
-
-	    if (_idx == _cnt - 1)
-	    {
-            m_IsRefreshingPlayerInfo = false;
-	        if (m_RefreshPlayerInfoCallback != null) m_RefreshPlayerInfoCallback();
-            m_RefreshPlayerInfoCallback = null;
-        }
 	}
-
+    
+    [RPC]
+    void PlayerManager_ResponseRefreshPlayerInfoDone()
+    {
+        m_IsRefreshingPlayerInfo = false;
+        if (m_RefreshPlayerInfoCallback != null) m_RefreshPlayerInfoCallback();
+        m_RefreshPlayerInfoCallback = null;
+    }
+        
     private bool m_IsUpdatingInfo = false;
     private Action m_UpdateInfoCallbacks;
 
@@ -352,7 +305,7 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 		    if (m_IsUpdatingInfo) return;
             m_IsUpdatingInfo = true;
 			var _playerInfoSerial = NetworkSerializer.Serialize(mine);
-            networkView.RPC("PlayerManager_RequestUpdateInfo", RPCMode.All, Network.player, _playerInfoSerial);
+            networkView.RPC("PlayerManager_RequestUpdateInfo", RPCMode.Others, Network.player, _playerInfoSerial);
 		}
 	}
 
@@ -366,7 +319,6 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 
 	    if (_playerLocal == null)
 	    {
-	        Debug.LogWarning("Trying to update not existing player. Add.");
             _playerLocal = _player;
             Add(_playerLocal);
 	    }
