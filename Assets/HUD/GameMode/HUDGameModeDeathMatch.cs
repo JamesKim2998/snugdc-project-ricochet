@@ -37,6 +37,8 @@ public class HUDGameModeDeathMatch : MonoBehaviour
 
     void Setup()
     {
+        m_IsSetuped = true;
+
         var _mode = Game.Mode as GameModeDeathMatch;
         if (_mode.type != GameModeType.DEATH_MATCH)
         {

@@ -42,7 +42,6 @@ public class HUDPlayerName : MonoBehaviour
         enabled = false;
         if (!nameLabel) nameLabel = GetComponent<UILabel>();
         nameLabel.text = "";
-        Game.Character.postCharacterChanged += ListenCharacterChanged;
     }
 
     void OnDestroy()
@@ -53,18 +52,14 @@ public class HUDPlayerName : MonoBehaviour
 	void Update ()
 	{
 	    if (!character) return;
-        var _viewportPosition = Game.Camera_.camera.WorldToViewportPoint(m_Character.transform.position);
+        var _viewportPosition = Game.Camera_.camera.WorldToViewportPoint(character.transform.position);
         nameLabel.transform.position = GameHUD.mainLayer.camera_.ViewportToWorldPoint(_viewportPosition);
         nameLabel.transform.localPosition += new Vector3(offset.x , offset.y);
 	}
 
-    void ListenCharacterChanged(Character _character)
-    {
-        character = _character;
-    }
-
     void ListenCharacterDestroy(Destroyable _destroyable)
     {
         character = null;
+        Destroy(gameObject);
     }
 }
