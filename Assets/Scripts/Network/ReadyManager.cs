@@ -7,22 +7,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(NetworkView))]
 public class ReadyManager : MonoBehaviour 
 {
-    public bool IsReady() { return Global.Player().mine.isReady; }
-
-	public bool IsReady(string _player) { 
-		if (_player ==  Global.Player().server)
-		{
-		    Global.Player().server.isReady.val = true;
-			return true;
-		}
-
-	    var _playerInfo = Global.Player()[_player];
-	    return (_playerInfo != null) ? _playerInfo.isReady : false;
-	}
-
 	public bool IsReadyAll()
 	{
-	    return Global.Player().All(_playerKV => IsReady(_playerKV.Key));
+        return Global.Player().All(_playerKV => (!_playerKV.Value.connected) || _playerKV.Value.isReady || Network.isServer);
 	}
 
     public void Clear()

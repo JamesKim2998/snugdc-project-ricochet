@@ -25,7 +25,7 @@ public class UIReadyButton : MonoBehaviour {
 
 	public void OnSubmit()
 	{
-        Global.Player().mine.isReady.val = !Global.Ready().IsReady();
+        Global.Player().mine.isReady.val = !Global.Player().mine.isReady;
         Global.Player().UpdateInfo(null);
 	}
 }

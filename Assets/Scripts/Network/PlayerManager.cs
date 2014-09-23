@@ -317,7 +317,6 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
         NetworkSerializer.Deserialize(_playerInfoSerial, out _player);
 
         var _playerLocal = Get(_player.guid);
-	    var _shouldConnect = false;
 
 	    if (_playerLocal == null)
 	    {

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -17,8 +18,8 @@ public class UIRoomPlayerEntries : MonoBehaviour
 
 		if (Network.peerType != NetworkPeerType.Disconnected)
 		{
-			foreach ( var _player in Global.Player().players )
-				Add(_player.Key); 
+		    foreach (var _player in Global.Player().Where(_player => _player.Value.connected))
+		        Add(_player.Key);
 		}
 
 		Global.Player().postConnected += ListenPlayerConnected;
