@@ -297,15 +297,17 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 		if (Network.peerType == NetworkPeerType.Disconnected)
 		{
             if (_callback != null) _callback();
+		    return;
 		}
-		else
-		{
-            m_UpdateInfoCallbacks += _callback;
-		    if (m_IsUpdatingInfo) return;
-            m_IsUpdatingInfo = true;
-			var _playerInfoSerial = NetworkSerializer.Serialize(mine);
-            networkView.RPC("PlayerManager_RequestUpdateInfo", RPCMode.Others, Network.player, _playerInfoSerial);
-		}
+
+        m_UpdateInfoCallbacks += _callback;
+		if (m_IsUpdatingInfo) return;
+        m_IsUpdatingInfo = true;
+		var _playerInfoSerial = NetworkSerializer.Serialize(mine);
+        networkView.RPC("PlayerManager_RequestUpdateInfo", RPCMode.Others, Network.player, _playerInfoSerial);
+
+	    if (Network.isServer)
+	        PlayerManager_ResponseUpdateInfo();
 	}
 
 	[RPC]
