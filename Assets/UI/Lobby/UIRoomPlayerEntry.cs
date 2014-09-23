@@ -43,7 +43,7 @@ public class UIRoomPlayerEntry : MonoBehaviour
 	void Refresh()
 	{
 		if (player != null)
-			SetReady(Global.Ready().IsReady(player.guid));
+			SetReady(player.isReady);
 
 		if (nameLabel != null)
             nameLabel.text = player == null ? "undefined" : player.name;
@@ -63,13 +63,9 @@ public class UIRoomPlayerEntry : MonoBehaviour
 	void OnTooltip (bool show)
 	{
 		if (show)
-		{
 			UITooltip.ShowText("highscore");
-		}
 		else 
-		{
 			UITooltip.ShowText(null);
-		}
 		return;
 	}
 

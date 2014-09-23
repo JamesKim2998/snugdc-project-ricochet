@@ -294,8 +294,7 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 
 	public void UpdateInfo(Action _callback)
 	{
-		if (Network.isServer 
-            || Network.peerType == NetworkPeerType.Disconnected)
+		if (Network.peerType == NetworkPeerType.Disconnected)
 		{
             if (_callback != null) _callback();
 		}
@@ -316,23 +315,20 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
         NetworkSerializer.Deserialize(_playerInfoSerial, out _player);
 
         var _playerLocal = Get(_player.guid);
+	    var _shouldConnect = false;
 
 	    if (_playerLocal == null)
 	    {
             _playerLocal = _player;
+            _playerLocal.connected = false;
             Add(_playerLocal);
+            Connect(_playerLocal);
 	    }
 	    else
 	    {
             Copy(_playerLocal, _player);
-        }
-
-        if (_playerLocal.connected != _player.connected)
-        {
-            if (_player.connected)
+            if (!_playerLocal.connected)
                 Connect(_playerLocal);
-            else
-                Disconnect(_playerLocal);
         }
 
         if (postInfoChanged != null) postInfoChanged(_player);
