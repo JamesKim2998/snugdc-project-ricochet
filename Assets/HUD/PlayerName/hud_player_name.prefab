@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a316b788fcee16a478c730762fd0b4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameLabel: {fileID: 0}
+  nameLabel: {fileID: 11400000}
   offset: {x: 0, y: -20}
 --- !u!1001 &100100000
 Prefab:

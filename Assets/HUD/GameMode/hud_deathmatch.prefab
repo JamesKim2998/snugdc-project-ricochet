@@ -39,14 +39,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b45e975caf194b40b9f4a0ec3686f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudNonAnchoredPrfs:
-  - {fileID: 100000, guid: 7f5e223fbc55a1747b7104c2c792c000, type: 2}
+  hudNonAnchoredPrfs: []
   hudPrfs:
   - {fileID: 11400000, guid: 477d93f30cd8d674e8782d4de9751286, type: 2}
   - {fileID: 11400000, guid: 2d7b9f3e5efc127479f1367ff82be277, type: 2}
   - {fileID: 11400000, guid: 57b68075fcc3de94d8de0a37840bf08e, type: 2}
   - {fileID: 11400000, guid: 5d293f834e58ca24b86cfdeccbcc964a, type: 2}
   - {fileID: 11400002, guid: 4def18c05a833df4d9479aa41f26b693, type: 2}
+  - {fileID: 11400000, guid: 76e8fbeaf0c7720499cf46c7a4408838, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
