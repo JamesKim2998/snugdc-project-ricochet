@@ -9,7 +9,7 @@ public class ReadyManager : MonoBehaviour
 {
 	public bool IsReadyAll()
 	{
-        return Global.Player().All(_playerKV => (!_playerKV.Value.connected) || _playerKV.Value.isReady || Network.isServer);
+        return Global.Player().All(_playerKV => (!_playerKV.Value.connected) || _playerKV.Value.isReady || _playerKV.Value == Global.Server());
 	}
 
     public void Clear()

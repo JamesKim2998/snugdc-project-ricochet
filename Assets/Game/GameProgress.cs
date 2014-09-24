@@ -129,6 +129,7 @@ public class GameProgress : MonoBehaviour
 		state = State.START;
 		timeElapsed = 0;
 		gameID = _gameID;
+        Global.Player().CleanDisconnected();
 		if (postStart != null) postStart();
 	}
 

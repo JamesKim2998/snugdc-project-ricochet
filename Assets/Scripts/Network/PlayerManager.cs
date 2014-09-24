@@ -150,6 +150,14 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
         _playerInfo.connected = false;
         if (postConnected != null) postConnected(false, _playerInfo.guid);   
     }
+
+    public void CleanDisconnected()
+    {
+        var _garbages = (from _player in players where !_player.Value.connected select _player.Key).ToList();
+        foreach (var _garbage in _garbages)
+            players.Remove(_garbage);
+    }
+
     #endregion
 
     static void Copy(PlayerInfo _dst, PlayerInfo _org)
