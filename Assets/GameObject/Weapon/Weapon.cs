@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour 
@@ -123,8 +124,8 @@ public class Weapon : MonoBehaviour
 	public delegate GameObject DoCreateProjectile(Weapon self);
 	public DoCreateProjectile doCreateProjectile;
 
-	public delegate void DoShoot(Weapon self, GameObject projectile);
-	public DoShoot doShoot;
+	public Action<Weapon, GameObject> doShootMine;
+    public Action<Weapon, GameObject> doShoot;
 
 	public delegate GameObject DoCreateProjectileServer(int _count, int _idx);
 	public DoCreateProjectileServer doCreateProjectileServer;
@@ -251,13 +252,17 @@ public class Weapon : MonoBehaviour
 			if (ownerGameObj != null)
 			{
 				_projectile.ownerID = ownerGameObj.GetInstanceID();
-				_projectile.ownerDeadZoneCollider = ownerGameObj.GetComponent<Character>().deadZoneCollider;
+
+                var _deadzone = _projectile.GetComponent<ProjectileDecoratorDeadzone>();
+			    var _deadzoneField = ownerGameObj.GetComponent<DeadzoneField>();
+			    if (_deadzone && _deadzoneField)
+			        _deadzone.deadzone = _deadzoneField.deadzone;
 
                 if (_recoil.HasValue)
                     ownerGameObj.rigidbody2D.velocity += _recoil.Value;
 
 				var _detector = ownerGameObj.GetComponentInChildren<DamageDetector>();
-				if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
+                if (_detector) _projectile.ownerDamageDetecterID = _detector.GetInstanceID();
 			}
 
 			if (_projectile) 
@@ -266,8 +271,8 @@ public class Weapon : MonoBehaviour
 					_projectile.damage = damage.Value;
 			}
 
-			if (doShoot != null) 
-				doShoot(this, _projectileGO);
+			if (doShootMine != null) 
+				doShootMine(this, _projectileGO);
 
             if (IsNetworkEnabled())
 			{
@@ -315,7 +320,7 @@ public class Weapon : MonoBehaviour
 		{
 			_projectile.ownerID = ownerGameObj.GetInstanceID();
 			var _detector = ownerGameObj.GetComponentInChildren<DamageDetector>();
-			if (_detector) _projectile.ownerDetecterID = _detector.GetInstanceID();
+			if (_detector) _projectile.ownerDamageDetecterID = _detector.GetInstanceID();
 		}
 
         _projectileGO.networkView.viewID = _viewID;

@@ -29,21 +29,41 @@ public class Projectile : MonoBehaviour
 	public int ownerID = 0;
 
 	[HideInInspector]
-	public int ownerDetecterID = 0;
+	public int ownerDamageDetecterID = 0;
 
-    public bool activated { get; set; }
+    #region active
 
-    private int m_OwnerDeadZoneColliderID = 0;
-    public Collider2D ownerDeadZoneCollider
+    private int m_ActivateCounter = 0;
+    public bool activated { get { return m_ActivateCounter >= 0;  } }
+
+    public bool Activate()
     {
-		set {
-		    m_OwnerDeadZoneColliderID = value != null ? value.GetInstanceID() : 0;
-		}
+#if DEBUG
+        if (m_ActivateCounter == 0)
+            Debug.LogWarning("Activate counter should not be greater than 0. ");
+#endif
+        return ++m_ActivateCounter == 0;
     }
 
+    public bool Deactivate() { return m_ActivateCounter-- == 0; }
+
+    #endregion
+
+	#region life cycle
 	// life
 	public float life = 10;
 	private float m_Age = 0;
+
+    // prepare
+    public float prepareDuration = 0;
+    private float m_PrepareTime;
+
+    // decay
+    public bool decaying { get; private set; }
+    public bool stopOnDecay = true;
+    public float decayDuration = 0;
+    private float m_DecayTime;
+	#endregion
 
 	// attack
 	public bool isHitOwner = false;
@@ -59,16 +79,6 @@ public class Projectile : MonoBehaviour
 	public LayerMask collisionIgnores;
 	public LayerMask collisionTargets;
 	public LayerMask collisionTerrains;
-
-	// prepare
-	public float prepareDuration = 0;
-	private float m_PrepareTime;
-
-	// decay
-    public bool decaying { get; private set; }
-    public bool stopOnDecay = true;
-	public float decayDuration = 0;
-	private float m_DecayTime;
 
 	// components
 	private Ricochet m_Ricochet;
@@ -90,13 +100,9 @@ public class Projectile : MonoBehaviour
 	public GameObject effectHitPrf;
 	public Vector3 effectHitOffset;
 	
-	// Dead-zone related variables.
-	// 총알은 최초에 데드존 내에서 발사되어서, 데드존을 벗어나야만 플레이어에 대한 충돌판정이 활성화된다.
-	private bool m_OutOfDeadZone;
-
     public Projectile()
     {
-        activated = false;
+        Deactivate();
         decaying = false;
     }
 
@@ -111,33 +117,11 @@ public class Projectile : MonoBehaviour
 		m_Animator = GetComponent<Animator>();
 
 		if (! prepareDuration.Equals(0)) 
-		{
 			m_PrepareTime = 0;
-		} 
 		else 
-		{
-			activated = true;
-		}
-		
-		if (m_OwnerDeadZoneColliderID == 0)
-		{
-			// Debug.Log ("Character doesn't have an detector");
-			m_OutOfDeadZone = true;
-		} 
-		else 
-		{
-			m_OutOfDeadZone = ! IsProjectileInsideOfInitialDeadzone();
-		}
+			Activate();
 	}
 	
-	private bool IsProjectileInsideOfInitialDeadzone()
-	{
-		// I don't know how to implements.
-		// 현재 생성된 Projectile이 deadzoneDetector 내부에 있는지 검사를했으면 좋겠는데
-		// 마땅한 API가 없는듯.
-		return true;
-	}
-
 	void DestroySelf() 
 	{
 		if (networkView.enabled && networkView.viewID != NetworkViewID.unassigned)
@@ -179,8 +163,7 @@ public class Projectile : MonoBehaviour
 				
 				if (m_PrepareTime >= prepareDuration) 
 				{
-					activated = true;
-
+					Activate();
 					if (m_Animator != null) 
 						m_Animator.SetTrigger("Activate");
 				}
@@ -240,18 +223,6 @@ public class Projectile : MonoBehaviour
 		OnCollision(_collider);
 	}
 	
-	void OnTriggerExit2D(Collider2D other)
-	{
-		if(other.isTrigger )
-		{
-			if ( other.GetInstanceID() == m_OwnerDeadZoneColliderID)
-			{
-				// Debug.Log ("Projectile just leaved owner's deadzone");
-				m_OutOfDeadZone = true;
-			}
-		}
-	}
-
 	void OnCollision(Collider2D _collider) 
 	{
 		// todo: trigger라고 맞지 않는다는 보장이 없음. 위험함. 
@@ -279,12 +250,12 @@ public class Projectile : MonoBehaviour
                 goto finalize;
 
             var _damageDetector = _collider.GetComponentInChildren<DamageDetector>();
-			var _isOwner = _damageDetector.GetInstanceID() == ownerDetecterID;
+			var _isOwner = _damageDetector.GetInstanceID() == ownerDamageDetecterID;
 
 			if (! isHitOwner && _isOwner)
 				return;
 
-			if ( isHitOwner && _isOwner && ! m_OutOfDeadZone)
+			if ( isHitOwner && _isOwner)
 			{
 				Debug.Log("Projectile just hit owner before get out of the dead zone.");
 				// Projectile is ignore the owner as if he wasn't there.

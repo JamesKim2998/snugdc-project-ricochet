@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HasHP : MonoBehaviour {
+public class PropertyHP : MonoBehaviour {
 
 	public int hpMax = 1;
 	private int m_HP;
@@ -34,7 +34,7 @@ public class HasHP : MonoBehaviour {
 		hp -= _attackData.damage;
 	}
 
-	public static implicit operator int(HasHP _hp) {
+	public static implicit operator int(PropertyHP _hp) {
 		return _hp.hp;
 	}
 

@@ -51,7 +51,7 @@ public partial class Character : MonoBehaviour
 
 	#region life_state
 	public int hpMax = 1;
-	private HasHP m_Hp;
+	private PropertyHP m_Hp;
 
 	public float hitCooldown = 0.5f;
 	public Vector2 hitForce = new Vector2(10.0f, 5.0f);
@@ -203,8 +203,6 @@ public partial class Character : MonoBehaviour
 	public CrateDetector crateDetector;
 	public DamageDetector damageDetector;
 	public LayerDetector terrainDetector;
-	
-	public Collider2D deadZoneCollider;
 	#endregion
 
 	#region events
@@ -240,7 +238,7 @@ public partial class Character : MonoBehaviour
 	void Awake () {
         id = s_Random.Next();
 
-		m_Hp = GetComponent<HasHP>();
+		m_Hp = GetComponent<PropertyHP>();
 		m_Hp.hp = hpMax;
 		m_Hp.postDead = Die;
 

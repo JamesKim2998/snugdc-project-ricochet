@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HasDamage : MonoBehaviour {
+public class DamageField : MonoBehaviour {
 
 	public AttackData attackData;
 	public string[] filters;

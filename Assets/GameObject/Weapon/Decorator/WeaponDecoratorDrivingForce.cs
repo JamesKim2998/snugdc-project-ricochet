@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Weapon))]
-public class RocketLauncherDef : MonoBehaviour 
+public class WeaponDecoratorDrivingForce : MonoBehaviour 
 {
 	public float drivingForce;
 	public float explosionRadius;
@@ -15,7 +15,7 @@ public class RocketLauncherDef : MonoBehaviour
 		
 		var _drivingForce = drivingForce;
 
-		_weapon.doShoot = (_, _projectile) => {
+		_weapon.doShootMine = (_, _projectile) => {
 			_projectile.GetComponent<Projectile>().drivingForce = _drivingForce * _weapon.transform.right;
 		};
 	}

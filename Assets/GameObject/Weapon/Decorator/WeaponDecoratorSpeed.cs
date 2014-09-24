@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Weapon))]
-public class SimpleGunDef : MonoBehaviour 
+public class WeaponDecoratorSpeed : MonoBehaviour 
 {
 	public float speed;
 
@@ -14,7 +14,7 @@ public class SimpleGunDef : MonoBehaviour
 
 		var _speed = speed;
 
-		_weapon.doShoot = (_, _projectile) => {
+		_weapon.doShootMine = (_, _projectile) => {
 			_projectile.rigidbody2D.velocity = _speed * _weapon.transform.right;
 		};
 	}
