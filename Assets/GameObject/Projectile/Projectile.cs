@@ -254,13 +254,6 @@ public class Projectile : MonoBehaviour
 
 			if (! isHitOwner && _isOwner)
 				return;
-
-			if ( isHitOwner && _isOwner)
-			{
-				Debug.Log("Projectile just hit owner before get out of the dead zone.");
-				// Projectile is ignore the owner as if he wasn't there.
-				return;
-			}
 				
 			if (_damageDetector && _damageDetector.enabled) 
 			{
