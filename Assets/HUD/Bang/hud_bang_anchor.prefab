@@ -41,8 +41,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor9: {fileID: 0}
   prefab: {fileID: 100002, guid: 3da80b385ca08a94aa61481766c16a97, type: 2}
-  anchor: 1
-  offset: {x: -230, y: -54}
+  anchor: 2
+  offset: {x: -200, y: -100}
+  destroyAfterCreate: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
