@@ -11,14 +11,7 @@ using System.Collections;
 
 			m_Player = value; 
 
-			if (m_Player != null)
-			{
-				statistic = Game.Statistic.Get(m_Player);
-			}
-			else
-			{
-				statistic = null;
-			}
+			statistic = m_Player != null ? Game.Statistic.Get(m_Player) : null;
 
 			Refresh();
 		}
@@ -61,15 +54,8 @@ using System.Collections;
 
 	public bool connected { 
 		set {
-			if (value)
-			{
-				icon.color = Color.white;
-			}
-			else
-			{
-				icon.color = Color.red;
-			}
-		} 
+		    icon.color = value ? Color.white : Color.red;
+		}
 	}
 
 	public int kill { set { killLabel.text = value.ToString(); } }
@@ -81,7 +67,7 @@ using System.Collections;
 //		statistic = Game.Statistic.mine;
 	}
 
-	void Destroy()
+	void OnDestroy()
 	{
 		player = null;
 		statistic = null;
@@ -89,13 +75,12 @@ using System.Collections;
 
 	void Refresh()
 	{
-		var _player = Global.Player().Get(player);
+		var _player = Global.Player()[player];
 
-		if (_player != null)
+		if (_player != null )
 		{
-			connected = true;
+			connected = _player.connected;
 			nameLabel.text = _player.name;
-			// todo: icon 변경.
 		}
 		else
 		{

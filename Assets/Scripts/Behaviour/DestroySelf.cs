@@ -5,6 +5,6 @@ public class DestroySelf : MonoBehaviour {
 
 	public void Destroy() 
 	{
-		GameObject.Destroy (gameObject);
+		Destroy (gameObject);
 	}
 }

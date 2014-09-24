@@ -8,12 +8,17 @@ public class HUDBang : MonoBehaviour
 
     public float destroyDelay = 1;
 
+    void Awake()
+    {
+        if (!grid) grid = GetComponent<UIGrid>();
+    }
+
 	void Start ()
 	{
 	    Game.Character.postCharacterDead += ListenCharacterDead;
 	}
 
-    void Destroy()
+    void OnDestroy()
     {
 	    Game.Character.postCharacterDead -= ListenCharacterDead;
     }

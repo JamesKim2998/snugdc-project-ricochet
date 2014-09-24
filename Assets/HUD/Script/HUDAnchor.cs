@@ -19,6 +19,6 @@ public class HUDAnchor : MonoBehaviour
         if (destroyAfterCreate) Destroy(gameObject);
 	}
 
-    void Destroy()
+    void OnDestroy()
     {}
 }
