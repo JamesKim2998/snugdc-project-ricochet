@@ -24,7 +24,7 @@ public class Game : Singleton<Game>
 	public static GameStatistics Statistic { get { return Instance.statistic; } }
 	
 	public GameLevel level;
-	public static GameLevel Level { get { return Instance.level; } }
+    public static GameLevel Level { get { return Instance.level; } set { Instance.level = value; } }
 
 	public GameModeManager modeManager;
 	public static GameModeManager ModeManager { get { return Instance.modeManager; } }
@@ -82,11 +82,6 @@ public class Game : Singleton<Game>
 
 	void FixedUpdate() 
 	{
-	}
-
-	public static void InitLevel(LevelDef _def) 
-	{
-		Instance.level = new GameLevel(_def);
 	}
 
 	void ListenBeforeDisconnected()

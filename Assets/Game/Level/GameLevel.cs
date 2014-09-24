@@ -3,7 +3,9 @@ using System.Collections;
 
 public class GameLevel
 {
-	public GameLevel(LevelDef _def) 
+    private bool m_IsPurged = false;
+
+	public GameLevel(GameLevelDef _def) 
 	{
 		characterSpawners = new CharacterSpawners(_def.characterSpawners);
         characterSpawners.postSpawn += ListenCharacterSpawned;
@@ -13,14 +15,27 @@ public class GameLevel
 		Global.Server().postDisconnected += ListenDisconnectedFromServer;
 	}
 
-	~GameLevel()
+    public void Purge()
     {
-		Global.Server().postConnected -= ListenConnectedToServer;
-		Global.Server().postDisconnected -= ListenDisconnectedFromServer;
+        if (m_IsPurged)
+        {
+            Debug.LogWarning("Trying to purge again! Ignore.");
+            return;   
+        }
+
+        m_IsPurged = true;
+
+        Global.Server().postConnected -= ListenConnectedToServer;
+        Global.Server().postDisconnected -= ListenDisconnectedFromServer;
 
         characterSpawners.postSpawn -= ListenCharacterSpawned;
         characterSpawners.postDestroy -= ListenCharacterDestroyed;
-	}
+    }
+
+	~GameLevel()
+    {
+        if (!m_IsPurged) Purge();
+    }
 
 	public CharacterSpawners characterSpawners;
 
