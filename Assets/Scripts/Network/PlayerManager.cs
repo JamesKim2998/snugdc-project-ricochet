@@ -342,7 +342,7 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 
         if (postInfoChanged != null) postInfoChanged(_player);
 
-	    if (Global.Server() == Network.player.guid)
+	    if (Global.Server().server == Network.player.guid)
             networkView.RPC("PlayerManager_ResponseUpdateInfo", _requestor);
 	}
 

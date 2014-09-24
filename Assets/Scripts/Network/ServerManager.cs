@@ -80,10 +80,5 @@ public class ServerManager : MonoBehaviour
 		if (postConnectionSetuped != null)
 			postConnectionSetuped();
 	}
-
-    public static implicit operator string(ServerManager _server)
-    {
-        return _server.server;
-    }
 }
 

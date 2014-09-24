@@ -458,6 +458,7 @@ GameObject:
   - 114: {fileID: 111883163}
   - 114: {fileID: 111883162}
   - 114: {fileID: 111883168}
+  - 114: {fileID: 111883164}
   m_Layer: 5
   m_Name: back
   m_TagString: Untagged
@@ -509,6 +510,17 @@ MonoBehaviour:
   trigger: 0
   volume: 1
   pitch: 1
+--- !u!114 &111883164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111883160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e723444bdf9efb54aae47396fff97e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &111883165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +595,9 @@ MonoBehaviour:
   pixelSnap: 1
   onClick:
   - mTarget: {fileID: 111883168}
+    mMethodName: Execute
+    oneShot: 0
+  - mTarget: {fileID: 111883164}
     mMethodName: Execute
     oneShot: 0
 --- !u!65 &111883167
@@ -1721,7 +1736,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3
+  aspectRatio: 2.83333325
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
@@ -2221,7 +2236,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.75
+  aspectRatio: 6.41666651
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
@@ -3970,7 +3985,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 106
+  mWidth: 98
   mHeight: 40
   mDepth: 2
   autoResizeBoxCollider: 0
@@ -4250,7 +4265,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1187558996
 MonoBehaviour:
@@ -4768,7 +4783,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3
+  aspectRatio: 2.83333325
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 417afece51adac84392c23964dff5bea, type: 3}
   mFont: {fileID: 0}
@@ -5504,7 +5519,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11400014, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: onClick.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: m_LocalPosition.x
@@ -5604,27 +5619,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
-      value: 72
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 11400044, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
-      value: 3
+      value: 2.83333325
       objectReference: {fileID: 0}
     - target: {fileID: 11400072, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
-      value: 162
+      value: 154
       objectReference: {fileID: 0}
     - target: {fileID: 11400072, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
-      value: 6.75
+      value: 6.41666651
       objectReference: {fileID: 0}
     - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: mWidth
-      value: 72
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 11400070, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
       propertyPath: aspectRatio
-      value: 3
+      value: 2.83333325
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400014, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: onClick.Array.data[1].mTarget
+      value: 
+      objectReference: {fileID: 111883164}
+    - target: {fileID: 11400014, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
+      propertyPath: onClick.Array.data[1].mMethodName
+      value: Execute
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400010, guid: e6cfbea46e33b304f97a4091bd5e3054, type: 2}
