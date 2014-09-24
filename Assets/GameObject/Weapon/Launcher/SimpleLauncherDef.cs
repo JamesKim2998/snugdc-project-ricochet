@@ -22,7 +22,7 @@ public class SimpleLauncherDef : MonoBehaviour
 
 		_weapon.doCreateProjectile = _ => (GameObject) Instantiate(_projectilePrf);
 
-	    _weapon.doCreateProjectileServer = (int _count, int _idx) => (GameObject) Instantiate(_projectilePrf);
+	    _weapon.doCreateProjectileServer = (_count, _idx) => (GameObject) Instantiate(_projectilePrf);
 	}
 	
 }

@@ -12,11 +12,14 @@ public class Weapon : MonoBehaviour
     public string ownerPlayer { get; set; }
     public GameObject ownerGameObj { get; set; }
 
+    #region editor properties
     public bool useDamage = true;
-	public int damageExpose;
-	public int? m_Damage;
-	public int? damage { get { return m_Damage; } set { m_Damage = value; } }
+	public int editorDamage = 1;
+    public bool useShootBundle = true;
+    public int editorShootBundle = 1;
+    #endregion
 
+	#region state
 	public enum State {
 		IDLE,
 		PREPARING,
@@ -34,16 +37,6 @@ public class Weapon : MonoBehaviour
 				Debug.Log("Trying to set same state again. Ignore.");
 			}
 	
-			/*
-			switch (value)
-			{
-			case State.SHOOTING:
-				if (! IsState(State.PREPARING) || IsState(State.CHARGING) ) 
-					return;
-				break;
-			}
-			*/
-
 			stateTime = 0;
 			m_State = value; 
 
@@ -60,20 +53,47 @@ public class Weapon : MonoBehaviour
 				break;
 			}
 		}
-	} 
+    }
 
-	// state
-	public bool IsState(State _state) { return _state == m_State; }
+    public bool IsState(State _state) { return _state == m_State; }
 
-	// ammo, shoot option
-	public bool autoload = false;
+    // time
+    public float stateTime { get; private set; }
+
+    public float prepareTime;
+    public float chargeTime;
+    public float shootTime;
+    public float cooldown;
+
+	#endregion
+
+	#region shoot option
+	// shoot option
+    public int shootBundle
+    {
+        get
+        {
+            if (doGetBundle == null)
+                return 1;
+            else
+                return doGetBundle(this);
+        }
+
+        set
+        {
+            if (doGetBundle != null)
+                Debug.LogWarning("doGetBundle already exists. Replace.");
+            doGetBundle = delegate { return value; };
+        }
+    }
+
+    public bool autoload = false;
 	public int shootAtOnce = 1;
-	public int ammoMax = 1000;
-    public int ammo { get; private set; }
+	#endregion
 
-    public bool IsNetworkEnabled() {
-		return networkView.isMine && networkView.enabled && (Network.peerType != NetworkPeerType.Disconnected);
-	}
+    #region ammo
+    public int ammoMax = 1;
+    public int ammo { get; private set; }
 
 	public void consumeAmmo() {
 		if (ammo <= 0) 
@@ -93,20 +113,17 @@ public class Weapon : MonoBehaviour
 	}
 
 	public Action<Weapon> postOutOfAmmo;
+    #endregion
 
-	// flag
-	public bool relativeVelocityEnabled = true;
+	#region projectile properties
+    public int? damage { get; set; }
+    public bool relativeVelocityEnabled = true;
 
-	public Vector3 projectileOffset;
+    public Vector3 projectileOffset;
 
-	// time
-    public float stateTime { get; private set; }
+    #endregion
 
-    public float prepareTime;
-	public float chargeTime;
-	public float shootTime;
-	public float cooldown;
-
+	#region projectile construction
 	// shoot/projectile idx
     public int shootCount { get; private set; }
     public int shootIdx { get; private set; }
@@ -128,17 +145,29 @@ public class Weapon : MonoBehaviour
 
 	public delegate GameObject DoCreateProjectileServer(int _count, int _idx);
 	public DoCreateProjectileServer doCreateProjectileServer;
+	#endregion
 
+	#region event
 	// events
 	public delegate void PostShoot(Weapon _weapon, Projectile _projectile);
 	public event PostShoot postShoot;
 	
 	public delegate void PostCooldown(Weapon _weapon);
 	public event PostCooldown postCooldown;
+	#endregion
 
+	#region effect
 	// effects
 	public GameObject effectMuzzleFirePrf;
 	public Vector3 effectMuzzleFireOffset;
+	#endregion
+
+    #region network
+    public bool IsNetworkEnabled()
+    {
+        return networkView.isMine && networkView.enabled && (Network.peerType != NetworkPeerType.Disconnected);
+    }
+    #endregion
 
     #region misc properties
 
@@ -158,7 +187,8 @@ public class Weapon : MonoBehaviour
     public void Awake()
     {
         ammo = ammoMax;
-        if (useDamage) damage = damageExpose;
+        if (useDamage) damage = editorDamage;
+        if (useShootBundle) shootBundle = editorShootBundle;
     }
 
 	public void Update () 
@@ -208,10 +238,7 @@ public class Weapon : MonoBehaviour
 
 	private void ShootProc() 
 	{
-	    var _bundle = 1;
-
-		if (doGetBundle != null) 
-		 	_bundle = doGetBundle(this);
+	    var _bundle = shootBundle;
 
 	    Vector2? _recoil = null;
 	    if (! recoil.Equals(0) && ownerGameObj && ownerGameObj.rigidbody2D)
