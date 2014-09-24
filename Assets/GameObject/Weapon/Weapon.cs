@@ -124,8 +124,7 @@ public class Weapon : MonoBehaviour
 	public delegate GameObject DoCreateProjectile(Weapon self);
 	public DoCreateProjectile doCreateProjectile;
 
-	public Action<Weapon, GameObject> doShootMine;
-    public Action<Weapon, GameObject> doShoot;
+	public Action<Weapon, GameObject> doShoot;
 
 	public delegate GameObject DoCreateProjectileServer(int _count, int _idx);
 	public DoCreateProjectileServer doCreateProjectileServer;
@@ -271,8 +270,8 @@ public class Weapon : MonoBehaviour
 					_projectile.damage = damage.Value;
 			}
 
-			if (doShootMine != null) 
-				doShootMine(this, _projectileGO);
+			if (doShoot != null) 
+				doShoot(this, _projectileGO);
 
             if (IsNetworkEnabled())
 			{

@@ -2,21 +2,25 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Weapon))]
-public class WeaponDecoratorSpeed : MonoBehaviour 
+public class WeaponDecoratorSpeed : MonoBehaviour
 {
+    private Weapon m_Weapon;
 	public float speed;
 
-	void Start() 
-	{
-		var _weapon = GetComponent<Weapon>();
+    void Awake()
+    {
+        m_Weapon = GetComponent<Weapon>();
+        m_Weapon.doShoot += DoShoot;
+    }
 
-		if (_weapon == null) return;
+    void OnDestroy()
+    {
+        m_Weapon.doShoot -= DoShoot;
+    }
 
-		var _speed = speed;
+    void DoShoot(Weapon _weapon, GameObject _projectile)
+    {
+        _projectile.rigidbody2D.velocity = speed * _weapon.transform.right;
+    }
 
-		_weapon.doShootMine = (_, _projectile) => {
-			_projectile.rigidbody2D.velocity = _speed * _weapon.transform.right;
-		};
-	}
-	
 }

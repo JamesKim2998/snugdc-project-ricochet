@@ -2,22 +2,25 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Weapon))]
-public class WeaponDecoratorDrivingForce : MonoBehaviour 
+public class WeaponDecoratorDrivingForce : MonoBehaviour
 {
+    private Weapon m_Weapon;
 	public float drivingForce;
 	public float explosionRadius;
 
-	void Start() 
+	void Awake() 
 	{
-		var _weapon = GetComponent<Weapon>();
-
-		if (_weapon == null) return;
-		
-		var _drivingForce = drivingForce;
-
-		_weapon.doShootMine = (_, _projectile) => {
-			_projectile.GetComponent<Projectile>().drivingForce = _drivingForce * _weapon.transform.right;
-		};
+		m_Weapon = GetComponent<Weapon>();
+        m_Weapon.doShoot += DoShoot;
 	}
-	
+
+    void OnDestroy()
+    {
+        m_Weapon.doShoot -= DoShoot;
+    }
+
+    void DoShoot(Weapon _weapon, GameObject _projectile)
+    {
+        _projectile.GetComponent<Projectile>().drivingForce = drivingForce * _weapon.transform.right;
+    }
 }
