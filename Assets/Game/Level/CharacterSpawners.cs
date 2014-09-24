@@ -32,7 +32,7 @@ public class CharacterSpawners
 		}
 	}
 
-    void Destroy()
+    ~CharacterSpawners()
     {
         foreach (var _spawner in spawners)
         {

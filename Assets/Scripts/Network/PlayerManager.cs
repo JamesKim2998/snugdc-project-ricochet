@@ -99,7 +99,12 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
         else
         {
             players.Add(_playerInfo.guid, _playerInfo);
-            m_ListenReadyChanged[_playerInfo.guid] = _value => postReady(_playerInfo.guid, _value.val);
+
+            m_ListenReadyChanged[_playerInfo.guid] = _value =>
+            {
+                if (postReady != null) postReady(_playerInfo.guid, _value.val);
+            };
+
             _playerInfo.isReady.postChanged += m_ListenReadyChanged[_playerInfo.guid];
         }
     }
