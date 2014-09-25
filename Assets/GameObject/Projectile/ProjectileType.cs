@@ -8,5 +8,7 @@ public enum ProjectileType
 	RED_BULLET,
 	GRAVITY_RIFLE_BULLET,
 	RPG_MISSILE,
-	END = 8,
+	YELLOW_BULLET = 8,
+	BLUE_BULLET = 9,
+	END = 10,
 }

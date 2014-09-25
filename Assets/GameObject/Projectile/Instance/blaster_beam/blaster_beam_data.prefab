@@ -8,13 +8,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: projectile_database
+  m_Name: blaster_beam_data
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1376725286, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -36,13 +37,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356a4598ab038574684c4dd844f9f040, type: 3}
+  m_Script: {fileID: 11500000, guid: e3a21fe8b881b4e4384d39f3177c3cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editorDataPrfs:
-  - {fileID: 100000, guid: dbda4d6e0151e55458b80cc5c5886758, type: 2}
-  - {fileID: 100000, guid: ff31a06f4ffadb2419202e9dc987ea75, type: 2}
-  - {fileID: 100000, guid: ff31a06f4ffadb2419202e9dc987ea75, type: 2}
+  projectilePrf: {fileID: 100008, guid: 90256c02bced7174b8c6e4718737b119, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7605855afd14311468cdb826d4234c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
