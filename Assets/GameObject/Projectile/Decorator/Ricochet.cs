@@ -99,7 +99,7 @@ public class Ricochet : MonoBehaviour
         var _rayResult = Physics2D.Raycast(
             (Vector2) transform.position + _direction * -0.5f,
             _direction, 
-			1f, 
+			2f, 
 			reflectionMask);
 
         if (_rayResult.collider)

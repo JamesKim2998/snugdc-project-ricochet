@@ -57,7 +57,12 @@ public partial class Character : MonoBehaviour
 	public Vector2 hitForce = new Vector2(10.0f, 5.0f);
 	
 	public bool hitEnabled {
-		get { return damageDetector.enabled; }
+        get { return damageDetector.enabled 
+#if DEBUG
+            && !debugInvinsible
+#endif
+            ; 
+        }
 		set { damageDetector.enabled = value; }
 	}
 	
@@ -233,6 +238,10 @@ public partial class Character : MonoBehaviour
         floating = false;
     }
 
+    #endregion
+
+    #region debug
+    public bool debugInvinsible = false;
     #endregion
 
 	void Awake () {
