@@ -67,6 +67,7 @@ public class Projectile : MonoBehaviour
 
 	// attack
 	public bool isHitOwner = false;
+    [HideInInspector]
 	public AttackData attackData;
 	public int damage { set { attackData.damage = value; }}
 
@@ -236,7 +237,7 @@ public class Projectile : MonoBehaviour
 			if (! m_Ricochet.ShouldCollide(_collider))
 				return;
 
-			if (! m_Ricochet.OnCollision(_collider))
+			if (m_Ricochet.OnCollision(_collider))
 				StartDecay();
 		}
 		else 

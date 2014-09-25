@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 212: {fileID: 21200000}
+  - 96: {fileID: 9600000}
   m_Layer: 12
   m_Name: ef_bullet_RS
   m_TagString: Untagged
@@ -27,12 +27,11 @@ GameObject:
   - 50: {fileID: 5000000}
   - 114: {fileID: 11400006}
   - 148: {fileID: 14800000}
-  - 114: {fileID: 11400004}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   m_Layer: 12
-  m_Name: Bullet_Laser
+  m_Name: red_laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: .200000003, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
   - {fileID: 400006}
@@ -129,9 +128,9 @@ Rigidbody2D:
   m_GameObject: {fileID: 100002}
   m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0
   m_GravityScale: 0
-  m_FixedAngle: 0
+  m_FixedAngle: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -145,8 +144,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .0900000036, y: .180000007}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1, y: .5}
+  m_Center: {x: -.5, y: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -205,6 +204,47 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!96 &9600000
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: b9bc5aeae18797c449bf53553270cd92, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 5
+  m_StartWidth: .100000001
+  m_EndWidth: .100000001
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -286,12 +326,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be99692242414b4da55b37d0def197d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editorType: 10
   ownerID: 0
-  ownerDetecterID: 0
-  life: .0500000007
+  ownerDamageDetecterID: 0
+  life: 1
+  prepareDuration: 0
+  stopOnDecay: 1
+  decayDuration: 0
   isHitOwner: 1
   attackData:
-    owner: 
+    ownerPlayer: 
+    weapon: 0
+    projectile: 0
     damage: 1
   initialVelocity: {x: 0, y: 0}
   drivingForce: {x: 0, y: 0}
@@ -305,10 +351,7 @@ MonoBehaviour:
   collisionTerrains:
     serializedVersion: 2
     m_Bits: 256
-  prepareDuration: .100000001
-  stopOnDecay: 1
-  decayDuration: 0
-  effectHitPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
+  effectHitPrf: {fileID: 0}
   effectHitOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -318,25 +361,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef8b6ad4f1c64baeac26ac67e2d47de, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c0ab0f7f82007541af95feebfb0ad09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  penetration: 0
+  penetrationForced:
+    serializedVersion: 2
+    m_Bits: 1024
+  reflectionCount: 10
   reflectionMask:
     serializedVersion: 2
     m_Bits: 256
-  reflectionCount: 10
-  distance: 10
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 367094aacb6600a49a25b82ba4c9b148, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  effectReflectPrf: {fileID: 100000, guid: cc9703e80f725ba4d8a84547606d91db, type: 2}
+  effectReflectOffset: {x: 0, y: 0, z: 0}
+  effectPenetratePrf: {fileID: 0}
+  effectPenetrateOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,28 +400,6 @@ NetworkView:
   m_ViewID:
     m_ID: 0
     m_Type: 0
---- !u!212 &21200000
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dfc14349141544caa862fb8eb17e2ed1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

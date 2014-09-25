@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     #region editor properties
     public bool useDamage = true;
 	public int editorDamage = 1;
-    public bool useShootBundle = true;
+    public bool useShootBundle = false;
     public int editorShootBundle = 1;
     #endregion
 

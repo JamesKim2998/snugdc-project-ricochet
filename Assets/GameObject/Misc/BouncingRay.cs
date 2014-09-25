@@ -39,7 +39,7 @@ public class BouncingRay : MonoBehaviour {
 			} 
 			else 
 			{
-				_ray = GameObject.Instantiate(rayPrf) as GameObject;
+                _ray = (GameObject) Instantiate(rayPrf);
 				_ray.transform.parent = transform;
 				m_Rays.Add(_ray);
 			}
@@ -76,7 +76,7 @@ public class BouncingRay : MonoBehaviour {
 
 		int _removeBegin = _i;
 		for (; _i < m_Rays.Count; ++_i)
-			GameObject.Destroy(m_Rays[_i]);
+			Destroy(m_Rays[_i]);
 		m_Rays.RemoveRange(_removeBegin, m_Rays.Count - _removeBegin);
 	}
 }

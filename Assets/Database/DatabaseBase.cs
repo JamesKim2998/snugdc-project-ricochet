@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using System.Collections;
 
 public class DatabaseBase<Type, TypeComponent, Data> : MonoBehaviour, IEnumerable<KeyValuePair<Type, Data>>
-    where TypeComponent: UnityEngine.Component, IDatabaseTypeComponent<Type>
-    where Data: UnityEngine.Component
+    where TypeComponent: Component, IDatabaseTypeComponent<Type>
+    where Data: Component
 {
-    public List<GameObject> editorDataPrfs;
+    public List<Data> editorDataPrfs;
 
     protected Dictionary<Type, Data> m_Datas = new Dictionary<Type, Data>();
 

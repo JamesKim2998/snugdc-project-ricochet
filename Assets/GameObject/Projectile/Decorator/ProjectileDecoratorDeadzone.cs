@@ -4,7 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(Projectile))]
 public class ProjectileDecoratorDeadzone : MonoBehaviour 
 {
-    private bool m_OutOfDeadzone = false;
     private int m_DeadzoneColliderID = 0;
 
     public Collider2D deadzone
@@ -28,7 +27,6 @@ public class ProjectileDecoratorDeadzone : MonoBehaviour
         if (_other.GetInstanceID() == m_DeadzoneColliderID) 
         {
             Debug.Log("Projectile leaved deadzone. Activate.");
-            m_OutOfDeadzone = true;
             GetComponent<Projectile>().Activate();
             Destroy(this);
         }

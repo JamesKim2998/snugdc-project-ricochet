@@ -47,7 +47,6 @@ public class HUDGameModeDeathMatch : MonoBehaviour
             return;
         }
 
-        var _modeDeathMatch = _mode as GameModeDeathMatch;
         if (_mode.type != GameModeType.DEATH_MATCH)
         {
             Debug.LogWarning("Mode should be " + GameModeType.DEATH_MATCH 

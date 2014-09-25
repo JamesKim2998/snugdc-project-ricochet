@@ -55,35 +55,31 @@ public class Ricochet : MonoBehaviour
 
 	public bool OnCollision(Collider2D _collider) 
 	{
-		bool _shouldDecay = false;
+		var _shouldDecay = true;
 
-		if ((LayerHelper.Exist(penetrationForced, _collider)
-		     //				|| (penetration > _collider.hardness)
-		     ))
+		if ((LayerHelper.Exist(penetrationForced, _collider)))
 		{
+            _shouldDecay = false;
 			m_IsPenetrating = true;
 			m_IsPenetratingTemp = true;
 			m_PenetrationTimer = 0.1f;
 			m_PenetratingObject = _collider.gameObject.GetInstanceID();
-			_shouldDecay = true;
-
-			// todo: server
+		    
 			if (effectPenetratePrf)
 			{
 				var _effect = (GameObject) Instantiate(effectPenetratePrf, transform.position, transform.rotation);
 				_effect.transform.Translate(effectPenetrateOffset);
 			}
 		}
-		else if ( reflectionCount > 0 
-		         && (LayerHelper.Exist(reflectionMask, _collider)
-		    //		    	|| _collider.reflectable)
-		    ))
+		else if ( !m_IsReflected && reflectionCount > 0 
+		         && (LayerHelper.Exist(reflectionMask, _collider)))
 		{
-			--reflectionCount;
-			Reflect(_collider);
-			_shouldDecay = true;
-			
-			// todo: server
+		    m_IsReflected = Reflect(_collider);
+		    if (!m_IsReflected)
+		        return false;
+
+		    _shouldDecay = --reflectionCount == 0;
+
 			if (effectReflectPrf)
 			{
 				var _effect = (GameObject) Instantiate(effectReflectPrf, transform.position, transform.rotation);
@@ -94,30 +90,33 @@ public class Ricochet : MonoBehaviour
 		return _shouldDecay;
 	}
 
-	void Reflect(Collider2D _collider)
+	bool Reflect(Collider2D _collider)
 	{
-	    if (m_IsReflected)
-	        return;
+        Debug.Log("reflect");
 
-		m_IsReflected = true;
-
-        var _direction = transform.TransformDirection(Vector3.right);
+        var _direction = transform.rigidbody2D.velocity.normalized;
 
         var _rayResult = Physics2D.Raycast(
-            transform.TransformPoint(0.5f * Vector3.left),
+            (Vector2) transform.position + _direction * -0.5f,
             _direction, 
 			1f, 
 			reflectionMask);
 
         if (_rayResult.collider)
 		{
-		    var _velocity = transform.rigidbody2D.velocity;
-		    transform.rigidbody2D.velocity = Vector3.Reflect(_velocity, _rayResult.normal);
+		    if ((_rayResult.point - (Vector2) transform.position).sqrMagnitude < 0.01f)
+		        return false;
+
+            var _velocity = transform.rigidbody2D.velocity;
+		    var _rotation = Quaternion.FromToRotation(-_direction, _rayResult.normal);
+            transform.rigidbody2D.velocity = _rotation * _rotation * -_velocity;
+            Debug.Log(_rayResult.normal);
+            return true;
 		}
         else
         {
             Debug.Log("RayCast failed!");
+            return false;
         }
-
 	}
 }

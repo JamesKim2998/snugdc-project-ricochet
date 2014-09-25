@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorDataPrfs:
-  - {fileID: 100000, guid: 9b5b1279b4db3a0469d1a30e9386742e, type: 2}
-  - {fileID: 100000, guid: 75f1b4a9734a29049a45a0c1fcd1eb6b, type: 2}
+  - {fileID: 11400000, guid: 9b5b1279b4db3a0469d1a30e9386742e, type: 2}
+  - {fileID: 11400000, guid: 75f1b4a9734a29049a45a0c1fcd1eb6b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

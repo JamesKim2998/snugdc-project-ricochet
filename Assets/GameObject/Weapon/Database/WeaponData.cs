@@ -4,7 +4,7 @@ using System.Collections;
 
 public class WeaponData : MonoBehaviour
 {
-	public GameObject weaponPrf;
+	public Weapon weaponPrf;
 	public GameObject weaponEquipPrf;
 
 	public Sprite hudBangIcon;

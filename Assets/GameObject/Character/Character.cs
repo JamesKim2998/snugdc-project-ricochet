@@ -435,7 +435,7 @@ public partial class Character : MonoBehaviour
 			return;
 
 	    var _weaponPrf = Database.Weapon[_crate.weapon].weaponPrf;
-		var _weapon = (GameObject) Instantiate(_weaponPrf);
+		var _weapon = (GameObject) Instantiate(_weaponPrf.gameObject);
 		weapon = _weapon.GetComponent<Weapon>();
 
 	    if (postObtainCrate != null) postObtainCrate(this, _crate);
