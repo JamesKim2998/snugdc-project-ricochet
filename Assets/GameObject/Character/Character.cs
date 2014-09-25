@@ -156,7 +156,7 @@ public partial class Character : MonoBehaviour
 			return;
 
 		var _weaponData = Database.Weapon[_weaponType];
-		var _weaponObj = (GameObject) Instantiate(_weaponData.weaponPrf);
+		var _weaponObj = (GameObject) Instantiate(_weaponData.weaponPrf.gameObject);
 		weapon = _weaponObj.GetComponent<Weapon>();
 		weapon.networkView.enabled = true;
 		weapon.networkView.viewID = _viewID;
