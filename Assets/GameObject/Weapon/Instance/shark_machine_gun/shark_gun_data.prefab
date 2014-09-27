@@ -8,10 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: bug_laser_data
+  m_Name: shark_gun_data
   m_TagString: Untagged
   m_Icon: {fileID: -1376725286, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.202682644, y: 59.8951836, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37,10 +37,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 6
+  weaponPrf: {fileID: 11400006, guid: a185ac031f48fcf4f9e6d7c849fed30f, type: 2}
+  weaponEquipPrf: {fileID: 100004, guid: de8e8971380736a41a68b00f72adb034, type: 2}
+  hudBangIcon: {fileID: 21300000, guid: dec723fd5dd8a4147a68cc110820f082, type: 3}
+  hudAmmoEquipPrf: {fileID: 100000, guid: cb704f440b8a9a442a1d2fbcc2c3ae53, type: 2}
+  hudAmmoDatas:
+  - {fileID: 11400002, guid: f821790a1f053e244821bb8d6fdb623b, type: 2}
+  - {fileID: 11400002, guid: 5c3a200055776d8429f6bb36f4c33223, type: 2}
+  - {fileID: 11400002, guid: 005f4bc647ac5e94d9467f9c92f1ba66, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,17 +56,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrf: {fileID: 11400006, guid: d5f0cea0c5febba4d8d19fee207e8413, type: 2}
-  weaponEquipPrf: {fileID: 100004, guid: f66b3e566bede9d41a50aae17a6a3cc6, type: 2}
-  hudBangIcon: {fileID: 21300000, guid: ad8425573eb97da418dbf7bf1f0d7e78, type: 3}
-  hudAmmoEquipPrf: {fileID: 100000, guid: 69086fc7955acdf47af4f55447199e5e, type: 2}
-  hudAmmoDatas:
-  - {fileID: 11400002, guid: 5ac625d8a146d8a4f8aee7f4911059ab, type: 2}
-  - {fileID: 11400002, guid: 049e12e6a001d6d42a2d8ea3cbdb0723, type: 2}
-  - {fileID: 11400002, guid: f1f1f61608bad1245b099003e561712a, type: 2}
+  type: 7
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

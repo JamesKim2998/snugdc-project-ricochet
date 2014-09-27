@@ -197,7 +197,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: .200000003
-  m_StartWidth: .0199999996
+  m_StartWidth: .0500000007
   m_EndWidth: 0
   m_Colors:
     m_Color[0]:
@@ -266,8 +266,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorType: 4
   ownerID: 0
-  ownerDetecterID: 0
-  life: 4
+  ownerDamageDetecterID: 0
+  life: 1
+  prepareDuration: .0500000007
+  stopOnDecay: 1
+  decayDuration: 0
   isHitOwner: 1
   attackData:
     ownerPlayer: 
@@ -286,9 +289,6 @@ MonoBehaviour:
   collisionTerrains:
     serializedVersion: 2
     m_Bits: 256
-  prepareDuration: .0500000007
-  stopOnDecay: 1
-  decayDuration: 0
   effectHitPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
   effectHitOffset: {x: 0, y: 0, z: 0}
 --- !u!148 &14800000

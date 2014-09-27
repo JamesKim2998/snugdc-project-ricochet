@@ -45,9 +45,9 @@ MonoBehaviour:
   hudBangIcon: {fileID: 21300000, guid: 874e914ce0194aa439f33eb7704e3699, type: 3}
   hudAmmoEquipPrf: {fileID: 100000, guid: aefa7cc0422eb784298bf77ac8929d90, type: 2}
   hudAmmoDatas:
-  - {fileID: 11400002, guid: a95bc4e4d3907554595775aa43366508, type: 2}
-  - {fileID: 11400002, guid: e712ad5582a82914295982e8f1c0ef64, type: 2}
-  - {fileID: 11400002, guid: 7bc6559c6bd7b8843a6865b6eedd05fd, type: 2}
+  - {fileID: 11400002, guid: ad9b0038d8cf54d4e908551763132490, type: 2}
+  - {fileID: 11400002, guid: 2dd7ca25700df5c419d34932b47a1a89, type: 2}
+  - {fileID: 11400002, guid: 40eaaa3bb2182254cbaf3223e77ba3b1, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

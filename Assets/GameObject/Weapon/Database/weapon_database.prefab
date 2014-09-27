@@ -40,9 +40,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorDataPrfs:
-  - {fileID: 11400000, guid: 833e0d0bca2976f469dcdcf774500b4b, type: 2}
+  - {fileID: 11400002, guid: 32eb16ac7b94ad044bdfd03efc478a08, type: 2}
   - {fileID: 11400000, guid: ff728165b24a99c46ac7f2662faed697, type: 2}
   - {fileID: 11400000, guid: 271aa65bfed49ec48be2ad8ed1750806, type: 2}
+  - {fileID: 11400000, guid: 0e6ec2db74491514d8f0142a0c0ac645, type: 2}
+  - {fileID: 11400000, guid: 7d41de8670c5adc44909a0f48f1ceaba, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
