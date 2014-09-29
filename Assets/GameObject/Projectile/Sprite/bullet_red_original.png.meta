@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: d136f42c79b64ac4abd0313a6a00ccff
+guid: c6e3090b8ddee304dbe862e1bb4ddd27
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Bug Beam
-    21300002: blaster_beam
-    21300004: beam_blaster
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -40,7 +37,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 600
+  spritePixelsToUnits: 400
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

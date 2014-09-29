@@ -79,6 +79,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 61: {fileID: 6100000}
+  - 114: {fileID: 11400008}
   m_Layer: 12
   m_Name: blaster_beam
   m_TagString: Untagged
@@ -117,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: -.375, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -174,7 +175,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 1.39999998, y: .150000006}
+  m_Size: {x: 1, y: .200000003}
   m_Center: {x: 0, y: 0}
 --- !u!96 &9600000
 TrailRenderer:
@@ -197,8 +198,8 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: .200000003
-  m_StartWidth: .150000006
-  m_EndWidth: .150000006
+  m_StartWidth: .100000001
+  m_EndWidth: .100000001
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
@@ -361,6 +362,29 @@ MonoBehaviour:
     m_Bits: 256
   effectHitPrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
   effectHitOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0ab0f7f82007541af95feebfb0ad09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  penetration: 0
+  penetrationForced:
+    serializedVersion: 2
+    m_Bits: 0
+  reflectionCount: 10
+  reflectionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  effectReflectPrf: {fileID: 0}
+  effectReflectOffset: {x: 0, y: 0, z: 0}
+  effectPenetratePrf: {fileID: 0}
+  effectPenetrateOffset: {x: 0, y: 0, z: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1

@@ -31,6 +31,7 @@ GameObject:
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 12
   m_Name: red_bullet
   m_TagString: Untagged
@@ -87,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: -.115000002, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -116,7 +117,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .0299999993
+  m_Radius: .5
   m_Center: {x: 0, y: 0}
 --- !u!82 &8200000
 AudioSource:
@@ -196,8 +197,8 @@ TrailRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: .200000003
-  m_StartWidth: .0500000007
+  m_Time: 1
+  m_StartWidth: .150000006
   m_EndWidth: 0
   m_Colors:
     m_Color[0]:
@@ -230,6 +231,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 0}
   mirrorX: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0ab0f7f82007541af95feebfb0ad09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  penetration: 3
+  penetrationForced:
+    serializedVersion: 2
+    m_Bits: 256
+  reflectionCount: 0
+  reflectionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  effectReflectPrf: {fileID: 0}
+  effectReflectOffset: {x: 0, y: 0, z: 0}
+  effectPenetratePrf: {fileID: 100000, guid: 581d19d8728e7e845a03603381d4ae76, type: 2}
+  effectPenetrateOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,7 +347,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: 2be8e3fd3b01bd54cae8bc37dfcfe0a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6e3090b8ddee304dbe862e1bb4ddd27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
