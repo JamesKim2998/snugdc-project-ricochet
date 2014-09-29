@@ -7,6 +7,8 @@ public class WeaponData : MonoBehaviour
 	public Weapon weaponPrf;
 	public GameObject weaponEquipPrf;
 
+    public int dropRate = 1;
+
 	public Sprite hudBangIcon;
 
     public GameObject hudAmmoEquipPrf;
