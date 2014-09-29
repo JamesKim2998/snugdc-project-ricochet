@@ -92,7 +92,7 @@ public class Ricochet : MonoBehaviour
 
 	bool Reflect(Collider2D _collider)
 	{
-        Debug.Log("reflect");
+        // Debug.Log("reflect");
 
         var _direction = transform.rigidbody2D.velocity.normalized;
 
@@ -110,7 +110,7 @@ public class Ricochet : MonoBehaviour
             var _velocity = transform.rigidbody2D.velocity;
 		    var _rotation = Quaternion.FromToRotation(-_direction, _rayResult.normal);
             transform.rigidbody2D.velocity = _rotation * _rotation * -_velocity;
-            Debug.Log(_rayResult.normal);
+            // Debug.Log(_rayResult.normal);
             return true;
 		}
         else
