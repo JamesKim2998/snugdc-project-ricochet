@@ -55,15 +55,16 @@ public class Global : Singleton<Global>
 	public CacheManager localCache = new CacheManager();
 	public static CacheManager LocalCache() { return Instance.localCache; }
 
-	// please implement this.
-	/*
-	[HideInInspector]
-	public CacheManager networkCache = new 
-	*/
-	
 	[HideInInspector]
 	public GameSetting gameSetting = new GameSetting();
 	public static GameSetting GameSetting() { return Instance.gameSetting; }
+
+    public static float timeElapsed { get; private set; }
+
+    static Global()
+    {
+        timeElapsed = 0;
+    }
 
 	void Awake () {
         config.Load();
@@ -80,8 +81,18 @@ public class Global : Singleton<Global>
         transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
 	}
 
-	void Start () 
-	{}
+    void Start()
+    {
+        // just for instantiate statistic.
+        var _statistic = StatisticManager.Instance;
+    }
+
+    new void OnDestroy()
+    {
+        StatisticManager.Instance.totalPlaytime.val += (int) timeElapsed;
+        if (StatisticManager.Instance.continuousPlaytime < timeElapsed)
+            StatisticManager.Instance.continuousPlaytime.val = (int) timeElapsed;
+    }
 
 	bool m_IsLoaded = false;
 
@@ -90,6 +101,12 @@ public class Global : Singleton<Global>
 		m_IsLoaded = true;
 
 	}
+
+    void Update()
+    {
+        // note: static 변수에 더하고 있습니다. 상당히 위험합니다.
+        timeElapsed += Time.deltaTime;
+    }
 
 	void Save()
 	{

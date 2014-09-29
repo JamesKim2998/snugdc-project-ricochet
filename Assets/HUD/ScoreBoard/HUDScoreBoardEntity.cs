@@ -112,7 +112,7 @@ using System.Collections;
 
 	}
 
-	void ListenDeathChanged(SetCounter<int> _statistic)
+	void ListenDeathChanged(SetCounter<int> _statistic, int _change)
 	{
 		death = _statistic;
 	}

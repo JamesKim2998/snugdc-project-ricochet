@@ -26,7 +26,7 @@ public class SetCounter<T> where T : System.IEquatable<T>
         old = val - 1;
 
         if (postAdd != null) postAdd(this, _value);
-        if (postChanged != null) postChanged(this);
+        if (postChanged != null) postChanged(this, _value);
         return true;
     }
 
@@ -41,7 +41,7 @@ public class SetCounter<T> where T : System.IEquatable<T>
         old = val + 1;
 
         if (postRemove != null) postRemove(this, _value);
-        if (postChanged != null) postChanged(this);
+        if (postChanged != null) postChanged(this, _value);
         return true;
     }
 
@@ -49,12 +49,12 @@ public class SetCounter<T> where T : System.IEquatable<T>
     {
         old = val;
         m_Counter.Clear();
-        if (postChanged != null) postChanged(this);
+        if (postChanged != null) postChanged(this, default(T));
     }
 
     public Action<SetCounter<T>, T> postAdd;
     public Action<SetCounter<T>, T> postRemove;
-    public Action<SetCounter<T>> postChanged;
+    public Action<SetCounter<T>, T> postChanged;
 
     public SetCounter()
     {

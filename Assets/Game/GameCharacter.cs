@@ -229,11 +229,15 @@ public partial class GameCharacter : MonoBehaviour
 
         if (! String.IsNullOrEmpty(_attackData.ownerPlayer))
         {
-            var _statistic = Game.Statistic[_attackData.ownerPlayer];
-            _statistic.kill.Add(_characerID);
+            var _killer = Game.Statistic[_attackData.ownerPlayer];
+            if (_attackData.ownerPlayer != _player)
+                _killer.kill.Add(_characerID);
+            else 
+                _killer.suicide.Add(_characerID);
         }
 
-        Game.Statistic[_player].death.Add(_characerID);
+        var _victim = Game.Statistic[_player];
+        _victim.death.Add(_characerID);
 
         if (postCharacterDead != null)
         {
@@ -246,6 +250,7 @@ public partial class GameCharacter : MonoBehaviour
             else
             {
                 Debug.LogWarning("Dead character " + _characerID + " does not exist! Cannot post.");
+                return;
             }
         }
     }

@@ -95,6 +95,7 @@ public class GameModeDeathMatch
 		Game.Progress.postRun += ListenGameRun;
 		Game.Progress.postOver += ListenGameOver;
 		Game.Statistic.total.death.postChanged += ListenTotalDeathChanged;
+	    Game.Result.postPropagated += ListenResultPropagated;
 
 		TryToRunGame();
 	}
@@ -106,6 +107,7 @@ public class GameModeDeathMatch
         Game.Progress.postRun -= ListenGameRun;
         Game.Progress.postOver -= ListenGameOver;
         Game.Statistic.total.death.postChanged -= ListenTotalDeathChanged;
+        Game.Result.postPropagated -= ListenResultPropagated;
     }
 
 	public override void Init(GameModeDef _def)
@@ -191,7 +193,7 @@ public class GameModeDeathMatch
 			Invoke("SpawnCharacter", respawnDelay);
 	}
 
-	void ListenTotalDeathChanged(SetCounter<int> _statistic)
+	void ListenTotalDeathChanged(SetCounter<int> _statistic, int _change)
 	{
 		if (_statistic >= respawnLimit)
 		{
@@ -201,4 +203,35 @@ public class GameModeDeathMatch
 		}
 	}
 
+    void ListenResultPropagated()
+    {
+        var _statistics = StatisticManager.Instance;
+        var _statisticMine = Game.Statistic.mine;
+        var _resultMine = Game.Result.mine;
+
+        // kill/death
+        _statistics.totalKill.val += _resultMine.kill;
+        _statistics.totalDeath.val += _resultMine.death;
+        _statistics.totalSuicide.val += _statisticMine.suicide;
+
+        if (_statistics.highestKill < _resultMine.kill)
+            _statistics.highestKill.val = _statisticMine.kill;
+
+        if (_statistics.highestDeath < _resultMine.death)
+            _statistics.highestDeath.val = _statisticMine.death;
+
+        if (_statistics.consecutiveKillCount < _statisticMine.consecutiveKill)
+            _statistics.consecutiveKillCount.val = _statisticMine.consecutiveKill;
+
+        if (_statistics.consecutiveDeathCount < _statisticMine.consecutiveDeath)
+            _statistics.consecutiveDeathCount.val = _statisticMine.consecutiveDeath;
+
+        // score
+        if (_statistics.highscore < _resultMine.score)
+            _statistics.highscore.val = _resultMine.score;
+        _statistics.cumulativeScore.val += _resultMine.score;
+
+        // misc
+        _statistics.totalCratePickUp.val += _resultMine.weaponPickUp;
+    }
 }

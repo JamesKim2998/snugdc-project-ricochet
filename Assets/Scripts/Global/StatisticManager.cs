@@ -1,10 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 using System.Security.Cryptography;
 
-public class StatisticManager : MonoBehaviour {
-    // 킬, 데스, 박스획득, 자살, 연속킬, 최고점수, 누적점수, 최고데스, 연속데스, 총 플레이시간, 연속 플레이시간
+public class StatisticManager 
+{
+
+    private readonly Dictionary<StatisticType, EncryptedPref> m_Statistics;
+    public EncryptedPref this[StatisticType _type] { get { return m_Statistics[_type]; } } 
+
+    private StatisticManager()
+    {
+        m_Statistics = new Dictionary<StatisticType, EncryptedPref>()
+        {
+            { StatisticType.TOTAL_KILL, totalKill },
+            { StatisticType.TOTAL_DEATH, totalDeath },
+            { StatisticType.TOTAL_SUICIDE, totalSuicide },
+            { StatisticType.HIGHEST_KILL, highestKill },
+            { StatisticType.HIGHEST_DEATH, highestDeath },
+            { StatisticType.CONSECUTIVE_KILL_COUNT, consecutiveKillCount },
+            { StatisticType.CONSECUTIVE_DEATH_COUNT, consecutiveDeathCount },
+            { StatisticType.HIGHSCORE, highscore },
+            { StatisticType.CUMULATIVE_SCORE, cumulativeScore },
+            { StatisticType.TOTAL_PLAYTIME, totalPlaytime },
+            { StatisticType.CONTINUOUS_PLAYTIME, continuousPlaytime },
+            { StatisticType.TOTAL_CRATE_PICKUP, totalCratePickUp },
+        };
+    }
+
+    static public readonly StatisticManager Instance = new StatisticManager();
 
     public class EncryptedPref
     {
@@ -37,7 +61,7 @@ public class StatisticManager : MonoBehaviour {
 
         public int val
         {
-            get { return int.Parse(Decrypt(PlayerPrefs.GetString(m_Key))); }
+            get { return PlayerPrefs.HasKey(m_Key) ? int.Parse(Decrypt(PlayerPrefs.GetString(m_Key))) : 0; }
             set { PlayerPrefs.SetString(m_Key, Encrypt(value.ToString())); }
         }
 
@@ -68,4 +92,6 @@ public class StatisticManager : MonoBehaviour {
     public EncryptedPref totalCratePickUp = new EncryptedPref("total_crate_pick_up");
     #endregion
     
+    
+
 }

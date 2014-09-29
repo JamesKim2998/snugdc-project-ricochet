@@ -15,7 +15,7 @@ public class GameLevelDef : MonoBehaviour
 
     void OnDestroy()
     {
-        if (autoremove)
+        if (autoremove && Game.Level != null)
         {
             Game.Level.Purge();
             Game.Level = null;

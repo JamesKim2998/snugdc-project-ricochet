@@ -19,15 +19,18 @@ public class PlayerStatistics
 
     public readonly SetCounter<int> kill = new SetCounter<int>();
     public readonly SetCounter<int> death = new SetCounter<int>();
+    public readonly SetCounter<int> suicide = new SetCounter<int>();
+    public readonly SetCounter<int> consecutiveKill = new SetCounter<int>();
+    public readonly SetCounter<int> consecutiveDeath = new SetCounter<int>();
 
     public readonly SetCounter<int> weaponPickUp = new SetCounter<int>();
 
 	public PlayerStatistics(string _player) {
 		player = _player;
 
-	    kill.postAdd += (_, _characterID) => CalculateScore();
+	    kill.postAdd += delegate { CalculateScore(); };
 		death.postAdd += (_, _characterID) => Game.Statistic.total.death.Add(_characterID);
-	    weaponPickUp.postAdd += (_, _crateID) => CalculateScore();
+	    weaponPickUp.postAdd += delegate { CalculateScore(); };
 
 		Reset ();
 	}
@@ -40,7 +43,6 @@ public class PlayerStatistics
 	}
 }
 
-// todo: incomplete code
 public class TotalStatistics 
 {
 	public readonly SetCounter<int> death = new SetCounter<int>();
@@ -66,6 +68,19 @@ public class GameStatistics {
 
     public void Start() {
 		mine = new PlayerStatistics(Network.player.guid);
+
+        mine.kill.postAdd += (_value, _change) =>
+        {
+            mine.consecutiveKill.Add(_change); 
+            mine.consecutiveDeath.Clear();
+        };
+
+        mine.death.postAdd += (_value, _change) =>
+        {
+            mine.consecutiveDeath.Add(_change); 
+            mine.consecutiveKill.Clear();
+        };
+
 		Global.Player().postConnected += ListenPlayerConnected;
 	}
 

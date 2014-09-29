@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 
 [System.Serializable]
@@ -22,6 +20,22 @@ public class GameResult : MonoBehaviour
 
 	public Dictionary<string, PlayerResult> results = new Dictionary<string, PlayerResult>();
 	public Action postPropagated;
+
+    public PlayerResult mine
+    {
+        get
+        {
+            if (results.ContainsKey(Network.player.guid))
+            {
+                return results[Network.player.guid];
+            }
+            else
+            {
+                Debug.LogWarning("Game result doesn't contains mine. Return null.");
+                return null;
+            }
+        }
+    }
 
 	void Start()
 	{
