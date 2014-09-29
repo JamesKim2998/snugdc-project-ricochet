@@ -1,9 +1,7 @@
 fileFormatVersion: 2
-guid: cb0ffef81a0c8a44a9bb53c29b159e52
+guid: ce6f462c3d1ae2447baafe25d0268e4f
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Revolver
-    21300002: revolver
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

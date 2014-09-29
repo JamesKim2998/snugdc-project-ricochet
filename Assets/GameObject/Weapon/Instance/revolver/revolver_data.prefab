@@ -8,10 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: bug_laser_data
+  m_Name: revolver_data
   m_TagString: Untagged
   m_Icon: {fileID: -1376725286, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -37,10 +37,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 6
+  weaponPrf: {fileID: 11400004, guid: af029d40450810f41a75f1c24552049a, type: 2}
+  weaponEquipPrf: {fileID: 100008, guid: 998bba7b865e45f4fb2661a663820bb5, type: 2}
+  hudBangIcon: {fileID: 21300000, guid: cb0ffef81a0c8a44a9bb53c29b159e52, type: 3}
+  hudAmmoEquipPrf: {fileID: 100000, guid: 80270edb14674dc4b80f15f3804cc16d, type: 2}
+  hudAmmoDatas:
+  - {fileID: 11400002, guid: a95bc4e4d3907554595775aa43366508, type: 2}
+  - {fileID: 11400002, guid: e712ad5582a82914295982e8f1c0ef64, type: 2}
+  - {fileID: 11400002, guid: 7bc6559c6bd7b8843a6865b6eedd05fd, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,17 +56,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a2938b9e095d534396ac6190631b4c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 22628725b731b1d4baa261c7c19c7ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrf: {fileID: 11400006, guid: d5f0cea0c5febba4d8d19fee207e8413, type: 2}
-  weaponEquipPrf: {fileID: 100004, guid: f66b3e566bede9d41a50aae17a6a3cc6, type: 2}
-  hudBangIcon: {fileID: 21300000, guid: ad8425573eb97da418dbf7bf1f0d7e78, type: 3}
-  hudAmmoEquipPrf: {fileID: 100000, guid: 69086fc7955acdf47af4f55447199e5e, type: 2}
-  hudAmmoDatas:
-  - {fileID: 11400002, guid: 5ac625d8a146d8a4f8aee7f4911059ab, type: 2}
-  - {fileID: 11400002, guid: 049e12e6a001d6d42a2d8ea3cbdb0723, type: 2}
-  - {fileID: 11400002, guid: f1f1f61608bad1245b099003e561712a, type: 2}
+  type: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

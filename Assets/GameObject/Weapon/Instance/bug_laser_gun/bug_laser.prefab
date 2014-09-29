@@ -8,13 +8,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   - 148: {fileID: 14800000}
-  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: revolver
+  m_Name: bug_laser
   m_TagString: Untagged
   m_Icon: {fileID: -1376725286, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -40,11 +40,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6982e8fe1a36f9747a797cff764d3b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionDeviation: {x: 0, y: 0}
+  directionDeviation: 5
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f36089159c4c2ff4cb0f68c7781f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 27
---- !u!114 &11400002
+  speed: 36
+--- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -55,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be9bef3b65ae7042985b1eab2ae46e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: 4
---- !u!114 &11400004
+  projectile: 3
+--- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -67,38 +80,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb246201d04eb754bba3ce58dbd215b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 6
   animationGroup: 2
   useDamage: 1
   editorDamage: 1
   useShootBundle: 1
   editorShootBundle: 1
   prepareTime: 0
-  chargeTime: 0
-  shootTime: 0
-  cooldown: 0
+  chargeTime: .0299999993
+  shootTime: .0700000003
+  cooldown: .200000003
   autoload: 0
   shootAtOnce: 1
-  ammoMax: 6
+  ammoMax: 10
   relativeVelocityEnabled: 1
   projectileOffset: {x: 1, y: .0500000007, z: 0}
   effectMuzzleFirePrf: {fileID: 100000, guid: 82b67fedd2a117b478fde23b6012cfe0, type: 2}
   effectMuzzleFireOffset: {x: .899999976, y: .119999997, z: 0}
   recoil: 4
   recoilModifier: {x: 1, y: .100000001}
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982e8fe1a36f9747a797cff764d3b03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positionDeviation: {x: 0, y: 0}
-  directionDeviation: 0
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
