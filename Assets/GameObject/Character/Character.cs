@@ -232,17 +232,16 @@ public partial class Character : MonoBehaviour
 	#region effects
 	public GameObject effectDeadPrf;
 	public Vector3 effectDeadOffset;
-
-    public Character()
-    {
-        floating = false;
-    }
-
     #endregion
 
     #region debug
     public bool debugInvinsible = false;
     #endregion
+
+    public Character()
+    {
+        floating = false;
+    }
 
 	void Awake () {
         id = s_Random.Next();

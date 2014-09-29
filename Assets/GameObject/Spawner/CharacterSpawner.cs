@@ -14,6 +14,11 @@ public class CharacterSpawner : MonoBehaviour
 
 	public float invinsibleTime = 1.0f;
 
+    #region fx
+    public GameObject fxSpawnPrf;
+    public Vector2 fxSpawnOffset;
+    #endregion
+
 	private WeakReference m_CharacterRef;
 
 	void OnDestroy()
@@ -76,6 +81,13 @@ public class CharacterSpawner : MonoBehaviour
         _character.Invoke("EnableHit", invinsibleTime);
 
         Database.Skin[_character.type].Apply(_character.renderer_);
+
+        if (fxSpawnPrf)
+        {
+            var _fxSpawn = (GameObject) Instantiate(fxSpawnPrf);
+            TransformHelper.SetParentWithoutScale(_fxSpawn, _character.gameObject);
+            _fxSpawn.transform.position = _character.transform.position + (Vector3) fxSpawnOffset;
+        }
 
         if (postSpawn != null) postSpawn(this, _character);
 

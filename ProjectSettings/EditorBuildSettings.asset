@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/UI/ui_room.unity
   - enabled: 1
     path: Assets/Maps/test_map_kkh001.unity
+  - enabled: 1
+    path: Assets/Maps/test_map_kdw001.unity

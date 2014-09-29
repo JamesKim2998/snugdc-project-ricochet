@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 public partial class GameCharacter : MonoBehaviour
 {
+	#region control
 	public float downForce = 30f;
 	public float maxUpForce = 2f;
 	public float upForce = 30f;
 	private float m_UpForceLeft = 0;
+	#endregion
 
 	public GameObject weaponDefault;
 
