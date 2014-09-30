@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameLevel
 {
-    private bool m_IsPurged = false;
+    private bool m_IsDisposed = false;
 
 	public GameLevel(GameLevelDef _def) 
 	{
@@ -15,15 +15,15 @@ public class GameLevel
 		Global.Server().postDisconnected += ListenDisconnectedFromServer;
 	}
 
-    public void Purge()
+    public void Dispose()
     {
-        if (m_IsPurged)
+        if (m_IsDisposed)
         {
             Debug.LogWarning("Trying to purge again! Ignore.");
             return;   
         }
 
-        m_IsPurged = true;
+        m_IsDisposed = true;
 
         Global.Server().postConnected -= ListenConnectedToServer;
         Global.Server().postDisconnected -= ListenDisconnectedFromServer;
@@ -34,7 +34,7 @@ public class GameLevel
 
 	~GameLevel()
     {
-        if (!m_IsPurged) Purge();
+        if (!m_IsDisposed) Dispose();
     }
 
 	public CharacterSpawners characterSpawners;

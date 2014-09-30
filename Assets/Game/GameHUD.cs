@@ -44,7 +44,7 @@ public class GameHUD : MonoBehaviour
 		Game.ModeManager.postChanged += ListenModeChanged;
 	}
 
-	~GameHUD()
+	public void Dispose()
 	{
 		Game.Progress.postIntro -= ListenGameIntro;
 		Game.Progress.postOver -= ListenGameOver;

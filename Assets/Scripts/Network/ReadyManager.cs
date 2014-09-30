@@ -23,7 +23,7 @@ public class ReadyManager : MonoBehaviour
 		Global.Context ().postChanged += ListenContextChanged;
 	}
 
-	void OnDestroy()
+	public void Dispose()
 	{
 		Global.Context ().postChanged -= ListenContextChanged;
 	}

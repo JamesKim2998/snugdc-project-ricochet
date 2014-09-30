@@ -17,7 +17,6 @@ public class GameLevelDef : MonoBehaviour
     {
         if (autoremove && Game.Level != null)
         {
-            Game.Level.Purge();
             Game.Level = null;
         }
     }

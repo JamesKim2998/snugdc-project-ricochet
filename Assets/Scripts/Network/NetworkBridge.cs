@@ -27,7 +27,7 @@ public class NetworkBridge : MonoBehaviour
 		Destroy(game);
 	}
 
-	void OnDestroy()
+	public void Dispose()
 	{
 		Global.Instance.networkBridge = null;
 	}

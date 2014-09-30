@@ -59,13 +59,6 @@ public class Global : Singleton<Global>
 	public GameSetting gameSetting = new GameSetting();
 	public static GameSetting GameSetting() { return Instance.gameSetting; }
 
-    public static float timeElapsed { get; private set; }
-
-    static Global()
-    {
-        timeElapsed = 0;
-    }
-
 	void Awake () {
         config.Load();
 	    
@@ -81,44 +74,28 @@ public class Global : Singleton<Global>
         transition = ComponentHelper.AddComponentIfNotExists<TransitionManager>(gameObject);
 	}
 
-    void Start()
+    private bool m_Disposed = false;
+
+    public void Dispose()
     {
-        // just for instantiate statistic.
-        var _statistic = StatisticManager.Instance;
+        if (m_Disposed) return;
+        m_Disposed = true;
+
+        Game.Instance.Dispose();
+
+        ready.Dispose();
+        player.Dispose();
+        networkBridge.Dispose();
+
+        StatisticManager.Instance.Save();
     }
 
-    new void OnDestroy()
-    {
-        StatisticManager.Instance.totalPlaytime.val += (int) timeElapsed;
-        if (StatisticManager.Instance.continuousPlaytime < timeElapsed)
-            StatisticManager.Instance.continuousPlaytime.val = (int) timeElapsed;
-    }
-
-	bool m_IsLoaded = false;
-
-	void Load()
-	{
-		m_IsLoaded = true;
-
-	}
+    void OnApplicationQuit() { Dispose(); }
 
     void Update()
     {
         // note: static 변수에 더하고 있습니다. 상당히 위험합니다.
-        timeElapsed += Time.deltaTime;
+        StatisticManager.Instance.playtime += Time.deltaTime;
     }
 
-	void Save()
-	{
-		if (! m_IsLoaded)
-		{
-			Debug.LogWarning("Trying to save but not loaded yet! Ignore.");
-			return;
-		}
-	}
-
-	void OnApplicationQuit()
-	{
-		Save ();
-	}
 }

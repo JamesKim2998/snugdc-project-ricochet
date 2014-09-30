@@ -68,6 +68,13 @@ public class StatisticManager
         public static implicit operator int(EncryptedPref _self) { return _self.val; }
     }
 
+    public void Save()
+    {
+        totalPlaytime.val += (int)playtime;
+        if (continuousPlaytime < playtime)
+            continuousPlaytime.val = (int)playtime;
+    }
+
     #region kill/death
     public EncryptedPref totalKill = new EncryptedPref("total_kill");
     public EncryptedPref totalDeath = new EncryptedPref("total_death");
@@ -84,6 +91,8 @@ public class StatisticManager
     #endregion
 
     #region time
+
+    public float playtime = 0;
     public EncryptedPref totalPlaytime = new EncryptedPref("total_playtime");
     public EncryptedPref continuousPlaytime = new EncryptedPref("continuous_playtime");
     #endregion

@@ -56,7 +56,7 @@ public partial class PlayerManager : MonoBehaviour, IEnumerable<KeyValuePair<str
 		
 	}
 
-	void OnDestroy()
+	public void Dispose()
 	{
 		Global.Server().postServerInitialized -= ListenServerInitialized;
 		Global.Server().postConnectionSetuped -= ListenConnectionSetuped;

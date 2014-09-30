@@ -37,17 +37,18 @@ public class GameResult : MonoBehaviour
         }
     }
 
+
 	void Start()
 	{
 		Game.Progress.postStart += ListenGameStart;
 		Game.Progress.postOver += ListenGameOver;
 	}
 
-	void OnDestroy()
-	{
-		Game.Progress.postStart -= ListenGameStart;
-		Game.Progress.postOver -= ListenGameOver;
-	}
+    public void Dispose()
+    {
+        Game.Progress.postStart -= ListenGameStart;
+        Game.Progress.postOver -= ListenGameOver;
+    }
 
 	public void FillIn()
 	{

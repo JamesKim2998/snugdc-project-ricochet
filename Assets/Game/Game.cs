@@ -22,8 +22,19 @@ public class Game : Singleton<Game>
 	
 	public GameStatistics statistic = new GameStatistics();
 	public static GameStatistics Statistic { get { return Instance.statistic; } }
-	
-	public GameLevel level;
+
+    private GameLevel m_Level;
+
+    public GameLevel level
+    {
+        get { return m_Level; }
+        set
+        {
+            if (level != null) level.Dispose();
+            m_Level = value;
+        }
+    }
+
     public static GameLevel Level { get { return Instance.level; } set { Instance.level = value; } }
 
 	public GameModeManager modeManager;
@@ -66,6 +77,19 @@ public class Game : Singleton<Game>
 		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
 	}
 
+    private bool m_IsDisposed = false;
+    public void Dispose()
+    {
+        if (m_IsDisposed) return;
+        m_IsDisposed = true;
+        hud.Dispose();
+        result.Dispose();
+        statistic.Dispose();
+        level = null;
+    }
+
+    void OnApplicationQuit() { Dispose(); }
+
 	public void Purge()
 	{
 		character.Purge ();
@@ -74,14 +98,6 @@ public class Game : Singleton<Game>
 		level = null;
 		modeManager.Purge();
 		statistic.Reset();
-	}
-
-	void Update () 
-	{
-	}
-
-	void FixedUpdate() 
-	{
 	}
 
 	void ListenBeforeDisconnected()

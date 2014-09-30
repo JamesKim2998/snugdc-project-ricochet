@@ -84,7 +84,7 @@ public class GameStatistics {
 		Global.Player().postConnected += ListenPlayerConnected;
 	}
 
-	public void OnDestroy() 
+	public void Dispose() 
 	{
 		Global.Player().postConnected -= ListenPlayerConnected;
 	}
