@@ -74,7 +74,7 @@ public class Game : Singleton<Game>
 		camera_.Start();
 		statistic.Start();
 
-		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
+		Global.Server().postDisconnected += ListenBeforeDisconnected;
 	}
 
     private bool m_IsDisposed = false;
@@ -86,6 +86,8 @@ public class Game : Singleton<Game>
         result.Dispose();
         statistic.Dispose();
         level = null;
+
+        Global.Server().postDisconnected -= ListenBeforeDisconnected;
     }
 
     void OnApplicationQuit() { Dispose(); }
@@ -104,6 +106,5 @@ public class Game : Singleton<Game>
 	{
 		Debug.Log ("Server disconnected.");
 		Network.RemoveRPCs(Network.player);
-		Network.DestroyPlayerObjects(Network.player);
 	}
 }

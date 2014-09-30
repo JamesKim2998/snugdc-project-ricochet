@@ -16,6 +16,7 @@ public class ServerManager : MonoBehaviour
 	public Action postServerInitialized;
 	public Action postConnected;
 	public Action postConnectionSetuped;
+    public Action postBeforeDisconnect;
 	public Action postDisconnected;
 
 	public void Initiate(int _port) 
@@ -33,6 +34,7 @@ public class ServerManager : MonoBehaviour
 
 	public void Disconnect()
 	{
+	    if (postBeforeDisconnect != null) postBeforeDisconnect();
 		Network.Disconnect();
 	}
 

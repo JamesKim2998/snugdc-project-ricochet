@@ -37,9 +37,14 @@ public class Spawner : MonoBehaviour {
 		if (! networkEnabled || (networkEnabled && Network.isServer))
 			StartSpawn();
 
-		MasterServerManager.postBeforeDisconnected += ListenBeforeDisconnected;
+		Global.Server().postBeforeDisconnect += ListenBeforeDisconnected;
 	}
-	
+
+    void OnDestroy()
+    {
+        Global.Server().postBeforeDisconnect -= ListenBeforeDisconnected;
+    }
+
 	IEnumerator SpawnRoutine() 
     {
 		yield return new WaitForSeconds(periodOffset);

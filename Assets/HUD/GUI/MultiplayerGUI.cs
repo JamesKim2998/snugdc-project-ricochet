@@ -165,7 +165,7 @@ public class JoinButton : MonoBehaviour
 		if (Network.isClient) 
 		{
 			if (GUILayout.Button("Disconnect")) 
-				MasterServerManager.Disconnect();
+				Global.Server().Disconnect();
 		} 
 		else 
 		{

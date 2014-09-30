@@ -12,7 +12,7 @@ public static class MasterServerManager {
 		get { return MasterServer.ipAddress; }
 		set { 
 			if (Network.peerType != NetworkPeerType.Disconnected) {
-				Debug.Log("trying to change master server address while server running. ignore.");
+                Debug.Log("Trying to change master server address while server running. Ignore.");
 				return;
 			}
 			MasterServer.ipAddress = value;
@@ -24,7 +24,7 @@ public static class MasterServerManager {
 		get { return MasterServer.port; }
 		set { 
 			if (Network.peerType != NetworkPeerType.Disconnected) {
-				Debug.Log("trying to change master server port while server running. ignore.");
+				Debug.Log("Trying to change master server port while server running. Ignore.");
 				return;
 			}
 			MasterServer.port = value;
@@ -35,7 +35,7 @@ public static class MasterServerManager {
 		get { return Network.natFacilitatorIP; }
 		set {
 			if (Network.peerType != NetworkPeerType.Disconnected) {
-				Debug.Log("trying to change facilitator IP while server running. ignore.");
+				Debug.Log("Trying to change facilitator IP while server running. Ignore.");
 				return;
 			}
 			Network.natFacilitatorIP = value;
@@ -46,15 +46,12 @@ public static class MasterServerManager {
 		get { return Network.natFacilitatorPort; }
 		set {
 			if (Network.peerType != NetworkPeerType.Disconnected) {
-				Debug.Log("trying to change facilitator port while server running. ignore.");
+				Debug.Log("Trying to change facilitator port while server running. Ignore.");
 				return;
 			}
 			Network.natFacilitatorPort = value;
 		}
 	}
-
-	public delegate void PostBeforeDisconnected();
-	public static event PostBeforeDisconnected postBeforeDisconnected;
 
 	static MasterServerManager() 
 	{
@@ -79,9 +76,4 @@ public static class MasterServerManager {
 		MasterServer.RequestHostList(m_GameType);
 	}
 
-	public static void Disconnect() 
-	{
-		if ( postBeforeDisconnected != null) postBeforeDisconnected();
-		Network.Disconnect();
-	}
 }
