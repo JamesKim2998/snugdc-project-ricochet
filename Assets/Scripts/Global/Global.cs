@@ -85,7 +85,7 @@ public class Global : Singleton<Global>
 
         ready.Dispose();
         player.Dispose();
-        networkBridge.Dispose();
+        if (networkBridge) networkBridge.Dispose();
 
         StatisticManager.Instance.Save();
     }
