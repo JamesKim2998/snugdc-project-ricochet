@@ -29,6 +29,8 @@ public class GameWeapon
 
     public void Refresh()
     {
+        m_TotalDropRate = 0;
+
         foreach (var _weaponType in weaponSet)
         {
             var _weaponData = Database.Weapon[_weaponType];
