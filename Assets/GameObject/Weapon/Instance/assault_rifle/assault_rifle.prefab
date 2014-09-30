@@ -89,7 +89,7 @@ MonoBehaviour:
   prepareTime: 0
   chargeTime: .0299999993
   shootTime: .0700000003
-  cooldown: .200000003
+  cooldown: .0299999993
   autoload: 0
   shootAtOnce: 3
   ammoMax: 30

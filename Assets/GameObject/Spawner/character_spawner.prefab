@@ -129,7 +129,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  invinsibleTime: 1.5
+  invinsibleTime: 3
   fxSpawnPrf: {fileID: 100000, guid: fbc7a9e90ef817045a36e5abfaace058, type: 2}
   fxSpawnOffset: {x: 0, y: .800000012}
 --- !u!114 &11400002
