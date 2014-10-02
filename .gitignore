@@ -71,7 +71,7 @@ $RECYCLE.BIN/
 # Unity generated #
 # =============== #
 /Temp/
-
+/Library/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -108,32 +108,3 @@ output_log.txt
 [Bb]inary
 /Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll
 /Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll.meta
-
-Library/AssetImportState
-Library/AssetServerCacheV3
-Library/FailedAssetImports.txt
-Library/ScriptAssemblies
-Library/ScriptMapper
-Library/cache
-Library/expandedItems
-Library/metadata
-Library/previews
-Library/ShaderCache
-Library/ShaderCache.db
-
-/Library/BuildSettings.asset
-/Library/BuildPlayer.prefs
-/Library/MonoManager.asset
-/Library/InspectorExpandedItems.asset
-/Library/UnityAssemblies/version.txt
-/Library/UnityAssemblies/UnityEditor.Graphs.dll
-/Library/UnityAssemblies/UnityEditor.Graphs.xml
-/Library/UnityAssemblies/UnityEditor.dll
-/Library/UnityAssemblies/UnityEditor.xml
-/Library/UnityAssemblies/UnityEngine.dll
-/Library/UnityAssemblies/UnityEngine.xml
-/Library/EditorUserBuildSettings.asset
-/Library/EditorUserSettings.asset
-/Library/ProjectSettings.asset
-/Library/AnnotationManager
-/Library/*.log
