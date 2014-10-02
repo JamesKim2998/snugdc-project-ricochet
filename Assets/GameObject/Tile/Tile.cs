@@ -49,7 +49,6 @@ public class Tile : MonoBehaviour
         {
             prefab = (GameObject)Instantiate(_tiledata.prefab);
             TransformHelper.SetParentLocal(prefab, gameObject);
-            prefab.name = "prefab";
         }
     }
 }

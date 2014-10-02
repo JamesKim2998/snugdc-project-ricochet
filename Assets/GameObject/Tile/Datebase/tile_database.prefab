@@ -47,8 +47,8 @@ MonoBehaviour:
       sloped: 0
     color: 1
     sprite:
-    - {fileID: 21300002, guid: 86b21038846da354a85df149b0dff96c, type: 3}
-    - {fileID: 21300002, guid: 84fe2a1ee9b789644bec45418309e82d, type: 3}
+    - {fileID: 21300000, guid: 86b21038846da354a85df149b0dff96c, type: 3}
+    - {fileID: 21300000, guid: 84fe2a1ee9b789644bec45418309e82d, type: 3}
     prefab: {fileID: 100000, guid: c5933e7388224cb40ab831e6fb03c9c2, type: 2}
     minimapGizmo: {fileID: 11400004, guid: afd185ccbe20c4740bf51009daf99945, type: 2}
   editorStoneDatas:
@@ -59,8 +59,8 @@ MonoBehaviour:
       sloped: 0
     color: 1
     sprite:
-    - {fileID: 21300004, guid: 22a1e40b4785018499e5529557cc72a2, type: 3}
-    - {fileID: 21300002, guid: 58bdb4ca457364344899d7bd1ed4a2bd, type: 3}
+    - {fileID: 21300000, guid: 22a1e40b4785018499e5529557cc72a2, type: 3}
+    - {fileID: 21300000, guid: 58bdb4ca457364344899d7bd1ed4a2bd, type: 3}
     prefab: {fileID: 0}
     minimapGizmo: {fileID: 0}
   - key:
@@ -70,8 +70,9 @@ MonoBehaviour:
       sloped: 0
     color: 1
     sprite:
-    - {fileID: 21300004, guid: 9dfc42c0b25d34943a66dbeb0c482d3f, type: 3}
-    - {fileID: 21300004, guid: b61e31634e9397a41951ee84eaeb3b27, type: 3}
+    - {fileID: 21300000, guid: 9dfc42c0b25d34943a66dbeb0c482d3f, type: 3}
+    - {fileID: 21300000, guid: b61e31634e9397a41951ee84eaeb3b27, type: 3}
+    - {fileID: 21300000, guid: 9dfc42c0b25d34943a66dbeb0c482d3f, type: 3}
     prefab: {fileID: 0}
     minimapGizmo: {fileID: 0}
   - key:
@@ -81,8 +82,8 @@ MonoBehaviour:
       sloped: 0
     color: 1
     sprite:
-    - {fileID: 21300004, guid: e63c0f43e5ff6f6448c07dbfe6d5c864, type: 3}
-    - {fileID: 21300004, guid: 490f83030cb1cb64b85a1c82ca202d28, type: 3}
+    - {fileID: 21300000, guid: e63c0f43e5ff6f6448c07dbfe6d5c864, type: 3}
+    - {fileID: 21300000, guid: 490f83030cb1cb64b85a1c82ca202d28, type: 3}
     prefab: {fileID: 0}
     minimapGizmo: {fileID: 0}
   editorSteelDatas: []
@@ -94,9 +95,9 @@ MonoBehaviour:
       sloped: 0
     color: 4
     sprite:
-    - {fileID: 21300002, guid: 2bff5b0cedc9d174c8731f346760ca41, type: 3}
-    - {fileID: 21300002, guid: c370f953253d83f4ebbf8efcf6e02c8f, type: 3}
-    - {fileID: 21300002, guid: 713f46301ead9264ca7901e6b57a8a92, type: 3}
+    - {fileID: 21300000, guid: 2bff5b0cedc9d174c8731f346760ca41, type: 3}
+    - {fileID: 21300000, guid: c370f953253d83f4ebbf8efcf6e02c8f, type: 3}
+    - {fileID: 21300000, guid: 713f46301ead9264ca7901e6b57a8a92, type: 3}
     prefab: {fileID: 0}
     minimapGizmo: {fileID: 0}
   editorWoodenDatas: []

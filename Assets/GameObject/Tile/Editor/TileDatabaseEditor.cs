@@ -15,8 +15,16 @@ public class TileDatabaseEditor : Editor
     public override void OnInspectorGUI()
     {
 	    base.OnInspectorGUI();
+
         if (GUILayout.Button("Rebuild"))
             m_Target.Rebuild();
-	}
+
+        if (GUILayout.Button("Refresh all tiles"))
+        {
+            var _tiles = FindObjectsOfType<Tile>();
+            foreach (var _tile in _tiles)
+                _tile.Refresh();
+        }
+    }
 	
 }
