@@ -56,7 +56,7 @@ public partial class Character : MonoBehaviour
 	public float hitCooldown = 0.5f;
 	public Vector2 hitForce = new Vector2(10.0f, 5.0f);
 
-    public SetCounter<int> hitDisabled;
+    public SetCounter<int> hitDisabled = new SetCounter<int>();
 
     public bool isDead { get; private set; }
 
