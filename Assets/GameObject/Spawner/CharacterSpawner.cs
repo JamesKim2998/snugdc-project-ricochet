@@ -12,7 +12,7 @@ public class CharacterSpawner : MonoBehaviour
     public Action<CharacterSpawner, Character> postSpawn;
 	public Action<CharacterSpawner, Character> postDestroy;
 
-	public float invinsibleTime = 1.0f;
+	public float invincibleTime = 1.0f;
 
     #region fx
     public GameObject fxSpawnPrf;
@@ -67,6 +67,14 @@ public class CharacterSpawner : MonoBehaviour
 		return _character;
 	}
 
+    IEnumerator InvincibleRoutine(Character _character)
+    {
+        const int INVINCIBLE_FLAG = 12384183;
+        _character.hitDisabled += INVINCIBLE_FLAG;
+        yield return new WaitForSeconds(invincibleTime);
+        _character.hitDisabled -= INVINCIBLE_FLAG;
+    }
+
     Character SpawnLocal(PlayerInfo _playerInfo, int _characterID, Vector3 _position)
     {
 //		Debug.Log("Spawn character local.");
@@ -76,9 +84,7 @@ public class CharacterSpawner : MonoBehaviour
         _character.id = _characterID;
         _character.ownerPlayer = _playerInfo.guid;
         _character.type = _playerInfo.characterSelected;
-
-        _character.hitEnabled = false;
-        _character.Invoke("EnableHit", invinsibleTime);
+        StartCoroutine(InvincibleRoutine(_character));
 
         Database.Skin[_character.type].Apply(_character.renderer_);
 

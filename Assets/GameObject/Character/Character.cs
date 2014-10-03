@@ -55,24 +55,12 @@ public partial class Character : MonoBehaviour
 
 	public float hitCooldown = 0.5f;
 	public Vector2 hitForce = new Vector2(10.0f, 5.0f);
-	
-	public bool hitEnabled {
-        get { return damageDetector.enabled 
-#if DEBUG
-            && !debugInvinsible
-#endif
-            ; 
-        }
-		set { damageDetector.enabled = value; }
-	}
-	
-	private bool m_Dead = false;
-	public bool isDead {
-		get { return m_Dead; }
-		private set { m_Dead = value; }
-	}
-	
-	public Vector2 deadForce;
+
+    public SetCounter<int> hitDisabled;
+
+    public bool isDead { get; private set; }
+
+    public Vector2 deadForce;
 	public float deadDelay = 0.5f;
 	#endregion
 
@@ -240,15 +228,27 @@ public partial class Character : MonoBehaviour
 
     public Character()
     {
+        isDead = false;
         floating = false;
     }
 
-	void Awake () {
+    void Awake () {
         id = s_Random.Next();
 
 		m_Hp = GetComponent<PropertyHP>();
 		m_Hp.hp = hpMax;
 		m_Hp.postDead = Die;
+
+        // life state
+        {
+            hitDisabled.postChanged += (_counter, _val) =>
+            {
+                if (_counter == 0)
+                    damageDetector.enabled = true;
+                else if (_counter.old == 0)
+                    damageDetector.enabled = false;
+            };
+        }
 
 		// components
 		m_NetworkAnimator = GetComponent<NetworkAnimator>();
@@ -359,16 +359,18 @@ public partial class Character : MonoBehaviour
 		weapon.Shoot();
 		m_NetworkAnimator.SetTrigger ("shoot");
 	}
-	
+
+    private const int INTERNAL_HIT_FLAG = 21674;
+
 	void EnableHit() {
-		hitEnabled = true;
+        hitDisabled -= INTERNAL_HIT_FLAG;
 	}
 
 	public void Hit(AttackData _attackData) 
 	{
 //		Debug.Log("Hit");
 
-		if (! hitEnabled) return;
+		if (hitDisabled) return;
 
 		if (IsNetworkEnabled())
 		{
@@ -383,7 +385,7 @@ public partial class Character : MonoBehaviour
 	void HitLocal(AttackData _attackData)
 	{
 //		Debug.Log("Hit Local");
-		hitEnabled = false;
+		hitDisabled += INTERNAL_HIT_FLAG;
 		CancelInvoke("EnableHit");
 		Invoke("EnableHit", hitCooldown);
 		
@@ -416,7 +418,7 @@ public partial class Character : MonoBehaviour
 		CancelInvoke("EnableHit");
 		
 		isDead = true;
-		hitEnabled = false;
+		hitDisabled += INTERNAL_HIT_FLAG;
 		
 		var _deadForce = deadForce;
 		_deadForce.x *= -direction;

@@ -61,8 +61,24 @@ public class SetCounter<T> where T : System.IEquatable<T>
         old = 0;
     }
 
+    public static implicit operator bool(SetCounter<T> _counter)
+    {
+        return _counter.val != 0;
+    }
+
     public static implicit operator int(SetCounter<T> _counter)
     {
         return _counter.val;
+    }
+
+    public static SetCounter<T> operator +(SetCounter<T> _counter, T _var)
+    {
+        _counter.Add(_var);
+        return _counter;
+    }
+    public static SetCounter<T> operator -(SetCounter<T> _counter, T _var)
+    {
+        _counter.Remove(_var);
+        return _counter;
     }
 }

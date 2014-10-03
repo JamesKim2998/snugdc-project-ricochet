@@ -93,7 +93,7 @@ public class Weapon : MonoBehaviour
 
     #region ammo
     public int ammoMax = 1;
-    public int ammo { get; private set; }
+    public int ammo { get; set; }
 
 	public void consumeAmmo() {
 		if (ammo <= 0) 

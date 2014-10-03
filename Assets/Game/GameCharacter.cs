@@ -12,7 +12,7 @@ public partial class GameCharacter : MonoBehaviour
 	private float m_UpForceLeft = 0;
 	#endregion
 
-	public GameObject weaponDefault;
+	public WeaponType weaponDefault;
 
 	private Character m_Character;
 
@@ -42,10 +42,14 @@ public partial class GameCharacter : MonoBehaviour
 
 				Game.Camera_.Bind(GetHashCode(), m_Character.transform);
 
-				if (weaponDefault != null)
+				if (weaponDefault != WeaponType.NONE)
 				{
-					var _weapon = (GameObject) Instantiate(weaponDefault);
-					m_Character.weapon = _weapon.GetComponent<Weapon>();
+				    var _weaponData = Database.Weapon[weaponDefault];
+				    if (_weaponData)
+				    {
+                        var _weapon = (GameObject)Instantiate(_weaponData.weaponPrf.gameObject);
+                        m_Character.weapon = _weapon.GetComponent<Weapon>();   
+				    }
 				}
 
 				m_Character.postDead += ListenDead;
@@ -66,6 +70,7 @@ public partial class GameCharacter : MonoBehaviour
     public Action<Character> postCharacterChanged;
     public Action<Character> postCharacterDead;
 
+    #region character list
     private readonly Dictionary<int, Character> m_Characters = new Dictionary<int, Character>();
     public Action<Character> postCharacterAdded;
     public Action<Character> postCharacterRemoved;
@@ -101,6 +106,7 @@ public partial class GameCharacter : MonoBehaviour
         else 
             Debug.LogWarning("Character does not exist! Ignore.");
     }
+    #endregion
 
 	public void Start()
 	{

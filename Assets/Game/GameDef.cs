@@ -134,7 +134,7 @@ public class GameCharacterDef
 	public bool useUpForce = false;
 	public float upForce = 30f;
 	
-	public GameObject weaponDefault;
+	public WeaponType weaponDefault = WeaponType.NONE;
 	
 	public List<Color> characterColors;
 	
@@ -145,7 +145,7 @@ public class GameCharacterDef
 		if (useUpForce) Game.Character.upForce = upForce;
 		if (characterColors != null && characterColors.Count > 0) 
 			Game.Character.characterColors = new List<Color>(characterColors);
-		if (weaponDefault) Game.Character.weaponDefault = weaponDefault;
+		if (weaponDefault != WeaponType.NONE) Game.Character.weaponDefault = weaponDefault;
 		if (character) Game.Character.character = character;
 	}
 }
