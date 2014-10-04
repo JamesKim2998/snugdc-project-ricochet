@@ -136,6 +136,16 @@ public partial class Character : MonoBehaviour
 	public GameObject weaponPivot;
 	public GameObject weaponEquipPivot;
 
+    public void SetWeapon(WeaponType _weaponType)
+    {
+        var _weaponData = Database.Weapon[_weaponType];
+        if (!_weaponData) return;
+
+        var _weaponPrf = _weaponData.weaponPrf;
+        var _weapon = (GameObject) Instantiate(_weaponPrf.gameObject);
+        weapon = _weapon.GetComponent<Weapon>();
+    }
+
 	[RPC]
 	private void Character_SetWeapon(NetworkViewID _viewID, int _weapon)
 	{
@@ -444,10 +454,7 @@ public partial class Character : MonoBehaviour
 		if (_crate.empty) 
 			return;
 
-	    var _weaponPrf = Database.Weapon[_crate.weapon].weaponPrf;
-		var _weapon = (GameObject) Instantiate(_weaponPrf.gameObject);
-		weapon = _weapon.GetComponent<Weapon>();
-
+        SetWeapon(_crate.weapon);
 	    if (postObtainCrate != null) postObtainCrate(this, _crate);
 	}
 
