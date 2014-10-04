@@ -26,7 +26,7 @@ public class ProjectileDecoratorDeadzone : MonoBehaviour
     {
         if (_other.GetInstanceID() == m_DeadzoneColliderID) 
         {
-            Debug.Log("Projectile leaved deadzone. Activate.");
+//             Debug.Log("Projectile leaved deadzone. Activate.");
             GetComponent<Projectile>().Activate();
             Destroy(this);
         }

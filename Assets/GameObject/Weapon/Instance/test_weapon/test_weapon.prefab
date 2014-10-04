@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36089159c4c2ff4cb0f68c7781f9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 10
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be9bef3b65ae7042985b1eab2ae46e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: 10
+  projectile: 7
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
   prepareTime: .100000001
   chargeTime: .0500000007
   shootTime: .100000001
-  cooldown: .5
+  cooldown: .100000001
   autoload: 0
   shootAtOnce: 1
   ammoMax: 1000

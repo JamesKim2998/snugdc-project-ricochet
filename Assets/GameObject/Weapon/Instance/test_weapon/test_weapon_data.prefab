@@ -42,7 +42,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrf: {fileID: 11400006, guid: 1e21dc3867355d44bb8f5e37ace182f2, type: 2}
   weaponEquipPrf: {fileID: 100002, guid: 28397b30b77c2a04c919c332e85b769f, type: 2}
-  hudBangIcon: {fileID: 21300002, guid: 03a053947652bd2498c92309b5e9567d, type: 3}
+  dropRate: 1
+  hudBangIcon: {fileID: 21300000, guid: 03a053947652bd2498c92309b5e9567d, type: 3}
   hudAmmoEquipPrf: {fileID: 100000, guid: b0d8ccba76b3da24c8b5032e8de60ae7, type: 2}
   hudAmmoDatas:
   - {fileID: 11400002, guid: 96a63361d821b5a4ca83688659865097, type: 2}

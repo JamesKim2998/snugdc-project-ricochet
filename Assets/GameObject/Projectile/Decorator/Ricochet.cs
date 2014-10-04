@@ -14,7 +14,7 @@ public class Ricochet : MonoBehaviour
 
 	// reflection
 	public int reflectionCount;
-	private bool m_IsReflected = false;
+    public float reflectRadius = 0.5f;
 	public LayerMask reflectionMask;
 
 	// effect
@@ -36,10 +36,10 @@ public class Ricochet : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		m_IsReflected = false;
-
 		if (m_PenetrationTimer >= 0)
 			m_PenetrationTimer -= Time.fixedDeltaTime;
+
+	    TryReflect();
 	}
 
 	public bool ShouldCollide(Collider2D _collider)
@@ -47,7 +47,7 @@ public class Ricochet : MonoBehaviour
 		if (m_IsPenetrating || (m_PenetratingObject == _collider.gameObject.GetInstanceID()))
 			return false;
 		
-		if ((m_PenetrationTimer > 0) || m_IsReflected) 
+		if (m_PenetrationTimer >= 0)
 			return false;
 
 		return true;
@@ -71,52 +71,51 @@ public class Ricochet : MonoBehaviour
 				_effect.transform.Translate(effectPenetrateOffset);
 			}
 		}
-		else if ( !m_IsReflected && reflectionCount > 0 
-		         && (LayerHelper.Exist(reflectionMask, _collider)))
-		{
-		    m_IsReflected = Reflect(_collider);
-		    if (!m_IsReflected)
-		        return false;
-
-		    _shouldDecay = --reflectionCount == 0;
-
-			if (effectReflectPrf)
-			{
-				var _effect = (GameObject) Instantiate(effectReflectPrf, transform.position, transform.rotation);
-				_effect.transform.Translate(effectReflectOffset);
-			}
-		}
+        else if (LayerHelper.Exist(reflectionMask, _collider))
+        {
+            _shouldDecay = reflectionCount == 0;
+        }
 
 		return _shouldDecay;
 	}
 
-	bool Reflect(Collider2D _collider)
-	{
-        // Debug.Log("reflect");
+    bool TryReflect()
+    {
+        if (reflectionCount <= 0)
+            return false;
 
+        // raycast
         var _direction = transform.rigidbody2D.velocity.normalized;
 
         var _rayResult = Physics2D.Raycast(
-            (Vector2) transform.position + _direction * -0.5f,
-            _direction, 
-			2f, 
+            transform.position,
+            _direction,
+            reflectRadius, 
 			reflectionMask);
 
         if (_rayResult.collider)
-		{
-		    if ((_rayResult.point - (Vector2) transform.position).sqrMagnitude < 0.01f)
-		        return false;
+        {
+            // 너무 가까우면 fail.
+            if ((_rayResult.point - (Vector2)transform.position).sqrMagnitude < 0.01f)
+                return false;
 
             var _velocity = transform.rigidbody2D.velocity;
-		    var _rotation = Quaternion.FromToRotation(-_direction, _rayResult.normal);
+            var _rotation = Quaternion.FromToRotation(-_direction, _rayResult.normal);
             transform.rigidbody2D.velocity = _rotation * _rotation * -_velocity;
-            // Debug.Log(_rayResult.normal);
-            return true;
-		}
+        }
         else
         {
-            Debug.Log("RayCast failed!");
             return false;
         }
-	}
+            
+        --reflectionCount;
+
+        if (effectReflectPrf)
+        {
+            var _effect = (GameObject)Instantiate(effectReflectPrf, transform.position, transform.rotation);
+            _effect.transform.Translate(effectReflectOffset);
+        }
+
+        return true;
+    }
 }
