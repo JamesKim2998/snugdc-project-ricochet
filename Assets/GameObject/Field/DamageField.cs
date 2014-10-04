@@ -4,26 +4,15 @@ using System.Collections;
 public class DamageField : MonoBehaviour {
 
 	public AttackData attackData;
-	public string[] filters;
+	public LayerMask targetMask;
 	
 	void OnTriggerEnter2D (Collider2D _collider)
 	{
-		if (! enabled)
-			return;
+		if (! enabled) return;
 
-		if (filters.Length == 0) {
-			Debug.Log("empty filter!");
-			return;
-		}
-
-		if (System.Array.Exists(filters, filter => filter == _collider.gameObject.tag)) {
+		if (LayerHelper.Exist(targetMask, _collider)) {
 			var detector = _collider.GetComponent<DamageDetector>();
-
-			if (detector) {
-				detector.Damage(attackData);
-			} else {
-				Debug.Log("detector not found!");
-			}
+			if (detector) detector.Damage(attackData);
 		}
 	}
 }

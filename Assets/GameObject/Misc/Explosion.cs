@@ -2,56 +2,68 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Explosion : MonoBehaviour {
+public class Explosion : MonoBehaviour
+{
+    public CircleCollider2D field;
 
-	public AttackData attackData;
+    public bool executeOnStart = true;
+
 	public float radius;
 	public float duration;
 
-	public LayerMask targets;
-	
-	private bool m_Exploded = false;
+    public float impulse;
+    public LayerMask impulseMask;
+    public float impulseRadius;
+
+    public GameObject scaleTarget;
+
+    private bool m_Exploded = false;
 	private float m_ExplosionTime = 0;
 
-	void Start() {
-		var _scale = transform.localScale;
-		_scale.y = _scale.x = 0;
-		transform.localScale = _scale;
+	void Start()
+	{
+        if (field) 
+            field = collider2D as CircleCollider2D;
+
+        if (executeOnStart) 
+            Explode();
 	}
 
-	void Update() {
+	void Update()
+	{
+	    if (! m_Exploded) return;
+		m_ExplosionTime += Time.deltaTime;
 
-		if (m_Exploded) {
-			m_ExplosionTime += Time.deltaTime;
-			var _scale = transform.localScale;
-			_scale.y = _scale.x = 2 * radius * m_ExplosionTime / duration;
-			transform.localScale = _scale;
-		}
-
+        var _radius = radius * m_ExplosionTime / duration;
+        field.radius = _radius;
+        if (scaleTarget) scaleTarget.transform.localScale = new Vector3(_radius, _radius, 1);
 	}
+
+    void Impulse()
+    {
+        var _rayResults = Physics2D.OverlapCircleAll(transform.position, impulseRadius, impulseMask);
+        foreach (var _rayResult in _rayResults)
+        {
+            if (! _rayResult.rigidbody2D) continue;
+            var _delta = _rayResult.transform.position - transform.position;
+            var _distance = _delta.magnitude;
+            var _direction = _delta/_distance;
+            var _factor = (_distance < radius) ? 1.0f
+                : (impulseRadius - _distance) / (impulseRadius - radius);
+            var _impulse = impulse * _factor * _direction;
+            _rayResult.rigidbody2D.AddForce(_impulse, ForceMode2D.Impulse);
+        }
+    }
 
 	public void Explode() {
+	    if (m_Exploded)
+	    {
+            Debug.LogWarning("Trying to explode again. Ignore.");
+	        return;
+	    }
 
-		if (m_Exploded) return;
 		m_Exploded = true;
-
-		var _colliders = Physics2D.OverlapCircleAll(transform.position, radius);
-
-		foreach(Collider2D _collider in _colliders) {
-			var _damageDetector = _collider.GetComponent<DamageDetector>();
-
-			if (_damageDetector == null
-			    || ! _damageDetector.enabled) 
-			{
-				continue;
-			}
-				
-			if ((targets.value & _damageDetector.gameObject.layer) != 0) 
-			{
-				_damageDetector.Damage(attackData);
-			}
-		}
-
+        Invoke("Impulse", duration / 2);
 		Invoke("DestroySelf", duration);
 	}
 

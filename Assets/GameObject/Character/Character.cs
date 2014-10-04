@@ -232,10 +232,6 @@ public partial class Character : MonoBehaviour
 	public Vector3 effectDeadOffset;
     #endregion
 
-    #region debug
-    public bool debugInvinsible = false;
-    #endregion
-
     public Character()
     {
         isDead = false;

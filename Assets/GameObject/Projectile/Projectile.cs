@@ -103,7 +103,6 @@ public class Projectile : MonoBehaviour
 	
     public Projectile()
     {
-        Deactivate();
         decaying = false;
     }
 
@@ -118,9 +117,10 @@ public class Projectile : MonoBehaviour
 		m_Animator = GetComponent<Animator>();
 
 		if (! prepareDuration.Equals(0)) 
+        {
 			m_PrepareTime = 0;
-		else 
-			Activate();
+            Deactivate();
+        }
 	}
 	
 	void DestroySelf() 
