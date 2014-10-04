@@ -74,9 +74,9 @@ MonoBehaviour:
   editorShootBundle: 1
   prepareTime: .100000001
   chargeTime: .0500000007
-  shootTime: .100000001
+  shootTime: .00999999978
   cooldown: .100000001
-  autoload: 0
+  autoload: 1
   shootAtOnce: 1
   ammoMax: 1000
   relativeVelocityEnabled: 1

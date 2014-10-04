@@ -17,6 +17,12 @@ public class ArcTargeter : MonoBehaviour
 	public float constCatchUp = 5;
 	public float lerpCatchUp = 0.02f;
 
+    bool ShouldUpdate()
+    {
+        return Network.peerType == NetworkPeerType.Disconnected
+            || Network.peerType == NetworkPeerType.Server;
+    }
+
     bool CanTarget()
     {
         return m_RetargetTimer <= 0;
@@ -46,6 +52,9 @@ public class ArcTargeter : MonoBehaviour
 
     void Update()
     {
+        if (! ShouldUpdate())
+            return;
+
         m_RetargetTimer -= Time.deltaTime;
 
         if (! CanTarget()) 
@@ -65,8 +74,11 @@ public class ArcTargeter : MonoBehaviour
         }
     }
 
-	void FixedUpdate () 
-	{
+	void FixedUpdate ()
+    {
+        if (!ShouldUpdate())
+            return;
+
 		if (target == null)
 			return;
 

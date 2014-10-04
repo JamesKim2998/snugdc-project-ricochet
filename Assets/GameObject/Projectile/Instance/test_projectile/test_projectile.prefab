@@ -76,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.94206119, y: .877662063, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -247,8 +247,8 @@ MonoBehaviour:
   penetration: 0
   penetrationForced:
     serializedVersion: 2
-    m_Bits: 0
-  reflectionCount: 3
+    m_Bits: 1280
+  reflectionCount: 100
   reflectRadius: .5
   reflectionMask:
     serializedVersion: 2
@@ -304,9 +304,9 @@ MonoBehaviour:
     weapon: 2
     projectile: 4
     damage: 1
-  initialVelocity: {x: 0, y: 0}
+  initialVelocity: {x: .100000001, y: 0}
   drivingForce: {x: 0, y: 0}
-  relativeDrivingForce: {x: 0, y: 0}
+  relativeDrivingForce: {x: .100000001, y: 0}
   collisionIgnores:
     serializedVersion: 2
     m_Bits: 0
@@ -342,11 +342,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   autoTargeting: 1
+  guiderOnly: 1
   targetMask:
     serializedVersion: 2
     m_Bits: 1024
   retargetDelay: .5
-  range: 180
+  range: 160
   radius: 5
   constCatchUp: 10
   lerpCatchUp: .0199999996
