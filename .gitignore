@@ -108,3 +108,38 @@ output_log.txt
 [Bb]inary
 /Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll
 /Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll.meta
+/Assets/Standard Assets
+/Assets/Fonts
+/Assets/Editor/Image Effects
+/Assets/Libraries/SpritesAndBones
+/Assets/Libraries/NGUI
+/Assets/Libraries/PlayMaker
+/Assets/Libraries/PlayMaker ArrayMaker
+/Assets/Libraries/PlayMaker NGUI
+/Assets/Libraries/PlayMaker Unity 2D
+/Assets/Libraries/PlayMaker Utils
+/Assets/Libraries/Gizmos
+/Assets/Libraries/iTween
+/Assets/Libraries/LitJson
+/Assets/Libraries/SpritesAndBones.meta
+/Assets/Libraries/Gizmos.meta
+/Assets/Libraries/iTween.meta
+/Assets/Libraries/LitJson.meta
+/Assets/Libraries/NGUI.meta
+/Assets/Libraries/PlayMaker ArrayMaker.meta
+/Assets/Libraries/PlayMaker NGUI.meta
+/Assets/Libraries/PlayMaker Unity 2D.meta
+/Assets/Libraries/PlayMaker Utils.meta
+/Assets/Libraries/PlayMaker.meta
+/Assets/Libraries/SimpleJSON.cs.meta
+/Assets/Libraries/Singleton.cs.meta
+/Assets/Sound/UI/ui_loadscreen_microfiche_01.ogg
+/Assets/Sound/UI/ui_loadscreen_microfiche_01.ogg.meta
+/Assets/Sound/bgm/ui_bgm_ricochet.ogg
+/Assets/Sound/bgm/ui_bgm_ricochet.ogg.meta
+/Assets/Editor/FindMissingScripts.cs
+/Assets/Editor/FindMissingScripts.cs.meta
+/Assets/Editor/FindMissingScriptsRecursively.cs
+/Assets/Editor/FindMissingScriptsRecursively.cs.meta
+/Assets/Editor/Image Effects.meta
+/Assets/Standard Assets.meta
